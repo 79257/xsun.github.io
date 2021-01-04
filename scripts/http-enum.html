@@ -1,0 +1,310 @@
+﻿   <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+    <title>http-enum NSE Script -VER007</title>
+    
+
+</HEAD>
+
+
+
+
+
+
+<a href="../nmap-script-help.html">HOME>>>>>>>>></a>
+
+
+
+<h1>File <code>http-enum</code></h1>
+
+
+
+<p>
+
+
+<a href="http://nmap.org/book/nse-script-format.html#nse-format-rules">脚本使用类型</a>:
+portrule
+<br>
+
+  脚本所属分类:
+  <i><a href="http://nmap.org/nsedoc/categories/discovery.html">discovery</a></i>, <i><a href="http://nmap.org/nsedoc/categories/intrusive.html">intrusive</a></i>, <i><a href="http://nmap.org/nsedoc/categories/vuln.html">vuln</a></i>
+  <br>
+
+脚本下载地址: <a href="http://nmap.org/svn/scripts/http-enum.nse">http://nmap.org/svn/scripts/http-enum.nse</a>
+</p>
+
+
+
+<h2> User Summary </h2>
+
+<p>
+Enumerates directories used by popular web applications and servers.
+</p>
+<p>
+This parses a fingerprint file that's formatted in a way that's compatible with the Nikto Web application
+scanner. This script, however, takes it one step further by building in advanced pattern matching as well
+as having the ability to identify specific versions of Web applications. 
+</p>
+<p>
+Currently, the database can be found under Nmap's directory in the nselib/data folder. The file is called
+http-fingerprints and has a long description of its functionality in the file header. 
+</p>
+<p>
+Many of the finger prints were discovered by me (Ron Bowes), and a number of them are from the Yokoso
+project, used with permission from Kevin Johnson (<a href="http://seclists.org/nmap-dev/2009/q3/0685.html">http://seclists.org/nmap-dev/2009/q3/0685.html</a>). 
+</p>
+<p>
+Initially, this script attempts to access two different random files in order to detect servers
+that don't return a proper 404 Not Found status. In the event that they return 200 OK, the body
+has any non-static-looking data removed (URI, time, etc), and saved. If the two random attempts
+return different results, the script aborts (since a 200-looking 404 cannot be distinguished from
+an actual 200). This will prevent most false positives. 
+</p>
+<p>
+In addition, if the root folder returns a 301 Moved Permanently or 401 Authentication Required, 
+this script will also abort. If the root folder has disappeared or requires authentication, there
+is little hope of finding anything inside it. 
+</p>
+<p>
+By default, only pages that return 200 OK or 401 Authentication Required are displayed. If the
+<code>http-enum.displayall</code> script argument is set, however, then all results will be displayed (except
+for 404 Not Found and the status code returned by the random files). Entries in the http-fingerprints
+database can specify their own criteria for accepting a page as valid.</p>
+
+
+
+
+
+
+
+  
+  
+  
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+  
+  
+    
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+  
+  
+    
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+
+
+  <h2> Script Arguments </h2>
+  <p>
+    
+      <h4> http-enum.displayall </h4>
+      <p>
+Set this argument to display all status codes that may indicate a valid page, not
+                                 just 200 OK and 401 Authentication Required pages. Although this is more likely
+                                 to find certain hidden folders, it also generates far more false positives.</p>
+
+    
+      <h4> http-enum.category </h4>
+      <p>
+Set to a category (as defined in the fingerprints file). Some options are 'attacks',
+                                 'database', 'general', 'microsoft', 'printer', etc.</p>
+
+    
+      <h4> http-enum.basepath </h4>
+      <p>
+The base path to prepend to each request. Leading/trailing slashes are ignored.</p>
+
+    
+      <h4> http-enum.fingerprintfile </h4>
+      <p>
+Specify a different file to read fingerprints from.</p>
+
+    
+
+    
+      <h4> smbdomain, smbhash, smbnoguest, smbpassword, smbtype, smbusername </h4>
+      See the documentation for the <a href="http://nmap.org/nsedoc/lib/smbauth.html#script-args">smbauth</a> library.
+    
+      <h4> http.max-cache-size, http.max-pipeline, http.pipeline, http.useragent </h4>
+      See the documentation for the <a href="http://nmap.org/nsedoc/lib/http.html#script-args">http</a> library.
+    
+  </p>
+
+
+<h2> Example Usage </h2>
+<p>执行格式
+
+  <pre>nmap -sV --script=http-enum &lt;target&gt;</pre>
+
+</p>
+
+
+  <h2> Script Output </h2>
+<pre>Interesting ports on test.skullsecurity.org (208.81.2.52):
+PORT   STATE SERVICE REASON
+80/tcp open  http    syn-ack
+|  http-enum:  
+|  |  /icons/: Icons and images
+|  |  /images/: Icons and images
+|  |  /robots.txt: Robots file
+|  |  /sw/auth/login.aspx: Citrix WebTop
+|  |  /images/outlook.jpg: Outlook Web Access
+|  |  /nfservlets/servlet/SPSRouterServlet/: netForensics
+|_ |_ /nfservlets/servlet/SPSRouterServlet/: netForensics</pre>
+
+
+
+  <h2> Requires </h2>
+  <ul>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/http.html">http</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/nmap.html">nmap</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/shortport.html">shortport</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/stdnse.html">stdnse</a></li>
+  
+     <li><a href="">string</a></li>
+  
+     <li><a href="">table</a></li>
+  
+  </ul>
+
+
+<hr/>
+
+
+
+
+
+
+<p><b>Author: </b>Ron Bowes, Andrew Orr, Rob Nicholls</p>
+
+
+
+<p><b>License: </b> VER007 整理 <a href="http://www.ver007.com">http://www.ver007.com</a></p>
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+</BODY>
+</HTML>
+
+

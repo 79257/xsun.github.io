@@ -1,0 +1,275 @@
+﻿   <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+    <title>smtp-vuln-cve2011-1720 NSE Script -VER007</title>
+    
+
+</HEAD>
+
+
+
+
+
+
+<a href="../nmap-script-help.html">HOME>>>>>>>>></a>
+
+
+
+<h1>File <code>smtp-vuln-cve2011-1720</code></h1>
+
+
+
+<p>
+
+
+<a href="http://nmap.org/book/nse-script-format.html#nse-format-rules">脚本使用类型</a>:
+portrule
+<br>
+
+  脚本所属分类:
+  <i><a href="http://nmap.org/nsedoc/categories/intrusive.html">intrusive</a></i>, <i><a href="http://nmap.org/nsedoc/categories/vuln.html">vuln</a></i>
+  <br>
+
+脚本下载地址: <a href="http://nmap.org/svn/scripts/smtp-vuln-cve2011-1720.nse">http://nmap.org/svn/scripts/smtp-vuln-cve2011-1720.nse</a>
+</p>
+
+
+
+<h2> User Summary </h2>
+
+<p>
+Checks for a memory corruption in the Postfix SMTP server when it uses
+Cyrus SASL library authentication mechanisms (CVE-2011-1720).  This
+vulnerability can allow denial of service and possibly remote code
+execution.
+</p>
+<p>
+Reference:
+<ul>
+<li><a href="http://www.postfix.org/CVE-2011-1720.html">http://www.postfix.org/CVE-2011-1720.html</a></li>
+</ul>
+</p>
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+  
+  
+    
+      
+        
+      
+    
+  
+  
+    
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+  
+  
+    
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+
+
+  <h2> Script Arguments </h2>
+  <p>
+    
+      <h4> smtp.domain </h4>
+      <p>
+Define the domain to be used in the SMTP EHLO command.</p>
+
+    
+
+    
+      <h4> smbdomain, smbhash, smbnoguest, smbpassword, smbtype, smbusername </h4>
+      See the documentation for the <a href="http://nmap.org/nsedoc/lib/smbauth.html#script-args">smbauth</a> library.
+    
+      <h4> vulns.showall </h4>
+      See the documentation for the <a href="http://nmap.org/nsedoc/lib/vulns.html#script-args">vulns</a> library.
+    
+  </p>
+
+
+<h2> Example Usage </h2>
+<p>执行格式
+
+  <pre>nmap --script=smtp-vuln-cve2011-1720 --script-args='smtp.domain=&lt;domain&gt;' -pT:25,465,587 &lt;host&gt;
+</pre>
+
+</p>
+
+
+  <h2> Script Output </h2>
+<pre>PORT   STATE SERVICE
+25/tcp open  smtp
+| smtp-vuln-cve2011-1720: 
+|   VULNERABLE:
+|   Postfix SMTP server Cyrus SASL Memory Corruption
+|     State: VULNERABLE
+|     IDs:  CVE:CVE-2011-1720  OSVDB:72259
+|     Description:
+|       The Postfix SMTP server is vulnerable to a memory corruption vulnerability
+|       when the Cyrus SASL library is used with authentication mechanisms other
+|       than PLAIN and LOGIN.
+|     Disclosure date: 2011-05-08
+|     Check results:
+|       AUTH tests: CRAM-MD5 NTLM
+|     Extra information:
+|       Available AUTH MECHANISMS:  CRAM-MD5 DIGEST-MD5 NTLM PLAIN LOGIN
+|     References:
+|       http://www.postfix.org/CVE-2011-1720.html
+|       http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2011-1720
+|_      http://osvdb.org/72259
+</pre>
+
+
+
+  <h2> Requires </h2>
+  <ul>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/shortport.html">shortport</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/smtp.html">smtp</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/stdnse.html">stdnse</a></li>
+  
+     <li><a href="">string</a></li>
+  
+     <li><a href="">table</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/vulns.html">vulns</a></li>
+  
+  </ul>
+
+
+<hr/>
+
+
+
+
+
+
+<p><b>Author: </b>Djalal Harouni</p>
+
+
+
+<p><b>License: </b> VER007 整理 <a href="http://www.ver007.com">http://www.ver007.com</a></p>
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+</BODY>
+</HTML>
+
+

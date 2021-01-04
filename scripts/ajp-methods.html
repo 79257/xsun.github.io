@@ -1,0 +1,280 @@
+﻿   <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+    <title>ajp-methods NSE Script -VER007</title>
+    
+
+</HEAD>
+
+
+
+
+
+
+<a href="../nmap-script-help.html">HOME>>>>>>>>></a>
+
+
+
+<h1>File <code>ajp-methods</code></h1>
+
+
+
+<p>
+
+
+<a href="http://nmap.org/book/nse-script-format.html#nse-format-rules">脚本使用类型</a>:
+portrule
+<br>
+
+  脚本所属分类:
+  <i><a href="http://nmap.org/nsedoc/categories/default.html">default</a></i>, <i><a href="http://nmap.org/nsedoc/categories/safe.html">safe</a></i>
+  <br>
+
+脚本下载地址: <a href="http://nmap.org/svn/scripts/ajp-methods.nse">http://nmap.org/svn/scripts/ajp-methods.nse</a>
+</p>
+
+
+
+<h2> User Summary </h2>
+
+<p>
+Discovers which options are supported by the AJP (Apache JServ
+Protocol) server by sending an OPTIONS request and lists potentially
+risky methods.
+</p>
+<p>
+In this script, "potentially risky" methods are anything except GET,
+HEAD, POST, and OPTIONS. If the script reports potentially risky
+methods, they may not all be security risks, but you should check to
+make sure. This page lists the dangers of some common methods:
+</p>
+<p>
+<a href="http://www.owasp.org/index.php/Testing_for_HTTP_Methods_and_XST_%28OWASP-CM-008%29">http://www.owasp.org/index.php/Testing_for_HTTP_Methods_and_XST_%28OWASP-CM-008%29</a></p>
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+  
+  
+    
+    
+  
+
+  
+  
+  
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+  
+  
+    
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+
+
+  <h2> Script Arguments </h2>
+  <p>
+    
+      <h4> ajp-methods.path </h4>
+      <p>
+the path to check or &lt;code&gt;/&lt;code&gt; if none was given</p>
+
+    
+
+    
+      <h4> smbdomain, smbhash, smbnoguest, smbpassword, smbtype, smbusername </h4>
+      See the documentation for the <a href="http://nmap.org/nsedoc/lib/smbauth.html#script-args">smbauth</a> library.
+    
+      <h4> http.max-cache-size, http.max-pipeline, http.pipeline, http.useragent </h4>
+      See the documentation for the <a href="http://nmap.org/nsedoc/lib/http.html#script-args">http</a> library.
+    
+  </p>
+
+
+<h2> Example Usage </h2>
+<p>执行格式
+
+  <pre>nmap -p 8009 &lt;ip&gt; --script ajp-methods
+</pre>
+
+</p>
+
+
+  <h2> Script Output </h2>
+<pre>PORT     STATE SERVICE
+8009/tcp open  ajp13
+| ajp-methods: 
+|   Supported methods: GET HEAD POST PUT DELETE TRACE OPTIONS
+|   Potentially risky methods: PUT DELETE TRACE
+|_  See http://nmap.org/nsedoc/scripts/ajp-methods.html
+</pre>
+
+
+
+  <h2> Requires </h2>
+  <ul>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/ajp.html">ajp</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/shortport.html">shortport</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/stdnse.html">stdnse</a></li>
+  
+     <li><a href="">table</a></li>
+  
+  </ul>
+
+
+<hr/>
+
+
+
+
+
+
+<p><b>Author: </b>Patrik Karlsson</p>
+
+
+
+<p><b>License: </b> VER007 整理 <a href="http://www.ver007.com">http://www.ver007.com</a></p>
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+</BODY>
+</HTML>
+
+

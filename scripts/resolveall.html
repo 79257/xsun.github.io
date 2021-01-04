@@ -1,0 +1,181 @@
+﻿   <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+    <title>resolveall NSE Script -VER007</title>
+    
+
+</HEAD>
+
+
+
+
+
+
+<a href="../nmap-script-help.html">HOME>>>>>>>>></a>
+
+
+
+<h1>File <code>resolveall</code></h1>
+
+
+
+<p>
+
+
+<a href="http://nmap.org/book/nse-script-format.html#nse-format-rules">脚本使用类型</a>:
+prerule
+<br>
+
+  脚本所属分类:
+  <i><a href="http://nmap.org/nsedoc/categories/safe.html">safe</a></i>, <i><a href="http://nmap.org/nsedoc/categories/discovery.html">discovery</a></i>
+  <br>
+
+脚本下载地址: <a href="http://nmap.org/svn/scripts/resolveall.nse">http://nmap.org/svn/scripts/resolveall.nse</a>
+</p>
+
+
+
+<h2> User Summary </h2>
+
+<p>
+Resolves hostnames and adds every address (IPv4 or IPv6, depending on
+Nmap mode) to Nmap's target list.  This differs from Nmap's normal
+host resolution process, which only scans the first address (A or AAAA
+record) returned for each host name.</p>
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+  
+  
+    
+      
+        
+      
+    
+      
+        
+      
+    
+  
+  
+    
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+
+
+  <h2> Script Arguments </h2>
+  <p>
+    
+      <h4> resolveall.hosts </h4>
+      <p>
+Table of hosts to resolve</p>
+
+    
+
+    
+      <h4> max-newtargets, newtargets </h4>
+      See the documentation for the <a href="http://nmap.org/nsedoc/lib/target.html#script-args">target</a> library.
+    
+  </p>
+
+
+<h2> Example Usage </h2>
+<p>执行格式
+
+  <pre>nmap --script=resolveall --script-args=newtargets,resolveall.hosts={&lt;host1&gt;, ...} ...</pre>
+
+</p>
+
+
+  <h2> Script Output </h2>
+<pre>Pre-scan script results:
+| resolveall: 
+|   Host 'google.com' resolves to:
+|     74.125.39.106
+|     74.125.39.147
+|     74.125.39.99
+|     74.125.39.103
+|     74.125.39.105
+|     74.125.39.104
+|_  Successfully added 6 new targets</pre>
+
+
+
+  <h2> Requires </h2>
+  <ul>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/nmap.html">nmap</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/stdnse.html">stdnse</a></li>
+  
+     <li><a href="">string</a></li>
+  
+     <li><a href="">table</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/target.html">target</a></li>
+  
+  </ul>
+
+
+<hr/>
+
+
+
+
+
+
+<p><b>Author: </b>Kris Katterjohn</p>
+
+
+
+<p><b>License: </b> VER007 整理 <a href="http://www.ver007.com">http://www.ver007.com</a></p>
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+</BODY>
+</HTML>
+
+

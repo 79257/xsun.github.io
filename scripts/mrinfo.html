@@ -1,0 +1,242 @@
+﻿   <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+    <title>mrinfo NSE Script -VER007</title>
+    
+
+</HEAD>
+
+
+
+
+
+
+<a href="../nmap-script-help.html">HOME>>>>>>>>></a>
+
+
+
+<h1>File <code>mrinfo</code></h1>
+
+
+
+<p>
+
+
+<a href="http://nmap.org/book/nse-script-format.html#nse-format-rules">脚本使用类型</a>:
+prerule
+<br>
+
+  脚本所属分类:
+  <i><a href="http://nmap.org/nsedoc/categories/discovery.html">discovery</a></i>, <i><a href="http://nmap.org/nsedoc/categories/safe.html">safe</a></i>, <i><a href="http://nmap.org/nsedoc/categories/broadcast.html">broadcast</a></i>
+  <br>
+
+脚本下载地址: <a href="http://nmap.org/svn/scripts/mrinfo.nse">http://nmap.org/svn/scripts/mrinfo.nse</a>
+</p>
+
+
+
+<h2> User Summary </h2>
+
+<p>
+Queries targets for multicast routing information.
+</p>
+<p>
+This works by sending a DVMRP Ask Neighbors 2 request to the target and
+listening for DVMRP Neighbors 2 responses that are sent back and which contain
+local addresses and the multicast neighbors on each interface of the target. If
+no specific target is specified, the request will be sent to the 224.0.0.1 All
+Hosts multicast address.
+</p>
+<p>
+This script is similar somehow to the mrinfo utility included with Windows and
+Cisco IOS.</p>
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+    
+      
+        
+      
+    
+      
+        
+      
+    
+  
+  
+    
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+
+
+  <h2> Script Arguments </h2>
+  <p>
+    
+      <h4> mrinfo.target </h4>
+      <p>
+Host to which the request is sent. If not set, the
+request will be sent to <code>224.0.0.1</code>.</p>
+
+    
+      <h4> mrinfo.timeout </h4>
+      <p>
+Time to wait for responses.
+Defaults to <code>5s</code>.</p>
+
+    
+
+    
+      <h4> max-newtargets, newtargets </h4>
+      See the documentation for the <a href="http://nmap.org/nsedoc/lib/target.html#script-args">target</a> library.
+    
+  </p>
+
+
+<h2> Example Usage </h2>
+<p>执行格式
+
+  <pre>nmap --script mrinfo
+nmap --script mrinfo -e eth1
+nmap --script mrinfo --script-args 'mrinfo.target=172.16.0.4'
+</pre>
+
+</p>
+
+
+  <h2> Script Output </h2>
+<pre>Pre-scan script results:
+| mrinfo: 
+|   Source: 224.0.0.1
+|     Version 12.4
+|     Local address: 172.16.0.2
+|       Neighbor: 172.16.0.4
+|       Neighbor: 172.16.0.3
+|     Local address: 172.17.0.1
+|       Neighbor: 172.17.0.2
+|     Local address: 172.18.0.1
+|       Neighbor: 172.18.0.2
+|   Source: 224.0.0.1
+|     Version 12.4
+|     Local address: 172.16.0.4
+|       Neighbor: 172.16.0.3
+|       Neighbor: 172.16.0.2
+|     Local address: 172.17.0.2
+|       Neighbor: 172.17.0.1
+|   Source: 224.0.0.1
+|     Version 12.4
+|     Local address: 172.16.0.3
+|       Neighbor: 172.16.0.4
+|       Neighbor: 172.16.0.2
+|     Local address: 172.18.0.2
+|       Neighbor: 172.18.0.1
+|_  Use the newtargets script-arg to add the responses as targets
+</pre>
+
+
+
+  <h2> Requires </h2>
+  <ul>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/nmap.html">nmap</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/packet.html">packet</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/ipOps.html">ipOps</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/bin.html">bin</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/stdnse.html">stdnse</a></li>
+  
+     <li><a href="">string</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/target.html">target</a></li>
+  
+     <li><a href="">table</a></li>
+  
+  </ul>
+
+
+<hr/>
+
+
+
+
+
+
+<p><b>Author: </b>Hani Benhabiles</p>
+
+
+
+<p><b>License: </b> VER007 整理 <a href="http://www.ver007.com">http://www.ver007.com</a></p>
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+</BODY>
+</HTML>
+
+

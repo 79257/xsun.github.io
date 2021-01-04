@@ -1,0 +1,272 @@
+﻿   <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+    <title>http-drupal-enum-users NSE Script -VER007</title>
+    
+
+</HEAD>
+
+
+
+
+
+
+<a href="../nmap-script-help.html">HOME>>>>>>>>></a>
+
+
+
+<h1>File <code>http-drupal-enum-users</code></h1>
+
+
+
+<p>
+
+
+<a href="http://nmap.org/book/nse-script-format.html#nse-format-rules">脚本使用类型</a>:
+portrule
+<br>
+
+  脚本所属分类:
+  <i><a href="http://nmap.org/nsedoc/categories/discovery.html">discovery</a></i>, <i><a href="http://nmap.org/nsedoc/categories/intrusive.html">intrusive</a></i>
+  <br>
+
+脚本下载地址: <a href="http://nmap.org/svn/scripts/http-drupal-enum-users.nse">http://nmap.org/svn/scripts/http-drupal-enum-users.nse</a>
+</p>
+
+
+
+<h2> User Summary </h2>
+
+<p>
+Enumerates Drupal users by exploiting a an information disclosure vulnerability
+in Views, Drupal's most popular module.
+</p>
+<p>
+Requests to admin/views/ajax/autocomplete/user/STRING return all usernames that
+begin with STRING. The script works by iterating STRING over letters to extract
+all usernames.
+</p>
+<p>
+For more information,see:
+ * <a href="http://www.madirish.net/node/465">http://www.madirish.net/node/465</a></p>
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+  
+  
+    
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+  
+  
+    
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+
+
+  <h2> Script Arguments </h2>
+  <p>
+    
+      <h4> http-drupal-enum-users.root </h4>
+      <p>
+base path. Defaults to "/"</p>
+
+    
+
+    
+      <h4> smbdomain, smbhash, smbnoguest, smbpassword, smbtype, smbusername </h4>
+      See the documentation for the <a href="http://nmap.org/nsedoc/lib/smbauth.html#script-args">smbauth</a> library.
+    
+      <h4> http.max-cache-size, http.max-pipeline, http.pipeline, http.useragent </h4>
+      See the documentation for the <a href="http://nmap.org/nsedoc/lib/http.html#script-args">http</a> library.
+    
+  </p>
+
+
+<h2> Example Usage </h2>
+<p>执行格式
+
+  <pre>nmap --script=http-drupal-enum-users --script-args http-drupal-enum-users.root="/path/" &lt;targets&gt;
+</pre>
+
+</p>
+
+
+  <h2> Script Output </h2>
+<pre>PORT   STATE SERVICE REASON
+80/tcp open  http    syn-ack
+| http-drupal-enum-users: 
+|   admin 
+|   alex
+|   manager
+|_  user
+</pre>
+
+
+
+  <h2> Requires </h2>
+  <ul>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/http.html">http</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/json.html">json</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/shortport.html">shortport</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/stdnse.html">stdnse</a></li>
+  
+     <li><a href="">table</a></li>
+  
+  </ul>
+
+
+<hr/>
+
+
+
+
+
+
+<p><b>Author: </b>Hani Benhabiles</p>
+
+
+
+<p><b>License: </b> VER007 整理 <a href="http://www.ver007.com">http://www.ver007.com</a></p>
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+</BODY>
+</HTML>
+
+

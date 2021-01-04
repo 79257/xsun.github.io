@@ -1,0 +1,205 @@
+﻿   <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+    <title>mmouse-exec NSE Script -VER007</title>
+    
+
+</HEAD>
+
+
+
+
+
+
+<a href="../nmap-script-help.html">HOME>>>>>>>>></a>
+
+
+
+<h1>File <code>mmouse-exec</code></h1>
+
+
+
+<p>
+
+
+<a href="http://nmap.org/book/nse-script-format.html#nse-format-rules">脚本使用类型</a>:
+portrule
+<br>
+
+  脚本所属分类:
+  <i><a href="http://nmap.org/nsedoc/categories/intrusive.html">intrusive</a></i>
+  <br>
+
+脚本下载地址: <a href="http://nmap.org/svn/scripts/mmouse-exec.nse">http://nmap.org/svn/scripts/mmouse-exec.nse</a>
+</p>
+
+
+
+<h2> User Summary </h2>
+
+<p>
+Connects to an RPA Tech Mobile Mouse server, starts an application and
+sends a sequence of keys to it. Any application that the user has
+access to can be started and the key sequence is sent to the
+application after it has been started.
+</p>
+<p>
+The Mobile Mouse server runs on OS X, Windows and Linux and enables remote
+control of the keyboard and mouse from an iOS device. For more information:
+<a href="http://mobilemouse.com/">http://mobilemouse.com/</a>
+</p>
+<p>
+The script has only been tested against OS X and will detect the remote OS
+and abort unless the OS is detected as Mac.</p>
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+
+
+  <h2> Script Arguments </h2>
+  <p>
+    
+      <h4> mmouse-exec.application </h4>
+      <p>
+The application which is to be started at the
+      server</p>
+
+    
+      <h4> mmouse-exec.delay </h4>
+      <p>
+Delay in seconds to wait before sending the key
+      sequence. (default: 3 seconds)</p>
+
+    
+      <h4> mmouse-exec.password </h4>
+      <p>
+The password needed to connect to the mobile
+      mouse server</p>
+
+    
+      <h4> mmouse-exec.keys </h4>
+      <p>
+The key sequence to send to the started application</p>
+
+    
+
+    
+  </p>
+
+
+<h2> Example Usage </h2>
+<p>执行格式
+
+  <pre>nmap -p 51010 &lt;host&gt; --script mmouse-exec \
+  --script-args application='/bin/sh',keys='ping -c 5 127.0.0.1'
+</pre>
+
+</p>
+
+
+  <h2> Script Output </h2>
+<pre>PORT      STATE SERVICE REASON
+51010/tcp open  unknown syn-ack
+| mmouse-exec: 
+|_  Attempted to start application "/bin/sh" and sent "ping -c 5 127.0.0.1"
+</pre>
+
+
+
+  <h2> Requires </h2>
+  <ul>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/creds.html">creds</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/nmap.html">nmap</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/shortport.html">shortport</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/stdnse.html">stdnse</a></li>
+  
+  </ul>
+
+
+<hr/>
+
+
+
+
+
+
+<p><b>Author: </b>Patrik Karlsson</p>
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+</BODY>
+</HTML>
+
+

@@ -1,0 +1,164 @@
+﻿   <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+    <title>dns-random-srcport NSE Script -VER007</title>
+    
+
+</HEAD>
+
+
+
+
+
+
+<a href="../nmap-script-help.html">HOME>>>>>>>>></a>
+
+
+
+<h1>File <code>dns-random-srcport</code></h1>
+
+
+
+<p>
+
+
+<a href="http://nmap.org/book/nse-script-format.html#nse-format-rules">脚本使用类型</a>:
+portrule
+<br>
+
+  脚本所属分类:
+  <i><a href="http://nmap.org/nsedoc/categories/external.html">external</a></i>, <i><a href="http://nmap.org/nsedoc/categories/intrusive.html">intrusive</a></i>
+  <br>
+
+脚本下载地址: <a href="http://nmap.org/svn/scripts/dns-random-srcport.nse">http://nmap.org/svn/scripts/dns-random-srcport.nse</a>
+</p>
+
+
+
+<h2> User Summary </h2>
+
+<p>
+Checks a DNS server for the predictable-port recursion vulnerability.
+Predictable source ports can make a DNS server vulnerable to cache poisoning
+attacks (see CVE-2008-1447).
+</p>
+<p>
+The script works by querying porttest.dns-oarc.net (see
+<a href="https://www.dns-oarc.net/oarc/services/porttest">https://www.dns-oarc.net/oarc/services/porttest</a>).  Be aware that any
+targets against which this script is run will be sent to and
+potentially recorded by one or more DNS servers and the porttest
+server. In addition your IP address will be sent along with the
+porttest query to the DNS server running on the target.</p>
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+
+
+
+<h2> Example Usage </h2>
+<p>执行格式
+
+  <pre>nmap -sV --script=dns-random-srcport &lt;target&gt;</pre>
+
+</p>
+
+
+  <h2> Script Output </h2>
+<pre>PORT   STATE SERVICE REASON
+53/udp open  domain  udp-response
+|_dns-random-srcport: X.X.X.X is GREAT: 26 queries in 1.2 seconds from 26 ports with std dev 17905</pre>
+
+
+
+  <h2> Requires </h2>
+  <ul>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/bit.html">bit</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/comm.html">comm</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/nmap.html">nmap</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/shortport.html">shortport</a></li>
+  
+     <li><a href="">string</a></li>
+  
+  </ul>
+
+
+<hr/>
+
+
+
+
+
+
+<p><b>Author: </b>Script: Brandon Enright &lt;bmenrigh@ucsd.edu&gt;<br/>
+porttest.dns-oarc.net: Duane Wessels &lt;wessels@dns-oarc.net&gt;</p>
+
+
+
+<p><b>License: </b> VER007 整理 <a href="http://www.ver007.com">http://www.ver007.com</a></p>
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+</BODY>
+</HTML>
+
+

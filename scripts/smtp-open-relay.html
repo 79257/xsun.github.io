@@ -1,0 +1,260 @@
+﻿   <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+    <title>smtp-open-relay NSE Script -VER007</title>
+    
+
+</HEAD>
+
+
+
+
+
+
+<a href="../nmap-script-help.html">HOME>>>>>>>>></a>
+
+
+
+<h1>File <code>smtp-open-relay</code></h1>
+
+
+
+<p>
+
+
+<a href="http://nmap.org/book/nse-script-format.html#nse-format-rules">脚本使用类型</a>:
+portrule
+<br>
+
+  脚本所属分类:
+  <i><a href="http://nmap.org/nsedoc/categories/discovery.html">discovery</a></i>, <i><a href="http://nmap.org/nsedoc/categories/intrusive.html">intrusive</a></i>, <i><a href="http://nmap.org/nsedoc/categories/external.html">external</a></i>
+  <br>
+
+脚本下载地址: <a href="http://nmap.org/svn/scripts/smtp-open-relay.nse">http://nmap.org/svn/scripts/smtp-open-relay.nse</a>
+</p>
+
+
+
+<h2> User Summary </h2>
+
+<p>
+Attempts to relay mail by issuing a predefined combination of SMTP commands. The goal
+of this script is to tell if a SMTP server is vulnerable to mail relaying.
+</p>
+<p>
+An SMTP server that works as an open relay, is a email server that does not verify if the
+user is authorised to send email from the specified email address. Therefore, users would
+be able to send email originating from any third-party email address that they want.
+</p>
+<p>
+The checks are done based in combinations of MAIL FROM and RCPT TO commands. The list is
+hardcoded in the source file. The script will output all the working combinations that the
+server allows if nmap is in verbose mode otherwise the script will print the number of
+successful tests. The script will not output if the server requires authentication. 
+</p>
+<p>
+If debug is enabled and an error occurrs while testing the target host, the error will be
+printed with the list of any combinations that were found prior to the error.</p>
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+  
+  
+    
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+
+
+  <h2> Script Arguments </h2>
+  <p>
+    
+      <h4> smtp-open-relay.ip </h4>
+      <p>
+Use this to change the IP address to be used (default is the target IP address)</p>
+
+    
+      <h4> smtp-open-relay.to </h4>
+      <p>
+Define the destination email address to be used (without the domain, default is
+relaytest)</p>
+
+    
+      <h4> smtp.domain </h4>
+      <p>
+or smtp-open-relay.domain Define the domain to be used in the anti-spam tests and EHLO command (default
+is nmap.scanme.org)</p>
+
+    
+      <h4> smtp-open-relay.from </h4>
+      <p>
+Define the source email address to be used (without the domain, default is
+antispam)</p>
+
+    
+
+    
+      <h4> smbdomain, smbhash, smbnoguest, smbpassword, smbtype, smbusername </h4>
+      See the documentation for the <a href="http://nmap.org/nsedoc/lib/smbauth.html#script-args">smbauth</a> library.
+    
+  </p>
+
+
+<h2> Example Usage </h2>
+<p>执行格式
+
+  <pre>nmap --script smtp-open-relay.nse [--script-args smtp-open-relay.domain=&lt;domain&gt;,smtp-open-relay.ip=&lt;address&gt;,...] -p 25,465,587 &lt;host&gt;
+</pre>
+
+</p>
+
+
+  <h2> Script Output </h2>
+<pre>Host script results:
+| smtp-open-relay: Server is an open relay (1/16 tests)
+|_MAIL FROM:&lt;antispam@insecure.org&gt; -&gt; RCPT TO:&lt;relaytest@insecure.org&gt;
+</pre>
+
+
+
+  <h2> Requires </h2>
+  <ul>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/nmap.html">nmap</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/shortport.html">shortport</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/smtp.html">smtp</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/stdnse.html">stdnse</a></li>
+  
+     <li><a href="">string</a></li>
+  
+     <li><a href="">table</a></li>
+  
+  </ul>
+
+
+<hr/>
+
+
+
+
+
+
+<p><b>Author: </b>Arturo 'Buanzo' Busleiman</p>
+
+
+
+<p><b>License: </b> VER007 整理 <a href="http://www.ver007.com">http://www.ver007.com</a></p>
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+</BODY>
+</HTML>
+
+

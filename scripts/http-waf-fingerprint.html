@@ -1,0 +1,273 @@
+﻿   <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+    <title>http-waf-fingerprint NSE Script -VER007</title>
+    
+
+</HEAD>
+
+
+
+
+
+
+<a href="../nmap-script-help.html">HOME>>>>>>>>></a>
+
+
+
+<h1>File <code>http-waf-fingerprint</code></h1>
+
+
+
+<p>
+
+
+<a href="http://nmap.org/book/nse-script-format.html#nse-format-rules">脚本使用类型</a>:
+portrule
+<br>
+
+  脚本所属分类:
+  <i><a href="http://nmap.org/nsedoc/categories/discovery.html">discovery</a></i>, <i><a href="http://nmap.org/nsedoc/categories/intrusive.html">intrusive</a></i>
+  <br>
+
+脚本下载地址: <a href="http://nmap.org/svn/scripts/http-waf-fingerprint.nse">http://nmap.org/svn/scripts/http-waf-fingerprint.nse</a>
+</p>
+
+
+
+<h2> User Summary </h2>
+
+<p>
+Tries to detect the presence of a web application firewall and its type and
+version.
+</p>
+<p>
+This works by sending a number of requests and looking in the responses for
+known behavior and fingerprints such as Server header, cookies and headers
+values. Intensive mode works by sending additional WAF specific requests to
+detect certain behaviour.
+</p>
+<p>
+Credit to wafw00f and w3af for some fingerprints.</p>
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+  
+  
+    
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+  
+  
+    
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+
+
+  <h2> Script Arguments </h2>
+  <p>
+    
+      <h4> http-waf-fingerprint.root </h4>
+      <p>
+The base path. Defaults to <code>/</code>.</p>
+
+    
+      <h4> http-waf-fingerprint.intensive </h4>
+      <p>
+If set, will add WAF specific scans,
+which takes more time. Off by default.</p>
+
+    
+
+    
+      <h4> smbdomain, smbhash, smbnoguest, smbpassword, smbtype, smbusername </h4>
+      See the documentation for the <a href="http://nmap.org/nsedoc/lib/smbauth.html#script-args">smbauth</a> library.
+    
+      <h4> http.max-cache-size, http.max-pipeline, http.pipeline, http.useragent </h4>
+      See the documentation for the <a href="http://nmap.org/nsedoc/lib/http.html#script-args">http</a> library.
+    
+  </p>
+
+
+<h2> Example Usage </h2>
+<p>执行格式
+
+  <pre>nmap --script=http-waf-fingerprint &lt;targets&gt;
+nmap --script=http-waf-fingerprint --script-args http-waf-fingerprint.intensive=1 &lt;targets&gt;
+</pre>
+
+</p>
+
+
+  <h2> Script Output </h2>
+<pre>PORT   STATE SERVICE REASON
+80/tcp open  http    syn-ack
+| http-waf-fingerprint: 
+|   Detected WAF
+|_    BinarySec version 3.2.2</pre>
+
+
+
+  <h2> Requires </h2>
+  <ul>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/http.html">http</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/stdnse.html">stdnse</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/shortport.html">shortport</a></li>
+  
+     <li><a href="">string</a></li>
+  
+     <li><a href="">table</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/url.html">url</a></li>
+  
+  </ul>
+
+
+<hr/>
+
+
+
+
+
+
+<p><b>Author: </b>Hani Benhabiles</p>
+
+
+
+<p><b>License: </b> VER007 整理 <a href="http://www.ver007.com">http://www.ver007.com</a></p>
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+</BODY>
+</HTML>
+
+

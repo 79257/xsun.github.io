@@ -1,0 +1,247 @@
+﻿   <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+    <title>rdp-vuln-ms12-020 NSE Script -VER007</title>
+    
+
+</HEAD>
+
+
+
+
+
+
+<a href="../nmap-script-help.html">HOME>>>>>>>>></a>
+
+
+
+<h1>File <code>rdp-vuln-ms12-020</code></h1>
+
+
+
+<p>
+
+
+<a href="http://nmap.org/book/nse-script-format.html#nse-format-rules">脚本使用类型</a>:
+portrule
+<br>
+
+  脚本所属分类:
+  <i><a href="http://nmap.org/nsedoc/categories/intrusive.html">intrusive</a></i>, <i><a href="http://nmap.org/nsedoc/categories/vuln.html">vuln</a></i>
+  <br>
+
+脚本下载地址: <a href="http://nmap.org/svn/scripts/rdp-vuln-ms12-020.nse">http://nmap.org/svn/scripts/rdp-vuln-ms12-020.nse</a>
+</p>
+
+
+
+<h2> User Summary </h2>
+
+<p>
+Checks if a machine is vulnerable to MS12-020 RDP vulnerability.
+</p>
+<p>
+The Microsoft bulletin MS12-020 patches two vulnerabilities: CVE-2012-0152
+which addresses a denial of service vulnerability inside Terminal Server, and
+CVE-2012-0002 which fixes a vulnerability in Remote Desktop Protocol. Both are
+part of Remote Desktop Services.
+</p>
+<p>
+The script works by checking for the CVE-2012-0152 vulnerability. If this
+vulnerability is not patched, it is assumed that CVE-2012-0002 is not patched
+either. This script can do its check without crashing the target.
+</p>
+<p>
+The way this works follows:
+<ul>
+<li>Send one user request. The server replies with a user id (call it A) and a channel for that user.
+</li>
+<li>Send another user request. The server replies with another user id (call it B) and another channel.
+</li>
+<li>Send a channel join request with requesting user set to A and requesting channel set to B. If the server replies with a success message, we conclude that the server is vulnerable.
+</li>
+<li>In case the server is vulnerable, send a channel join request with the requesting user set to B and requesting channel set to B to prevent the chance of a crash.
+</li>
+</ul>
+</p>
+<p>
+References:
+<ul>
+<li><a href="http://technet.microsoft.com/en-us/security/bulletin/ms12-020">http://technet.microsoft.com/en-us/security/bulletin/ms12-020</a>
+</li>
+<li><a href="http://support.microsoft.com/kb/2621440">http://support.microsoft.com/kb/2621440</a>
+</li>
+<li><a href="http://zerodayinitiative.com/advisories/ZDI-12-044/">http://zerodayinitiative.com/advisories/ZDI-12-044/</a>
+</li>
+<li><a href="http://aluigi.org/adv/termdd_1-adv.txt">http://aluigi.org/adv/termdd_1-adv.txt</a>
+</li>
+</ul>
+</p>
+<p>
+Original check by by Worawit Wang (sleepya).</p>
+
+
+
+
+
+
+
+  
+  
+  
+    
+      
+        
+      
+    
+  
+  
+    
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+
+
+  <h2> Script Arguments </h2>
+  <p>
+    
+
+    
+      <h4> vulns.showall </h4>
+      See the documentation for the <a href="http://nmap.org/nsedoc/lib/vulns.html#script-args">vulns</a> library.
+    
+  </p>
+
+
+<h2> Example Usage </h2>
+<p>执行格式
+
+  <pre>nmap -sV --script=rdp-ms12-020 -p 3389 &lt;target&gt;
+</pre>
+
+</p>
+
+
+  <h2> Script Output </h2>
+<pre>PORT     STATE SERVICE        VERSION
+3389/tcp open  ms-wbt-server?
+| rdp-ms12-020:
+|   VULNERABLE:
+|   MS12-020 Remote Desktop Protocol Denial Of Service Vulnerability
+|     State: VULNERABLE
+|     IDs:  CVE:CVE-2012-0152
+|     Risk factor: Medium  CVSSv2: 4.3 (MEDIUM) (AV:N/AC:M/Au:N/C:N/I:N/A:P)
+|     Description:
+|               Remote Desktop Protocol vulnerability that could allow remote attackers to cause a denial of service.
+|
+|     Disclosure date: 2012-03-13
+|     References:
+|       http://technet.microsoft.com/en-us/security/bulletin/ms12-020
+|       http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2012-0152
+|
+|   MS12-020 Remote Desktop Protocol Remote Code Execution Vulnerability
+|     State: VULNERABLE
+|     IDs:  CVE:CVE-2012-0002
+|     Risk factor: High  CVSSv2: 9.3 (HIGH) (AV:N/AC:M/Au:N/C:C/I:C/A:C)
+|     Description:
+|               Remote Desktop Protocol vulnerability that could allow remote attackers to execute arbitrary code on the targeted system.
+|
+|     Disclosure date: 2012-03-13
+|     References:
+|       http://technet.microsoft.com/en-us/security/bulletin/ms12-020
+|_      http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2012-0002</pre>
+
+
+
+  <h2> Requires </h2>
+  <ul>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/bin.html">bin</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/nmap.html">nmap</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/shortport.html">shortport</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/stdnse.html">stdnse</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/vulns.html">vulns</a></li>
+  
+  </ul>
+
+
+<hr/>
+
+
+
+
+
+
+<p><b>Author: </b>Aleksandar Nikolic, based on python script by sleepya</p>
+
+
+
+<p><b>License: </b> VER007 整理 <a href="http://www.ver007.com">http://www.ver007.com</a></p>
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+</BODY>
+</HTML>
+
+

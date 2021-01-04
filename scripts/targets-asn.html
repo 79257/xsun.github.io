@@ -1,0 +1,193 @@
+﻿   <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+    <title>targets-asn NSE Script -VER007</title>
+    
+
+</HEAD>
+
+
+
+
+
+
+<a href="../nmap-script-help.html">HOME>>>>>>>>></a>
+
+
+
+<h1>File <code>targets-asn</code></h1>
+
+
+
+<p>
+
+
+<a href="http://nmap.org/book/nse-script-format.html#nse-format-rules">脚本使用类型</a>:
+prerule
+<br>
+
+  脚本所属分类:
+  <i><a href="http://nmap.org/nsedoc/categories/discovery.html">discovery</a></i>, <i><a href="http://nmap.org/nsedoc/categories/external.html">external</a></i>, <i><a href="http://nmap.org/nsedoc/categories/safe.html">safe</a></i>
+  <br>
+
+脚本下载地址: <a href="http://nmap.org/svn/scripts/targets-asn.nse">http://nmap.org/svn/scripts/targets-asn.nse</a>
+</p>
+
+
+
+<h2> User Summary </h2>
+
+<p>
+Produces a list of IP prefixes for a given routing AS number (ASN).
+</p>
+<p>
+This script uses a whois server database operated by the Shadowserver
+Foundation.  We thank them for granting us permission to use this in
+Nmap.
+</p>
+<p>
+Output is in CIDR notation. 
+</p>
+<p>
+<a href="http://www.shadowserver.org/wiki/pmwiki.php/Services/IP-BGP">http://www.shadowserver.org/wiki/pmwiki.php/Services/IP-BGP</a></p>
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+  
+  
+    
+      
+        
+      
+    
+      
+        
+      
+    
+  
+  
+    
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+
+
+  <h2> Script Arguments </h2>
+  <p>
+    
+      <h4> targets-asn.whois_port </h4>
+      <p>
+The whois port to use. Default: 43.</p>
+
+    
+      <h4> targets-asn.whois_server </h4>
+      <p>
+The whois server to use. Default: asn.shadowserver.org.</p>
+
+    
+      <h4> targets-asn.asn </h4>
+      <p>
+The ASN to search.</p>
+
+    
+
+    
+      <h4> max-newtargets, newtargets </h4>
+      See the documentation for the <a href="http://nmap.org/nsedoc/lib/target.html#script-args">target</a> library.
+    
+  </p>
+
+
+<h2> Example Usage </h2>
+<p>执行格式
+
+  <pre>nmap --script targets-asn --script-args targets-asn.asn=32
+</pre>
+
+</p>
+
+
+  <h2> Script Output </h2>
+<pre>53/udp open  domain  udp-response
+| targets-asn:
+|   32
+|     128.12.0.0/16
+|_    171.64.0.0/14</pre>
+
+
+
+  <h2> Requires </h2>
+  <ul>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/nmap.html">nmap</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/stdnse.html">stdnse</a></li>
+  
+     <li><a href="">table</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/target.html">target</a></li>
+  
+  </ul>
+
+
+<hr/>
+
+
+
+
+
+
+<p><b>Author: </b>John Bond</p>
+
+
+
+<p><b>License: </b> Simplified (2-clause) BSD license--See <a href="http://nmap.org/svn/docs/licenses/BSD-simplified">http://nmap.org/svn/docs/licenses/BSD-simplified</a></p>
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+</BODY>
+</HTML>
+
+

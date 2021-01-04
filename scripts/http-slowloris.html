@@ -1,0 +1,306 @@
+﻿   <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+    <title>http-slowloris NSE Script -VER007</title>
+    
+
+</HEAD>
+
+
+
+
+
+
+<a href="../nmap-script-help.html">HOME>>>>>>>>></a>
+
+
+
+<h1>File <code>http-slowloris</code></h1>
+
+
+
+<p>
+
+
+<a href="http://nmap.org/book/nse-script-format.html#nse-format-rules">脚本使用类型</a>:
+portrule
+<br>
+
+  脚本所属分类:
+  <i><a href="http://nmap.org/nsedoc/categories/dos.html">dos</a></i>, <i><a href="http://nmap.org/nsedoc/categories/intrusive.html">intrusive</a></i>
+  <br>
+
+脚本下载地址: <a href="http://nmap.org/svn/scripts/http-slowloris.nse">http://nmap.org/svn/scripts/http-slowloris.nse</a>
+</p>
+
+
+
+<h2> User Summary </h2>
+
+<p>
+Tests a web server for vulnerability to the Slowloris DoS attack by launching a Slowloris attack.
+</p>
+<p>
+Slowloris was described at Defcon 17 by RSnake
+(see <a href="http://ha.ckers.org/slowloris/">http://ha.ckers.org/slowloris/</a>).
+</p>
+<p>
+This script opens and maintains numerous 'half-HTTP' connections until
+the server runs out of ressources, leading to a denial of service. When
+a successful DoS is detected, the script stops the attack and returns
+these pieces of information (which may be useful to tweak further
+filtering rules):
+<ul>
+<li>Time taken until DoS
+</li>
+<li>Number of sockets used
+</li>
+<li>Number of queries sent
+</li>
+</ul>
+By default the script runs for 30 minutes if DoS is not achieved.
+</p>
+<p>
+Please note that the number of concurrent connexions must be defined
+with the <code>--max-parallelism</code> option (default is 20, suggested
+is 400 or more) Also, be advised that in some cases this attack can
+bring the web server down for good, not only while the attack is
+running.
+</p>
+<p>
+Also, due to OS limitations, the script is unlikely to work
+when run from Windows.</p>
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+  
+  
+    
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+  
+  
+    
+    
+  
+
+  
+  
+  
+  
+
+
+
+  <h2> Script Arguments </h2>
+  <p>
+    
+      <h4> http-slowloris.runforever </h4>
+      <p>
+Specify that the script should continue the
+attack forever. Defaults to false.</p>
+
+    
+      <h4> http-slowloris.timelimit </h4>
+      <p>
+Specify maximum run time for DoS attack (30
+minutes default).</p>
+
+    
+      <h4> http-slowloris.send_interval </h4>
+      <p>
+Time to wait before sending new http header datas
+in order to maintain the connection. Defaults to 100 seconds.</p>
+
+    
+
+    
+      <h4> http.max-cache-size, http.max-pipeline, http.pipeline, http.useragent </h4>
+      See the documentation for the <a href="http://nmap.org/nsedoc/lib/http.html#script-args">http</a> library.
+    
+      <h4> smbdomain, smbhash, smbnoguest, smbpassword, smbtype, smbusername </h4>
+      See the documentation for the <a href="http://nmap.org/nsedoc/lib/smbauth.html#script-args">smbauth</a> library.
+    
+  </p>
+
+
+<h2> Example Usage </h2>
+<p>执行格式
+
+  <pre>nmap --script http-slowloris --max-parallelism 400  &lt;target&gt;
+</pre>
+
+</p>
+
+
+  <h2> Script Output </h2>
+<pre>PORT     STATE SERVICE REASON  VERSION
+80/tcp   open  http    syn-ack Apache httpd 2.2.20 ((Ubuntu))
+| http-slowloris:
+|   Vulnerable:
+|   the DoS attack took +2m22s
+|   with 501 concurrent connections
+|_  and 441 sent queries</pre>
+
+
+
+  <h2> Requires </h2>
+  <ul>
+  
+     <li><a href="">coroutine</a></li>
+  
+     <li><a href="">math</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/nmap.html">nmap</a></li>
+  
+     <li><a href="">os</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/shortport.html">shortport</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/stdnse.html">stdnse</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/http.html">http</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/comm.html">comm</a></li>
+  
+  </ul>
+
+
+<hr/>
+
+
+
+
+
+
+<p><b>Author: </b>Aleksandar Nikolic, Ange Gutek</p>
+
+
+
+<p><b>License: </b> VER007 整理 <a href="http://www.ver007.com">http://www.ver007.com</a></p>
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+</BODY>
+</HTML>
+
+

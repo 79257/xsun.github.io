@@ -1,0 +1,230 @@
+﻿   <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+    <title>ftp-vsftpd-backdoor NSE Script -VER007</title>
+    
+
+</HEAD>
+
+
+
+
+
+
+<a href="../nmap-script-help.html">HOME>>>>>>>>></a>
+
+
+
+<h1>File <code>ftp-vsftpd-backdoor</code></h1>
+
+
+
+<p>
+
+
+<a href="http://nmap.org/book/nse-script-format.html#nse-format-rules">脚本使用类型</a>:
+portrule
+<br>
+
+  脚本所属分类:
+  <i><a href="http://nmap.org/nsedoc/categories/exploit.html">exploit</a></i>, <i><a href="http://nmap.org/nsedoc/categories/intrusive.html">intrusive</a></i>, <i><a href="http://nmap.org/nsedoc/categories/malware.html">malware</a></i>, <i><a href="http://nmap.org/nsedoc/categories/vuln.html">vuln</a></i>
+  <br>
+
+脚本下载地址: <a href="http://nmap.org/svn/scripts/ftp-vsftpd-backdoor.nse">http://nmap.org/svn/scripts/ftp-vsftpd-backdoor.nse</a>
+</p>
+
+
+
+<h2> User Summary </h2>
+
+<p>
+Tests for the presence of the vsFTPd 2.3.4 backdoor reported on 2011-07-04
+(CVE-2011-2523). This script attempts to exploit the backdoor using the
+innocuous <code>id</code> command by default, but that can be changed with
+the <code>exploit.cmd</code> or <code>ftp-vsftpd-backdoor.cmd</code> script
+arguments.
+</p>
+<p>
+References:
+ * <a href="http://scarybeastsecurity.blogspot.com/2011/07/alert-vsftpd-download-backdoored.html">http://scarybeastsecurity.blogspot.com/2011/07/alert-vsftpd-download-backdoored.html</a>
+ * <a href="https://dev.metasploit.com/redmine/projects/framework/repository/revisions/13093">https://dev.metasploit.com/redmine/projects/framework/repository/revisions/13093</a>
+ * <a href="http://cve.mitre.org/cgi-bin/cvekey.cgi?keyword=CVE-2011-2523">http://cve.mitre.org/cgi-bin/cvekey.cgi?keyword=CVE-2011-2523</a></p>
+
+
+
+
+
+
+
+  
+  
+  
+    
+      
+        
+      
+    
+  
+  
+    
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+
+
+  <h2> Script Arguments </h2>
+  <p>
+    
+      <h4> exploit.cmd </h4>
+      <p>
+or ftp-vsftpd-backdoor.cmd Command to execute in shell
+      (default is <code>id</code>).</p>
+
+    
+
+    
+      <h4> vulns.showall </h4>
+      See the documentation for the <a href="http://nmap.org/nsedoc/lib/vulns.html#script-args">vulns</a> library.
+    
+  </p>
+
+
+<h2> Example Usage </h2>
+<p>执行格式
+
+  <pre>nmap --script ftp-vsftpd-backdoor -p 21 &lt;host&gt;
+</pre>
+
+</p>
+
+
+  <h2> Script Output </h2>
+<pre>PORT   STATE SERVICE
+21/tcp open  ftp
+| ftp-vsftpd-backdoor: 
+|   VULNERABLE:
+|   vsFTPd version 2.3.4 backdoor
+|     State: VULNERABLE (Exploitable)
+|     IDs:  CVE:CVE-2011-2523  OSVDB:73573
+|     Description:
+|       vsFTPd version 2.3.4 backdoor, this was reported on 2011-07-04.
+|     Disclosure date: 2011-07-03
+|     Exploit results:
+|       The backdoor was already triggered
+|       Shell command: id
+|       Results: uid=0(root) gid=0(root) groups=0(root)
+|     References:
+|       http://osvdb.org/73573
+|       http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2011-2523
+|       http://scarybeastsecurity.blogspot.com/2011/07/alert-vsftpd-download-backdoored.html
+|_      https://dev.metasploit.com/redmine/projects/framework/repository/revisions/13093
+</pre>
+
+
+
+  <h2> Requires </h2>
+  <ul>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/ftp.html">ftp</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/nmap.html">nmap</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/shortport.html">shortport</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/stdnse.html">stdnse</a></li>
+  
+     <li><a href="">string</a></li>
+  
+     <li><a href="">table</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/vulns.html">vulns</a></li>
+  
+  </ul>
+
+
+<hr/>
+
+
+
+
+
+
+<p><b>Author: </b>Daniel Miller</p>
+
+
+
+<p><b>License: </b> VER007 整理 <a href="http://www.ver007.com">http://www.ver007.com</a></p>
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+</BODY>
+</HTML>
+
+

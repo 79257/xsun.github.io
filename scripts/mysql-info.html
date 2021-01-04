@@ -1,0 +1,152 @@
+﻿   <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+    <title>mysql-info NSE Script -VER007</title>
+    
+
+</HEAD>
+
+
+
+
+
+
+<a href="../nmap-script-help.html">HOME>>>>>>>>></a>
+
+
+
+<h1>File <code>mysql-info</code></h1>
+
+
+
+<p>
+
+
+<a href="http://nmap.org/book/nse-script-format.html#nse-format-rules">脚本使用类型</a>:
+portrule
+<br>
+
+  脚本所属分类:
+  <i><a href="http://nmap.org/nsedoc/categories/default.html">default</a></i>, <i><a href="http://nmap.org/nsedoc/categories/discovery.html">discovery</a></i>, <i><a href="http://nmap.org/nsedoc/categories/safe.html">safe</a></i>
+  <br>
+
+脚本下载地址: <a href="http://nmap.org/svn/scripts/mysql-info.nse">http://nmap.org/svn/scripts/mysql-info.nse</a>
+</p>
+
+
+
+<h2> User Summary </h2>
+
+<p>
+Connects to a MySQL server and prints information such as the protocol and
+version numbers, thread ID, status, capabilities, and the password salt.
+</p>
+<p>
+If service detection is performed and the server appears to be blocking
+our host or is blocked because of too many connections, then this script
+isn't run (see the portrule).</p>
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+
+
+
+<h2> Example Usage </h2>
+<p>执行格式
+
+  <pre>nmap -sV -sC &lt;target&gt;</pre>
+
+</p>
+
+
+  <h2> Script Output </h2>
+<pre>3306/tcp open  mysql
+|  mysql-info: Protocol: 10
+|  Version: 5.0.51a-3ubuntu5.1
+|  Thread ID: 7
+|  Some Capabilities: Connect with DB, Transactions, Secure Connection
+|  Status: Autocommit
+|_ Salt: bYyt\NQ/4V6IN+*3`imj</pre>
+
+
+
+  <h2> Requires </h2>
+  <ul>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/bit.html">bit</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/comm.html">comm</a></li>
+  
+  </ul>
+
+
+<hr/>
+
+
+
+
+
+
+<p><b>Author: </b>Kris Katterjohn</p>
+
+
+
+<p><b>License: </b> VER007 整理 <a href="http://www.ver007.com">http://www.ver007.com</a></p>
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+</BODY>
+</HTML>
+
+

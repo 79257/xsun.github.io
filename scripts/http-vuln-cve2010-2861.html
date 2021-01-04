@@ -1,0 +1,303 @@
+﻿   <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+    <title>http-vuln-cve2010-2861 NSE Script -VER007</title>
+    
+
+</HEAD>
+
+
+
+
+
+
+<a href="../nmap-script-help.html">HOME>>>>>>>>></a>
+
+
+
+<h1>File <code>http-vuln-cve2010-2861</code></h1>
+
+
+
+<p>
+
+
+<a href="http://nmap.org/book/nse-script-format.html#nse-format-rules">脚本使用类型</a>:
+portrule
+<br>
+
+  脚本所属分类:
+  <i><a href="http://nmap.org/nsedoc/categories/intrusive.html">intrusive</a></i>, <i><a href="http://nmap.org/nsedoc/categories/vuln.html">vuln</a></i>
+  <br>
+
+脚本下载地址: <a href="http://nmap.org/svn/scripts/http-vuln-cve2010-2861.nse">http://nmap.org/svn/scripts/http-vuln-cve2010-2861.nse</a>
+</p>
+
+
+
+<h2> User Summary </h2>
+
+<p>
+Executes a directory traversal attack against a ColdFusion
+server and tries to grab the password hash for the administrator user. It
+then uses the salt value (hidden in the web page) to create the SHA1
+HMAC hash that the web server needs for authentication as admin. You can
+pass this value to the ColdFusion server as the admin without cracking
+the password hash.</p>
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+    
+      
+        
+      
+    
+  
+  
+    
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+  
+  
+    
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+  
+  
+    
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+
+
+  <h2> Script Arguments </h2>
+  <p>
+    
+
+    
+      <h4> smbdomain, smbhash, smbnoguest, smbpassword, smbtype, smbusername </h4>
+      See the documentation for the <a href="http://nmap.org/nsedoc/lib/smbauth.html#script-args">smbauth</a> library.
+    
+      <h4> http.max-cache-size, http.max-pipeline, http.pipeline, http.useragent </h4>
+      See the documentation for the <a href="http://nmap.org/nsedoc/lib/http.html#script-args">http</a> library.
+    
+      <h4> vulns.showall </h4>
+      See the documentation for the <a href="http://nmap.org/nsedoc/lib/vulns.html#script-args">vulns</a> library.
+    
+  </p>
+
+
+<h2> Example Usage </h2>
+<p>执行格式
+
+  <pre>nmap --script http-vuln-cve2010-2861 &lt;host&gt;
+</pre>
+
+</p>
+
+
+  <h2> Script Output </h2>
+<pre>80/tcp open  http
+| http-vuln-cve2010-2861:
+|   VULNERABLE:
+|   Adobe ColdFusion enter.cfm Traversal password.properties Information Disclosure
+|     State: VULNERABLE
+|     IDs:  CVE:CVE-2010-2861  OSVDB:67047
+|     Description:
+|       Multiple directory traversal vulnerabilities in the administrator console in Adobe ColdFusion
+|       9.0.1 and earlier allow remote attackers to read arbitrary files via the locale parameter
+|     Disclosure date: 2010-08-10
+|     Extra information:
+|
+|   ColdFusion8
+|   HMAC: d6914bef568f8931d0c696cd5f7748596f97db5d
+|   Salt: 1329446896585
+|   Hash: 5BAA61E4C9B93F3F0682250B6CF8331B7EE68FD8
+|
+|     References:
+|       http://www.blackhatacademy.org/security101/Cold_Fusion_Hacking
+|       http://www.nessus.org/plugins/index.php?view=single&amp;id=48340
+|       http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-2861
+|       http://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2010-2861
+|_      http://osvdb.org/67047
+
+
+This script relies on the service being identified as HTTP or HTTPS. If the
+ColdFusion server you run this against is on a port other than 80/tcp or 443/tcp
+then use "nmap -sV" so that nmap discovers the port as an HTTP server.</pre>
+
+
+
+  <h2> Requires </h2>
+  <ul>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/http.html">http</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/nmap.html">nmap</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/shortport.html">shortport</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/stdnse.html">stdnse</a></li>
+  
+     <li><a href="">table</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/vulns.html">vulns</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/openssl.html">openssl</a></li>
+  
+  </ul>
+
+
+<hr/>
+
+
+
+
+
+
+<p><b>Author: </b>Micah Hoffman</p>
+
+
+
+<p><b>License: </b> VER007 整理 <a href="http://www.ver007.com">http://www.ver007.com</a></p>
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+</BODY>
+</HTML>
+
+

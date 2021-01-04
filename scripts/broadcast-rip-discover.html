@@ -1,0 +1,193 @@
+﻿   <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+    <title>broadcast-rip-discover NSE Script -VER007</title>
+    
+
+</HEAD>
+
+
+
+
+
+
+<a href="../nmap-script-help.html">HOME>>>>>>>>></a>
+
+
+
+<h1>File <code>broadcast-rip-discover</code></h1>
+
+
+
+<p>
+
+
+<a href="http://nmap.org/book/nse-script-format.html#nse-format-rules">脚本使用类型</a>:
+prerule
+<br>
+
+  脚本所属分类:
+  <i><a href="http://nmap.org/nsedoc/categories/broadcast.html">broadcast</a></i>, <i><a href="http://nmap.org/nsedoc/categories/safe.html">safe</a></i>
+  <br>
+
+脚本下载地址: <a href="http://nmap.org/svn/scripts/broadcast-rip-discover.nse">http://nmap.org/svn/scripts/broadcast-rip-discover.nse</a>
+</p>
+
+
+
+<h2> User Summary </h2>
+
+<p>
+Discovers hosts and routing information from devices running RIPv2 on the
+LAN. It does so by sending a RIPv2 Request command and collects the responses
+from all devices responding to the request.</p>
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+
+
+  <h2> Script Arguments </h2>
+  <p>
+    
+      <h4> broadcast-rip-discover.timeout </h4>
+      <p>
+timespec defining how long to wait for
+      a response. (default 5s)</p>
+
+    
+
+    
+  </p>
+
+
+<h2> Example Usage </h2>
+<p>执行格式
+
+  <pre>nmap --script broadcast-rip-discover
+</pre>
+
+</p>
+
+
+  <h2> Script Output </h2>
+<pre>Pre-scan script results:
+| broadcast-rip-discover: 
+| Discovered RIPv2 devices
+|   10.0.200.107
+|     ip           netmask        nexthop       metric
+|     10.46.100.0  255.255.255.0  0.0.0.0       1
+|     10.46.110.0  255.255.255.0  0.0.0.0       1
+|     10.46.120.0  255.255.255.0  0.0.0.0       1
+|     10.46.123.0  255.255.255.0  10.0.200.123  1
+|     10.46.124.0  255.255.255.0  10.0.200.124  1
+|     10.46.125.0  255.255.255.0  10.0.200.125  1
+|   10.0.200.101
+|     ip       netmask  nexthop     metric
+|_    0.0.0.0  0.0.0.0  10.0.200.1  1
+</pre>
+
+
+
+  <h2> Requires </h2>
+  <ul>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/bin.html">bin</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/ipOps.html">ipOps</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/nmap.html">nmap</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/stdnse.html">stdnse</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/tab.html">tab</a></li>
+  
+     <li><a href="">table</a></li>
+  
+  </ul>
+
+
+<hr/>
+
+
+
+
+
+
+<p><b>Author: </b>Patrik Karlsson</p>
+
+
+
+<p><b>License: </b> VER007 整理 <a href="http://www.ver007.com">http://www.ver007.com</a></p>
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+</BODY>
+</HTML>
+
+

@@ -1,0 +1,415 @@
+﻿   <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+    <title>smb-brute NSE Script -VER007</title>
+    
+
+</HEAD>
+
+
+
+
+
+
+<a href="../nmap-script-help.html">HOME>>>>>>>>></a>
+
+
+
+<h1>File <code>smb-brute</code></h1>
+
+
+
+<p>
+
+
+<a href="http://nmap.org/book/nse-script-format.html#nse-format-rules">脚本使用类型</a>:
+hostrule
+<br>
+
+  脚本所属分类:
+  <i><a href="http://nmap.org/nsedoc/categories/intrusive.html">intrusive</a></i>, <i><a href="http://nmap.org/nsedoc/categories/brute.html">brute</a></i>
+  <br>
+
+脚本下载地址: <a href="http://nmap.org/svn/scripts/smb-brute.nse">http://nmap.org/svn/scripts/smb-brute.nse</a>
+</p>
+
+
+
+<h2> User Summary </h2>
+
+<p>
+Attempts to guess username/password combinations over SMB, storing discovered combinations 
+for use in other scripts. Every attempt will be made to get a valid list of users and to 
+verify each username before actually using them. When a username is discovered, besides 
+being printed, it is also saved in the Nmap registry so other Nmap scripts can use it. That
+means that if you're going to run <code>smb-brute.nse</code>, you should run other <code>smb</code> scripts you want. 
+This checks passwords in a case-insensitive way, determining case after a password is found, 
+for Windows versions before Vista. 
+</p>
+<p>
+This script is specifically targeted towards security auditors or penetration testers. 
+One example of its use, suggested by Brandon Enright, was hooking up <code>smb-brute.nse</code> to the
+database of usernames and passwords used by the Conficker worm (the password list can be
+found at <a href="http://www.skullsecurity.org/wiki/index.php/Passwords">http://www.skullsecurity.org/wiki/index.php/Passwords</a>, among other places.
+Then, the network is scanned and all systems that would be infected by Conficker are 
+discovered. 
+</p>
+<p>
+From the penetration tester perspective its use is pretty obvious. By discovering weak passwords
+on SMB, a protocol that's well suited for bruteforcing, access to a system can be gained. 
+Further, passwords discovered against Windows with SMB might also be used on Linux or MySQL
+or custom Web applications. Discovering a password greatly beneficial for a pen-tester. 
+</p>
+<p>
+This script uses a lot of little tricks that I (Ron Bowes) describe in detail in a blog 
+posting, <a href="http://www.skullsecurity.org/blog/?p=164">http://www.skullsecurity.org/blog/?p=164</a>. The tricks will be summarized here, but
+that blog is the best place to learn more. 
+</p>
+<p>
+Usernames and passwords are initially taken from the unpwdb library. If possible, the usernames
+are verified as existing by taking advantage of Windows' odd behaviour with invalid username
+and invalid password responses. As soon as it is able, this script will download a full list 
+of usernames from the server and replace the unpw usernames with those. This enables the 
+script to restrict itself to actual accounts only. 
+</p>
+<p>
+When an account is discovered, it's saved in the <code>smb</code> module (which uses the Nmap
+registry). If an account is already saved, the account's privileges are checked; accounts 
+with administrator privileges are kept over accounts without. The specific method for checking
+is by calling <code>GetShareInfo("IPC$")</code>, which requires administrative privileges. Once this script
+is finished (all other smb scripts depend on it, it'll run first), other scripts will use the saved account
+to perform their checks. 
+</p>
+<p>
+The blank password is always tried first, followed by "special passwords" (such as the username
+and the username reversed). Once those are exhausted, the unpwdb password list is used. 
+</p>
+<p>
+One major goal of this script is to avoid accout lockouts. This is done in a few ways. First, 
+when a lockout is detected, unless you user specifically overrides it with the <code>smblockout</code>
+argument, the scan stops. Second, all usernames are checked with the most common passwords first, 
+so with not-too-strict lockouts (10 invalid attempts), the 10 most common passwords will still 
+be tried. Third, one account, called the canary, "goes out ahead"; that is, three invalid 
+attempts are made (by default) to ensure that it's locked out before others are. 
+</p>
+<p>
+In addition to active accounts, this script will identify valid passwords for accounts that
+are disabled, guest-equivalent, and require password changes. Although these accounts can't
+be used, it's good to know that the password is valid. In other cases, it's impossible to
+tell a valid password (if an account is locked out, for example). These are displayed, too. 
+Certain accounts, such as guest or some guest-equivalent, will permit any password. This
+is also detected. When possible, the SMB protocol is used to its fullest to get maximum 
+information. 
+</p>
+<p>
+When possible, checks are done using a case-insensitive password, then proper case is
+determined with a fairly efficient bruteforce. For example, if the actual password is 
+"PassWord", then "password" will work and "PassWord" will be found afterwards (on the
+14th attempt out of a possible 256 attempts, with the current algorithm).</p>
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+  
+  
+    
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+  
+  
+    
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+  
+  
+    
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+
+
+  <h2> Script Arguments </h2>
+  <p>
+    
+      <h4> smblockout </h4>
+      <p>
+This argument will force the script to continue if it 
+      locks out an account or thinks it will lock out an account.</p>
+
+    
+      <h4> canaries </h4>
+      <p>
+Sets the number of tests to do to attempt to lock out the first account. 
+      This will lock out the first account without locking out the rest of the accounts. 
+      The default is 3, which will only trigger strict lockouts, but will also bump the
+      canary account up far enough to detect a lockout well before other accounts are
+      hit.</p>
+
+    
+      <h4> brutelimit </h4>
+      <p>
+Limits the number of usernames checked in the script. In some domains, 
+      it's possible to end up with 10,000+ usernames on each server. By default, this
+      will be <code>5000</code>, which should be higher than most servers and also prevent infinite
+      loops or other weird things. This will only affect the user list pulled from the
+      server, not the username list.</p>
+
+    
+
+    
+      <h4> passdb, unpwdb.passlimit, unpwdb.timelimit, unpwdb.userlimit, userdb </h4>
+      See the documentation for the <a href="http://nmap.org/nsedoc/lib/unpwdb.html#script-args">unpwdb</a> library.
+    
+      <h4> randomseed, smbbasic, smbport, smbsign </h4>
+      See the documentation for the <a href="http://nmap.org/nsedoc/lib/smb.html#script-args">smb</a> library.
+    
+      <h4> smbdomain, smbhash, smbnoguest, smbpassword, smbtype, smbusername </h4>
+      See the documentation for the <a href="http://nmap.org/nsedoc/lib/smbauth.html#script-args">smbauth</a> library.
+    
+  </p>
+
+
+<h2> Example Usage </h2>
+<p>执行格式
+
+  <pre>nmap --script smb-brute.nse -p445 &lt;host&gt;
+sudo nmap -sU -sS --script smb-brute.nse -p U:137,T:139 &lt;host&gt;
+</pre>
+
+</p>
+
+
+  <h2> Script Output </h2>
+<pre>Host script results:
+|  smb-brute:
+|  |  bad name:test =&gt; Valid credentials
+|  |  consoletest:test =&gt; Valid credentials, password must be changed at next logon
+|  |  guest:&lt;anything&gt; =&gt; Valid credentials, account disabled
+|  |  mixcase:BuTTeRfLY1 =&gt; Valid credentials
+|  |  test:password1 =&gt; Valid credentials, account expired
+|  |  this:password =&gt; Valid credentials, account cannot log in at current time
+|  |  thisisaverylong:password =&gt; Valid credentials
+|  |  thisisaverylongname:password =&gt; Valid credentials
+|  |  thisisaverylongnamev:password =&gt; Valid credentials
+|_ |_ web:TeSt =&gt; Valid credentials, account disabled
+</pre>
+
+
+
+  <h2> Requires </h2>
+  <ul>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/bit.html">bit</a></li>
+  
+     <li><a href="">math</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/msrpc.html">msrpc</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/nmap.html">nmap</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/smb.html">smb</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/stdnse.html">stdnse</a></li>
+  
+     <li><a href="">string</a></li>
+  
+     <li><a href="">table</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/unpwdb.html">unpwdb</a></li>
+  
+  </ul>
+
+
+<hr/>
+
+
+
+
+
+
+<p><b>Author: </b>Ron Bowes</p>
+
+
+
+<p><b>License: </b> VER007 整理 <a href="http://www.ver007.com">http://www.ver007.com</a></p>
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+</BODY>
+</HTML>
+
+

@@ -1,0 +1,200 @@
+﻿   <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+    <title>snmp-hh3c-logins NSE Script -VER007</title>
+    
+
+</HEAD>
+
+
+
+
+
+
+<a href="../nmap-script-help.html">HOME>>>>>>>>></a>
+
+
+
+<h1>File <code>snmp-hh3c-logins</code></h1>
+
+
+
+<p>
+
+
+<a href="http://nmap.org/book/nse-script-format.html#nse-format-rules">脚本使用类型</a>:
+portrule
+<br>
+
+  脚本所属分类:
+  <i><a href="http://nmap.org/nsedoc/categories/default.html">default</a></i>, <i><a href="http://nmap.org/nsedoc/categories/discovery.html">discovery</a></i>, <i><a href="http://nmap.org/nsedoc/categories/safe.html">safe</a></i>
+  <br>
+
+脚本下载地址: <a href="http://nmap.org/svn/scripts/snmp-hh3c-logins.nse">http://nmap.org/svn/scripts/snmp-hh3c-logins.nse</a>
+</p>
+
+
+
+<h2> User Summary </h2>
+
+<p>
+Attempts to enumerate Huawei / HP/H3C Locally Defined Users through the
+hh3c-user.mib OID
+</p>
+<p>
+For devices running software released pre-Oct 2012 only an SNMP read-only
+string is required to access the OID. Otherwise a read-write string is
+required.
+</p>
+<p>
+Output is 'username - password - level: {0|1|2|3}'
+</p>
+<p>
+Password may be in cleartext, ciphertext or sha256
+Levels are from 0 to 3 with 0 being the lowest security level
+</p>
+<p>
+<a href="https://h20566.www2.hp.com/portal/site/hpsc/public/kb/docDisplay/?docId=emr_na-c03515685">https://h20566.www2.hp.com/portal/site/hpsc/public/kb/docDisplay/?docId=emr_na-c03515685</a>
+<a href="http://grutztopia.jingojango.net/2012/10/hph3c-and-huawei-snmp-weak-access-to.html">http://grutztopia.jingojango.net/2012/10/hph3c-and-huawei-snmp-weak-access-to.html</a></p>
+
+
+
+
+
+
+
+  
+  
+  
+    
+      
+        
+      
+    
+  
+  
+    
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+
+
+  <h2> Script Arguments </h2>
+  <p>
+    
+
+    
+      <h4> snmpcommunity </h4>
+      See the documentation for the <a href="http://nmap.org/nsedoc/lib/snmp.html#script-args">snmp</a> library.
+    
+  </p>
+
+
+<h2> Example Usage </h2>
+<p>执行格式
+
+  <pre>nmap -sU -p 161 --script snmp-hh3c-logins --script-args --script-args snmpcommunity=&lt;community&gt; &lt;target&gt;
+</pre>
+
+</p>
+
+
+  <h2> Script Output </h2>
+<pre>| snmp-hh3c-logins:
+|   users:
+|     admin - admin - level: 3
+|_    h3c - h3capadmin - level 0
+</pre>
+
+
+
+  <h2> Requires </h2>
+  <ul>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/nmap.html">nmap</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/shortport.html">shortport</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/snmp.html">snmp</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/stdnse.html">stdnse</a></li>
+  
+  </ul>
+
+
+<hr/>
+
+
+
+
+
+
+<p><b>Author: </b>Kurt Grutzmacher</p>
+
+
+
+<p><b>License: </b> VER007 整理 <a href="http://www.ver007.com">http://www.ver007.com</a></p>
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+</BODY>
+</HTML>
+
+

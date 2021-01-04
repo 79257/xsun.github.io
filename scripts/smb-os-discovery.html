@@ -1,0 +1,366 @@
+﻿   <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+    <title>smb-os-discovery NSE Script -VER007</title>
+    
+
+</HEAD>
+
+
+
+
+
+
+<a href="../nmap-script-help.html">HOME>>>>>>>>></a>
+
+
+
+<h1>File <code>smb-os-discovery</code></h1>
+
+
+
+<p>
+
+
+<a href="http://nmap.org/book/nse-script-format.html#nse-format-rules">脚本使用类型</a>:
+hostrule
+<br>
+
+  脚本所属分类:
+  <i><a href="http://nmap.org/nsedoc/categories/default.html">default</a></i>, <i><a href="http://nmap.org/nsedoc/categories/discovery.html">discovery</a></i>, <i><a href="http://nmap.org/nsedoc/categories/safe.html">safe</a></i>
+  <br>
+
+脚本下载地址: <a href="http://nmap.org/svn/scripts/smb-os-discovery.nse">http://nmap.org/svn/scripts/smb-os-discovery.nse</a>
+</p>
+
+
+
+<h2> User Summary </h2>
+
+<p>
+Attempts to determine the operating system, computer name, domain, workgroup, and current
+time over the SMB protocol (ports 445 or 139).
+This is done by starting a session with the anonymous 
+account (or with a proper user account, if one is given; it likely doesn't make
+a difference); in response to a session starting, the server will send back all this
+information.
+</p>
+<p>
+The following fields may be included in the output, depending on the 
+cirumstances (e.g. the workgroup name is mutually exclusive with domain and forest
+names) and the information available:
+<ul>
+<li>OS
+</li>
+<li>Computer name
+</li>
+<li>Domain name
+</li>
+<li>Forest name
+</li>
+<li>FQDN
+</li>
+<li>NetBIOS computer name
+</li>
+<li>NetBIOS domain name
+</li>
+<li>Workgroup
+</li>
+<li>System time
+</li>
+</ul>
+</p>
+<p>
+Some systems, like Samba, will blank out their name (and only send their domain). 
+Other systems (like embedded printers) will simply leave out the information. Other
+systems will blank out various pieces (some will send back 0 for the current
+time, for example). 
+</p>
+<p>
+Retrieving the name and operating system of a server is a vital step in targeting
+an attack against it, and this script makes that retrieval easy. Additionally, if
+a penetration tester is choosing between multiple targets, the time can help identify
+servers that are being poorly maintained (for more information/random thoughts on
+using the time, see <a href="http://www.skullsecurity.org/blog/?p=76">http://www.skullsecurity.org/blog/?p=76</a>. 
+</p>
+<p>
+Although the standard <code>smb*</code> script arguments can be used, 
+they likely won't change the outcome in any meaningful way. However, <code>smbnoguest</code>
+will speed up the script on targets that do not allow guest access.</p>
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+  
+  
+    
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+  
+  
+    
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+
+
+  <h2> Script Arguments </h2>
+  <p>
+    
+
+    
+      <h4> randomseed, smbbasic, smbport, smbsign </h4>
+      See the documentation for the <a href="http://nmap.org/nsedoc/lib/smb.html#script-args">smb</a> library.
+    
+      <h4> smbdomain, smbhash, smbnoguest, smbpassword, smbtype, smbusername </h4>
+      See the documentation for the <a href="http://nmap.org/nsedoc/lib/smbauth.html#script-args">smbauth</a> library.
+    
+  </p>
+
+
+<h2> Example Usage </h2>
+<p>执行格式
+
+  <pre>nmap --script smb-os-discovery.nse -p445 127.0.0.1
+sudo nmap -sU -sS --script smb-os-discovery.nse -p U:137,T:139 127.0.0.1
+</pre>
+
+</p>
+
+
+  <h2> Script Output </h2>
+<pre>Host script results:
+| smb-os-discovery:
+|   OS: Windows Server (R) 2008 Standard 6001 Service Pack 1 (Windows Server (R) 2008 Standard 6.0)
+|   OS CPE: cpe:/o:microsoft:windows_2008::sp1
+|   Computer name: Sql2008
+|   NetBIOS computer name: SQL2008
+|   Domain name: lab.test.local
+|   Forest name: test.local
+|   FQDN: Sql2008.lab.test.local
+|   NetBIOS domain name: LAB
+|_  System time: 2011-04-20T13:34:06-05:00
+</pre>
+
+
+
+  <h2> Requires </h2>
+  <ul>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/smb.html">smb</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/stdnse.html">stdnse</a></li>
+  
+     <li><a href="">string</a></li>
+  
+     <li><a href="">table</a></li>
+  
+     <li><a href="">math</a></li>
+  
+     <li><a href="">os</a></li>
+  
+  </ul>
+
+
+<hr/>
+
+
+
+
+
+
+<p><b>Author: </b>Ron Bowes</p>
+
+
+
+<p><b>License: </b> VER007 整理 <a href="http://www.ver007.com">http://www.ver007.com</a></p>
+
+
+
+
+
+
+
+
+
+  
+
+  
+    <h2> <font color="#0000ff">hostrule</font> </h2>
+    <dl class="function">
+      
+
+<dt><a name="hostrule"></a><strong>hostrule</strong>&nbsp;(host)</dt>
+<dd>
+
+<p>
+Check whether or not this script should be run.</p>
+
+
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  host:
+          
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+    </dl>
+  
+
+  
+
+  
+
+
+
+
+</BODY>
+</HTML>
+
+

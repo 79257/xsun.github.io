@@ -1,0 +1,293 @@
+﻿   <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+    <title>smtp-vuln-cve2011-1764 NSE Script -VER007</title>
+    
+
+</HEAD>
+
+
+
+
+
+
+<a href="../nmap-script-help.html">HOME>>>>>>>>></a>
+
+
+
+<h1>File <code>smtp-vuln-cve2011-1764</code></h1>
+
+
+
+<p>
+
+
+<a href="http://nmap.org/book/nse-script-format.html#nse-format-rules">脚本使用类型</a>:
+portrule
+<br>
+
+  脚本所属分类:
+  <i><a href="http://nmap.org/nsedoc/categories/intrusive.html">intrusive</a></i>, <i><a href="http://nmap.org/nsedoc/categories/vuln.html">vuln</a></i>
+  <br>
+
+脚本下载地址: <a href="http://nmap.org/svn/scripts/smtp-vuln-cve2011-1764.nse">http://nmap.org/svn/scripts/smtp-vuln-cve2011-1764.nse</a>
+</p>
+
+
+
+<h2> User Summary </h2>
+
+<p>
+Checks for a format string vulnerability in the Exim SMTP server
+(version 4.70 through 4.75) with DomainKeys Identified Mail (DKIM) support
+(CVE-2011-1764).  The DKIM logging mechanism did not use format string
+specifiers when logging some parts of the DKIM-Signature header field.
+A remote attacker who is able to send emails, can exploit this vulnerability
+and execute arbitrary code with the privileges of the Exim daemon.
+</p>
+<p>
+Reference:
+<ul>
+<li><a href="http://bugs.exim.org/show_bug.cgi?id=1106">http://bugs.exim.org/show_bug.cgi?id=1106</a>
+</li>
+<li><a href="http://thread.gmane.org/gmane.mail.exim.devel/4946">http://thread.gmane.org/gmane.mail.exim.devel/4946</a>
+</li>
+<li><a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=2011-1764">http://cve.mitre.org/cgi-bin/cvename.cgi?name=2011-1764</a>
+</li>
+<li><a href="http://en.wikipedia.org/wiki/DomainKeys_Identified_Mail">http://en.wikipedia.org/wiki/DomainKeys_Identified_Mail</a></li>
+</ul>
+</p>
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+  
+  
+    
+      
+        
+      
+    
+  
+  
+    
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+  
+  
+    
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+
+
+  <h2> Script Arguments </h2>
+  <p>
+    
+      <h4> smtp-vuln-cve2011-1764.mailto </h4>
+      <p>
+Define the destination email address
+      to be used.</p>
+
+    
+      <h4> smtp.domain </h4>
+      <p>
+Define the domain to be used in the SMTP EHLO command.</p>
+
+    
+      <h4> smtp-vuln-cve2011-1764.mailfrom </h4>
+      <p>
+Define the source email address to
+      be used.</p>
+
+    
+
+    
+      <h4> smbdomain, smbhash, smbnoguest, smbpassword, smbtype, smbusername </h4>
+      See the documentation for the <a href="http://nmap.org/nsedoc/lib/smbauth.html#script-args">smbauth</a> library.
+    
+      <h4> vulns.showall </h4>
+      See the documentation for the <a href="http://nmap.org/nsedoc/lib/vulns.html#script-args">vulns</a> library.
+    
+  </p>
+
+
+<h2> Example Usage </h2>
+<p>执行格式
+
+  <pre>nmap --script=smtp-vuln-cve2011-1764 -pT:25,465,587 &lt;host&gt;
+</pre>
+
+</p>
+
+
+  <h2> Script Output </h2>
+<pre>PORT   STATE SERVICE
+25/tcp open  smtp
+| smtp-vuln-cve2011-1764: 
+|   VULNERABLE:
+|   Exim DKIM format string
+|     State: VULNERABLE
+|     IDs:  CVE:CVE-2011-1764  OSVDB:72156
+|     Risk factor: High  CVSSv2: 7.5 (HIGH) (AV:N/AC:L/Au:N/C:P/I:P/A:P)
+|     Description:
+|       Exim SMTP server (version 4.70 through 4.75) with DomainKeys Identified
+|       Mail (DKIM) support is vulnerable to a format string. A remote attacker
+|       who is able to send emails, can exploit this vulnerability and execute
+|       arbitrary code with the privileges of the Exim daemon.
+|     Disclosure date: 2011-04-29
+|     References:
+|       http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2011-1764
+|       http://osvdb.org/72156
+|_      http://bugs.exim.org/show_bug.cgi?id=1106
+</pre>
+
+
+
+  <h2> Requires </h2>
+  <ul>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/shortport.html">shortport</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/smtp.html">smtp</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/stdnse.html">stdnse</a></li>
+  
+     <li><a href="">string</a></li>
+  
+     <li><a href="">table</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/vulns.html">vulns</a></li>
+  
+  </ul>
+
+
+<hr/>
+
+
+
+
+
+
+<p><b>Author: </b>Djalal Harouni</p>
+
+
+
+<p><b>License: </b> VER007 整理 <a href="http://www.ver007.com">http://www.ver007.com</a></p>
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+</BODY>
+</HTML>
+
+

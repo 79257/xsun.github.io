@@ -1,0 +1,187 @@
+﻿   <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+    <title>firewall-bypass NSE Script -VER007</title>
+    
+
+</HEAD>
+
+
+
+
+
+
+<a href="../nmap-script-help.html">HOME>>>>>>>>></a>
+
+
+
+<h1>File <code>firewall-bypass</code></h1>
+
+
+
+<p>
+
+
+<a href="http://nmap.org/book/nse-script-format.html#nse-format-rules">脚本使用类型</a>:
+hostrule
+<br>
+
+  脚本所属分类:
+  <i><a href="http://nmap.org/nsedoc/categories/vuln.html">vuln</a></i>, <i><a href="http://nmap.org/nsedoc/categories/intrusive.html">intrusive</a></i>
+  <br>
+
+脚本下载地址: <a href="http://nmap.org/svn/scripts/firewall-bypass.nse">http://nmap.org/svn/scripts/firewall-bypass.nse</a>
+</p>
+
+
+
+<h2> User Summary </h2>
+
+<p>
+Detects a vulnerability in netfilter and other firewalls that use helpers to dynamically open ports for protocols such as ftp and sip.
+</p>
+<p>
+The script works by spoofing a packet from the target server asking for opening a related connection to a target port which will be
+fulfilled by the firewall through the adequate protocol helper port. The attacking machine should be on the same network segment as the
+firewall for this to work. The script supports ftp helper on both IPv4 and IPv6. Real path filter is used to prevent such attacks.
+</p>
+<p>
+Based on work done by Eric Leblond.
+</p>
+<p>
+For more information, see:
+    * <a href="http://home.regit.org/2012/03/playing-with-network-layers-to-bypass-firewalls-filtering-policy/">http://home.regit.org/2012/03/playing-with-network-layers-to-bypass-firewalls-filtering-policy/</a></p>
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+
+
+  <h2> Script Arguments </h2>
+  <p>
+    
+      <h4> firewall-bypass.helper </h4>
+      <p>
+The helper to use. Defaults to <code>ftp</code>.
+Supported helpers: ftp (Both IPv4 and IPv6).</p>
+
+    
+      <h4> firewall-bypass.targetport </h4>
+      <p>
+Port to test vulnerability on. Target port should be a
+non-open port. If not given, the script will try to find a filtered or closed port from
+the port scan results.</p>
+
+    
+      <h4> firewall-bypass.helperport </h4>
+      <p>
+If not using the helper's default port.</p>
+
+    
+
+    
+  </p>
+
+
+<h2> Example Usage </h2>
+<p>执行格式
+
+  <pre>nmap --script firewall-bypass &lt;target&gt;
+nmap --script firewall-bypass --script-args firewall-bypass.helper="ftp", firewall-bypass.targetport=22 &lt;target&gt;
+</pre>
+
+</p>
+
+
+  <h2> Script Output </h2>
+<pre>Host script results:
+| firewall-bypass:
+|_  Firewall vulnerable to bypass through ftp helper. (IPv4)</pre>
+
+
+
+  <h2> Requires </h2>
+  <ul>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/nmap.html">nmap</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/stdnse.html">stdnse</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/bit.html">bit</a></li>
+  
+     <li><a href="">string</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/packet.html">packet</a></li>
+  
+  </ul>
+
+
+<hr/>
+
+
+
+
+
+
+<p><b>Author: </b>Hani Benhabiles</p>
+
+
+
+<p><b>License: </b> VER007 整理 <a href="http://www.ver007.com">http://www.ver007.com</a></p>
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+</BODY>
+</HTML>
+
+

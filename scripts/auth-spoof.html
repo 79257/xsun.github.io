@@ -1,0 +1,148 @@
+﻿   <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+    <title>auth-spoof NSE Script -VER007</title>
+    
+
+</HEAD>
+
+
+
+
+
+
+<a href="../nmap-script-help.html">HOME>>>>>>>>></a>
+
+
+
+<h1>File <code>auth-spoof</code></h1>
+
+
+
+<p>
+
+
+<a href="http://nmap.org/book/nse-script-format.html#nse-format-rules">脚本使用类型</a>:
+portrule
+<br>
+
+  脚本所属分类:
+  <i><a href="http://nmap.org/nsedoc/categories/malware.html">malware</a></i>, <i><a href="http://nmap.org/nsedoc/categories/safe.html">safe</a></i>
+  <br>
+
+脚本下载地址: <a href="http://nmap.org/svn/scripts/auth-spoof.nse">http://nmap.org/svn/scripts/auth-spoof.nse</a>
+</p>
+
+
+
+<h2> User Summary </h2>
+
+<p>
+Checks for an identd (auth) server which is spoofing its replies.
+</p>
+<p>
+Tests whether an identd (auth) server responds with an answer before
+we even send the query.  This sort of identd spoofing can be a sign of
+malware infection, though it can also be used for legitimate privacy
+reasons.</p>
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+
+
+
+<h2> Example Usage </h2>
+<p>执行格式
+
+  <pre>nmap -sV --script=auth-spoof &lt;target&gt;</pre>
+
+</p>
+
+
+  <h2> Script Output </h2>
+<pre>PORT    STATE SERVICE REASON
+113/tcp open  auth    syn-ack
+|_auth-spoof: Spoofed reply: 0, 0 : USERID : UNIX : OGJdvM</pre>
+
+
+
+  <h2> Requires </h2>
+  <ul>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/comm.html">comm</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/shortport.html">shortport</a></li>
+  
+  </ul>
+
+
+<hr/>
+
+
+
+
+
+
+<p><b>Author: </b>Diman Todorov</p>
+
+
+
+<p><b>License: </b> VER007 整理 <a href="http://www.ver007.com">http://www.ver007.com</a></p>
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+</BODY>
+</HTML>
+
+

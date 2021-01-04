@@ -1,0 +1,202 @@
+﻿   <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+    <title>quake3-info NSE Script -VER007</title>
+    
+
+</HEAD>
+
+
+
+
+
+
+<a href="../nmap-script-help.html">HOME>>>>>>>>></a>
+
+
+
+<h1>File <code>quake3-info</code></h1>
+
+
+
+<p>
+
+
+<a href="http://nmap.org/book/nse-script-format.html#nse-format-rules">脚本使用类型</a>:
+portrule
+<br>
+
+  脚本所属分类:
+  <i><a href="http://nmap.org/nsedoc/categories/default.html">default</a></i>, <i><a href="http://nmap.org/nsedoc/categories/discovery.html">discovery</a></i>, <i><a href="http://nmap.org/nsedoc/categories/safe.html">safe</a></i>, <i><a href="http://nmap.org/nsedoc/categories/version.html">version</a></i>
+  <br>
+
+脚本下载地址: <a href="http://nmap.org/svn/scripts/quake3-info.nse">http://nmap.org/svn/scripts/quake3-info.nse</a>
+</p>
+
+
+
+<h2> User Summary </h2>
+
+<p>
+Extracts information from a Quake3 game server and other games which use the same protocol.</p>
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+
+
+
+<h2> Example Usage </h2>
+<p>执行格式
+
+  <pre>nmap -sU -sV -Pn --script quake3-info.nse -p &lt;port&gt; &lt;target&gt;
+</pre>
+
+</p>
+
+
+  <h2> Script Output </h2>
+<pre>PORT      STATE         SERVICE VERSION
+27960/udp open          quake3  Quake 3 dedicated server
+| quake3-info:  
+| PLAYERS:
+|     1. cyberix (frags: 0/20, ping: 4)
+| BASIC OPTIONS:
+|     capturelimit: 8
+|     dmflags: 0
+|     elimflags: 0
+|     fraglimit: 20
+|     gamename: baseoa
+|     mapname: oa_dm1
+|     protocol: 71
+|     timelimit: 0
+|     version: ioq3 1.36+svn1933-1/Ubuntu linux-x86_64 Apr  4 2011
+|     videoflags: 7
+|     voteflags: 767
+| OTHER OPTIONS:
+|     bot_minplayers: 0
+|     elimination_roundtime: 120
+|     g_allowVote: 1
+|     g_altExcellent: 0
+|     g_delagHitscan: 0
+|     g_doWarmup: 0
+|     g_enableBreath: 0
+|     g_enableDust: 0
+|     g_gametype: 0
+|     g_instantgib: 0
+|     g_lms_mode: 0
+|     g_maxGameClients: 0
+|     g_needpass: 0
+|     g_obeliskRespawnDelay: 10
+|     g_rockets: 0
+|     g_voteGametypes: /0/1/3/4/5/6/7/8/9/10/11/12/
+|     g_voteMaxFraglimit: 0
+|     g_voteMaxTimelimit: 0
+|     g_voteMinFraglimit: 0
+|     g_voteMinTimelimit: 0
+|     sv_allowDownload: 0
+|     sv_floodProtect: 1
+|     sv_hostname: noname
+|     sv_maxPing: 0
+|     sv_maxRate: 0
+|     sv_maxclients: 8
+|     sv_minPing: 0
+|     sv_minRate: 0
+|_    sv_privateClients: 0</pre>
+
+
+
+  <h2> Requires </h2>
+  <ul>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/bin.html">bin</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/comm.html">comm</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/nmap.html">nmap</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/shortport.html">shortport</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/stdnse.html">stdnse</a></li>
+  
+     <li><a href="">string</a></li>
+  
+     <li><a href="">table</a></li>
+  
+  </ul>
+
+
+<hr/>
+
+
+
+
+
+
+<p><b>Author: </b>Toni Ruottu</p>
+
+
+
+<p><b>License: </b> VER007 整理 <a href="http://www.ver007.com">http://www.ver007.com</a></p>
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+</BODY>
+</HTML>
+
+

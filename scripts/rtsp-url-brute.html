@@ -1,0 +1,177 @@
+﻿   <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+    <title>rtsp-url-brute NSE Script -VER007</title>
+    
+
+</HEAD>
+
+
+
+
+
+
+<a href="../nmap-script-help.html">HOME>>>>>>>>></a>
+
+
+
+<h1>File <code>rtsp-url-brute</code></h1>
+
+
+
+<p>
+
+
+<a href="http://nmap.org/book/nse-script-format.html#nse-format-rules">脚本使用类型</a>:
+portrule
+<br>
+
+  脚本所属分类:
+  <i><a href="http://nmap.org/nsedoc/categories/brute.html">brute</a></i>, <i><a href="http://nmap.org/nsedoc/categories/intrusive.html">intrusive</a></i>
+  <br>
+
+脚本下载地址: <a href="http://nmap.org/svn/scripts/rtsp-url-brute.nse">http://nmap.org/svn/scripts/rtsp-url-brute.nse</a>
+</p>
+
+
+
+<h2> User Summary </h2>
+
+<p>
+Attempts to enumerate RTSP media URLS by testing for common paths on devices such as surveillance IP cameras.</p>
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+
+
+  <h2> Script Arguments </h2>
+  <p>
+    
+      <h4> rtsp-url-brute.urlfile </h4>
+      <p>
+sets an alternate URL dictionary file</p>
+
+    
+      <h4> rtsp-url-brute.threads </h4>
+      <p>
+sets the maximum number of parallell threads to run</p>
+
+    
+
+    
+  </p>
+
+
+<h2> Example Usage </h2>
+<p>执行格式
+
+  <pre>nmap --script rtsp-url-brute -p 554 &lt;ip&gt;
+</pre>
+
+</p>
+
+
+  <h2> Script Output </h2>
+<pre>PORT    STATE SERVICE
+554/tcp open  rtsp
+| rtsp-url-brute: 
+|   Discovered URLs
+|_    rtsp://camera.example.com/mpeg4
+
+The script attempts to discover valid RTSP URLs by sending a DESCRIBE
+request for each URL in the dictionary. It then parses the response, based
+on which it determines whether the URL is valid or not.
+</pre>
+
+
+
+  <h2> Requires </h2>
+  <ul>
+  
+     <li><a href="">coroutine</a></li>
+  
+     <li><a href="">io</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/nmap.html">nmap</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/rtsp.html">rtsp</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/shortport.html">shortport</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/stdnse.html">stdnse</a></li>
+  
+     <li><a href="">table</a></li>
+  
+  </ul>
+
+
+<hr/>
+
+
+
+
+
+
+<p><b>Author: </b>Patrik Karlsson</p>
+
+
+
+<p><b>License: </b> VER007 整理 <a href="http://www.ver007.com">http://www.ver007.com</a></p>
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+</BODY>
+</HTML>
+
+

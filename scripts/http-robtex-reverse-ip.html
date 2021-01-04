@@ -1,0 +1,270 @@
+﻿   <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+    <title>http-robtex-reverse-ip NSE Script -VER007</title>
+    
+
+</HEAD>
+
+
+
+
+
+
+<a href="../nmap-script-help.html">HOME>>>>>>>>></a>
+
+
+
+<h1>File <code>http-robtex-reverse-ip</code></h1>
+
+
+
+<p>
+
+
+<a href="http://nmap.org/book/nse-script-format.html#nse-format-rules">脚本使用类型</a>:
+prerule
+<br>
+
+  脚本所属分类:
+  <i><a href="http://nmap.org/nsedoc/categories/discovery.html">discovery</a></i>, <i><a href="http://nmap.org/nsedoc/categories/safe.html">safe</a></i>, <i><a href="http://nmap.org/nsedoc/categories/external.html">external</a></i>
+  <br>
+
+脚本下载地址: <a href="http://nmap.org/svn/scripts/http-robtex-reverse-ip.nse">http://nmap.org/svn/scripts/http-robtex-reverse-ip.nse</a>
+</p>
+
+
+
+<h2> User Summary </h2>
+
+<p>
+Obtains up to 100 forward DNS names for a target IP address by querying the Robtex service (<a href="http://www.robtex.com/ip/">http://www.robtex.com/ip/</a>).</p>
+
+
+
+
+
+
+
+  
+  
+  
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+  
+  
+    
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+  
+  
+    
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+
+
+  <h2> Script Arguments </h2>
+  <p>
+    
+      <h4> http-robtex-reverse-ip.host </h4>
+      <p>
+IPv4 address of the host to lookup</p>
+
+    
+
+    
+      <h4> smbdomain, smbhash, smbnoguest, smbpassword, smbtype, smbusername </h4>
+      See the documentation for the <a href="http://nmap.org/nsedoc/lib/smbauth.html#script-args">smbauth</a> library.
+    
+      <h4> http.max-cache-size, http.max-pipeline, http.pipeline, http.useragent </h4>
+      See the documentation for the <a href="http://nmap.org/nsedoc/lib/http.html#script-args">http</a> library.
+    
+  </p>
+
+
+<h2> Example Usage </h2>
+<p>执行格式
+
+  <pre>nmap --script http-robtex-reverse-ip --script-args http-robtex-reverse-ip.host='&lt;ip&gt;'
+</pre>
+
+</p>
+
+
+  <h2> Script Output </h2>
+<pre>Pre-scan script results:
+| http-robtex-reverse-ip: 
+|   *.insecure.org
+|   *.nmap.com
+|   *.nmap.org
+|   *.seclists.org
+|   insecure.com
+|   insecure.org
+|   lists.insecure.org
+|   nmap.com
+|   nmap.net
+|   nmap.org
+|   seclists.org
+|   sectools.org
+|   web.insecure.org
+|   www.insecure.org
+|   www.nmap.com
+|   www.nmap.org
+|   www.seclists.org
+|_  images.insecure.org
+</pre>
+
+
+
+  <h2> Requires </h2>
+  <ul>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/http.html">http</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/ipOps.html">ipOps</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/stdnse.html">stdnse</a></li>
+  
+     <li><a href="">string</a></li>
+  
+     <li><a href="">table</a></li>
+  
+  </ul>
+
+
+<hr/>
+
+
+
+
+
+
+<p><b>Author: </b>riemann</p>
+
+
+
+<p><b>License: </b> VER007 整理 <a href="http://www.ver007.com">http://www.ver007.com</a></p>
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+</BODY>
+</HTML>
+
+

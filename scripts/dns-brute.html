@@ -1,0 +1,228 @@
+﻿   <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+    <title>dns-brute NSE Script -VER007</title>
+    
+
+</HEAD>
+
+
+
+
+
+
+<a href="../nmap-script-help.html">HOME>>>>>>>>></a>
+
+
+
+<h1>File <code>dns-brute</code></h1>
+
+
+
+<p>
+
+
+<a href="http://nmap.org/book/nse-script-format.html#nse-format-rules">脚本使用类型</a>:
+prerule, hostrule
+<br>
+
+  脚本所属分类:
+  <i><a href="http://nmap.org/nsedoc/categories/intrusive.html">intrusive</a></i>, <i><a href="http://nmap.org/nsedoc/categories/discovery.html">discovery</a></i>
+  <br>
+
+脚本下载地址: <a href="http://nmap.org/svn/scripts/dns-brute.nse">http://nmap.org/svn/scripts/dns-brute.nse</a>
+</p>
+
+
+
+<h2> User Summary </h2>
+
+<p>
+Attempts to enumerate DNS hostnames by brute force guessing of common subdomains.</p>
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+    
+      
+    
+      
+        
+      
+    
+  
+  
+    
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+
+
+  <h2> Script Arguments </h2>
+  <p>
+    
+      <h4> dns-brute.threads </h4>
+      <p>
+Thread to use (default 5).</p>
+
+    
+      <h4> dns-brute.domain </h4>
+      <p>
+Domain name to brute force if no host is specified</p>
+
+    
+      <h4> newtargets </h4>
+      <p>
+Add discovered targets to nmap scan queue</p>
+
+    
+      <h4> dns-brute.hostlist </h4>
+      <p>
+The filename of a list of host strings to try.</p>
+
+    
+      <h4> dns-brute.srv </h4>
+      <p>
+Perform lookup for SRV records</p>
+
+    
+
+    
+      <h4> max-newtargets </h4>
+      See the documentation for the <a href="http://nmap.org/nsedoc/lib/target.html#script-args">target</a> library.
+    
+  </p>
+
+
+<h2> Example Usage </h2>
+<p>执行格式
+
+  <pre>nmap --script dns-brute --script-args dns-brute.domain=foo.com,dns-brute.threads=6,dns-brute.hostlist=./hostfile.txt,newtargets -sS -p 80
+nmap --script dns-brute www.foo.com</pre>
+
+</p>
+
+
+  <h2> Script Output </h2>
+<pre>Pre-scan script results:
+| dns-brute:
+|   DNS Brute-force hostnames
+|     www.foo.com - 127.0.0.1
+|     mail.foo.com - 127.0.0.2
+|     blog.foo.com - 127.0.1.3
+|     ns1.foo.com - 127.0.0.4
+|_    admin.foo.com - 127.0.0.5</pre>
+
+
+
+  <h2> Requires </h2>
+  <ul>
+  
+     <li><a href="">coroutine</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/dns.html">dns</a></li>
+  
+     <li><a href="">io</a></li>
+  
+     <li><a href="">math</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/nmap.html">nmap</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/stdnse.html">stdnse</a></li>
+  
+     <li><a href="">string</a></li>
+  
+     <li><a href="">table</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/target.html">target</a></li>
+  
+  </ul>
+
+
+<hr/>
+
+
+
+
+
+
+<p><b>Author: </b>Cirrus</p>
+
+
+
+<p><b>License: </b> VER007 整理 <a href="http://www.ver007.com">http://www.ver007.com</a></p>
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+</BODY>
+</HTML>
+
+

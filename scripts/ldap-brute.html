@@ -1,0 +1,302 @@
+﻿   <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+    <title>ldap-brute NSE Script -VER007</title>
+    
+
+</HEAD>
+
+
+
+
+
+
+<a href="../nmap-script-help.html">HOME>>>>>>>>></a>
+
+
+
+<h1>File <code>ldap-brute</code></h1>
+
+
+
+<p>
+
+
+<a href="http://nmap.org/book/nse-script-format.html#nse-format-rules">脚本使用类型</a>:
+portrule
+<br>
+
+  脚本所属分类:
+  <i><a href="http://nmap.org/nsedoc/categories/intrusive.html">intrusive</a></i>, <i><a href="http://nmap.org/nsedoc/categories/brute.html">brute</a></i>
+  <br>
+
+脚本下载地址: <a href="http://nmap.org/svn/scripts/ldap-brute.nse">http://nmap.org/svn/scripts/ldap-brute.nse</a>
+</p>
+
+
+
+<h2> User Summary </h2>
+
+<p>
+Attempts to brute-force LDAP authentication. By default
+it uses the built-in username and password lists. In order to use your
+own lists use the <code>userdb</code> and <code>passdb</code> script arguments.
+</p>
+<p>
+This script does not make any attempt to prevent account lockout!
+If the number of passwords in the dictionary exceed the amount of
+allowed tries, accounts will be locked out. This usually happens 
+very quickly.
+</p>
+<p>
+Authenticating against Active Directory using LDAP does not use the
+Windows user name but the user accounts distinguished name. LDAP on Windows
+2003 allows authentication using a simple user name rather than using the
+fully distinguished name. E.g., "Patrik Karlsson" vs.
+"cn=Patrik Karlsson,cn=Users,dc=cqure,dc=net"
+This type of authentication is not supported on e.g. OpenLDAP.
+</p>
+<p>
+This script uses some AD-specific support and optimizations:
+<ul>
+<li>LDAP on Windows 2003/2008 reports different error messages depending on whether an account exists or not. If the script receives an error indicating that the username does not exist it simply stops guessing passwords for this account and moves on to the next.
+</li>
+<li>The script attempts to authenticate with the username only if no LDAP base is specified. The benefit of authenticating this way is that the LDAP path of each account does not need to be known in advance as it's looked up by the server.  This technique will only find a match if the account Display Name matches the username being attempted.</li>
+</ul>
+</p>
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+  
+  
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+  
+  
+    
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+
+
+  <h2> Script Arguments </h2>
+  <p>
+    
+      <h4> ldap.upnsuffix </h4>
+      <p>
+If set, the script will append this suffix value to the username 
+      to create a User Principle Name (UPN).  For example if the ldap.upnsuffix value were
+      'mycompany.com' and the username being tested was 'pete' then this script would 
+      attempt to login as 'pete@mycompany.com'.  This setting should only have value
+      when running the script against a Microsoft Active Directory LDAP implementation.
+      When the UPN is known using this setting should provide more reliable results
+      against domains that have been organized into various OUs or child domains.
+      If both ldap.base and ldap.upnsuffix are unset the user list must either contain
+      the distinguished name of each user or the server must support authentication 
+      using a simple user name. See the AD discussion in the description.
+      DO NOT use ldap.upnsuffix in conjunction with ldap.base as attempts to login
+      will fail.</p>
+
+    
+      <h4> ldap.saveprefix </h4>
+      <p>
+If set, the script will save the output to a file
+      beginning with the specified path and name.  The file suffix will automatically
+      be added based on the output type selected.</p>
+
+    
+      <h4> ldap.savetype </h4>
+      <p>
+If set, the script will save the passwords in the specified
+      format.  The current formats are CSV, verbose and plain. In both verbose and plain
+      records are separated by colons.  The difference between the two is that verbose
+      includes the credential state.  When ldap.savetype is used without ldap.saveprefix
+      then ldap-brute will be prefixed to all output filenames.</p>
+
+    
+      <h4> ldap.base </h4>
+      <p>
+If set, the script will use it as a base for the password
+      guessing attempts. If both ldap.base and ldap.upnsuffix are unset the user 
+      list must either contain the distinguished name of each user or the server
+      must support authentication using a simple user name. See the AD discussion 
+      in the description.  DO NOT use ldap.upnsuffix in conjunction with ldap.base 
+      as attempts to login will fail.</p>
+
+    
+
+    
+      <h4> passdb, unpwdb.passlimit, unpwdb.timelimit, unpwdb.userlimit, userdb </h4>
+      See the documentation for the <a href="http://nmap.org/nsedoc/lib/unpwdb.html#script-args">unpwdb</a> library.
+    
+  </p>
+
+
+<h2> Example Usage </h2>
+<p>执行格式
+
+  <pre>nmap -p 389 --script ldap-brute --script-args \
+ ldap.base='"cn=users,dc=cqure,dc=net"' &lt;host&gt;
+</pre>
+
+</p>
+
+
+  <h2> Script Output </h2>
+<pre>389/tcp open  ldap
+| ldap-brute:  
+|_  ldaptest:ldaptest =&gt; Valid credentials
+|   restrict.ws:restricted1 =&gt; Valid credentials, account cannot log in from current host
+|   restrict.time:restricted1 =&gt; Valid credentials, account cannot log in at current time
+|   valid.user:valid1 =&gt; Valid credentials
+|   expired.user:expired1 =&gt; Valid credentials, account expired
+|   disabled.user:disabled1 =&gt; Valid credentials, account disabled
+|_  must.change:need2change =&gt; Valid credentials, password must be changed at next logon
+</pre>
+
+
+
+  <h2> Requires </h2>
+  <ul>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/comm.html">comm</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/creds.html">creds</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/ldap.html">ldap</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/nmap.html">nmap</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/shortport.html">shortport</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/stdnse.html">stdnse</a></li>
+  
+     <li><a href="">string</a></li>
+  
+     <li><a href="">table</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/unpwdb.html">unpwdb</a></li>
+  
+  </ul>
+
+
+<hr/>
+
+
+
+
+
+
+<p><b>Author: </b>Patrik Karlsson</p>
+
+
+
+<p><b>License: </b> VER007 整理 <a href="http://www.ver007.com">http://www.ver007.com</a></p>
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+</BODY>
+</HTML>
+
+

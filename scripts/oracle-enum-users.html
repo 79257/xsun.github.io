@@ -1,0 +1,232 @@
+﻿   <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+    <title>oracle-enum-users NSE Script -VER007</title>
+    
+
+</HEAD>
+
+
+
+
+
+
+<a href="../nmap-script-help.html">HOME>>>>>>>>></a>
+
+
+
+<h1>File <code>oracle-enum-users</code></h1>
+
+
+
+<p>
+
+
+<a href="http://nmap.org/book/nse-script-format.html#nse-format-rules">脚本使用类型</a>:
+portrule
+<br>
+
+  脚本所属分类:
+  <i><a href="http://nmap.org/nsedoc/categories/intrusive.html">intrusive</a></i>, <i><a href="http://nmap.org/nsedoc/categories/auth.html">auth</a></i>
+  <br>
+
+脚本下载地址: <a href="http://nmap.org/svn/scripts/oracle-enum-users.nse">http://nmap.org/svn/scripts/oracle-enum-users.nse</a>
+</p>
+
+
+
+<h2> User Summary </h2>
+
+<p>
+Attempts to enumerate valid Oracle user names against unpatched Oracle 11g
+servers (this bug was fixed in Oracle's October 2009 Critical Patch Update).</p>
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+  
+  
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+  
+  
+    
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+
+
+  <h2> Script Arguments </h2>
+  <p>
+    
+      <h4> oracle-enum-users.sid </h4>
+      <p>
+the instance against which to attempt user
+      enumeration</p>
+
+    
+
+    
+      <h4> passdb, unpwdb.passlimit, unpwdb.timelimit, unpwdb.userlimit, userdb </h4>
+      See the documentation for the <a href="http://nmap.org/nsedoc/lib/unpwdb.html#script-args">unpwdb</a> library.
+    
+  </p>
+
+
+<h2> Example Usage </h2>
+<p>执行格式
+
+  <pre>nmap --script oracle-enum-users --script-args oracle-enum-users.sid=ORCL,userdb=orausers.txt -p 1521-1560 &lt;host&gt;
+
+If no userdb is supplied the default userlist is used
+</pre>
+
+</p>
+
+
+  <h2> Script Output </h2>
+<pre>PORT     STATE SERVICE REASON
+1521/tcp open  oracle  syn-ack
+| oracle-enum-users:  
+|   haxxor is a valid user account
+|   noob is a valid user account
+|_  patrik is a valid user account
+
+The get_random_string function was stolen from Ron's smb code
+</pre>
+
+
+
+  <h2> Requires </h2>
+  <ul>
+  
+     <li><a href="">math</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/nmap.html">nmap</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/shortport.html">shortport</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/stdnse.html">stdnse</a></li>
+  
+     <li><a href="">string</a></li>
+  
+     <li><a href="">table</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/tns.html">tns</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/unpwdb.html">unpwdb</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/openssl.html">openssl</a></li>
+  
+  </ul>
+
+
+<hr/>
+
+
+
+
+
+
+<p><b>Author: </b>Patrik Karlsson</p>
+
+
+
+<p><b>License: </b> VER007 整理 <a href="http://www.ver007.com">http://www.ver007.com</a></p>
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+</BODY>
+</HTML>
+
+

@@ -1,0 +1,194 @@
+﻿   <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+    <title>domcon-cmd NSE Script -VER007</title>
+    
+
+</HEAD>
+
+
+
+
+
+
+<a href="../nmap-script-help.html">HOME>>>>>>>>></a>
+
+
+
+<h1>File <code>domcon-cmd</code></h1>
+
+
+
+<p>
+
+
+<a href="http://nmap.org/book/nse-script-format.html#nse-format-rules">脚本使用类型</a>:
+portrule
+<br>
+
+  脚本所属分类:
+  <i><a href="http://nmap.org/nsedoc/categories/intrusive.html">intrusive</a></i>, <i><a href="http://nmap.org/nsedoc/categories/auth.html">auth</a></i>
+  <br>
+
+脚本下载地址: <a href="http://nmap.org/svn/scripts/domcon-cmd.nse">http://nmap.org/svn/scripts/domcon-cmd.nse</a>
+</p>
+
+
+
+<h2> User Summary </h2>
+
+<p>
+Runs a console command on the Lotus Domino Console using the given authentication credentials (see also: domcon-brute)</p>
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+
+
+  <h2> Script Arguments </h2>
+  <p>
+    
+      <h4> domcon-cmd.cmd </h4>
+      <p>
+The command to run on the remote server</p>
+
+    
+      <h4> domcon-cmd.pass </h4>
+      <p>
+The password used to authenticate to the server</p>
+
+    
+      <h4> domcon-cmd.user </h4>
+      <p>
+The user used to authenticate to the server</p>
+
+    
+
+    
+  </p>
+
+
+<h2> Example Usage </h2>
+<p>执行格式
+
+  <pre>nmap -p 2050 &lt;host&gt; --script domcon-cmd --script-args domcon-cmd.cmd="show server", \
+		domcon-cmd.user="Patrik Karlsson",domcon-cmd.pass="secret"
+</pre>
+
+</p>
+
+
+  <h2> Script Output </h2>
+<pre>PORT     STATE SERVICE REASON
+2050/tcp open  unknown syn-ack
+| domcon-cmd:  
+|   show server
+|     
+|     Lotus Domino (r) Server (Release 8.5 for Windows/32) 2010-07-30 00:52:58
+|     
+|     Server name:            server1/cqure - cqure testing server
+|     Domain name:            cqure
+|     Server directory:       C:\Program Files\IBM\Lotus\Domino\data
+|     Partition:              C.Program Files.IBM.Lotus.Domino.data
+|     Elapsed time:           00:27:11
+|     Transactions/minute:    Last minute: 0; Last hour: 0; Peak: 0
+|     Peak # of sessions:     0 at 
+|     Transactions: 0         Max. concurrent: 20
+|     ThreadPool Threads:     20  (TCPIP Port)
+|     Availability Index:     100 (state: AVAILABLE)
+|     Mail Tracking:          Not Enabled
+|     Mail Journalling:       Not Enabled
+|     Number of Mailboxes:    1
+|     Pending mail: 0         Dead mail: 0    
+|     Waiting Tasks:          0
+|     DAOS:                   Not Enabled
+|     Transactional Logging:  Not Enabled
+|     Fault Recovery:         Not Enabled
+|     Activity Logging:       Not Enabled
+|     Server Controller:      Enabled
+|     Diagnostic Directory:   C:\Program Files\IBM\Lotus\Domino\data\IBM_TECHNICAL_SUPPORT
+|     Console Logging:        Enabled (1K)
+|     Console Log File:       C:\Program Files\IBM\Lotus\Domino\data\IBM_TECHNICAL_SUPPORT\console.log
+|_    DB2 Server:             Not Enabled
+</pre>
+
+
+
+  <h2> Requires </h2>
+  <ul>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/nmap.html">nmap</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/shortport.html">shortport</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/stdnse.html">stdnse</a></li>
+  
+     <li><a href="">table</a></li>
+  
+  </ul>
+
+
+<hr/>
+
+
+
+
+
+
+<p><b>Author: </b>Patrik Karlsson</p>
+
+
+
+<p><b>License: </b> VER007 整理 <a href="http://www.ver007.com">http://www.ver007.com</a></p>
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+</BODY>
+</HTML>
+
+

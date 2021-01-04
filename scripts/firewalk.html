@@ -1,0 +1,316 @@
+﻿   <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+    <title>firewalk NSE Script -VER007</title>
+    
+
+</HEAD>
+
+
+
+
+
+
+<a href="../nmap-script-help.html">HOME>>>>>>>>></a>
+
+
+
+<h1>File <code>firewalk</code></h1>
+
+
+
+<p>
+
+
+<a href="http://nmap.org/book/nse-script-format.html#nse-format-rules">脚本使用类型</a>:
+hostrule
+<br>
+
+  脚本所属分类:
+  <i><a href="http://nmap.org/nsedoc/categories/safe.html">safe</a></i>, <i><a href="http://nmap.org/nsedoc/categories/discovery.html">discovery</a></i>
+  <br>
+
+脚本下载地址: <a href="http://nmap.org/svn/scripts/firewalk.nse">http://nmap.org/svn/scripts/firewalk.nse</a>
+</p>
+
+
+
+<h2> User Summary </h2>
+
+<p>
+Tries to discover firewall rules using an IP TTL expiration technique known
+as firewalking.
+</p>
+<p>
+To determine a rule on a given gateway, the scanner sends a probe to a metric
+located behind the gateway, with a TTL one higher than the gateway. If the probe
+is forwarded by the gateway, then we can expect to receive an ICMP_TIME_EXCEEDED
+reply from the gateway next hop router, or eventually the metric itself if it is
+directly connected to the gateway. Otherwise, the probe will timeout.
+</p>
+<p>
+It starts with a TTL equals to the distance to the target. If the probe timeout,
+then it is resent with a TTL decreased by one. If we get an ICMP_TIME_EXCEEDED,
+then the scan is over for this probe.
+</p>
+<p>
+Every "no-reply" filtered TCP and UDP ports are probed. As for UDP scans, this
+process can be quite slow if lots of ports are blocked by a gateway close to the
+scanner.
+</p>
+<p>
+Scan parameters can be controlled using the <code>firewalk.*</code>
+optional arguments.
+</p>
+<p>
+From an original idea of M. Schiffman and D. Goldsmith, authors of the
+firewalk tool.</p>
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+
+
+  <h2> Script Arguments </h2>
+  <p>
+    
+      <h4> firewalk.max-probed-ports </h4>
+      <p>
+maximum number of ports to probe per protocol. Set to -1 to scan every filtered port.</p>
+
+    
+      <h4> firewalk.max-retries </h4>
+      <p>
+the maximum number of allowed retransmissions.</p>
+
+    
+      <h4> firewalk.recv-timeout </h4>
+      <p>
+the duration of the packets capture loop (in milliseconds).</p>
+
+    
+      <h4> firewalk.max-active-probes </h4>
+      <p>
+maximum number of parallel active probes.</p>
+
+    
+      <h4> firewalk.probe-timeout </h4>
+      <p>
+validity period of a probe (in milliseconds).</p>
+
+    
+
+    
+  </p>
+
+
+<h2> Example Usage </h2>
+<p>执行格式
+
+  <ul>
+  
+    <li><pre>nmap --script=firewalk --traceroute &lt;host&gt;
+</pre></li>
+  
+    <li><pre>nmap --script=firewalk --traceroute --script-args=firewalk.max-retries=1 &lt;host&gt;
+</pre></li>
+  
+    <li><pre>nmap --script=firewalk --traceroute --script-args=firewalk.probe-timeout=400ms &lt;host&gt;
+</pre></li>
+  
+    <li><pre>nmap --script=firewalk --traceroute --script-args=firewalk.max-probed-ports=7 &lt;host&gt;
+
+</pre></li>
+  
+  </ul>
+
+</p>
+
+
+  <h2> Script Output </h2>
+<pre>| firewalk:
+| HOP HOST         PROTOCOL  BLOCKED PORTS
+| 2   192.168.1.1  tcp       21-23,80
+|                  udp       21-23,80
+| 6   10.0.1.1     tcp       67-68
+| 7   10.0.1.254   tcp       25
+|_                 udp       25
+
+</pre>
+
+
+
+  <h2> Requires </h2>
+  <ul>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/bin.html">bin</a></li>
+  
+     <li><a href="">math</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/nmap.html">nmap</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/packet.html">packet</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/stdnse.html">stdnse</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/tab.html">tab</a></li>
+  
+     <li><a href="">table</a></li>
+  
+  </ul>
+
+
+<hr/>
+
+
+
+
+
+
+<p><b>Author: </b>Henri Doreau</p>
+
+
+
+<p><b>License: </b> VER007 整理 <a href="http://www.ver007.com">http://www.ver007.com</a></p>
+
+
+
+
+
+
+
+
+<h2> <font color="#ff0000">action</font> </h2>
+<dl class="function">
+  
+
+<dt><a name="action"></a><strong>action</strong>&nbsp;(host)</dt>
+<dd>
+
+<p>
+firewalk entry point</p>
+
+
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  host:
+          
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+</dl>
+
+
+
+
+  
+
+  
+    <h2> <font color="#0000ff">hostrule</font> </h2>
+    <dl class="function">
+      
+
+<dt><a name="hostrule"></a><strong>hostrule</strong>&nbsp;(host)</dt>
+<dd>
+
+<p>
+host rule, check for requirements before to launch the script</p>
+
+
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  host:
+          
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+    </dl>
+  
+
+  
+
+  
+
+
+
+
+</BODY>
+</HTML>
+
+

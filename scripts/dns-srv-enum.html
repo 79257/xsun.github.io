@@ -1,0 +1,253 @@
+﻿   <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+    <title>dns-srv-enum NSE Script -VER007</title>
+    
+
+</HEAD>
+
+
+
+
+
+
+<a href="../nmap-script-help.html">HOME>>>>>>>>></a>
+
+
+
+<h1>File <code>dns-srv-enum</code></h1>
+
+
+
+<p>
+
+
+<a href="http://nmap.org/book/nse-script-format.html#nse-format-rules">脚本使用类型</a>:
+prerule
+<br>
+
+  脚本所属分类:
+  <i><a href="http://nmap.org/nsedoc/categories/discovery.html">discovery</a></i>, <i><a href="http://nmap.org/nsedoc/categories/safe.html">safe</a></i>
+  <br>
+
+脚本下载地址: <a href="http://nmap.org/svn/scripts/dns-srv-enum.nse">http://nmap.org/svn/scripts/dns-srv-enum.nse</a>
+</p>
+
+
+
+<h2> User Summary </h2>
+
+<p>
+Enumerates various common service (SRV) records for a given domain name.
+The service records contain the hostname, port and priority of servers for a given service.
+The following services are enumerated by the script:
+  - Active Directory Global Catalog
+  - Exchange Autodiscovery
+  - Kerberos KDC Service
+  - Kerberos Passwd Change Service
+  - LDAP Servers
+  - SIP Servers
+  - XMPP S2S
+  - XMPP C2S</p>
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+    
+      
+        
+      
+    
+      
+        
+      
+    
+  
+  
+    
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+
+
+  <h2> Script Arguments </h2>
+  <p>
+    
+      <h4> dns-srv-enum.domain </h4>
+      <p>
+string containing the domain to query</p>
+
+    
+      <h4> dns-srv-enum.filter </h4>
+      <p>
+string containing the service to query
+      (default: all)</p>
+
+    
+
+    
+      <h4> max-newtargets, newtargets </h4>
+      See the documentation for the <a href="http://nmap.org/nsedoc/lib/target.html#script-args">target</a> library.
+    
+  </p>
+
+
+<h2> Example Usage </h2>
+<p>执行格式
+
+  <pre>nmap --script dns-srv-enum --script-args "dns-srv-enum.domain='example.com'"
+</pre>
+
+</p>
+
+
+  <h2> Script Output </h2>
+<pre>| dns-srv-enum: 
+|   Active Directory Global Catalog
+|     service   prio  weight  host
+|     3268/tcp  0     100     stodc01.example.com
+|   Kerberos KDC Service
+|     service  prio  weight  host
+|     88/tcp   0     100     stodc01.example.com
+|     88/udp   0     100     stodc01.example.com
+|   Kerberos Password Change Service
+|     service  prio  weight  host
+|     464/tcp  0     100     stodc01.example.com
+|     464/udp  0     100     stodc01.example.com
+|   LDAP
+|     service  prio  weight  host
+|     389/tcp  0     100     stodc01.example.com
+|   SIP
+|     service   prio  weight  host
+|     5060/udp  10    50      vclux2.example.com
+|     5070/udp  10    50      vcbxl2.example.com
+|     5060/tcp  10    50      vclux2.example.com
+|     5060/tcp  10    50      vcbxl2.example.com
+|   XMPP server-to-server
+|     service   prio  weight  host
+|     5269/tcp  5     0       xmpp-server.l.example.com
+|     5269/tcp  20    0       alt2.xmpp-server.l.example.com
+|     5269/tcp  20    0       alt4.xmpp-server.l.example.com
+|     5269/tcp  20    0       alt3.xmpp-server.l.example.com
+|_    5269/tcp  20    0       alt1.xmpp-server.l.example.com
+</pre>
+
+
+
+  <h2> Requires </h2>
+  <ul>
+  
+     <li><a href="">coroutine</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/dns.html">dns</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/nmap.html">nmap</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/stdnse.html">stdnse</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/tab.html">tab</a></li>
+  
+     <li><a href="">table</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/target.html">target</a></li>
+  
+  </ul>
+
+
+<hr/>
+
+
+
+
+
+
+<p><b>Author: </b>Patrik Karlsson</p>
+
+
+
+<p><b>License: </b> VER007 整理 <a href="http://www.ver007.com">http://www.ver007.com</a></p>
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+</BODY>
+</HTML>
+
+

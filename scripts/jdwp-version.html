@@ -1,0 +1,187 @@
+﻿   <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+    <title>jdwp-version NSE Script -VER007</title>
+    
+
+</HEAD>
+
+
+
+
+
+
+<a href="../nmap-script-help.html">HOME>>>>>>>>></a>
+
+
+
+<h1>File <code>jdwp-version</code></h1>
+
+
+
+<p>
+
+
+<a href="http://nmap.org/book/nse-script-format.html#nse-format-rules">脚本使用类型</a>:
+portrule
+<br>
+
+  脚本所属分类:
+  <i><a href="http://nmap.org/nsedoc/categories/version.html">version</a></i>
+  <br>
+
+脚本下载地址: <a href="http://nmap.org/svn/scripts/jdwp-version.nse">http://nmap.org/svn/scripts/jdwp-version.nse</a>
+</p>
+
+
+
+<h2> User Summary </h2>
+
+<p>
+Detects the Java Debug Wire Protocol. This protocol is used by Java programs
+to be debugged via the network. It should not be open to the public Internet,
+as it does not provide any security against malicious attackers who can inject
+their own bytecode into the debugged process.
+</p>
+<p>
+Documentation for JDWP is available at 
+<a href="http://java.sun.com/javase/6/docs/technotes/guides/jpda/jdwp-spec.html">http://java.sun.com/javase/6/docs/technotes/guides/jpda/jdwp-spec.html</a></p>
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+
+
+
+<h2> Example Usage </h2>
+<p>执行格式
+
+  <pre>nmap -sV &lt;target&gt;</pre>
+
+</p>
+
+
+
+
+  <h2> Requires </h2>
+  <ul>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/comm.html">comm</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/nmap.html">nmap</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/shortport.html">shortport</a></li>
+  
+     <li><a href="">string</a></li>
+  
+  </ul>
+
+
+<hr/>
+
+
+
+
+
+
+<p><b>Author: </b>Michael Schierl &lt;schierlm@gmx.de&gt;</p>
+
+
+
+<p><b>License: </b> VER007 整理 <a href="http://www.ver007.com">http://www.ver007.com</a></p>
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+    <h2> <font color="#0000ff">portrule</font> </h2>
+    <dl class="function">
+      
+
+<dt><a name="portrule"></a><strong>portrule</strong>&nbsp;(host, port)</dt>
+<dd>
+
+<p>
+</p>
+
+
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  host:
+          
+	</li>
+	
+	<li>
+	  port:
+          
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+    </dl>
+  
+
+  
+
+
+
+
+</BODY>
+</HTML>
+
+

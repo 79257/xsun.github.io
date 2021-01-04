@@ -1,0 +1,336 @@
+﻿   <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+    <title>smb-enum-groups NSE Script -VER007</title>
+    
+
+</HEAD>
+
+
+
+
+
+
+<a href="../nmap-script-help.html">HOME>>>>>>>>></a>
+
+
+
+<h1>File <code>smb-enum-groups</code></h1>
+
+
+
+<p>
+
+
+<a href="http://nmap.org/book/nse-script-format.html#nse-format-rules">脚本使用类型</a>:
+hostrule
+<br>
+
+  脚本所属分类:
+  <i><a href="http://nmap.org/nsedoc/categories/discovery.html">discovery</a></i>, <i><a href="http://nmap.org/nsedoc/categories/intrusive.html">intrusive</a></i>
+  <br>
+
+脚本下载地址: <a href="http://nmap.org/svn/scripts/smb-enum-groups.nse">http://nmap.org/svn/scripts/smb-enum-groups.nse</a>
+</p>
+
+
+
+<h2> User Summary </h2>
+
+<p>
+Obtains a list of groups from the remote Windows system, as well as a list of the group's users. 
+This works similarly to <code>enum.exe</code> with the <code>/G</code> switch. 
+</p>
+<p>
+The following MSRPC functions in SAMR are used to find a list of groups and the RIDs of their users. Keep
+in mind that MSRPC refers to groups as "Aliases". 
+</p>
+<p>
+<ul>
+<li><code>Bind</code>: bind to the SAMR service.
+</li>
+<li><code>Connect4</code>: get a connect_handle.
+</li>
+<li><code>EnumDomains</code>: get a list of the domains.
+</li>
+<li><code>LookupDomain</code>: get the RID of the domains. 
+</li>
+<li><code>OpenDomain</code>: get a handle for each domain.
+</li>
+<li><code>EnumDomainAliases</code>: get the list of groups in the domain.
+</li>
+<li><code>OpenAlias</code>: get a handle to each group.
+</li>
+<li><code>GetMembersInAlias</code>: get the RIDs of the members in the groups. 
+</li>
+<li><code>Close</code>: close the alias handle.
+</li>
+<li><code>Close</code>: close the domain handle.
+</li>
+<li><code>Close</code>: close the connect handle.
+</li>
+</ul>
+</p>
+<p>
+Once the RIDs have been termined, the
+<ul>
+<li><code>Bind</code>: bind to the LSA service.
+</li>
+<li><code>OpenPolicy2</code>: get a policy handle.
+</li>
+<li><code>LookupSids2</code>: convert SIDs to usernames. 
+</li>
+</ul>
+</p>
+<p>
+I (Ron Bowes) originally looked into the possibility of using the SAMR function <code>LookupRids2</code> 
+to convert RIDs to usernames, but the function seemed to return a fault no matter what I tried. Since 
+enum.exe also switches to LSA to convert RIDs to usernames, I figured they had the same issue and I do 
+the same thing.</p>
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+  
+  
+    
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+  
+  
+    
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+
+
+  <h2> Script Arguments </h2>
+  <p>
+    
+
+    
+      <h4> randomseed, smbbasic, smbport, smbsign </h4>
+      See the documentation for the <a href="http://nmap.org/nsedoc/lib/smb.html#script-args">smb</a> library.
+    
+      <h4> smbdomain, smbhash, smbnoguest, smbpassword, smbtype, smbusername </h4>
+      See the documentation for the <a href="http://nmap.org/nsedoc/lib/smbauth.html#script-args">smbauth</a> library.
+    
+  </p>
+
+
+<h2> Example Usage </h2>
+<p>执行格式
+
+  <pre>nmap --script smb-enum-users.nse -p445 &lt;host&gt;
+sudo nmap -sU -sS --script smb-enum-users.nse -p U:137,T:139 &lt;host&gt;
+</pre>
+
+</p>
+
+
+  <h2> Script Output </h2>
+<pre>Host script results:
+|  smb-enum-groups:
+|  |  WINDOWS2003\HelpServicesGroup: SUPPORT_388945a0
+|  |  WINDOWS2003\IIS_WPG: SYSTEM, SERVICE, NETWORK SERVICE, IWAM_WINDOWS2003
+|  |  WINDOWS2003\TelnetClients: &lt;empty&gt;
+|  |  Builtin\Print Operators: &lt;empty&gt;
+|  |  Builtin\Replicator: &lt;empty&gt;
+|  |  Builtin\Network Configuration Operators: &lt;empty&gt;
+|  |  Builtin\Performance Monitor Users: &lt;empty&gt;
+|  |  Builtin\Users: INTERACTIVE, Authenticated Users, ron, ASPNET, test
+|  |  Builtin\Power Users: &lt;empty&gt;
+|  |  Builtin\Backup Operators: &lt;empty&gt;
+|  |  Builtin\Remote Desktop Users: &lt;empty&gt;
+|  |  Builtin\Administrators: Administrator, ron, test
+|  |  Builtin\Performance Log Users: NETWORK SERVICE
+|  |  Builtin\Guests: Guest, IUSR_WINDOWS2003
+|_ |_ Builtin\Distributed COM Users: &lt;empty&gt;
+</pre>
+
+
+
+  <h2> Requires </h2>
+  <ul>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/msrpc.html">msrpc</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/smb.html">smb</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/stdnse.html">stdnse</a></li>
+  
+     <li><a href="">string</a></li>
+  
+     <li><a href="">table</a></li>
+  
+  </ul>
+
+
+<hr/>
+
+
+
+
+
+
+<p><b>Author: </b>Ron Bowes</p>
+
+
+
+<p><b>License: </b> VER007 整理 <a href="http://www.ver007.com">http://www.ver007.com</a></p>
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+</BODY>
+</HTML>
+
+

@@ -1,0 +1,322 @@
+﻿   <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+    <title>smb-enum-domains NSE Script -VER007</title>
+    
+
+</HEAD>
+
+
+
+
+
+
+<a href="../nmap-script-help.html">HOME>>>>>>>>></a>
+
+
+
+<h1>File <code>smb-enum-domains</code></h1>
+
+
+
+<p>
+
+
+<a href="http://nmap.org/book/nse-script-format.html#nse-format-rules">脚本使用类型</a>:
+hostrule
+<br>
+
+  脚本所属分类:
+  <i><a href="http://nmap.org/nsedoc/categories/discovery.html">discovery</a></i>, <i><a href="http://nmap.org/nsedoc/categories/intrusive.html">intrusive</a></i>
+  <br>
+
+脚本下载地址: <a href="http://nmap.org/svn/scripts/smb-enum-domains.nse">http://nmap.org/svn/scripts/smb-enum-domains.nse</a>
+</p>
+
+
+
+<h2> User Summary </h2>
+
+<p>
+Attempts to enumerate domains on a system, along with their policies. This generally requires
+credentials, except against Windows 2000. In addition to the actual domain, the "Builtin" 
+domain is generally displayed. Windows returns this in the list of domains, but its policies 
+don't appear to be used anywhere. 
+</p>
+<p>
+Much of the information provided is useful to a penetration tester, because it tells the
+tester what types of policies to expect. For example, if passwords have a minimum length of 8, 
+the tester can trim his database to match; if the minimum length is 14, the tester will
+probably start looking for sticky notes on people's monitors. 
+</p>
+<p>
+Another useful piece of information is the password lockouts. A penetration tester often wants
+to know whether or not there's a risk of negatively impacting a network, and this will 
+indicate it. The SID is displayed, which may be useful in other tools; the users are listed, 
+which uses different functions than <code>smb-enum-users.nse</code> (though likely won't 
+get different results), and the date and time the domain was created may give some insight into
+its history. 
+</p>
+<p>
+After the initial <code>bind</code> to SAMR, the sequence of calls is:
+<ul>
+<li><code>Connect4</code>: get a connect_handle
+</li>
+<li><code>EnumDomains</code>: get a list of the domains (stop here if you just want the names).
+</li>
+<li><code>QueryDomain</code>: get the SID for the domain.
+</li>
+<li><code>OpenDomain</code>: get a handle for each domain.
+</li>
+<li><code>QueryDomainInfo2</code>: get the domain information.
+</li>
+<li><code>QueryDomainUsers</code>: get a list of the users in the domain.</li>
+</ul>
+</p>
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+  
+  
+    
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+  
+  
+    
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+
+
+  <h2> Script Arguments </h2>
+  <p>
+    
+
+    
+      <h4> randomseed, smbbasic, smbport, smbsign </h4>
+      See the documentation for the <a href="http://nmap.org/nsedoc/lib/smb.html#script-args">smb</a> library.
+    
+      <h4> smbdomain, smbhash, smbnoguest, smbpassword, smbtype, smbusername </h4>
+      See the documentation for the <a href="http://nmap.org/nsedoc/lib/smbauth.html#script-args">smbauth</a> library.
+    
+  </p>
+
+
+<h2> Example Usage </h2>
+<p>执行格式
+
+  <pre>nmap --script smb-enum-domains.nse -p445 &lt;host&gt;
+sudo nmap -sU -sS --script smb-enum-domains.nse -p U:137,T:139 &lt;host&gt;
+</pre>
+
+</p>
+
+
+  <h2> Script Output </h2>
+<pre>Host script results:
+| smb-enum-domains:
+|   WINDOWS2000
+|     Groups: n/a
+|     Users: Administrator, blah, Guest, testpass, ron, test, user
+|     Creation time: 2009-10-17 12:45:47
+|     Passwords: min length: n/a; min age: 5 days; max age: 100 days; history: 10 passwords
+|     Properties: Complexity requirements exist
+|     Account lockout: 5 attempts in 30 minutes will lock out the account for 30 minutes
+|   Builtin
+|     Groups: Administrators, Backup Operators, Guests, Power Users, Replicator, Users
+|     Users: n/a
+|     Creation time: 2009-10-17 12:45:46
+|     Passwords: min length: n/a; min age: n/a days; max age: 42 days; history: n/a passwords
+|_    Account lockout disabled
+</pre>
+
+
+
+  <h2> Requires </h2>
+  <ul>
+  
+     <li><a href="">math</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/msrpc.html">msrpc</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/smb.html">smb</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/stdnse.html">stdnse</a></li>
+  
+     <li><a href="">string</a></li>
+  
+     <li><a href="">table</a></li>
+  
+  </ul>
+
+
+<hr/>
+
+
+
+
+
+
+<p><b>Author: </b>Ron Bowes</p>
+
+
+
+<p><b>License: </b> VER007 整理 <a href="http://www.ver007.com">http://www.ver007.com</a></p>
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+</BODY>
+</HTML>
+
+

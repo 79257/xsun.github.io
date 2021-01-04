@@ -1,0 +1,231 @@
+﻿   <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+    <title>mysql-vuln-cve2012-2122 NSE Script -VER007</title>
+    
+
+</HEAD>
+
+
+
+
+
+
+<a href="../nmap-script-help.html">HOME>>>>>>>>></a>
+
+
+
+<h1>File <code>mysql-vuln-cve2012-2122</code></h1>
+
+
+
+<p>
+
+
+<a href="http://nmap.org/book/nse-script-format.html#nse-format-rules">脚本使用类型</a>:
+portrule
+<br>
+
+  脚本所属分类:
+  <i><a href="http://nmap.org/nsedoc/categories/discovery.html">discovery</a></i>, <i><a href="http://nmap.org/nsedoc/categories/intrusive.html">intrusive</a></i>, <i><a href="http://nmap.org/nsedoc/categories/vuln.html">vuln</a></i>
+  <br>
+
+脚本下载地址: <a href="http://nmap.org/svn/scripts/mysql-vuln-cve2012-2122.nse">http://nmap.org/svn/scripts/mysql-vuln-cve2012-2122.nse</a>
+</p>
+
+
+
+<h2> User Summary </h2>
+
+<p>
+Attempts to bypass authentication in MySQL and MariaDB servers by
+exploiting CVE2012-2122. If its vulnerable, it will also attempt to
+dump the MySQL usernames and password hashes.
+</p>
+<p>
+All MariaDB and MySQL versions up to 5.1.61, 5.2.11, 5.3.5, 5.5.22 are
+vulnerable but exploitation depends on whether memcmp() returns an
+arbitrary integer outside of -128..127 range.
+</p>
+<p>
+"When a user connects to MariaDB/MySQL, a token (SHA over a password
+and a random scramble string) is calculated and compared with the
+expected value. Because of incorrect casting, it might've happened
+that the token and the expected value were considered equal, even if
+the memcmp() returned a non-zero value. In this case MySQL/MariaDB
+would think that the password is correct, even while it is not.
+Because the protocol uses random strings, the probability of hitting
+this bug is about 1/256.  Which means, if one knows a user name to
+connect (and "root" almost always exists), she can connect using *any*
+password by repeating connection attempts. ~300 attempts takes only a
+fraction of second, so basically account password protection is as
+good as nonexistent."
+</p>
+<p>
+Original public advisory:
+<ul>
+<li><a href="http://seclists.org/oss-sec/2012/q2/493">http://seclists.org/oss-sec/2012/q2/493</a>
+</li>
+</ul>
+Interesting post about this vuln:
+<ul>
+<li><a href="https://community.rapid7.com/community/metasploit/blog/2012/06/11/cve-2012-2122-a-tragically-comedic-security-flaw-in-mysql">https://community.rapid7.com/community/metasploit/blog/2012/06/11/cve-2012-2122-a-tragically-comedic-security-flaw-in-mysql</a></li>
+</ul>
+</p>
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+  
+  
+    
+      
+        
+      
+    
+  
+  
+    
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+
+
+  <h2> Script Arguments </h2>
+  <p>
+    
+
+    
+      <h4> vulns.showall </h4>
+      See the documentation for the <a href="http://nmap.org/nsedoc/lib/vulns.html#script-args">vulns</a> library.
+    
+  </p>
+
+
+<h2> Example Usage </h2>
+<p>执行格式
+
+  <pre>nmap -sV --script=mysql-vuln-cve2012-2122 &lt;target&gt;</pre>
+
+</p>
+
+
+
+
+  <h2> Requires </h2>
+  <ul>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/mysql.html">mysql</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/nmap.html">nmap</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/shortport.html">shortport</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/stdnse.html">stdnse</a></li>
+  
+     <li><a href="">string</a></li>
+  
+     <li><a href="">table</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/vulns.html">vulns</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/openssl.html">openssl</a></li>
+  
+  </ul>
+
+
+<hr/>
+
+
+
+
+
+
+<p><b>Author: </b>Paulino Calderon &lt;calderon()websec.mx&gt;</p>
+
+
+
+<p><b>License: </b> VER007 整理 <a href="http://www.ver007.com">http://www.ver007.com</a></p>
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+</BODY>
+</HTML>
+
+

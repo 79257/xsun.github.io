@@ -1,0 +1,342 @@
+﻿   <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+    <title>http-sql-injection NSE Script -VER007</title>
+    
+
+</HEAD>
+
+
+
+
+
+
+<a href="../nmap-script-help.html">HOME>>>>>>>>></a>
+
+
+
+<h1>File <code>http-sql-injection</code></h1>
+
+
+
+<p>
+
+
+<a href="http://nmap.org/book/nse-script-format.html#nse-format-rules">脚本使用类型</a>:
+portrule
+<br>
+
+  脚本所属分类:
+  <i><a href="http://nmap.org/nsedoc/categories/intrusive.html">intrusive</a></i>, <i><a href="http://nmap.org/nsedoc/categories/vuln.html">vuln</a></i>
+  <br>
+
+脚本下载地址: <a href="http://nmap.org/svn/scripts/http-sql-injection.nse">http://nmap.org/svn/scripts/http-sql-injection.nse</a>
+</p>
+
+
+
+<h2> User Summary </h2>
+
+<p>
+Spiders an HTTP server looking for URLs containing queries vulnerable to an SQL
+injection attack. It also extracts forms from found websites and tries to identify
+fields that are vulnerable.
+</p>
+<p>
+The script spiders an HTTP server looking for URLs containing queries. It then
+proceeds to combine crafted SQL commands with susceptible URLs in order to
+obtain errors. The errors are analysed to see if the URL is vulnerable to
+attack. This uses the most basic form of SQL injection but anything more
+complicated is better suited to a standalone tool.
+</p>
+<p>
+We may not have access to the target web server's true hostname, which can prevent access to
+virtually hosted sites.</p>
+
+
+
+
+
+
+
+  
+  
+  
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+  
+  
+    
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+  
+  
+    
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+  
+  
+    
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+
+
+  <h2> Script Arguments </h2>
+  <p>
+    
+
+    
+      <h4> httpspider.maxdepth, httpspider.maxpagecount, httpspider.noblacklist, httpspider.url, httpspider.useheadfornonwebfiles, httpspider.withindomain, httpspider.withinhost </h4>
+      See the documentation for the <a href="http://nmap.org/nsedoc/lib/httpspider.html#script-args">httpspider</a> library.
+    
+      <h4> smbdomain, smbhash, smbnoguest, smbpassword, smbtype, smbusername </h4>
+      See the documentation for the <a href="http://nmap.org/nsedoc/lib/smbauth.html#script-args">smbauth</a> library.
+    
+      <h4> http.max-cache-size, http.max-pipeline, http.pipeline, http.useragent </h4>
+      See the documentation for the <a href="http://nmap.org/nsedoc/lib/http.html#script-args">http</a> library.
+    
+  </p>
+
+
+<h2> Example Usage </h2>
+<p>执行格式
+
+  <pre>nmap -sV --script=http-sql-injection &lt;target&gt;</pre>
+
+</p>
+
+
+
+
+  <h2> Requires </h2>
+  <ul>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/http.html">http</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/httpspider.html">httpspider</a></li>
+  
+     <li><a href="">io</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/nmap.html">nmap</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/shortport.html">shortport</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/stdnse.html">stdnse</a></li>
+  
+     <li><a href="">string</a></li>
+  
+     <li><a href="">table</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/url.html">url</a></li>
+  
+  </ul>
+
+
+<hr/>
+
+
+
+
+
+
+<p><b>Author: </b>Eddie Bell, Piotr Olma</p>
+
+
+
+<p><b>License: </b> VER007 整理 <a href="http://www.ver007.com">http://www.ver007.com</a></p>
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+    <h2> <font color="#0000ff">portrule</font> </h2>
+    <dl class="function">
+      
+
+<dt><a name="portrule"></a><strong>portrule</strong>&nbsp;(host, port)</dt>
+<dd>
+
+<p>
+</p>
+
+
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  host:
+          
+	</li>
+	
+	<li>
+	  port:
+          
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+    </dl>
+  
+
+  
+
+
+
+
+</BODY>
+</HTML>
+
+

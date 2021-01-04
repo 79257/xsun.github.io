@@ -1,0 +1,195 @@
+﻿   <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+    <title>eap-info NSE Script -VER007</title>
+    
+
+</HEAD>
+
+
+
+
+
+
+<a href="../nmap-script-help.html">HOME>>>>>>>>></a>
+
+
+
+<h1>File <code>eap-info</code></h1>
+
+
+
+<p>
+
+
+<a href="http://nmap.org/book/nse-script-format.html#nse-format-rules">脚本使用类型</a>:
+prerule
+<br>
+
+  脚本所属分类:
+  <i><a href="http://nmap.org/nsedoc/categories/broadcast.html">broadcast</a></i>, <i><a href="http://nmap.org/nsedoc/categories/safe.html">safe</a></i>
+  <br>
+
+脚本下载地址: <a href="http://nmap.org/svn/scripts/eap-info.nse">http://nmap.org/svn/scripts/eap-info.nse</a>
+</p>
+
+
+
+<h2> User Summary </h2>
+
+<p>
+Enumerates the authentication methods offered by an EAP (Extensible
+Authentication Protocol) authenticator for a given identity or for the
+anonymous identity if no argument is passed.</p>
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+
+
+  <h2> Script Arguments </h2>
+  <p>
+    
+      <h4> eap-info.identity </h4>
+      <p>
+Identity to use for the first step of the authentication methods (if omitted "anonymous" will be used).</p>
+
+    
+      <h4> eap-info.scan </h4>
+      <p>
+Table of authentication methods to test, e.g. { 4, 13, 25 } for MD5, TLS and PEAP. Default: TLS, TTLS, PEAP, MSCHAP.</p>
+
+    
+      <h4> eap-info.timeout </h4>
+      <p>
+Maximum time allowed for the scan (default 10s). Methods not tested because of timeout will be listed as "unknown".</p>
+
+    
+      <h4> eap-info.interface </h4>
+      <p>
+Network interface to use for the scan, overrides "-e".</p>
+
+    
+
+    
+  </p>
+
+
+<h2> Example Usage </h2>
+<p>执行格式
+
+  <pre>nmap -e interface --script eap-info [--script-args="eap-info.identity=0-user,eap-info.scan={13,50}"] &lt;target&gt;
+</pre>
+
+</p>
+
+
+  <h2> Script Output </h2>
+<pre>Pre-scan script results:
+| eap-info: 
+| Available authentication methods with identity="anonymous" on interface eth2
+|   true     PEAP
+|   true     EAP-TTLS
+|   false    EAP-TLS
+|_  false    EAP-MSCHAP-V2
+</pre>
+
+
+
+  <h2> Requires </h2>
+  <ul>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/bin.html">bin</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/eap.html">eap</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/nmap.html">nmap</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/stdnse.html">stdnse</a></li>
+  
+     <li><a href="">string</a></li>
+  
+     <li><a href="">table</a></li>
+  
+  </ul>
+
+
+<hr/>
+
+
+
+
+
+
+<p><b>Author: </b>Riccardo Cecolin</p>
+
+
+
+<p><b>License: </b> VER007 整理 <a href="http://www.ver007.com">http://www.ver007.com</a></p>
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+</BODY>
+</HTML>
+
+

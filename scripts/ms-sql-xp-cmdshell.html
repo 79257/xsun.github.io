@@ -1,0 +1,402 @@
+﻿   <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+    <title>ms-sql-xp-cmdshell NSE Script -VER007</title>
+    
+
+</HEAD>
+
+
+
+
+
+
+<a href="../nmap-script-help.html">HOME>>>>>>>>></a>
+
+
+
+<h1>File <code>ms-sql-xp-cmdshell</code></h1>
+
+
+
+<p>
+
+
+<a href="http://nmap.org/book/nse-script-format.html#nse-format-rules">脚本使用类型</a>:
+hostrule, portrule
+<br>
+
+  脚本所属分类:
+  <i><a href="http://nmap.org/nsedoc/categories/intrusive.html">intrusive</a></i>
+  <br>
+
+脚本下载地址: <a href="http://nmap.org/svn/scripts/ms-sql-xp-cmdshell.nse">http://nmap.org/svn/scripts/ms-sql-xp-cmdshell.nse</a>
+</p>
+
+
+
+<h2> User Summary </h2>
+
+<p>
+Attempts to run a command using the command shell of Microsoft SQL
+Server (ms-sql).
+</p>
+<p>
+SQL Server credentials required: Yes (use <code>ms-sql-brute</code>, <code>ms-sql-empty-password</code>
+and/or <code>mssql.username</code> &amp; <code>mssql.password</code>)
+Run criteria:
+<ul>
+<li>Host script: Will run if the <code>mssql.instance-all</code>, <code>mssql.instance-name</code>
+</li>
+</ul>
+or <code>mssql.instance-port</code> script arguments are used (see mssql.lua).
+<ul>
+<li>Port script: Will run against any services identified as SQL Servers, but only
+</li>
+</ul>
+if the <code>mssql.instance-all</code>, <code>mssql.instance-name</code>
+and <code>mssql.instance-port</code> script arguments are NOT used.
+</p>
+<p>
+The script needs an account with the sysadmin server role to work.
+</p>
+<p>
+When run, the script iterates over the credentials and attempts to run
+the command until either all credentials are exhausted or until the
+command is executed.
+</p>
+<p>
+NOTE: Communication with instances via named pipes depends on the <code>smb</code>
+library. To communicate with (and possibly to discover) instances via named pipes,
+the host must have at least one SMB port (e.g. TCP 445) that was scanned and
+found to be open. Additionally, named pipe connections may require Windows
+authentication to connect to the Windows host (via SMB) in addition to the
+authentication required to connect to the SQL Server instances itself. See the
+documentation and arguments for the <code>smb</code> library for more information.
+</p>
+<p>
+NOTE: By default, the ms-sql-* scripts may attempt to connect to and communicate
+with ports that were not included in the port list for the Nmap scan. This can
+be disabled using the <code>mssql.scanned-ports-only</code> script argument.</p>
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+  
+  
+    
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+  
+  
+    
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+  
+  
+    
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+
+
+  <h2> Script Arguments </h2>
+  <p>
+    
+      <h4> ms-sql-xp-cmdshell.cmd </h4>
+      <p>
+The OS command to run (default: ipconfig /all).</p>
+
+    
+
+    
+      <h4> mssql.domain, mssql.instance-all, mssql.instance-name, mssql.instance-port, mssql.password, mssql.protocol, mssql.scanned-ports-only, mssql.timeout, mssql.username </h4>
+      See the documentation for the <a href="http://nmap.org/nsedoc/lib/mssql.html#script-args">mssql</a> library.
+    
+      <h4> randomseed, smbbasic, smbport, smbsign </h4>
+      See the documentation for the <a href="http://nmap.org/nsedoc/lib/smb.html#script-args">smb</a> library.
+    
+      <h4> smbdomain, smbhash, smbnoguest, smbpassword, smbtype, smbusername </h4>
+      See the documentation for the <a href="http://nmap.org/nsedoc/lib/smbauth.html#script-args">smbauth</a> library.
+    
+  </p>
+
+
+<h2> Example Usage </h2>
+<p>执行格式
+
+  <pre>nmap -p 445 --script ms-sql-discover,ms-sql-empty-password,ms-sql-xp-cmdshell &lt;host&gt;
+nmap -p 1433 --script ms-sql-xp-cmdshell --script-args mssql.username=sa,mssql.password=sa,ms-sql-xp-cmdshell.cmd="net user test test /add" &lt;host&gt;
+</pre>
+
+</p>
+
+
+  <h2> Script Output </h2>
+<pre>| ms-sql-xp-cmdshell:  
+|   [192.168.56.3\MSSQLSERVER]
+|     Command: ipconfig /all
+|       output
+|       ======
+|   
+|       Windows IP Configuration
+|   
+|          Host Name . . . . . . . . . . . . : EDUSRV011
+|          Primary Dns Suffix  . . . . . . . : cqure.net
+|          Node Type . . . . . . . . . . . . : Unknown
+|          IP Routing Enabled. . . . . . . . : No
+|          WINS Proxy Enabled. . . . . . . . : No
+|          DNS Suffix Search List. . . . . . : cqure.net
+|     
+|       Ethernet adapter Local Area Connection 3:
+|   
+|          Connection-specific DNS Suffix  . : 
+|          Description . . . . . . . . . . . : AMD PCNET Family PCI Ethernet Adapter #2
+|          Physical Address. . . . . . . . . : 08-00-DE-AD-C0-DE
+|          DHCP Enabled. . . . . . . . . . . : Yes
+|          Autoconfiguration Enabled . . . . : Yes
+|          IP Address. . . . . . . . . . . . : 192.168.56.3
+|          Subnet Mask . . . . . . . . . . . : 255.255.255.0
+|          Default Gateway . . . . . . . . . : 
+|          DHCP Server . . . . . . . . . . . : 192.168.56.2
+|          Lease Obtained. . . . . . . . . . : den 21 mars 2010 00:12:10
+|          Lease Expires . . . . . . . . . . : den 21 mars 2010 01:12:10
+|_</pre>
+
+
+
+  <h2> Requires </h2>
+  <ul>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/mssql.html">mssql</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/nmap.html">nmap</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/stdnse.html">stdnse</a></li>
+  
+     <li><a href="">string</a></li>
+  
+     <li><a href="">table</a></li>
+  
+  </ul>
+
+
+<hr/>
+
+
+
+
+
+
+<p><b>Author: </b>Patrik Karlsson</p>
+
+
+
+<p><b>License: </b> VER007 整理 <a href="http://www.ver007.com">http://www.ver007.com</a></p>
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+</BODY>
+</HTML>
+
+

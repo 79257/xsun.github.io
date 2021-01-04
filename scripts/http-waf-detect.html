@@ -1,0 +1,291 @@
+﻿   <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+    <title>http-waf-detect NSE Script -VER007</title>
+    
+
+</HEAD>
+
+
+
+
+
+
+<a href="../nmap-script-help.html">HOME>>>>>>>>></a>
+
+
+
+<h1>File <code>http-waf-detect</code></h1>
+
+
+
+<p>
+
+
+<a href="http://nmap.org/book/nse-script-format.html#nse-format-rules">脚本使用类型</a>:
+portrule
+<br>
+
+  脚本所属分类:
+  <i><a href="http://nmap.org/nsedoc/categories/discovery.html">discovery</a></i>, <i><a href="http://nmap.org/nsedoc/categories/intrusive.html">intrusive</a></i>
+  <br>
+
+脚本下载地址: <a href="http://nmap.org/svn/scripts/http-waf-detect.nse">http://nmap.org/svn/scripts/http-waf-detect.nse</a>
+</p>
+
+
+
+<h2> User Summary </h2>
+
+<p>
+Attempts to determine whether a web server is protected by an IPS (Intrusion Prevention System), IDS (Intrusion Detection System) or WAF (Web Application Firewall) by probing the web server with malicious payloads and detecting changes in the response code and body.
+</p>
+<p>
+To do this the script will send a "good" request and record the response, afterwards it will match this response against new requests containing 
+malicious payloads. In theory, web applications shouldn't react to malicious requests because we are storing the payloads in a variable that is 
+not used by the script/file and only WAF/IDS/IPS should react to it. 
+If aggro mode is set, the script will try all attack vectors (More noisy)
+</p>
+<p>
+This script can detect numerous IDS, IPS, and WAF products since
+they often protect web applications in the same way.  But it
+won't detect products which don't alter the http traffic.
+Results can vary based on product configuration, but this script
+has been tested to work against various configurations of the
+following products:
+</p>
+<p>
+ * Apache ModSecurity 
+ * Barracuda Web Application Firewall 
+ * PHPIDS 
+ * dotDefender
+ * Imperva Web Firewall
+ * Blue Coat SG 400</p>
+
+
+
+
+
+
+
+  
+  
+  
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+  
+  
+    
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+  
+  
+    
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+
+
+  <h2> Script Arguments </h2>
+  <p>
+    
+      <h4> http-waf-detect.uri </h4>
+      <p>
+Target URI. Use a path that does not redirect to a different page</p>
+
+    
+      <h4> http-waf-detect.aggro </h4>
+      <p>
+If aggro mode is set, the script will try all attack vectors to trigger the IDS/IPS/WAF</p>
+
+    
+      <h4> http-waf-detect.detectBodyChanges </h4>
+      <p>
+If set it also checks for changes in the document's body
+</p>
+<p>
+Other useful args when running this script
+http.useragent User Agent for HTTP requests
+http.pipeline Number of requests sent in the single request</p>
+
+    
+
+    
+      <h4> smbdomain, smbhash, smbnoguest, smbpassword, smbtype, smbusername </h4>
+      See the documentation for the <a href="http://nmap.org/nsedoc/lib/smbauth.html#script-args">smbauth</a> library.
+    
+      <h4> http.max-cache-size, http.max-pipeline, http.pipeline, http.useragent </h4>
+      See the documentation for the <a href="http://nmap.org/nsedoc/lib/http.html#script-args">http</a> library.
+    
+  </p>
+
+
+<h2> Example Usage </h2>
+<p>执行格式
+
+  <pre>nmap -p80 --script http-waf-detect &lt;host&gt;
+nmap -p80 --script http-waf-detect --script-args="http-waf-detect.aggro,http-waf-detect.uri=/testphp.vulnweb.com/artists.php" www.modsecurity.org
+</pre>
+
+</p>
+
+
+  <h2> Script Output </h2>
+<pre>PORT   STATE SERVICE
+80/tcp open  http
+|_http-waf-detect: IDS/IPS/WAF detected
+</pre>
+
+
+
+  <h2> Requires </h2>
+  <ul>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/http.html">http</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/shortport.html">shortport</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/stdnse.html">stdnse</a></li>
+  
+     <li><a href="">string</a></li>
+  
+     <li><a href="">table</a></li>
+  
+  </ul>
+
+
+<hr/>
+
+
+
+
+
+
+<p><b>Author: </b>Paulino Calderon</p>
+
+
+
+<p><b>License: </b> VER007 整理 <a href="http://www.ver007.com">http://www.ver007.com</a></p>
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+</BODY>
+</HTML>
+
+

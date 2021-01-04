@@ -1,0 +1,271 @@
+﻿   <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+    <title>http-apache-negotiation NSE Script -VER007</title>
+    
+
+</HEAD>
+
+
+
+
+
+
+<a href="../nmap-script-help.html">HOME>>>>>>>>></a>
+
+
+
+<h1>File <code>http-apache-negotiation</code></h1>
+
+
+
+<p>
+
+
+<a href="http://nmap.org/book/nse-script-format.html#nse-format-rules">脚本使用类型</a>:
+portrule
+<br>
+
+  脚本所属分类:
+  <i><a href="http://nmap.org/nsedoc/categories/safe.html">safe</a></i>, <i><a href="http://nmap.org/nsedoc/categories/discovery.html">discovery</a></i>
+  <br>
+
+脚本下载地址: <a href="http://nmap.org/svn/scripts/http-apache-negotiation.nse">http://nmap.org/svn/scripts/http-apache-negotiation.nse</a>
+</p>
+
+
+
+<h2> User Summary </h2>
+
+<p>
+Checks if the target http server has mod_negotiation enabled.  This
+feature can be leveraged to find hidden resources and spider a web
+site using fewer requests.
+</p>
+<p>
+The script works by sending requests for resources like index and home 
+without specifying the extension. If mod_negotiate is enabled (default 
+Apache configuration), the target would reply with content-location header 
+containing target resource (such as index.html) and vary header containing 
+"negotiate" depending on the configuration. 
+</p>
+<p>
+For more information, see:
+<ul>
+<li><a href="http://www.wisec.it/sectou.php?id=4698ebdc59d15">http://www.wisec.it/sectou.php?id=4698ebdc59d15</a>
+</li>
+<li>Metasploit auxiliary module 
+</li>
+</ul>
+    /modules/auxiliary/scanner/http/mod_negotiation_scanner.rb</p>
+
+
+
+
+
+
+
+  
+  
+  
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+  
+  
+    
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+  
+  
+    
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+
+
+  <h2> Script Arguments </h2>
+  <p>
+    
+      <h4> http-apache-negotiation.root </h4>
+      <p>
+target web site root. 
+ Defaults to <code>/</code>.</p>
+
+    
+
+    
+      <h4> smbdomain, smbhash, smbnoguest, smbpassword, smbtype, smbusername </h4>
+      See the documentation for the <a href="http://nmap.org/nsedoc/lib/smbauth.html#script-args">smbauth</a> library.
+    
+      <h4> http.max-cache-size, http.max-pipeline, http.pipeline, http.useragent </h4>
+      See the documentation for the <a href="http://nmap.org/nsedoc/lib/http.html#script-args">http</a> library.
+    
+  </p>
+
+
+<h2> Example Usage </h2>
+<p>执行格式
+
+  <pre>nmap --script=http-apache-negotiation --script-args http-apache-negotiation.root=/root/ &lt;target&gt;
+</pre>
+
+</p>
+
+
+  <h2> Script Output </h2>
+<pre>PORT   STATE SERVICE
+80/tcp open  http
+|_http-apache-negotiation: mod_negotiation enabled.
+</pre>
+
+
+
+  <h2> Requires </h2>
+  <ul>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/http.html">http</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/shortport.html">shortport</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/stdnse.html">stdnse</a></li>
+  
+     <li><a href="">string</a></li>
+  
+  </ul>
+
+
+<hr/>
+
+
+
+
+
+
+<p><b>Author: </b>Hani Benhabiles</p>
+
+
+
+<p><b>License: </b> VER007 整理 <a href="http://www.ver007.com">http://www.ver007.com</a></p>
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+</BODY>
+</HTML>
+
+

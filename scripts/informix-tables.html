@@ -1,0 +1,202 @@
+﻿   <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+    <title>informix-tables NSE Script -VER007</title>
+    
+
+</HEAD>
+
+
+
+
+
+
+<a href="../nmap-script-help.html">HOME>>>>>>>>></a>
+
+
+
+<h1>File <code>informix-tables</code></h1>
+
+
+
+<p>
+
+
+<a href="http://nmap.org/book/nse-script-format.html#nse-format-rules">脚本使用类型</a>:
+portrule
+<br>
+
+  脚本所属分类:
+  <i><a href="http://nmap.org/nsedoc/categories/intrusive.html">intrusive</a></i>, <i><a href="http://nmap.org/nsedoc/categories/auth.html">auth</a></i>
+  <br>
+
+脚本下载地址: <a href="http://nmap.org/svn/scripts/informix-tables.nse">http://nmap.org/svn/scripts/informix-tables.nse</a>
+</p>
+
+
+
+<h2> User Summary </h2>
+
+<p>
+Retrieves a list of tables and column definitions for each database on an Informix server.</p>
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+
+
+  <h2> Script Arguments </h2>
+  <p>
+    
+      <h4> informix-query.username </h4>
+      <p>
+The username used for authentication</p>
+
+    
+      <h4> informix-query.password </h4>
+      <p>
+The password used for authentication
+</p>
+<p>
+Version 0.1
+Created 27/07/2010 - v0.1 - created by Patrik Karlsson &lt;patrik@cqure.net&gt;</p>
+
+    
+
+    
+  </p>
+
+
+<h2> Example Usage </h2>
+<p>执行格式
+
+  <pre>nmap -p 9088 &lt;host&gt; --script informix-tables --script-args informix-tables.username=informix,informix-tables.password=informix
+</pre>
+
+</p>
+
+
+  <h2> Script Output </h2>
+<pre>PORT     STATE SERVICE REASON
+9088/tcp open  unknown syn-ack
+| informix-tables:  
+|   Information
+|     User: informix
+|     Database: stores_demo
+|   Results
+|     table                column               rows                 
+|     call_type            call_code            5                    
+|     call_type            code_descr           5                    
+|     catalog              cat_advert           74                   
+|     catalog              cat_descr            74                   
+|     catalog              cat_picture          74                   
+|     catalog              catalog_num          74                   
+|     catalog              manu_code            74                   
+|     catalog              stock_num            74                   
+|     classes              class                4                    
+|     classes              classid              4                    
+|     classes              subject              4
+|     cust_calls          call_code           7                   
+|     cust_calls          call_descr          7                   
+|     cust_calls          call_dtime          7                   
+|     cust_calls          customer_num        7                   
+|     cust_calls          res_descr           7                   
+|     cust_calls          res_dtime           7                   
+|     cust_calls          user_id             7                   
+|     warehouses          warehouse_id        4                   
+|     warehouses          warehouse_name      4                   
+|_    warehouses          warehouse_spec      4
+</pre>
+
+
+
+  <h2> Requires </h2>
+  <ul>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/informix.html">informix</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/nmap.html">nmap</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/shortport.html">shortport</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/stdnse.html">stdnse</a></li>
+  
+     <li><a href="">table</a></li>
+  
+  </ul>
+
+
+<hr/>
+
+
+
+
+
+
+<p><b>Author: </b>Patrik Karlsson</p>
+
+
+
+<p><b>License: </b> VER007 整理 <a href="http://www.ver007.com">http://www.ver007.com</a></p>
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+</BODY>
+</HTML>
+
+

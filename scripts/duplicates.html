@@ -1,0 +1,179 @@
+﻿   <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+    <title>duplicates NSE Script -VER007</title>
+    
+
+</HEAD>
+
+
+
+
+
+
+<a href="../nmap-script-help.html">HOME>>>>>>>>></a>
+
+
+
+<h1>File <code>duplicates</code></h1>
+
+
+
+<p>
+
+
+<a href="http://nmap.org/book/nse-script-format.html#nse-format-rules">脚本使用类型</a>:
+
+<br>
+
+  脚本所属分类:
+  <i><a href="http://nmap.org/nsedoc/categories/safe.html">safe</a></i>
+  <br>
+
+脚本下载地址: <a href="http://nmap.org/svn/scripts/duplicates.nse">http://nmap.org/svn/scripts/duplicates.nse</a>
+</p>
+
+
+
+<h2> User Summary </h2>
+
+<p>
+Attempts to discover multihomed systems by analysing and comparing
+information collected by other scripts. The information analyzed
+currently includes, SSL certificates, SSH host keys, MAC addresses,
+and Netbios server names.
+</p>
+<p>
+In order for the script to be able to analyze the data it has dependencies to
+the following scripts: ssl-cert,ssh-hostkey,nbtstat.
+</p>
+<p>
+One or more of these scripts have to be run in order to allow the duplicates
+script to analyze the data.</p>
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+
+
+
+<h2> Example Usage </h2>
+<p>执行格式
+
+  <pre>sudo nmap -PN -p445,443 --script duplicates,nbstat,ssl-cert &lt;ips&gt;
+</pre>
+
+</p>
+
+
+  <h2> Script Output </h2>
+<pre>| duplicates: 
+|   ARP
+|       MAC: 01:23:45:67:89:0a
+|           192.168.99.10
+|           192.168.99.11
+|   Netbios
+|       Server Name: WIN2KSRV001
+|           192.168.0.10
+|_          192.168.1.10
+</pre>
+
+
+
+  <h2> Requires </h2>
+  <ul>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/ipOps.html">ipOps</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/nmap.html">nmap</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/ssh1.html">ssh1</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/stdnse.html">stdnse</a></li>
+  
+     <li><a href="">string</a></li>
+  
+     <li><a href="">table</a></li>
+  
+  </ul>
+
+
+<hr/>
+
+
+
+
+
+
+<p><b>Author: </b>Patrik Karlsson</p>
+
+
+
+<p><b>License: </b> VER007 整理 <a href="http://www.ver007.com">http://www.ver007.com</a></p>
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+</BODY>
+</HTML>
+
+

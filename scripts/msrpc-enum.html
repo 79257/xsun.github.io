@@ -1,0 +1,307 @@
+﻿   <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+    <title>msrpc-enum NSE Script -VER007</title>
+    
+
+</HEAD>
+
+
+
+
+
+
+<a href="../nmap-script-help.html">HOME>>>>>>>>></a>
+
+
+
+<h1>File <code>msrpc-enum</code></h1>
+
+
+
+<p>
+
+
+<a href="http://nmap.org/book/nse-script-format.html#nse-format-rules">脚本使用类型</a>:
+hostrule
+<br>
+
+  脚本所属分类:
+  <i><a href="http://nmap.org/nsedoc/categories/safe.html">safe</a></i>, <i><a href="http://nmap.org/nsedoc/categories/discovery.html">discovery</a></i>
+  <br>
+
+脚本下载地址: <a href="http://nmap.org/svn/scripts/msrpc-enum.nse">http://nmap.org/svn/scripts/msrpc-enum.nse</a>
+</p>
+
+
+
+<h2> User Summary </h2>
+
+<p>
+Queries an MSRPC endpoint mapper for a list of mapped 
+services and displays the gathered information.
+</p>
+<p>
+As it is using smb library, you can specify optional
+username and password to use.
+</p>
+<p>
+Script works much like Microsoft's rpcdump tool
+or dcedump tool from SPIKE fuzzer.</p>
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+  
+  
+    
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+  
+  
+    
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+
+
+  <h2> Script Arguments </h2>
+  <p>
+    
+
+    
+      <h4> randomseed, smbbasic, smbport, smbsign </h4>
+      See the documentation for the <a href="http://nmap.org/nsedoc/lib/smb.html#script-args">smb</a> library.
+    
+      <h4> smbdomain, smbhash, smbnoguest, smbpassword, smbtype, smbusername </h4>
+      See the documentation for the <a href="http://nmap.org/nsedoc/lib/smbauth.html#script-args">smbauth</a> library.
+    
+  </p>
+
+
+<h2> Example Usage </h2>
+<p>执行格式
+
+  <pre>nmap &lt;target&gt; --script=msrpc-enum
+</pre>
+
+</p>
+
+
+  <h2> Script Output </h2>
+<pre>PORT    STATE SERVICE      REASON
+445/tcp open  microsoft-ds syn-ack
+
+Host script results:
+| msrpc-enum:
+|
+|     uuid: 3c4728c5-f0ab-448b-bda1-6ce01eb0a6d5
+|     annotation: DHCP Client LRPC Endpoint
+|     ncalrpc: dhcpcsvc
+|
+|     uuid: 12345678-1234-abcd-ef00-0123456789ab
+|     annotation: IPSec Policy agent endpoint
+|     ncalrpc: audit
+|
+|     uuid: 3c4728c5-f0ab-448b-bda1-6ce01eb0a6d5
+|     ip_addr: 0.0.0.0
+|     annotation: DHCP Client LRPC Endpoint
+|     tcp_port: 49153
+|
+&lt;snip&gt;
+|
+|     uuid: 12345678-1234-abcd-ef00-0123456789ab
+|     annotation: IPSec Policy agent endpoint
+|     ncalrpc: securityevent
+|
+|     uuid: 12345678-1234-abcd-ef00-0123456789ab
+|     annotation: IPSec Policy agent endpoint
+|_    ncalrpc: protected_storage
+</pre>
+
+
+
+  <h2> Requires </h2>
+  <ul>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/msrpc.html">msrpc</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/smb.html">smb</a></li>
+  
+     <li><a href="">string</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/stdnse.html">stdnse</a></li>
+  
+     <li><a href="">table</a></li>
+  
+  </ul>
+
+
+<hr/>
+
+
+
+
+
+
+<p><b>Author: </b>Aleksandar Nikolic</p>
+
+
+
+<p><b>License: </b> VER007 整理 <a href="http://www.ver007.com">http://www.ver007.com</a></p>
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+</BODY>
+</HTML>
+
+

@@ -1,0 +1,309 @@
+﻿   <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+    <title>http-slowloris-check NSE Script -VER007</title>
+    
+
+</HEAD>
+
+
+
+
+
+
+<a href="../nmap-script-help.html">HOME>>>>>>>>></a>
+
+
+
+<h1>File <code>http-slowloris-check</code></h1>
+
+
+
+<p>
+
+
+<a href="http://nmap.org/book/nse-script-format.html#nse-format-rules">脚本使用类型</a>:
+portrule
+<br>
+
+  脚本所属分类:
+  <i><a href="http://nmap.org/nsedoc/categories/vuln.html">vuln</a></i>, <i><a href="http://nmap.org/nsedoc/categories/safe.html">safe</a></i>
+  <br>
+
+脚本下载地址: <a href="http://nmap.org/svn/scripts/http-slowloris-check.nse">http://nmap.org/svn/scripts/http-slowloris-check.nse</a>
+</p>
+
+
+
+<h2> User Summary </h2>
+
+<p>
+Tests a web server for vulnerability to the Slowloris DoS attack without actually launching a DoS attack.
+</p>
+<p>
+Slowloris was described at Defcon 17 by RSnake
+(see <a href="http://ha.ckers.org/slowloris/">http://ha.ckers.org/slowloris/</a>).
+</p>
+<p>
+This script opens two connections to the server, each without 
+the final CRLF. After 10 seconds, second connection sends 
+additional header. Both connections then wait for server timeout.
+If second connection gets a timeout 10 or more seconds after the
+first one, we can conclude that sending additional header prolonged
+it's timeout and that the server is vulnerable to slowloris DoS attack.
+</p>
+<p>
+You can specify custom http User-agent field with <code>http.useragent</code>
+script argument.
+</p>
+<p>
+Idea from Qualys blogpost:
+ * <a href="https://community.qualys.com/blogs/securitylabs/2011/07/07/identifying-slow-http-attack-vulnerabilities-on-web-applications">https://community.qualys.com/blogs/securitylabs/2011/07/07/identifying-slow-http-attack-vulnerabilities-on-web-applications</a></p>
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+    
+      
+        
+      
+    
+  
+  
+    
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+  
+  
+    
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+    
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+  
+  
+    
+    
+  
+
+
+
+  <h2> Script Arguments </h2>
+  <p>
+    
+      <h4> http.useragent </h4>
+      <p>
+Specifies custom user agent string.</p>
+
+    
+
+    
+      <h4> http.max-cache-size, http.max-pipeline, http.pipeline </h4>
+      See the documentation for the <a href="http://nmap.org/nsedoc/lib/http.html#script-args">http</a> library.
+    
+      <h4> smbdomain, smbhash, smbnoguest, smbpassword, smbtype, smbusername </h4>
+      See the documentation for the <a href="http://nmap.org/nsedoc/lib/smbauth.html#script-args">smbauth</a> library.
+    
+      <h4> vulns.showall </h4>
+      See the documentation for the <a href="http://nmap.org/nsedoc/lib/vulns.html#script-args">vulns</a> library.
+    
+  </p>
+
+
+<h2> Example Usage </h2>
+<p>执行格式
+
+  <pre>nmap --script http-slowloris-check  &lt;target&gt;
+</pre>
+
+</p>
+
+
+  <h2> Script Output </h2>
+<pre>PORT   STATE SERVICE REASON
+80/tcp open  http    syn-ack
+| http-slowloris-check:
+|   VULNERABLE:
+|   Slowloris DOS attack
+|     State: VULNERABLE
+|     Description:
+|       Slowloris tries to keep many connections to the target web server open and hold them open as long as possible.
+|       It accomplishes this by opening connections to the target web server and sending a partial request. By doing
+|       so, it starves the http server's resources causing Denial Of Service.
+|
+|     Disclosure date: 2009-09-17
+|     References:
+|_      http://ha.ckers.org/slowloris/</pre>
+
+
+
+  <h2> Requires </h2>
+  <ul>
+  
+     <li><a href="">coroutine</a></li>
+  
+     <li><a href="">math</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/nmap.html">nmap</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/shortport.html">shortport</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/stdnse.html">stdnse</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/comm.html">comm</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/vulns.html">vulns</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/http.html">http</a></li>
+  
+  </ul>
+
+
+<hr/>
+
+
+
+
+
+
+<p><b>Author: </b>Aleksandar Nikolic</p>
+
+
+
+<p><b>License: </b> VER007 整理 <a href="http://www.ver007.com">http://www.ver007.com</a></p>
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+</BODY>
+</HTML>
+
+

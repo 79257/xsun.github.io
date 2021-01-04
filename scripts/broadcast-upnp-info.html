@@ -1,0 +1,327 @@
+﻿   <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+    <title>broadcast-upnp-info NSE Script -VER007</title>
+    
+
+</HEAD>
+
+
+
+
+
+
+<a href="../nmap-script-help.html">HOME>>>>>>>>></a>
+
+
+
+<h1>File <code>broadcast-upnp-info</code></h1>
+
+
+
+<p>
+
+
+<a href="http://nmap.org/book/nse-script-format.html#nse-format-rules">脚本使用类型</a>:
+prerule
+<br>
+
+  脚本所属分类:
+  <i><a href="http://nmap.org/nsedoc/categories/broadcast.html">broadcast</a></i>, <i><a href="http://nmap.org/nsedoc/categories/safe.html">safe</a></i>
+  <br>
+
+脚本下载地址: <a href="http://nmap.org/svn/scripts/broadcast-upnp-info.nse">http://nmap.org/svn/scripts/broadcast-upnp-info.nse</a>
+</p>
+
+
+
+<h2> User Summary </h2>
+
+<p>
+Attempts to extract system information from the UPnP service by sending a multicast query, then collecting, parsing, and displaying all responses.</p>
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+  
+  
+    
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+  
+  
+    
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+    
+      
+        
+      
+    
+      
+        
+      
+    
+  
+  
+    
+    
+  
+
+  
+  
+  
+  
+
+
+
+  <h2> Script Arguments </h2>
+  <p>
+    
+
+    
+      <h4> max-newtargets, newtargets </h4>
+      See the documentation for the <a href="http://nmap.org/nsedoc/lib/target.html#script-args">target</a> library.
+    
+      <h4> smbdomain, smbhash, smbnoguest, smbpassword, smbtype, smbusername </h4>
+      See the documentation for the <a href="http://nmap.org/nsedoc/lib/smbauth.html#script-args">smbauth</a> library.
+    
+      <h4> http.max-cache-size, http.max-pipeline, http.pipeline, http.useragent </h4>
+      See the documentation for the <a href="http://nmap.org/nsedoc/lib/http.html#script-args">http</a> library.
+    
+  </p>
+
+
+<h2> Example Usage </h2>
+<p>执行格式
+
+  <pre>nmap -sV --script=broadcast-upnp-info &lt;target&gt;</pre>
+
+</p>
+
+
+  <h2> Script Output </h2>
+<pre>| broadcast-upnp-info: 
+|   1.2.3.50
+|       Debian/4.0 DLNADOC/1.50 UPnP/1.0 MiniDLNA/1.0
+|       Location:  http://1.2.3.50:8200/rootDesc.xml
+|       Webserver:  Debian/4.0 DLNADOC/1.50 UPnP/1.0 MiniDLNA/1.0
+|       Name: BUBBA|TWO DLNA Server
+|       Manufacturer: Justin Maggard
+|       Model Descr: MiniDLNA on Debian
+|       Model Name: Windows Media Connect compatible (MiniDLNA)
+|       Model Version: 1
+|   1.2.3.114
+|       Linux/2.6 UPnP/1.0 KDL-32EX701/1.7
+|       Location:  http://1.2.3.114:52323/dmr.xml
+|       Webserver:  Linux/2.6 UPnP/1.0 KDL-32EX701/1.7
+|       Name: BRAVIA KDL-32EX701
+|       Manufacturer: Sony Corporation
+|_      Model Name: KDL-32EX701</pre>
+
+
+
+  <h2> Requires </h2>
+  <ul>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/stdnse.html">stdnse</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/upnp.html">upnp</a></li>
+  
+  </ul>
+
+
+<hr/>
+
+
+
+
+
+
+<p><b>Author: </b>Patrik Karlsson</p>
+
+
+
+<p><b>License: </b> VER007 整理 <a href="http://www.ver007.com">http://www.ver007.com</a></p>
+
+
+
+
+
+
+
+
+<h2> <font color="#ff0000">action</font> </h2>
+<dl class="function">
+  
+
+<dt><a name="action"></a><strong>action</strong>&nbsp;(host, port)</dt>
+<dd>
+
+<p>
+Sends UPnP discovery packet to host, 
+and extracts service information from results</p>
+
+
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  host:
+          
+	</li>
+	
+	<li>
+	  port:
+          
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+</dl>
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+</BODY>
+</HTML>
+
+

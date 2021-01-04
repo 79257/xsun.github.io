@@ -1,0 +1,225 @@
+﻿   <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+    <title>backorifice-info NSE Script -VER007</title>
+    
+
+</HEAD>
+
+
+
+
+
+
+<a href="../nmap-script-help.html">HOME>>>>>>>>></a>
+
+
+
+<h1>File <code>backorifice-info</code></h1>
+
+
+
+<p>
+
+
+<a href="http://nmap.org/book/nse-script-format.html#nse-format-rules">脚本使用类型</a>:
+portrule
+<br>
+
+  脚本所属分类:
+  <i><a href="http://nmap.org/nsedoc/categories/default.html">default</a></i>, <i><a href="http://nmap.org/nsedoc/categories/discovery.html">discovery</a></i>, <i><a href="http://nmap.org/nsedoc/categories/safe.html">safe</a></i>
+  <br>
+
+脚本下载地址: <a href="http://nmap.org/svn/scripts/backorifice-info.nse">http://nmap.org/svn/scripts/backorifice-info.nse</a>
+</p>
+
+
+
+<h2> User Summary </h2>
+
+<p>
+Connects to a BackOrifice service and gathers information about
+the host and the BackOrifice service itself.
+</p>
+<p>
+The extracted host information includes basic system setup, list
+of running processes, network resources and shares.
+</p>
+<p>
+Information about the service includes enabled port redirections,
+listening console applications and a list of BackOrifice plugins
+installed with the service.</p>
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+
+
+  <h2> Script Arguments </h2>
+  <p>
+    
+      <h4> backorifice-info.seed </h4>
+      <p>
+Encryption seed (default derived from password, or 31337 for no password).</p>
+
+    
+      <h4> backorifice-info.password </h4>
+      <p>
+Encryption password (defaults to no password).</p>
+
+    
+
+    
+  </p>
+
+
+<h2> Example Usage </h2>
+<p>执行格式
+
+  <pre>nmap --script backorifice-info &lt;target&gt; --script-args backorifice-info.password=&lt;password&gt;
+</pre>
+
+</p>
+
+
+  <h2> Script Output </h2>
+<pre>31337/udp open|filtered BackOrifice
+| backorifice-info:
+|   PING REPLY
+|     !PONG!1.20!HAL9000!
+|   SYSTEM INFO
+|     System info for machine 'HAL9000'
+|     Current user: 'Dave'
+|     Processor: I586
+|     Win32 on Windows 95 v4.10 build 2222 -  A
+|     Memory: 63M in use: 30%  Page file: 1984M free: 1970M
+|     C:\ - Fixed Sec/Clust: 64 Byts/Sec: 512,  Bytes free: 2147155968/21471
+|       ...155968
+|     D:\ - CD-ROM
+|   PROCESS LIST
+|       PID  -    Executable
+|     4293872589 C:\WINDOWS\SYSTEM\KERNEL32.DLL
+|     4294937581 C:\WINDOWS\SYSTEM\MSGSRV32.EXE
+|     4294935933 C:\WINDOWS\SYSTEM\MPREXE.EXE
+|     4294843869 C:\WINDOWS\SYSTEM\MSTASK.EXE
+|     4294838549 C:\WINDOWS\SYSTEM\ .EXE
+|     4294864917 C:\WINDOWS\EXPLORER.EXE
+|     4294880413 C:\WINDOWS\TASKMON.EXE
+|     4294878445 C:\WINDOWS\SYSTEM\SYSTRAY.EXE
+|     4294771309 C:\WINDOWS\WINIPCFG.EXE
+|     4294772081 C:\WINDOWS\SYSTEM\WINOA386.MOD
+|   NETWORK RESOURCES - NET VIEW
+|     (null) '(null)' - Microsoft Network - UNKNOWN!  (Network root?):CONTAINER
+|     (null) 'WORKGROUP' - (null) - DOMAIN:CONTAINER
+|     (null) '\\HAL9000' -  - SERVER:CONTAINER
+|     (null) '\\HAL9000\DOCUMENTS' - sample comment 2 - SHARE:DISK
+|     (null) '\\WIN982' -  - SERVER:CONTAINER
+|     (null) '\\WIN982\BO' - tee hee hee comment - SHARE:DISK
+|   SHARELIST
+|     'DOCUMENTS'-C:\WINDOWS\DESKTOP\DOCUMENTS 'sample comment 2' RO:'' RW:'
+|       ...'' Disk PERSISTANT READONLY
+|     'IPC$'-  'Remote Inter Process Communication' RO:'' RW:'' IPC FULL
+|   REDIRECTED PORTS
+|     0 redirs displayed
+|   LISTENING CONSOLE APPLICATIONS
+|     0 apps listed
+|   PLUGIN LIST
+|_    End of plugins
+</pre>
+
+
+
+  <h2> Requires </h2>
+  <ul>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/bin.html">bin</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/bit.html">bit</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/nmap.html">nmap</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/shortport.html">shortport</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/stdnse.html">stdnse</a></li>
+  
+     <li><a href="">string</a></li>
+  
+     <li><a href="">table</a></li>
+  
+  </ul>
+
+
+<hr/>
+
+
+
+
+
+
+<p><b>Author: </b>Gorjan Petrovski</p>
+
+
+
+<p><b>License: </b> VER007 整理 <a href="http://www.ver007.com">http://www.ver007.com</a></p>
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+</BODY>
+</HTML>
+
+

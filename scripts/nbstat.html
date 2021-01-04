@@ -1,0 +1,191 @@
+﻿   <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+    <title>nbstat NSE Script -VER007</title>
+    
+
+</HEAD>
+
+
+
+
+
+
+<a href="../nmap-script-help.html">HOME>>>>>>>>></a>
+
+
+
+<h1>File <code>nbstat</code></h1>
+
+
+
+<p>
+
+
+<a href="http://nmap.org/book/nse-script-format.html#nse-format-rules">脚本使用类型</a>:
+hostrule
+<br>
+
+  脚本所属分类:
+  <i><a href="http://nmap.org/nsedoc/categories/default.html">default</a></i>, <i><a href="http://nmap.org/nsedoc/categories/discovery.html">discovery</a></i>, <i><a href="http://nmap.org/nsedoc/categories/safe.html">safe</a></i>
+  <br>
+
+脚本下载地址: <a href="http://nmap.org/svn/scripts/nbstat.nse">http://nmap.org/svn/scripts/nbstat.nse</a>
+</p>
+
+
+
+<h2> User Summary </h2>
+
+<p>
+Attempts to retrieve the target's NetBIOS names and MAC address.
+</p>
+<p>
+By default, the script displays the name of the computer and the logged-in
+user; if the verbosity is turned up, it displays all names the system thinks it
+owns.</p>
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+
+
+
+<h2> Example Usage </h2>
+<p>执行格式
+
+  <pre>sudo nmap -sU --script nbstat.nse -p137 &lt;host&gt;
+</pre>
+
+</p>
+
+
+  <h2> Script Output </h2>
+<pre>Host script results:
+|_ nbstat: NetBIOS name: WINDOWS2003, NetBIOS user: &lt;unknown&gt;, NetBIOS MAC: 00:0c:29:c6:da:f5 (VMware)
+
+Host script results:
+|  nbstat:
+|  |  NetBIOS name: WINDOWS2003, NetBIOS user: &lt;unknown&gt;, NetBIOS MAC: 00:0c:29:c6:da:f5 (VMware)
+|  |  Names
+|  |  |  WINDOWS2003&lt;00&gt;      Flags: &lt;unique&gt;&lt;active&gt;
+|  |  |  WINDOWS2003&lt;20&gt;      Flags: &lt;unique&gt;&lt;active&gt;
+|  |  |  SKULLSECURITY&lt;00&gt;    Flags: &lt;group&gt;&lt;active&gt;
+|  |  |  SKULLSECURITY&lt;1e&gt;    Flags: &lt;group&gt;&lt;active&gt;
+|  |  |  SKULLSECURITY&lt;1d&gt;    Flags: &lt;unique&gt;&lt;active&gt;
+|_ |_ |_ \x01\x02__MSBROWSE__\x02&lt;01&gt;  Flags: &lt;group&gt;&lt;active&gt;</pre>
+
+
+
+  <h2> Requires </h2>
+  <ul>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/datafiles.html">datafiles</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/netbios.html">netbios</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/nmap.html">nmap</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/stdnse.html">stdnse</a></li>
+  
+     <li><a href="">string</a></li>
+  
+     <li><a href="">table</a></li>
+  
+  </ul>
+
+
+<hr/>
+
+
+
+
+
+
+<p><b>Author: </b>Brandon Enright, Ron Bowes</p>
+
+
+
+<p><b>License: </b> VER007 整理 <a href="http://www.ver007.com">http://www.ver007.com</a></p>
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+</BODY>
+</HTML>
+
+

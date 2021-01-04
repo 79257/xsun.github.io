@@ -1,0 +1,336 @@
+﻿   <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+    <title>http-grep NSE Script -VER007</title>
+    
+
+</HEAD>
+
+
+
+
+
+
+<a href="../nmap-script-help.html">HOME>>>>>>>>></a>
+
+
+
+<h1>File <code>http-grep</code></h1>
+
+
+
+<p>
+
+
+<a href="http://nmap.org/book/nse-script-format.html#nse-format-rules">脚本使用类型</a>:
+portrule
+<br>
+
+  脚本所属分类:
+  <i><a href="http://nmap.org/nsedoc/categories/discovery.html">discovery</a></i>, <i><a href="http://nmap.org/nsedoc/categories/safe.html">safe</a></i>
+  <br>
+
+脚本下载地址: <a href="http://nmap.org/svn/scripts/http-grep.nse">http://nmap.org/svn/scripts/http-grep.nse</a>
+</p>
+
+
+
+<h2> User Summary </h2>
+
+<p>
+Spiders a website and attempts to match all pages and urls against a given
+string. Matches are counted and grouped per url under which they were
+discovered.</p>
+
+
+
+
+
+
+
+  
+  
+  
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+  
+  
+    
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+  
+  
+    
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+  
+  
+    
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+
+
+  <h2> Script Arguments </h2>
+  <p>
+    
+      <h4> http-grep.maxdepth </h4>
+      <p>
+the maximum amount of directories beneath
+      the initial url to spider. A negative value disables the limit.
+      (default: 3)</p>
+
+    
+      <h4> http-grep.withinhost </h4>
+      <p>
+only spider URLs within the same host.
+      (default: true)</p>
+
+    
+      <h4> http-grep.withindomain </h4>
+      <p>
+only spider URLs within the same
+      domain. This widens the scope from <code>withinhost</code> and can
+      not be used in combination. (default: false)</p>
+
+    
+      <h4> http-grep.match </h4>
+      <p>
+the string to match in urls and page contents</p>
+
+    
+      <h4> http-grep.maxpagecount </h4>
+      <p>
+the maximum amount of pages to visit.
+      A negative value disables the limit (default: 20)</p>
+
+    
+      <h4> http-grep.url </h4>
+      <p>
+the url to start spidering. This is a URL
+      relative to the scanned host eg. /default.html (default: /)</p>
+
+    
+
+    
+      <h4> httpspider.maxdepth, httpspider.maxpagecount, httpspider.noblacklist, httpspider.url, httpspider.useheadfornonwebfiles, httpspider.withindomain, httpspider.withinhost </h4>
+      See the documentation for the <a href="http://nmap.org/nsedoc/lib/httpspider.html#script-args">httpspider</a> library.
+    
+      <h4> smbdomain, smbhash, smbnoguest, smbpassword, smbtype, smbusername </h4>
+      See the documentation for the <a href="http://nmap.org/nsedoc/lib/smbauth.html#script-args">smbauth</a> library.
+    
+      <h4> http.max-cache-size, http.max-pipeline, http.pipeline, http.useragent </h4>
+      See the documentation for the <a href="http://nmap.org/nsedoc/lib/http.html#script-args">http</a> library.
+    
+  </p>
+
+
+<h2> Example Usage </h2>
+<p>执行格式
+
+  <pre>nmap -p 80 www.example.com --script http-grep --script-args='http-grep.match="[A-Za-z0-9%.%%%+%-]+@[A-Za-z0-9%.%%%+%-]+%.%w%w%w?%w?",http-grep.breakonmatch'
+</pre>
+
+</p>
+
+
+  <h2> Script Output </h2>
+<pre>PORT   STATE SERVICE REASON
+80/tcp open  http    syn-ack
+| http-grep: 
+|   (4) http://example.com/name/
+|     + name@example.com
+|     + name@example.com
+|     + name@example.com
+|     + name@example.com
+|   (4) http://example.com/sales.html
+|     + sales@example.com
+|     + sales@example.com
+|     + sales@example.com
+|__   + sales@example.com
+</pre>
+
+
+
+  <h2> Requires </h2>
+  <ul>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/httpspider.html">httpspider</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/shortport.html">shortport</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/stdnse.html">stdnse</a></li>
+  
+     <li><a href="">table</a></li>
+  
+  </ul>
+
+
+<hr/>
+
+
+
+
+
+
+<p><b>Author: </b>Patrik Karlsson</p>
+
+
+
+<p><b>License: </b> VER007 整理 <a href="http://www.ver007.com">http://www.ver007.com</a></p>
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+</BODY>
+</HTML>
+
+

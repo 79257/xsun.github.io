@@ -1,0 +1,308 @@
+﻿   <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+    <title>http-form-fuzzer NSE Script -VER007</title>
+    
+
+</HEAD>
+
+
+
+
+
+
+<a href="../nmap-script-help.html">HOME>>>>>>>>></a>
+
+
+
+<h1>File <code>http-form-fuzzer</code></h1>
+
+
+
+<p>
+
+
+<a href="http://nmap.org/book/nse-script-format.html#nse-format-rules">脚本使用类型</a>:
+portrule
+<br>
+
+  脚本所属分类:
+  <i><a href="http://nmap.org/nsedoc/categories/fuzzer.html">fuzzer</a></i>, <i><a href="http://nmap.org/nsedoc/categories/intrusive.html">intrusive</a></i>
+  <br>
+
+脚本下载地址: <a href="http://nmap.org/svn/scripts/http-form-fuzzer.nse">http://nmap.org/svn/scripts/http-form-fuzzer.nse</a>
+</p>
+
+
+
+<h2> User Summary </h2>
+
+<p>
+Performs a simple form fuzzing against forms found on websites.
+Tries strings and numbers of increasing length and attempts to
+determine if the fuzzing was successful.</p>
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+  
+  
+    
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+  
+  
+    
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+
+
+  <h2> Script Arguments </h2>
+  <p>
+    
+      <h4> http-form-fuzzer.minlength </h4>
+      <p>
+the minimum length of a string that will be used for fuzzing,
+defaults to 300000</p>
+
+    
+      <h4> http-form-fuzzer.maxlength </h4>
+      <p>
+the maximum length of a string that will be used for fuzzing,
+defaults to 310000</p>
+
+    
+      <h4> http-form-fuzzer.targets </h4>
+      <p>
+a table with the targets of fuzzing, for example
+{{path = /index.html, minlength = 40002}, {path = /foo.html, maxlength = 10000}}.
+The path parameter is required, if minlength or maxlength is not specified,
+then the values of http-form-fuzzer.minlength or http-form-fuzzer.maxlength will be used.
+Defaults to {{path="/"}}</p>
+
+    
+
+    
+      <h4> smbdomain, smbhash, smbnoguest, smbpassword, smbtype, smbusername </h4>
+      See the documentation for the <a href="http://nmap.org/nsedoc/lib/smbauth.html#script-args">smbauth</a> library.
+    
+      <h4> http.max-cache-size, http.max-pipeline, http.pipeline, http.useragent </h4>
+      See the documentation for the <a href="http://nmap.org/nsedoc/lib/http.html#script-args">http</a> library.
+    
+  </p>
+
+
+<h2> Example Usage </h2>
+<p>执行格式
+
+  <pre>nmap --script http-form-fuzzer -p 80 &lt;host&gt;
+
+This script attempts to fuzz fields in forms it detects (it fuzzes one field at a time).
+In each iteration it first tries to fuzz a field with a string, then with a number.
+In the output, actions and paths for which errors were observed are listed, along with
+names of fields that were being fuzzed during error occurrence. Length and type
+(string/integer) of the input that caused the error are also provided.
+We consider an error to be either: a response with status 500 or with an empty body,
+a response that contains "server error" or "sql error" strings. ATM anything other than
+that is considered not to be an 'error'.
+TODO: develop more sophisticated techniques that will let us determine if the fuzzing was
+successful (i.e. we got an 'error'). Ideally, an algorithm that will tell us a percentage
+difference between responses should be implemented.
+</pre>
+
+</p>
+
+
+  <h2> Script Output </h2>
+<pre>PORT   STATE SERVICE REASON
+80/tcp open  http    syn-ack
+| http-form-fuzzer: 
+|   Path: /register.html Action: /validate.php
+|     age
+|       integer lengths that caused errors:
+|         10000, 10001
+|     name
+|       string lengths that caused errors:
+|         40000
+|   Path: /form.html Action: /check_form.php
+|     fieldfoo
+|       integer lengths that caused errors:
+|_        1, 2
+</pre>
+
+
+
+  <h2> Requires </h2>
+  <ul>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/shortport.html">shortport</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/http.html">http</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/stdnse.html">stdnse</a></li>
+  
+     <li><a href="">string</a></li>
+  
+     <li><a href="">table</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/tab.html">tab</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/url.html">url</a></li>
+  
+  </ul>
+
+
+<hr/>
+
+
+
+
+
+
+<p><b>Author: </b>Piotr Olma</p>
+
+
+
+<p><b>License: </b> VER007 整理 <a href="http://www.ver007.com">http://www.ver007.com</a></p>
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+</BODY>
+</HTML>
+
+

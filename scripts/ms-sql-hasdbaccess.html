@@ -1,0 +1,389 @@
+﻿   <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+    <title>ms-sql-hasdbaccess NSE Script -VER007</title>
+    
+
+</HEAD>
+
+
+
+
+
+
+<a href="../nmap-script-help.html">HOME>>>>>>>>></a>
+
+
+
+<h1>File <code>ms-sql-hasdbaccess</code></h1>
+
+
+
+<p>
+
+
+<a href="http://nmap.org/book/nse-script-format.html#nse-format-rules">脚本使用类型</a>:
+hostrule, portrule
+<br>
+
+  脚本所属分类:
+  <i><a href="http://nmap.org/nsedoc/categories/auth.html">auth</a></i>, <i><a href="http://nmap.org/nsedoc/categories/discovery.html">discovery</a></i>, <i><a href="http://nmap.org/nsedoc/categories/safe.html">safe</a></i>
+  <br>
+
+脚本下载地址: <a href="http://nmap.org/svn/scripts/ms-sql-hasdbaccess.nse">http://nmap.org/svn/scripts/ms-sql-hasdbaccess.nse</a>
+</p>
+
+
+
+<h2> User Summary </h2>
+
+<p>
+Queries Microsoft SQL Server (ms-sql) instances for a list of databases a user has
+access to.
+</p>
+<p>
+SQL Server credentials required: Yes (use <code>ms-sql-brute</code>, <code>ms-sql-empty-password</code>
+and/or <code>mssql.username</code> &amp; <code>mssql.password</code>)
+Run criteria:
+<ul>
+<li>Host script: Will run if the <code>mssql.instance-all</code>, <code>mssql.instance-name</code>
+</li>
+</ul>
+or <code>mssql.instance-port</code> script arguments are used (see mssql.lua).
+<ul>
+<li>Port script: Will run against any services identified as SQL Servers, but only
+</li>
+</ul>
+if the <code>mssql.instance-all</code>, <code>mssql.instance-name</code>
+and <code>mssql.instance-port</code> script arguments are NOT used.
+</p>
+<p>
+The script needs an account with the sysadmin server role to work.
+</p>
+<p>
+When run, the script iterates over the credentials and attempts to run
+the command for each available set of credentials.
+</p>
+<p>
+NOTE: The "owner" field in the results will be truncated at 20 characters. This
+is a limitation of the <code>sp_MShasdbaccess</code> stored procedure that the
+script uses.
+</p>
+<p>
+NOTE: Communication with instances via named pipes depends on the <code>smb</code>
+library. To communicate with (and possibly to discover) instances via named pipes,
+the host must have at least one SMB port (e.g. TCP 445) that was scanned and
+found to be open. Additionally, named pipe connections may require Windows
+authentication to connect to the Windows host (via SMB) in addition to the
+authentication required to connect to the SQL Server instances itself. See the
+documentation and arguments for the <code>smb</code> library for more information.
+</p>
+<p>
+NOTE: By default, the ms-sql-* scripts may attempt to connect to and communicate
+with ports that were not included in the port list for the Nmap scan. This can
+be disabled using the <code>mssql.scanned-ports-only</code> script argument.</p>
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+  
+  
+    
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+  
+  
+    
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+  
+  
+    
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+
+
+  <h2> Script Arguments </h2>
+  <p>
+    
+      <h4> ms-sql-hasdbaccess.limit </h4>
+      <p>
+limits the amount of databases per-user
+      that are returned (default 5). If set to zero or less all 
+      databases the user has access to are returned.</p>
+
+    
+
+    
+      <h4> mssql.domain, mssql.instance-all, mssql.instance-name, mssql.instance-port, mssql.password, mssql.protocol, mssql.scanned-ports-only, mssql.timeout, mssql.username </h4>
+      See the documentation for the <a href="http://nmap.org/nsedoc/lib/mssql.html#script-args">mssql</a> library.
+    
+      <h4> randomseed, smbbasic, smbport, smbsign </h4>
+      See the documentation for the <a href="http://nmap.org/nsedoc/lib/smb.html#script-args">smb</a> library.
+    
+      <h4> smbdomain, smbhash, smbnoguest, smbpassword, smbtype, smbusername </h4>
+      See the documentation for the <a href="http://nmap.org/nsedoc/lib/smbauth.html#script-args">smbauth</a> library.
+    
+  </p>
+
+
+<h2> Example Usage </h2>
+<p>执行格式
+
+  <pre>nmap -p 1433 --script ms-sql-hasdbaccess --script-args mssql.username=sa,mssql.password=sa &lt;host&gt;
+</pre>
+
+</p>
+
+
+  <h2> Script Output </h2>
+<pre>| ms-sql-hasdbaccess:  
+|   [192.168.100.25\MSSQLSERVER]
+|       webshop_reader
+|         dbname	owner
+|         ====== =====
+|         hr	sa
+|         finance	sa
+|         webshop	sa
+|       lordvader
+|         dbname	owner
+|         ====== =====
+|         testdb	CQURE-NET\Administr
+|_        webshop	sa</pre>
+
+
+
+  <h2> Requires </h2>
+  <ul>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/mssql.html">mssql</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/stdnse.html">stdnse</a></li>
+  
+     <li><a href="">string</a></li>
+  
+     <li><a href="">table</a></li>
+  
+  </ul>
+
+
+<hr/>
+
+
+
+
+
+
+<p><b>Author: </b>Patrik Karlsson</p>
+
+
+
+<p><b>License: </b> VER007 整理 <a href="http://www.ver007.com">http://www.ver007.com</a></p>
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+</BODY>
+</HTML>
+
+

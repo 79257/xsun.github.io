@@ -1,0 +1,214 @@
+﻿   <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+    <title>ssl-enum-ciphers NSE Script -VER007</title>
+    
+
+</HEAD>
+
+
+
+
+
+
+<a href="../nmap-script-help.html">HOME>>>>>>>>></a>
+
+
+
+<h1>File <code>ssl-enum-ciphers</code></h1>
+
+
+
+<p>
+
+
+<a href="http://nmap.org/book/nse-script-format.html#nse-format-rules">脚本使用类型</a>:
+portrule
+<br>
+
+  脚本所属分类:
+  <i><a href="http://nmap.org/nsedoc/categories/discovery.html">discovery</a></i>, <i><a href="http://nmap.org/nsedoc/categories/intrusive.html">intrusive</a></i>
+  <br>
+
+脚本下载地址: <a href="http://nmap.org/svn/scripts/ssl-enum-ciphers.nse">http://nmap.org/svn/scripts/ssl-enum-ciphers.nse</a>
+</p>
+
+
+
+<h2> User Summary </h2>
+
+<p>
+This script repeatedly initiates SSL/TLS connections, each time trying a new
+cipher or compressor while recording whether a host accepts or rejects it. The
+end result is a list of all the ciphers and compressors that a server accepts.
+</p>
+<p>
+Each cipher is shown with a strength rating: one of <code>strong</code>,
+<code>weak</code>, or <code>unknown strength</code>. The output line
+beginning with <code>Least strength</code> shows the strength of the
+weakest cipher offered. If you are auditing for weak ciphers, you would
+want to look more closely at any port where <code>Least strength</code>
+is not <code>strong</code>. The cipher strength database is in the file
+<code>nselib/data/ssl-ciphers</code>, or you can use a different file
+through the script argument
+<code>ssl-enum-ciphers.rankedcipherlist</code>.
+</p>
+<p>
+SSLv3/TLSv1 requires more effort to determine which ciphers and compression
+methods a server supports than SSLv2. A client lists the ciphers and compressors
+that it is capable of supporting, and the server will respond with a single
+cipher and compressor chosen, or a rejection notice.
+</p>
+<p>
+This script is intrusive since it must initiate many connections to a server,
+and therefore is quite noisy.</p>
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+
+
+  <h2> Script Arguments </h2>
+  <p>
+    
+      <h4> ssl-enum-ciphers.rankedcipherlist </h4>
+      <p>
+A path to a file of cipher names and strength ratings</p>
+
+    
+
+    
+  </p>
+
+
+<h2> Example Usage </h2>
+<p>执行格式
+
+  <pre>nmap --script ssl-enum-ciphers -p 443 &lt;host&gt;
+</pre>
+
+</p>
+
+
+  <h2> Script Output </h2>
+<pre>PORT    STATE SERVICE REASON
+443/tcp open  https   syn-ack
+| ssl-enum-ciphers:
+|   SSLv3
+|     Ciphers (6)
+|       TLS_DHE_RSA_WITH_3DES_EDE_CBC_SHA - unknown strength
+|       TLS_DHE_RSA_WITH_AES_128_CBC_SHA - strong
+|       TLS_DHE_RSA_WITH_AES_256_CBC_SHA - unknown strength
+|       TLS_RSA_WITH_3DES_EDE_CBC_SHA - strong
+|       TLS_RSA_WITH_AES_128_CBC_SHA - strong
+|       TLS_RSA_WITH_AES_256_CBC_SHA - unknown strength
+|     Compressors (1)
+|       uncompressed
+|   TLSv1.0
+|     Ciphers (6)
+|       TLS_DHE_RSA_WITH_3DES_EDE_CBC_SHA - unknown strength
+|       TLS_DHE_RSA_WITH_AES_128_CBC_SHA - strong
+|       TLS_DHE_RSA_WITH_AES_256_CBC_SHA - unknown strength
+|       TLS_RSA_WITH_3DES_EDE_CBC_SHA - strong
+|       TLS_RSA_WITH_AES_128_CBC_SHA - strong
+|       TLS_RSA_WITH_AES_256_CBC_SHA - unknown strength
+|     Compressors (1)
+|       uncompressed
+|_  Least strength = unknown strength
+</pre>
+
+
+
+  <h2> Requires </h2>
+  <ul>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/bin.html">bin</a></li>
+  
+     <li><a href="">coroutine</a></li>
+  
+     <li><a href="">io</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/nmap.html">nmap</a></li>
+  
+     <li><a href="">os</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/shortport.html">shortport</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/stdnse.html">stdnse</a></li>
+  
+     <li><a href="">string</a></li>
+  
+     <li><a href="">table</a></li>
+  
+  </ul>
+
+
+<hr/>
+
+
+
+
+
+
+<p><b>Author: </b>Mak Kolybabi &lt;mak@kolybabi.com&gt;, Gabriel Lawrence</p>
+
+
+
+<p><b>License: </b> VER007 整理 <a href="http://www.ver007.com">http://www.ver007.com</a></p>
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+</BODY>
+</HTML>
+
+

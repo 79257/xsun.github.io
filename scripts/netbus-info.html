@@ -1,0 +1,193 @@
+﻿   <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+    <title>netbus-info NSE Script -VER007</title>
+    
+
+</HEAD>
+
+
+
+
+
+
+<a href="../nmap-script-help.html">HOME>>>>>>>>></a>
+
+
+
+<h1>File <code>netbus-info</code></h1>
+
+
+
+<p>
+
+
+<a href="http://nmap.org/book/nse-script-format.html#nse-format-rules">脚本使用类型</a>:
+portrule
+<br>
+
+  脚本所属分类:
+  <i><a href="http://nmap.org/nsedoc/categories/default.html">default</a></i>, <i><a href="http://nmap.org/nsedoc/categories/discovery.html">discovery</a></i>, <i><a href="http://nmap.org/nsedoc/categories/safe.html">safe</a></i>
+  <br>
+
+脚本下载地址: <a href="http://nmap.org/svn/scripts/netbus-info.nse">http://nmap.org/svn/scripts/netbus-info.nse</a>
+</p>
+
+
+
+<h2> User Summary </h2>
+
+<p>
+Opens a connection to a NetBus server and extracts information about
+the host and the NetBus service itself.
+</p>
+<p>
+The extracted host information includes a list of running
+applications, and the hosts sound volume settings. 
+</p>
+<p>
+The extracted service information includes it's access control list
+(acl), server information, and setup. The acl is a list of IP
+addresses permitted to access the service. Server information
+contains details about the server installation path, restart
+persistence, user account that the server is running on, and the
+amount of connected NetBus clients. The setup information contains
+configuration details, such as the services TCP port number, traffic
+logging setting, password, an email address for receiving login
+notifications, an email address used for sending the notifications,
+and an smtp-server used for notification delivery.</p>
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+
+
+  <h2> Script Arguments </h2>
+  <p>
+    
+      <h4> netbus-info.password </h4>
+      <p>
+The password used for authentication</p>
+
+    
+
+    
+  </p>
+
+
+<h2> Example Usage </h2>
+<p>执行格式
+
+  <pre>nmap -p 12345 --script netbus-info &lt;target&gt; --script-args netbus-info.password=&lt;password&gt;
+</pre>
+
+</p>
+
+
+  <h2> Script Output </h2>
+<pre>12345/tcp open  netbus
+| netbus-info:   
+|   ACL
+|     127.0.0.1
+|   APPLICATIONS
+|     PuTTY Configuration
+|   INFO
+|     Program Path: Z:\home\joeuser\Desktop\Patch.exe
+|     Restart persistent: Yes
+|     Login ID: joeuser
+|     Clients connected to this host: 1
+|   SETUP
+|     TCP-port: 12345
+|     Log traffic: 1
+|     Password: password123
+|     Notify to: admin@example.com
+|     Notify from: spoofed@example.org
+|     SMTP-server: smtp.example.net
+|   VOLUME
+|     Wave: 0
+|     Synth: 0
+|_    Cd: 0
+</pre>
+
+
+
+  <h2> Requires </h2>
+  <ul>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/nmap.html">nmap</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/shortport.html">shortport</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/stdnse.html">stdnse</a></li>
+  
+     <li><a href="">string</a></li>
+  
+     <li><a href="">table</a></li>
+  
+  </ul>
+
+
+<hr/>
+
+
+
+
+
+
+<p><b>Author: </b>Toni Ruottu</p>
+
+
+
+<p><b>License: </b> VER007 整理 <a href="http://www.ver007.com">http://www.ver007.com</a></p>
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+</BODY>
+</HTML>
+
+

@@ -1,0 +1,198 @@
+﻿   <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+    <title>sip-call-spoof NSE Script -VER007</title>
+    
+
+</HEAD>
+
+
+
+
+
+
+<a href="../nmap-script-help.html">HOME>>>>>>>>></a>
+
+
+
+<h1>File <code>sip-call-spoof</code></h1>
+
+
+
+<p>
+
+
+<a href="http://nmap.org/book/nse-script-format.html#nse-format-rules">脚本使用类型</a>:
+portrule
+<br>
+
+  脚本所属分类:
+  <i><a href="http://nmap.org/nsedoc/categories/discovery.html">discovery</a></i>, <i><a href="http://nmap.org/nsedoc/categories/intrusive.html">intrusive</a></i>
+  <br>
+
+脚本下载地址: <a href="http://nmap.org/svn/scripts/sip-call-spoof.nse">http://nmap.org/svn/scripts/sip-call-spoof.nse</a>
+</p>
+
+
+
+<h2> User Summary </h2>
+
+<p>
+Spoofs a call to a SIP phone and detects the action taken by the target (busy, declined, hung up, etc.)
+</p>
+<p>
+This works by sending a fake sip invite request to the target phone and checking
+the responses. A response with status code 180 means that the phone is ringing.
+The script waits for the next responses until timeout is reached or a special
+response is received.  Special responses include:  Busy (486), Decline (603),
+Timeout (408) or Hang up (200).</p>
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+
+
+  <h2> Script Arguments </h2>
+  <p>
+    
+      <h4> sip-call-spoof.from </h4>
+      <p>
+Caller user ID. Defaults to <code>Home</code>.</p>
+
+    
+      <h4> sip-call-spoof.extension </h4>
+      <p>
+SIP Extension to send request from. Defaults to
+<code>100</code>.</p>
+
+    
+      <h4> sip-call-spoof.ua </h4>
+      <p>
+Source application's user agent. Defaults to
+<code>Ekiga</code>.</p>
+
+    
+      <h4> sip-call-spoof.timeout </h4>
+      <p>
+Time to wait for a response. Defaults to
+<code>5s</code></p>
+
+    
+      <h4> sip-call-spoof.src </h4>
+      <p>
+Source address to spoof.</p>
+
+    
+
+    
+  </p>
+
+
+<h2> Example Usage </h2>
+<p>执行格式
+
+  <pre>nmap --script=sip-call-spoof -sU -p 5060 &lt;targets&gt;
+nmap --script=sip-call-spoof -sU -p 5060 --script-args
+'sip-call-spoof.ua=Nmap, sip-call-spoof.from=Boss' &lt;targets&gt;
+</pre>
+
+</p>
+
+
+  <h2> Script Output </h2>
+<pre>5060/udp open  sip
+| sip-call-spoof: 
+|_  Target hung up. (After 10.9 seconds)</pre>
+
+
+
+  <h2> Requires </h2>
+  <ul>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/nmap.html">nmap</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/shortport.html">shortport</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/sip.html">sip</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/stdnse.html">stdnse</a></li>
+  
+     <li><a href="">table</a></li>
+  
+  </ul>
+
+
+<hr/>
+
+
+
+
+
+
+<p><b>Author: </b>Hani Benhabiles</p>
+
+
+
+<p><b>License: </b> VER007 整理 <a href="http://www.ver007.com">http://www.ver007.com</a></p>
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+</BODY>
+</HTML>
+
+

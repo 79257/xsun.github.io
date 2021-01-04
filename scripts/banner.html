@@ -1,0 +1,243 @@
+﻿   <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+    <title>banner NSE Script -VER007</title>
+    
+
+</HEAD>
+
+
+
+
+
+
+<a href="../nmap-script-help.html">HOME>>>>>>>>></a>
+
+
+
+<h1>File <code>banner</code></h1>
+
+
+
+<p>
+
+
+<a href="http://nmap.org/book/nse-script-format.html#nse-format-rules">脚本使用类型</a>:
+portrule
+<br>
+
+  脚本所属分类:
+  <i><a href="http://nmap.org/nsedoc/categories/discovery.html">discovery</a></i>, <i><a href="http://nmap.org/nsedoc/categories/safe.html">safe</a></i>
+  <br>
+
+脚本下载地址: <a href="http://nmap.org/svn/scripts/banner.nse">http://nmap.org/svn/scripts/banner.nse</a>
+</p>
+
+
+
+<h2> User Summary </h2>
+
+<p>
+A simple banner grabber which connects to an open TCP port and prints out anything sent by the listening service within five seconds.
+</p>
+<p>
+The banner will be truncated to fit into a single line, but an extra line may be printed for every
+increase in the level of verbosity requested on the command line.</p>
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+
+
+  <h2> Script Arguments </h2>
+  <p>
+    
+      <h4> banner.timeout </h4>
+      <p>
+How long to wait for a banner. Default: 5s</p>
+
+    
+      <h4> banner.ports </h4>
+      <p>
+Which ports to grab. Same syntax as -p option. Use
+                  "common" to only grab common text-protocol banners.
+                  Default: all ports.</p>
+
+    
+
+    
+  </p>
+
+
+<h2> Example Usage </h2>
+<p>执行格式
+
+  <pre>nmap -sV --script=banner &lt;target&gt;</pre>
+
+</p>
+
+
+  <h2> Script Output </h2>
+<pre>21/tcp open  ftp
+|_ banner: 220 FTP version 1.0\x0D\x0A</pre>
+
+
+
+  <h2> Requires </h2>
+  <ul>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/comm.html">comm</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/nmap.html">nmap</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/stdnse.html">stdnse</a></li>
+  
+     <li><a href="">table</a></li>
+  
+  </ul>
+
+
+<hr/>
+
+
+
+
+
+
+<p><b>Author: </b>jah</p>
+
+
+
+<p><b>License: </b> VER007 整理 <a href="http://www.ver007.com">http://www.ver007.com</a></p>
+
+
+
+
+
+
+
+
+<h2> <font color="#ff0000">action</font> </h2>
+<dl class="function">
+  
+
+<dt><a name="action"></a><strong>action</strong>&nbsp;(host, port)</dt>
+<dd>
+
+<p>
+Grabs a banner and outputs it nicely formatted.</p>
+
+
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  host:
+          
+	</li>
+	
+	<li>
+	  port:
+          
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+</dl>
+
+
+
+
+  
+
+  
+
+  
+    <h2> <font color="#0000ff">portrule</font> </h2>
+    <dl class="function">
+      
+
+<dt><a name="portrule"></a><strong>portrule</strong>&nbsp;(host, port)</dt>
+<dd>
+
+<p>
+Script is executed for any TCP port.</p>
+
+
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  host:
+          
+	</li>
+	
+	<li>
+	  port:
+          
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+    </dl>
+  
+
+  
+
+
+
+
+</BODY>
+</HTML>
+
+

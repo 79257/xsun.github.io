@@ -1,0 +1,344 @@
+﻿   <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+    <title>flume-master-info NSE Script -VER007</title>
+    
+
+</HEAD>
+
+
+
+
+
+
+<a href="../nmap-script-help.html">HOME>>>>>>>>></a>
+
+
+
+<h1>File <code>flume-master-info</code></h1>
+
+
+
+<p>
+
+
+<a href="http://nmap.org/book/nse-script-format.html#nse-format-rules">脚本使用类型</a>:
+portrule
+<br>
+
+  脚本所属分类:
+  <i><a href="http://nmap.org/nsedoc/categories/default.html">default</a></i>, <i><a href="http://nmap.org/nsedoc/categories/discovery.html">discovery</a></i>, <i><a href="http://nmap.org/nsedoc/categories/safe.html">safe</a></i>
+  <br>
+
+脚本下载地址: <a href="http://nmap.org/svn/scripts/flume-master-info.nse">http://nmap.org/svn/scripts/flume-master-info.nse</a>
+</p>
+
+
+
+<h2> User Summary </h2>
+
+<p>
+Retrieves information from Flume master HTTP pages.
+</p>
+<p>
+Information gathered:
+<ul>
+<li>Flume version
+</li>
+<li>Flume server id
+</li>
+<li>Zookeeper/Hbase master servers present in configured flows
+</li>
+<li>Java information
+</li>
+<li>OS information
+</li>
+<li>various other local configurations.
+</li>
+</ul>
+</p>
+<p>
+If this script is run wth -v, it will output lots more info.
+</p>
+<p>
+Use the <code>newtargets</code> script argument to add discovered hosts to the
+Namp scan queue.</p>
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+  
+  
+    
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+  
+  
+    
+    
+  
+
+  
+  
+  
+    
+      
+        
+      
+    
+      
+        
+      
+    
+  
+  
+    
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+
+
+  <h2> Script Arguments </h2>
+  <p>
+    
+
+    
+      <h4> max-newtargets, newtargets </h4>
+      See the documentation for the <a href="http://nmap.org/nsedoc/lib/target.html#script-args">target</a> library.
+    
+      <h4> smbdomain, smbhash, smbnoguest, smbpassword, smbtype, smbusername </h4>
+      See the documentation for the <a href="http://nmap.org/nsedoc/lib/smbauth.html#script-args">smbauth</a> library.
+    
+      <h4> http.max-cache-size, http.max-pipeline, http.pipeline, http.useragent </h4>
+      See the documentation for the <a href="http://nmap.org/nsedoc/lib/http.html#script-args">http</a> library.
+    
+  </p>
+
+
+<h2> Example Usage </h2>
+<p>执行格式
+
+  <pre>nmap --script flume-master-info -p 35871 host
+</pre>
+
+</p>
+
+
+  <h2> Script Output </h2>
+<pre>PORT      STATE SERVICE         REASON
+35871/tcp open  flume-master syn-ack
+| flume-master-info: 
+|   Version:  0.9.4-cdh3u3
+|   ServerID: 0
+|   Flume nodes:
+|     node1.example.com
+|     node2.example.com
+|     node5.example.com
+|     node6.example.com
+|     node3.example.com
+|     node4.example.com
+|   Zookeeper Master:
+|     master1.example.com
+|   Hbase Master Master:
+|     hdfs://master1.example.com:8020/hbase
+|   Enviroment: 
+|     java.runtime.name: Java(TM) SE Runtime Environment
+|     java.runtime.version: 1.6.0_36-a01
+|     java.version: 1.6.0_36
+|     java.vm.name: Java HotSpot(TM) 64-Bit Server VM
+|     java.vm.vendor: Sun Microsystems Inc.
+|     java.vm.version: 14.0-b12
+|     os.arch: amd64
+|     os.name: Linux
+|     os.version: 2.6.32-220.4.2.el6.x86_64
+|     user.country: US
+|     user.name: flume
+|   Config: 
+|     dfs.datanode.address: 0.0.0.0:50010
+|     dfs.datanode.http.address: 0.0.0.0:50075
+|     dfs.datanode.https.address: 0.0.0.0:50475
+|     dfs.datanode.ipc.address: 0.0.0.0:50020
+|     dfs.http.address: master1.example.com:50070
+|     dfs.https.address: 0.0.0.0:50470
+|     dfs.secondary.http.address: 0.0.0.0:50090
+|     flume.collector.dfs.dir: hdfs://master1.example.com/user/flume/collected
+|     flume.collector.event.host: node1.example.com
+|     flume.master.servers: master1.example.com
+|     fs.default.name: hdfs://master1.example.com:8020
+|     mapred.job.tracker: master1.example.com:9001
+|     mapred.job.tracker.handler.count: 10
+|     mapred.job.tracker.http.address: 0.0.0.0:50030
+|     mapred.job.tracker.http.address: 0.0.0.0:50030
+|     mapred.job.tracker.jobhistory.lru.cache.size: 5
+|     mapred.job.tracker.persist.jobstatus.active: false
+|     mapred.job.tracker.persist.jobstatus.dir: /jobtracker/jobsInfo
+|     mapred.job.tracker.persist.jobstatus.hours: 0
+|     mapred.job.tracker.retiredjobs.cache.size: 1000
+|     mapred.task.tracker.http.address: 0.0.0.0:50060
+|_    mapred.task.tracker.report.address: 127.0.0.1:0</pre>
+
+
+
+  <h2> Requires </h2>
+  <ul>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/http.html">http</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/nmap.html">nmap</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/shortport.html">shortport</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/stdnse.html">stdnse</a></li>
+  
+     <li><a href="">string</a></li>
+  
+     <li><a href="">table</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/target.html">target</a></li>
+  
+  </ul>
+
+
+<hr/>
+
+
+
+
+
+
+<p><b>Author: </b>John R. Bond (john.r.bond@gmail.com)</p>
+
+
+
+<p><b>License: </b> Simplified (2-clause) BSD license--See <a href="http://nmap.org/svn/docs/licenses/BSD-simplified">http://nmap.org/svn/docs/licenses/BSD-simplified</a></p>
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+</BODY>
+</HTML>
+
+

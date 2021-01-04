@@ -1,0 +1,190 @@
+﻿   <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+    <title>vuze-dht-info NSE Script -VER007</title>
+    
+
+</HEAD>
+
+
+
+
+
+
+<a href="../nmap-script-help.html">HOME>>>>>>>>></a>
+
+
+
+<h1>File <code>vuze-dht-info</code></h1>
+
+
+
+<p>
+
+
+<a href="http://nmap.org/book/nse-script-format.html#nse-format-rules">脚本使用类型</a>:
+portrule
+<br>
+
+  脚本所属分类:
+  <i><a href="http://nmap.org/nsedoc/categories/discovery.html">discovery</a></i>, <i><a href="http://nmap.org/nsedoc/categories/safe.html">safe</a></i>
+  <br>
+
+脚本下载地址: <a href="http://nmap.org/svn/scripts/vuze-dht-info.nse">http://nmap.org/svn/scripts/vuze-dht-info.nse</a>
+</p>
+
+
+
+<h2> User Summary </h2>
+
+<p>
+Retrieves some basic information, including protocol version from a Vuze filesharing node.</p>
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+
+
+  <h2> Script Arguments </h2>
+  <p>
+    
+      <h4> vuze-dht-info.allports </h4>
+      <p>
+if set runs this script against every open port</p>
+
+    
+
+    
+  </p>
+
+
+<h2> Example Usage </h2>
+<p>执行格式
+
+  <pre>nmap -sU -p &lt;port&gt; &lt;ip&gt; --script vuze-dht-info -sV
+</pre>
+
+</p>
+
+
+  <h2> Script Output </h2>
+<pre>PORT      STATE SERVICE  VERSION
+17555/udp open  vuze-dht Vuze
+| vuze-dht-info: 
+|   Transaction id: 9438865
+|   Connection id: 0xFF79A77B4592BDB0
+|   Protocol version: 50
+|   Vendor id: Azureus (0)
+|   Network id: Stable (0)
+|_  Instance id: 2260473691
+
+As Vuze doesn't have a default port for it's DHT service, this script has
+some difficulties in determining when to run. Most scripts are triggered by
+either a default port or a fingerprinted service. To get around this, there
+are two options:
+1. Always run a version scan, to identify the vuze-dht service in order to
+   trigger the script.
+2. Force the script to run against each port by setting the argument
+   vuze-dht-info.allports
+</pre>
+
+
+
+  <h2> Requires </h2>
+  <ul>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/nmap.html">nmap</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/shortport.html">shortport</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/stdnse.html">stdnse</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/vuzedht.html">vuzedht</a></li>
+  
+  </ul>
+
+
+<hr/>
+
+
+
+
+
+
+<p><b>Author: </b>Patrik Karlsson</p>
+
+
+
+<p><b>License: </b> VER007 整理 <a href="http://www.ver007.com">http://www.ver007.com</a></p>
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+</BODY>
+</HTML>
+
+

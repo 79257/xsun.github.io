@@ -1,0 +1,269 @@
+﻿   <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+    <title>broadcast-eigrp-discovery NSE Script -VER007</title>
+    
+
+</HEAD>
+
+
+
+
+
+
+<a href="../nmap-script-help.html">HOME>>>>>>>>></a>
+
+
+
+<h1>File <code>broadcast-eigrp-discovery</code></h1>
+
+
+
+<p>
+
+
+<a href="http://nmap.org/book/nse-script-format.html#nse-format-rules">脚本使用类型</a>:
+prerule
+<br>
+
+  脚本所属分类:
+  <i><a href="http://nmap.org/nsedoc/categories/discovery.html">discovery</a></i>, <i><a href="http://nmap.org/nsedoc/categories/broadcast.html">broadcast</a></i>, <i><a href="http://nmap.org/nsedoc/categories/safe.html">safe</a></i>
+  <br>
+
+脚本下载地址: <a href="http://nmap.org/svn/scripts/broadcast-eigrp-discovery.nse">http://nmap.org/svn/scripts/broadcast-eigrp-discovery.nse</a>
+</p>
+
+
+
+<h2> User Summary </h2>
+
+<p>
+Performs network discovery and routing information gathering through
+Cisco's Enhanced Interior Gateway Routing Protocol (EIGRP).
+</p>
+<p>
+The script works by sending an EIGRP Hello packet with the specified Autonomous
+System value to the 224.0.0.10 multicast address and listening for EIGRP Update
+packets. The script then parses the update responses for routing information.
+</p>
+<p>
+If no A.S value was provided by the user, the script will listen for multicast
+Hello packets to grab an A.S value. If no interface was provided as a script
+argument or through the -e option, the script will send packets and listen
+through all valid ethernet interfaces simultaneously.</p>
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+    
+      
+        
+      
+    
+      
+        
+      
+    
+  
+  
+    
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+
+
+  <h2> Script Arguments </h2>
+  <p>
+    
+      <h4> broadcast-eigrp-discovery.kparams </h4>
+      <p>
+the K metrics. 
+Defaults to <code>101000</code>.</p>
+
+    
+      <h4> broadcast-eigrp-discovery.as </h4>
+      <p>
+Autonomous System value to announce on.
+If not set, the script will listen for announcements on 224.0.0.10 to grab
+an A.S value.</p>
+
+    
+      <h4> broadcast-eigrp-discovery.interface </h4>
+      <p>
+Interface to send on (overrides -e)</p>
+
+    
+      <h4> broadcast-eigrp-discovery.timeout </h4>
+      <p>
+Max amount of time to listen for A.S
+announcements and updates. Defaults to <code>10</code> seconds.</p>
+
+    
+
+    
+      <h4> max-newtargets, newtargets </h4>
+      See the documentation for the <a href="http://nmap.org/nsedoc/lib/target.html#script-args">target</a> library.
+    
+  </p>
+
+
+<h2> Example Usage </h2>
+<p>执行格式
+
+  <pre>nmap --script=broadcast-eigrp-discovery &lt;targets&gt;
+nmap --script=broadcast-eigrp-discovery &lt;targets&gt; -e wlan0
+</pre>
+
+</p>
+
+
+  <h2> Script Output </h2>
+<pre>Pre-scan script results:
+| broadcast-eigrp-discovery:
+| 192.168.2.2
+|   Interface: eth0 
+|   A.S: 1
+|   Virtual Router ID: 0
+|   Internal Route
+|     Destination: 192.168.21.0/24
+|     Next hop: 0.0.0.0
+|   Internal Route
+|     Destination: 192.168.31.0/24
+|     Next hop: 0.0.0.0
+|   External Route
+|     Protocol: Static
+|     Originating A.S: 0
+|     Originating Router ID: 192.168.31.1
+|     Destination: 192.168.60.0/24
+|     Next hop: 0.0.0.0
+|   External Route
+|     Protocol: OSPF
+|     Originating A.S: 1
+|     Originating Router ID: 192.168.31.1
+|     Destination: 192.168.24.0/24
+|     Next hop: 0.0.0.0
+|_  Use the newtargets script-arg to add the results as targets
+</pre>
+
+
+
+  <h2> Requires </h2>
+  <ul>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/eigrp.html">eigrp</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/nmap.html">nmap</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/shortport.html">shortport</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/stdnse.html">stdnse</a></li>
+  
+     <li><a href="">table</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/bin.html">bin</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/packet.html">packet</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/ipOps.html">ipOps</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/target.html">target</a></li>
+  
+     <li><a href="">coroutine</a></li>
+  
+     <li><a href="">string</a></li>
+  
+  </ul>
+
+
+<hr/>
+
+
+
+
+
+
+<p><b>Author: </b>Hani Benhabiles</p>
+
+
+
+<p><b>License: </b> VER007 整理 <a href="http://www.ver007.com">http://www.ver007.com</a></p>
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+</BODY>
+</HTML>
+
+

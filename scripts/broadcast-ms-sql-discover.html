@@ -1,0 +1,381 @@
+﻿   <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+    <title>broadcast-ms-sql-discover NSE Script -VER007</title>
+    
+
+</HEAD>
+
+
+
+
+
+
+<a href="../nmap-script-help.html">HOME>>>>>>>>></a>
+
+
+
+<h1>File <code>broadcast-ms-sql-discover</code></h1>
+
+
+
+<p>
+
+
+<a href="http://nmap.org/book/nse-script-format.html#nse-format-rules">脚本使用类型</a>:
+prerule
+<br>
+
+  脚本所属分类:
+  <i><a href="http://nmap.org/nsedoc/categories/broadcast.html">broadcast</a></i>, <i><a href="http://nmap.org/nsedoc/categories/safe.html">safe</a></i>
+  <br>
+
+脚本下载地址: <a href="http://nmap.org/svn/scripts/broadcast-ms-sql-discover.nse">http://nmap.org/svn/scripts/broadcast-ms-sql-discover.nse</a>
+</p>
+
+
+
+<h2> User Summary </h2>
+
+<p>
+Discovers Microsoft SQL servers in the same broadcast domain.
+</p>
+<p>
+SQL Server credentials required: No (will not benefit from 
+<code>mssql.username</code> &amp; <code>mssql.password</code>).
+</p>
+<p>
+The script attempts to discover SQL Server instances in the same broadcast
+domain. Any instances found are stored in the Nmap registry for use by any
+other ms-sql-* scripts that are run in the same scan.
+</p>
+<p>
+In contrast to the <code>ms-sql-discover</code> script, the broadcast version
+will use a broadcast method rather than targeting individual hosts. However, the
+broadcast version will only use the SQL Server Browser service discovery method.</p>
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+    
+      
+        
+      
+    
+      
+        
+      
+    
+  
+  
+    
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+  
+  
+    
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+  
+  
+    
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+  
+  
+    
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+
+
+  <h2> Script Arguments </h2>
+  <p>
+    
+
+    
+      <h4> max-newtargets, newtargets </h4>
+      See the documentation for the <a href="http://nmap.org/nsedoc/lib/target.html#script-args">target</a> library.
+    
+      <h4> mssql.domain, mssql.instance-all, mssql.instance-name, mssql.instance-port, mssql.password, mssql.protocol, mssql.scanned-ports-only, mssql.timeout, mssql.username </h4>
+      See the documentation for the <a href="http://nmap.org/nsedoc/lib/mssql.html#script-args">mssql</a> library.
+    
+      <h4> randomseed, smbbasic, smbport, smbsign </h4>
+      See the documentation for the <a href="http://nmap.org/nsedoc/lib/smb.html#script-args">smb</a> library.
+    
+      <h4> smbdomain, smbhash, smbnoguest, smbpassword, smbtype, smbusername </h4>
+      See the documentation for the <a href="http://nmap.org/nsedoc/lib/smbauth.html#script-args">smbauth</a> library.
+    
+  </p>
+
+
+<h2> Example Usage </h2>
+<p>执行格式
+
+  <pre>nmap --script broadcast-ms-sql-discover
+nmap --script broadcast-ms-sql-discover,ms-sql-info --script-args=newtargets
+</pre>
+
+</p>
+
+
+  <h2> Script Output </h2>
+<pre>| broadcast-ms-sql-discover:
+|   192.168.100.128 (WINXP)
+|     [192.168.100.128\MSSQLSERVER]
+|       Name: MSSQLSERVER
+|       Product: Microsoft SQL Server 2000
+|       TCP port: 1433
+|       Named pipe: \\192.168.100.128\pipe\sql\query
+|     [192.168.100.128\SQL2K5]
+|       Name: SQL2K5
+|       Product: Microsoft SQL Server 2005
+|       Named pipe: \\192.168.100.128\pipe\MSSQL$SQL2K5\sql\query
+|   192.168.100.150 (SQLSRV)
+|     [192.168.100.150\PROD]
+|       Name: PROD
+|       Product: Microsoft SQL Server 2008
+|_      Named pipe: \\192.168.100.128\pipe\sql\query
+</pre>
+
+
+
+  <h2> Requires </h2>
+  <ul>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/mssql.html">mssql</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/stdnse.html">stdnse</a></li>
+  
+     <li><a href="">string</a></li>
+  
+     <li><a href="">table</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/target.html">target</a></li>
+  
+  </ul>
+
+
+<hr/>
+
+
+
+
+
+
+<p><b>Author: </b>Patrik Karlsson</p>
+
+
+
+<p><b>License: </b> VER007 整理 <a href="http://www.ver007.com">http://www.ver007.com</a></p>
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+</BODY>
+</HTML>
+
+

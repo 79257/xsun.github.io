@@ -1,0 +1,237 @@
+﻿   <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+    <title>ldap-rootdse NSE Script -VER007</title>
+    
+
+</HEAD>
+
+
+
+
+
+
+<a href="../nmap-script-help.html">HOME>>>>>>>>></a>
+
+
+
+<h1>File <code>ldap-rootdse</code></h1>
+
+
+
+<p>
+
+
+<a href="http://nmap.org/book/nse-script-format.html#nse-format-rules">脚本使用类型</a>:
+portrule
+<br>
+
+  脚本所属分类:
+  <i><a href="http://nmap.org/nsedoc/categories/discovery.html">discovery</a></i>, <i><a href="http://nmap.org/nsedoc/categories/safe.html">safe</a></i>
+  <br>
+
+脚本下载地址: <a href="http://nmap.org/svn/scripts/ldap-rootdse.nse">http://nmap.org/svn/scripts/ldap-rootdse.nse</a>
+</p>
+
+
+
+<h2> User Summary </h2>
+
+<p>
+Retrieves the LDAP root DSA-specific Entry (DSE)</p>
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+
+
+
+<h2> Example Usage </h2>
+<p>执行格式
+
+  <pre>nmap -p 389 --script ldap-rootdse &lt;host&gt;
+</pre>
+
+</p>
+
+
+  <h2> Script Output </h2>
+<pre>PORT    STATE SERVICE
+389/tcp open  ldap
+| ldap-rootdse:  
+|     currentTime: 20100112092616.0Z
+|     subschemaSubentry: CN=Aggregate,CN=Schema,CN=Configuration,DC=cqure,DC=net
+|     dsServiceName: CN=NTDS Settings,CN=LDAPTEST001,CN=Servers,CN=Default-First-Site,CN=Sites,CN=Configuration,DC=cqure,DC=net
+|     namingContexts: DC=cqure,DC=net
+|     namingContexts: CN=Configuration,DC=cqure,DC=net
+|     namingContexts: CN=Schema,CN=Configuration,DC=cqure,DC=net
+|     namingContexts: DC=DomainDnsZones,DC=cqure,DC=net
+|     namingContexts: DC=ForestDnsZones,DC=cqure,DC=net
+|     namingContexts: DC=TAPI3Directory,DC=cqure,DC=net
+|     defaultNamingContext: DC=cqure,DC=net
+|     schemaNamingContext: CN=Schema,CN=Configuration,DC=cqure,DC=net
+|     configurationNamingContext: CN=Configuration,DC=cqure,DC=net
+|     rootDomainNamingContext: DC=cqure,DC=net
+|     supportedControl: 1.2.840.113556.1.4.319
+|     .
+|     .
+|     supportedControl: 1.2.840.113556.1.4.1948
+|     supportedLDAPVersion: 3
+|     supportedLDAPVersion: 2
+|     supportedLDAPPolicies: MaxPoolThreads
+|     supportedLDAPPolicies: MaxDatagramRecv
+|     supportedLDAPPolicies: MaxReceiveBuffer
+|     supportedLDAPPolicies: InitRecvTimeout
+|     supportedLDAPPolicies: MaxConnections
+|     supportedLDAPPolicies: MaxConnIdleTime
+|     supportedLDAPPolicies: MaxPageSize
+|     supportedLDAPPolicies: MaxQueryDuration
+|     supportedLDAPPolicies: MaxTempTableSize
+|     supportedLDAPPolicies: MaxResultSetSize
+|     supportedLDAPPolicies: MaxNotificationPerConn
+|     supportedLDAPPolicies: MaxValRange
+|     highestCommittedUSN: 126991
+|     supportedSASLMechanisms: GSSAPI
+|     supportedSASLMechanisms: GSS-SPNEGO
+|     supportedSASLMechanisms: EXTERNAL
+|     supportedSASLMechanisms: DIGEST-MD5
+|     dnsHostName: EDUSRV011.cqure.local
+|     ldapServiceName: cqure.net:edusrv011$@CQURE.NET
+|     serverName: CN=EDUSRV011,CN=Servers,CN=Default-First-Site,CN=Sites,CN=Configuration,DC=cqure,DC=net
+|     supportedCapabilities: 1.2.840.113556.1.4.800
+|     supportedCapabilities: 1.2.840.113556.1.4.1670
+|     supportedCapabilities: 1.2.840.113556.1.4.1791
+|     isSynchronized: TRUE
+|     isGlobalCatalogReady: TRUE
+|     domainFunctionality: 0
+|     forestFunctionality: 0
+|_    domainControllerFunctionality: 2
+
+
+The root DSE object may contain a number of different attributes as described in RFC 2251 section 3.4:
+* namingContexts: naming contexts held in the server
+* subschemaSubentry: subschema entries (or subentries) known by this server 
+* altServer: alternative servers in case this one is later unavailable.
+* supportedExtension: list of supported extended operations.
+* supportedControl: list of supported controls.
+* supportedSASLMechanisms: list of supported SASL security features.
+* supportedLDAPVersion: LDAP versions implemented by the server.
+
+The above example, which contains a lot more information is from Windows 2003 accessible without authentication.
+The same request against OpenLDAP will result in significantly less information. 
+
+The ldap-search script queries the root DSE for the namingContexts and/or defaultNamingContexts, which it sets as base
+if no base object was specified
+
+Credit goes out to Martin Swende who provided me with the initial code that got me started writing this.
+</pre>
+
+
+
+  <h2> Requires </h2>
+  <ul>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/comm.html">comm</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/ldap.html">ldap</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/nmap.html">nmap</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/shortport.html">shortport</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/stdnse.html">stdnse</a></li>
+  
+     <li><a href="">string</a></li>
+  
+  </ul>
+
+
+<hr/>
+
+
+
+
+
+
+<p><b>Author: </b>Patrik Karlsson</p>
+
+
+
+<p><b>License: </b> VER007 整理 <a href="http://www.ver007.com">http://www.ver007.com</a></p>
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+</BODY>
+</HTML>
+
+

@@ -1,0 +1,280 @@
+﻿   <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+    <title>rmi-dumpregistry NSE Script -VER007</title>
+    
+
+</HEAD>
+
+
+
+
+
+
+<a href="../nmap-script-help.html">HOME>>>>>>>>></a>
+
+
+
+<h1>File <code>rmi-dumpregistry</code></h1>
+
+
+
+<p>
+
+
+<a href="http://nmap.org/book/nse-script-format.html#nse-format-rules">脚本使用类型</a>:
+portrule
+<br>
+
+  脚本所属分类:
+  <i><a href="http://nmap.org/nsedoc/categories/default.html">default</a></i>, <i><a href="http://nmap.org/nsedoc/categories/discovery.html">discovery</a></i>, <i><a href="http://nmap.org/nsedoc/categories/safe.html">safe</a></i>
+  <br>
+
+脚本下载地址: <a href="http://nmap.org/svn/scripts/rmi-dumpregistry.nse">http://nmap.org/svn/scripts/rmi-dumpregistry.nse</a>
+</p>
+
+
+
+<h2> User Summary </h2>
+
+<p>
+Connects to a remote RMI registry and attempts to dump all of its objects.
+</p>
+<p>
+First it tries to determine the names of all objects bound in the
+registry, and then it tries to determine information about the
+objects, such as the the class names of the superclasses and
+interfaces. This may, depending on what the registry is used for, give
+valuable information about the service. E.g, if the app uses JMX (Java
+Management eXtensions), you should see an object called "jmxconnector"
+on it.
+</p>
+<p>
+It also gives information about where the objects are located, (marked
+with @&lt;ip&gt;:port in the output).
+</p>
+<p>
+Some apps give away the classpath, which this scripts catches in so-called "Custom data".</p>
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+
+
+
+<h2> Example Usage </h2>
+<p>执行格式
+
+  <pre>nmap --script "rmi-dumpregistry.nse" -p 1098 &lt;host&gt;</pre>
+
+</p>
+
+
+  <h2> Script Output </h2>
+<pre>PORT     STATE SERVICE  REASON
+1099/tcp open  java-rmi syn-ack
+| rmi-dumpregistry:  
+|   cfassembler/default
+|     coldfusion.flex.rmi.DataServicesCFProxyServer_Stub
+|     @192.168.0.3:1271
+|     extends
+|       java.rmi.server.RemoteStub
+|       extends
+|         java.rmi.server.RemoteObject
+|     Custom data
+|       Classpath
+|         file:/C:/CFusionMX7/runtime/http://nmap.org/nsedoc/lib/ant-launcher.jar
+|         file:/C:/CFusionMX7/runtime/http://nmap.org/nsedoc/lib/ant.jar
+|         file:/C:/CFusionMX7/runtime/http://nmap.org/nsedoc/lib/axis.jar
+|         file:/C:/CFusionMX7/runtime/http://nmap.org/nsedoc/lib/backport-util-concurrent.jar
+|         file:/C:/CFusionMX7/runtime/http://nmap.org/nsedoc/lib/bcel.jar
+|         file:/C:/CFusionMX7/runtime/http://nmap.org/nsedoc/lib/cdo.jar
+|         file:/C:/CFusionMX7/runtime/http://nmap.org/nsedoc/lib/cdohost.jar
+|         file:/C:/CFusionMX7/runtime/http://nmap.org/nsedoc/lib/cf4was.jar
+|         file:/C:/CFusionMX7/runtime/http://nmap.org/nsedoc/lib/cf4was_ae.jar
+|         file:/C:/CFusionMX7/runtime/http://nmap.org/nsedoc/lib/cfmx-ssl.jar
+|         file:/C:/CFusionMX7/runtime/http://nmap.org/nsedoc/lib/cfusion.jar
+|         file:/C:/CFusionMX7/runtime/http://nmap.org/nsedoc/lib/commons-beanutils-1.5.jar
+|         file:/C:/CFusionMX7/runtime/http://nmap.org/nsedoc/lib/commons-collections-2.1.jar
+|         file:/C:/CFusionMX7/runtime/http://nmap.org/nsedoc/lib/commons-digester-1.3.jar
+|         file:/C:/CFusionMX7/runtime/http://nmap.org/nsedoc/lib/commons-digester-1.7.jar
+|         file:/C:/CFusionMX7/runtime/http://nmap.org/nsedoc/lib/commons-discovery-0.2.jar
+|         file:/C:/CFusionMX7/runtime/http://nmap.org/nsedoc/lib/commons-discovery.jar
+|         file:/C:/CFusionMX7/runtime/http://nmap.org/nsedoc/lib/commons-logging-1.0.2.jar
+|         file:/C:/CFusionMX7/runtime/http://nmap.org/nsedoc/lib/commons-logging-api-1.0.2.jar
+|         file:/C:/CFusionMX7/runtime/http://nmap.org/nsedoc/lib/commons-net-1.2.2.jar
+|         file:/C:/CFusionMX7/runtime/http://nmap.org/nsedoc/lib/crystal.jar
+|         file:/C:/CFusionMX7/runtime/http://nmap.org/nsedoc/lib/flashgateway.jar
+|         file:/C:/CFusionMX7/runtime/http://nmap.org/nsedoc/lib/flashremoting_update.jar
+|         file:/C:/CFusionMX7/runtime/http://nmap.org/nsedoc/lib/flex-assemblerservice.jar
+|         file:/C:/CFusionMX7/runtime/http://nmap.org/nsedoc/lib/flex-messaging-common.jar
+|         file:/C:/CFusionMX7/runtime/http://nmap.org/nsedoc/lib/flex-messaging-opt.jar
+|         file:/C:/CFusionMX7/runtime/http://nmap.org/nsedoc/lib/flex-messaging-req.jar
+|         file:/C:/CFusionMX7/runtime/http://nmap.org/nsedoc/lib/flex-messaging.jar
+|         file:/C:/CFusionMX7/runtime/http://nmap.org/nsedoc/lib/httpclient.jar
+|         file:/C:/CFusionMX7/runtime/http://nmap.org/nsedoc/lib/ib61patch.jar
+|         file:/C:/CFusionMX7/runtime/http://nmap.org/nsedoc/lib/ib6addonpatch.jar
+|         file:/C:/CFusionMX7/runtime/http://nmap.org/nsedoc/lib/ib6core.jar
+|         file:/C:/CFusionMX7/runtime/http://nmap.org/nsedoc/lib/ib6swing.jar
+|         file:/C:/CFusionMX7/runtime/http://nmap.org/nsedoc/lib/ib6util.jar
+|         file:/C:/CFusionMX7/runtime/http://nmap.org/nsedoc/lib/im.jar
+|         file:/C:/CFusionMX7/runtime/http://nmap.org/nsedoc/lib/iText.jar
+|         file:/C:/CFusionMX7/runtime/http://nmap.org/nsedoc/lib/iTextAsian.jar
+|         file:/C:/CFusionMX7/runtime/http://nmap.org/nsedoc/lib/izmado.jar
+|         file:/C:/CFusionMX7/runtime/http://nmap.org/nsedoc/lib/jakarta-oro-2.0.6.jar
+|         file:/C:/CFusionMX7/runtime/http://nmap.org/nsedoc/lib/java2wsdl.jar
+|         file:/C:/CFusionMX7/runtime/http://nmap.org/nsedoc/lib/jaxrpc.jar
+|         file:/C:/CFusionMX7/runtime/http://nmap.org/nsedoc/lib/jdom.jar
+|         file:/C:/CFusionMX7/runtime/http://nmap.org/nsedoc/lib/jeb.jar
+|         file:/C:/CFusionMX7/runtime/http://nmap.org/nsedoc/lib/jintegra.jar
+|         file:/C:/CFusionMX7/runtime/http://nmap.org/nsedoc/lib/ldap.jar
+|         file:/C:/CFusionMX7/runtime/http://nmap.org/nsedoc/lib/ldapbp.jar
+|         file:/C:/CFusionMX7/runtime/http://nmap.org/nsedoc/lib/log4j.jar
+|         file:/C:/CFusionMX7/runtime/http://nmap.org/nsedoc/lib/macromedia_drivers.jar
+|         file:/C:/CFusionMX7/runtime/http://nmap.org/nsedoc/lib/mail.jar
+|         file:/C:/CFusionMX7/runtime/http://nmap.org/nsedoc/lib/msapps.jar
+|         file:/C:/CFusionMX7/runtime/http://nmap.org/nsedoc/lib/pbclient42RE.jar
+|         file:/C:/CFusionMX7/runtime/http://nmap.org/nsedoc/lib/pbembedded42RE.jar
+|         file:/C:/CFusionMX7/runtime/http://nmap.org/nsedoc/lib/pbserver42RE.jar
+|         file:/C:/CFusionMX7/runtime/http://nmap.org/nsedoc/lib/pbtools42RE.jar
+|         file:/C:/CFusionMX7/runtime/http://nmap.org/nsedoc/lib/poi-2.5.1-final-20040804.jar
+|         file:/C:/CFusionMX7/runtime/http://nmap.org/nsedoc/lib/poi-contrib-2.5.1-final-20040804.jar
+|         file:/C:/CFusionMX7/runtime/http://nmap.org/nsedoc/lib/ri_generic.jar
+|         file:/C:/CFusionMX7/runtime/http://nmap.org/nsedoc/lib/saaj.jar
+|         file:/C:/CFusionMX7/runtime/http://nmap.org/nsedoc/lib/smack.jar
+|         file:/C:/CFusionMX7/runtime/http://nmap.org/nsedoc/lib/smpp.jar
+|         file:/C:/CFusionMX7/runtime/http://nmap.org/nsedoc/lib/STComm.jar
+|         file:/C:/CFusionMX7/runtime/http://nmap.org/nsedoc/lib/tools.jar
+|         file:/C:/CFusionMX7/runtime/http://nmap.org/nsedoc/lib/tt-bytecode.jar
+|         file:/C:/CFusionMX7/runtime/http://nmap.org/nsedoc/lib/vadmin.jar
+|         file:/C:/CFusionMX7/runtime/http://nmap.org/nsedoc/lib/verity.jar
+|         file:/C:/CFusionMX7/runtime/http://nmap.org/nsedoc/lib/vparametric.jar
+|         file:/C:/CFusionMX7/runtime/http://nmap.org/nsedoc/lib/vsearch.jar
+|         file:/C:/CFusionMX7/runtime/http://nmap.org/nsedoc/lib/wc50.jar
+|         file:/C:/CFusionMX7/runtime/http://nmap.org/nsedoc/lib/webchartsJava2D.jar
+|         file:/C:/CFusionMX7/runtime/http://nmap.org/nsedoc/lib/wsdl2java.jar
+|         file:/C:/CFusionMX7/runtime/http://nmap.org/nsedoc/lib/wsdl4j-1.5.1.jar
+|         file:/C:/CFusionMX7/runtime/http://nmap.org/nsedoc/lib/wsdl4j.jar
+|         file:/C:/CFusionMX7/runtime/http://nmap.org/nsedoc/lib/xalan.jar
+|         file:/C:/CFusionMX7/runtime/http://nmap.org/nsedoc/lib/xercesImpl.jar
+|         file:/C:/CFusionMX7/runtime/http://nmap.org/nsedoc/lib/xml-apis.jar
+|         file:/C:/CFusionMX7/runtime/http://nmap.org/nsedoc/lib/
+|         file:/C:/CFusionMX7/runtime/../gateway/lib/examples.jar
+|         file:/C:/CFusionMX7/runtime/../gateway/lib/
+|         file:/C:/CFusionMX7/runtime/../wwwroot/WEB-INF/cfform/jars/batik-awt-util.jar
+|         file:/C:/CFusionMX7/runtime/../wwwroot/WEB-INF/cfform/jars/batik-css.jar
+|         file:/C:/CFusionMX7/runtime/../wwwroot/WEB-INF/cfform/jars/batik-ext.jar
+|         file:/C:/CFusionMX7/runtime/../wwwroot/WEB-INF/cfform/jars/batik-transcoder.jar
+|         file:/C:/CFusionMX7/runtime/../wwwroot/WEB-INF/cfform/jars/batik-util.jar
+|         file:/C:/CFusionMX7/runtime/../wwwroot/WEB-INF/cfform/jars/commons-discovery.jar
+|         file:/C:/CFusionMX7/runtime/../wwwroot/WEB-INF/cfform/jars/commons-logging.jar
+|         file:/C:/CFusionMX7/runtime/../wwwroot/WEB-INF/cfform/jars/concurrent.jar
+|         file:/C:/CFusionMX7/runtime/../wwwroot/WEB-INF/cfform/jars/flex.jar
+|         file:/C:/CFusionMX7/runtime/../wwwroot/WEB-INF/cfform/jars/jakarta-oro-2.0.7.jar
+|         file:/C:/CFusionMX7/runtime/../wwwroot/WEB-INF/cfform/jars/jcert.jar
+|         file:/C:/CFusionMX7/runtime/../wwwroot/WEB-INF/cfform/jars/jnet.jar
+|         file:/C:/CFusionMX7/runtime/../wwwroot/WEB-INF/cfform/jars/jsse.jar
+|         file:/C:/CFusionMX7/runtime/../wwwroot/WEB-INF/cfform/jars/oscache.jar
+|_        file:/C:/CFusionMX7/runtime/../wwwroot/WEB-INF/cfform/jars/
+
+</pre>
+
+
+
+  <h2> Requires </h2>
+  <ul>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/nmap.html">nmap</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/rmi.html">rmi</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/shortport.html">shortport</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/stdnse.html">stdnse</a></li>
+  
+     <li><a href="">string</a></li>
+  
+     <li><a href="">table</a></li>
+  
+  </ul>
+
+
+<hr/>
+
+
+
+
+
+
+<p><b>Author: </b>Martin Holst Swende</p>
+
+
+
+<p><b>License: </b> VER007 整理 <a href="http://www.ver007.com">http://www.ver007.com</a></p>
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+</BODY>
+</HTML>
+
+

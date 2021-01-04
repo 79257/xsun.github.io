@@ -1,0 +1,231 @@
+﻿   <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+    <title>dhcp-discover NSE Script -VER007</title>
+    
+
+</HEAD>
+
+
+
+
+
+
+<a href="../nmap-script-help.html">HOME>>>>>>>>></a>
+
+
+
+<h1>File <code>dhcp-discover</code></h1>
+
+
+
+<p>
+
+
+<a href="http://nmap.org/book/nse-script-format.html#nse-format-rules">脚本使用类型</a>:
+portrule
+<br>
+
+  脚本所属分类:
+  <i><a href="http://nmap.org/nsedoc/categories/discovery.html">discovery</a></i>, <i><a href="http://nmap.org/nsedoc/categories/safe.html">safe</a></i>
+  <br>
+
+脚本下载地址: <a href="http://nmap.org/svn/scripts/dhcp-discover.nse">http://nmap.org/svn/scripts/dhcp-discover.nse</a>
+</p>
+
+
+
+<h2> User Summary </h2>
+
+<p>
+Sends a DHCPINFORM request to a host on UDP port 67 to obtain all the local configuration parameters
+without allocating a new address.
+</p>
+<p>
+DHCPINFORM is a DHCP request that returns useful information from a DHCP server, without allocating an IP
+address. The request sends a list of which fields it wants to know (a handful by default, every field if
+verbosity is turned on), and the server responds with the fields that were requested. It should be noted
+that the server doesn't have to return every field, nor does it have to return them in the same order,
+or honour the request at all. A Linksys WRT54g, for example, completely ignores the list of requested
+fields and returns a few standard ones. This script displays every field it receives. 
+</p>
+<p>
+With script arguments, the type of DHCP request can be changed, which can lead to interesting results. 
+Additionally, the MAC address can be randomized, which in should override the cache on the DHCP server and
+assign a new IP address. Extra requests can also be sent to exhaust the IP address range more quickly. 
+</p>
+<p>
+Some of the more useful fields:
+<ul>
+<li>DHCP Server (the address of the server that responded)
+</li>
+<li>Subnet Mask
+</li>
+<li>Router
+</li>
+<li>DNS Servers
+</li>
+<li>Hostname</li>
+</ul>
+</p>
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+
+
+  <h2> Script Arguments </h2>
+  <p>
+    
+      <h4> randomize_mac </h4>
+      <p>
+Set to <code>true</code> or <code>1</code> to  send a random MAC address with
+               the request (keep in mind that you may  not see the response). This should 
+               cause the router to reserve a new  IP address each time.</p>
+
+    
+      <h4> requests </h4>
+      <p>
+Set to an integer to make up to  that many requests (and display the results).</p>
+
+    
+      <h4> dhcptype </h4>
+      <p>
+The type of DHCP request to make. By default,  DHCPINFORM is sent, but this
+               argument can change it to DHCPOFFER,  DHCPREQUEST, DHCPDECLINE, DHCPACK, DHCPNAK, 
+               DHCPRELEASE or DHCPINFORM. Not all types will evoke a response from all servers,
+               and many require different fields to contain specific values.</p>
+
+    
+
+    
+  </p>
+
+
+<h2> Example Usage </h2>
+<p>执行格式
+
+  <pre>nmap -sV --script=dhcp-discover &lt;target&gt;</pre>
+
+</p>
+
+
+  <h2> Script Output </h2>
+<pre>Interesting ports on 192.168.1.1:
+PORT   STATE SERVICE
+67/udp open  dhcps
+|  dhcp-discover:
+|  |  DHCP Message Type: DHCPACK
+|  |  Server Identifier: 192.168.1.1
+|  |  IP Address Lease Time: 1 day, 0:00:00
+|  |  Subnet Mask: 255.255.255.0
+|  |  Router: 192.168.1.1
+|_ |_ Domain Name Server: 208.81.7.10, 208.81.7.14
+</pre>
+
+
+
+  <h2> Requires </h2>
+  <ul>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/dhcp.html">dhcp</a></li>
+  
+     <li><a href="">math</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/nmap.html">nmap</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/shortport.html">shortport</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/stdnse.html">stdnse</a></li>
+  
+     <li><a href="">string</a></li>
+  
+     <li><a href="">table</a></li>
+  
+  </ul>
+
+
+<hr/>
+
+
+
+
+
+
+<p><b>Author: </b>Ron Bowes</p>
+
+
+
+<p><b>License: </b> VER007 整理 <a href="http://www.ver007.com">http://www.ver007.com</a></p>
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+</BODY>
+</HTML>
+
+

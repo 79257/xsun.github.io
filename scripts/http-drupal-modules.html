@@ -1,0 +1,300 @@
+﻿   <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+    <title>http-drupal-modules NSE Script -VER007</title>
+    
+
+</HEAD>
+
+
+
+
+
+
+<a href="../nmap-script-help.html">HOME>>>>>>>>></a>
+
+
+
+<h1>File <code>http-drupal-modules</code></h1>
+
+
+
+<p>
+
+
+<a href="http://nmap.org/book/nse-script-format.html#nse-format-rules">脚本使用类型</a>:
+portrule
+<br>
+
+  脚本所属分类:
+  <i><a href="http://nmap.org/nsedoc/categories/discovery.html">discovery</a></i>, <i><a href="http://nmap.org/nsedoc/categories/intrusive.html">intrusive</a></i>
+  <br>
+
+脚本下载地址: <a href="http://nmap.org/svn/scripts/http-drupal-modules.nse">http://nmap.org/svn/scripts/http-drupal-modules.nse</a>
+</p>
+
+
+
+<h2> User Summary </h2>
+
+<p>
+Enumerates the installed Drupal modules by using a list of known modules.
+</p>
+<p>
+The script works by iterating over module names and requesting
+MODULES_PATH/MODULE_NAME/LICENSE.txt.  MODULES_PATH is either provied by the
+user, grepped for in the html body or defaulting to sites/all/modules/. If the
+response status code is 200, it means that the module is installed.  By
+default, the script checks for the top 100 modules (by downloads), given the
+huge number of existing modules (~10k).</p>
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+  
+  
+    
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+  
+  
+    
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+
+
+  <h2> Script Arguments </h2>
+  <p>
+    
+      <h4> http-drupal-modules.root </h4>
+      <p>
+The base path. Defaults to <code>/</code>.</p>
+
+    
+      <h4> http-drupal-modules.number </h4>
+      <p>
+Number of modules to check.
+Use this option with a number or "all" as an argument to test for all modules.
+Defaults to <code>100</code>.</p>
+
+    
+      <h4> http-drupal-modules.modules_path </h4>
+      <p>
+The path to the modules folder. If not set, the script will try to
+find the path or default to <code>sites/all/modules/</code></p>
+
+    
+
+    
+      <h4> smbdomain, smbhash, smbnoguest, smbpassword, smbtype, smbusername </h4>
+      See the documentation for the <a href="http://nmap.org/nsedoc/lib/smbauth.html#script-args">smbauth</a> library.
+    
+      <h4> http.max-cache-size, http.max-pipeline, http.pipeline, http.useragent </h4>
+      See the documentation for the <a href="http://nmap.org/nsedoc/lib/http.html#script-args">http</a> library.
+    
+  </p>
+
+
+<h2> Example Usage </h2>
+<p>执行格式
+
+  <pre>nmap --script=http-drupal-modules --script-args http-drupal-modules.root="/path/",http-drupal-modules.number=1000 &lt;targets&gt;
+</pre>
+
+</p>
+
+
+  <h2> Script Output </h2>
+<pre>Interesting ports on my.woot.blog (123.123.123.123):
+PORT   STATE SERVICE REASON
+80/tcp open  http    syn-ack
+| http-drupal-modules: 
+|   views
+|   token
+|   cck
+|   pathauto
+|   ctools
+|   admin_menu
+|   imageapi
+|   filefield
+|   date
+|   imagecache
+|   imagefield
+|   google_analytics
+|   webform
+|   jquery_ui
+|_  link</pre>
+
+
+
+  <h2> Requires </h2>
+  <ul>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/http.html">http</a></li>
+  
+     <li><a href="">io</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/nmap.html">nmap</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/pcre.html">pcre</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/shortport.html">shortport</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/stdnse.html">stdnse</a></li>
+  
+     <li><a href="">string</a></li>
+  
+     <li><a href="">table</a></li>
+  
+  </ul>
+
+
+<hr/>
+
+
+
+
+
+
+<p><b>Author: </b>Hani Benhabiles</p>
+
+
+
+<p><b>License: </b> VER007 整理 <a href="http://www.ver007.com">http://www.ver007.com</a></p>
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+</BODY>
+</HTML>
+
+

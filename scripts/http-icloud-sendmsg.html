@@ -1,0 +1,302 @@
+﻿   <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+    <title>http-icloud-sendmsg NSE Script -VER007</title>
+    
+
+</HEAD>
+
+
+
+
+
+
+<a href="../nmap-script-help.html">HOME>>>>>>>>></a>
+
+
+
+<h1>File <code>http-icloud-sendmsg</code></h1>
+
+
+
+<p>
+
+
+<a href="http://nmap.org/book/nse-script-format.html#nse-format-rules">脚本使用类型</a>:
+prerule
+<br>
+
+  脚本所属分类:
+  <i><a href="http://nmap.org/nsedoc/categories/discovery.html">discovery</a></i>, <i><a href="http://nmap.org/nsedoc/categories/safe.html">safe</a></i>, <i><a href="http://nmap.org/nsedoc/categories/external.html">external</a></i>
+  <br>
+
+脚本下载地址: <a href="http://nmap.org/svn/scripts/http-icloud-sendmsg.nse">http://nmap.org/svn/scripts/http-icloud-sendmsg.nse</a>
+</p>
+
+
+
+<h2> User Summary </h2>
+
+<p>
+Sends a message to a iOS device through the Apple MobileMe web service. The
+device has to be registered with an Apple ID using the Find My Iphone
+application.</p>
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+  
+  
+    
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+  
+  
+    
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+
+
+  <h2> Script Arguments </h2>
+  <p>
+    
+      <h4> http-icloud-sendmsg.username </h4>
+      <p>
+the Apple ID username</p>
+
+    
+      <h4> http-icloud-sendmsg.sound </h4>
+      <p>
+boolean specifying if a loud sound should be
+      played while displaying the message. (default: true)</p>
+
+    
+      <h4> http-icloud-sendmsg.subject </h4>
+      <p>
+the subject of the message to send to the
+      device.</p>
+
+    
+      <h4> http-icloud-sendmsg.message </h4>
+      <p>
+the body of the message to send to the
+      device.</p>
+
+    
+      <h4> http-icloud-sendmsg.deviceindex </h4>
+      <p>
+the device index to which the message
+      should be sent (@see http-icloud-sendmsg.listdevices)</p>
+
+    
+      <h4> http-icloud-sendmsg.password </h4>
+      <p>
+the Apple ID password</p>
+
+    
+      <h4> http-icloud-sendmsg.listdevices </h4>
+      <p>
+list the devices managed by the
+      specified Apple ID.</p>
+
+    
+
+    
+      <h4> smbdomain, smbhash, smbnoguest, smbpassword, smbtype, smbusername </h4>
+      See the documentation for the <a href="http://nmap.org/nsedoc/lib/smbauth.html#script-args">smbauth</a> library.
+    
+      <h4> http.max-cache-size, http.max-pipeline, http.pipeline, http.useragent </h4>
+      See the documentation for the <a href="http://nmap.org/nsedoc/lib/http.html#script-args">http</a> library.
+    
+  </p>
+
+
+<h2> Example Usage </h2>
+<p>执行格式
+
+  <pre>nmap -sn -Pn --script http-icloud-sendmsg --script-args="username=&lt;user&gt;,password=&lt;pass&gt;,http-icloud-sendmsg.listdevices"
+nmap -sn -Pn --script http-icloud-sendmsg --script-args="username=&lt;user&gt;,password=&lt;pass&gt;,deviceindex=1,subject='subject',message='hello world.',sound=false"
+</pre>
+
+</p>
+
+
+  <h2> Script Output </h2>
+<pre>Pre-scan script results:
+| http-icloud-sendmsg: 
+|_  Message was successfully sent to "Patrik Karlsson's iPhone"
+</pre>
+
+
+
+  <h2> Requires </h2>
+  <ul>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/mobileme.html">mobileme</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/stdnse.html">stdnse</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/tab.html">tab</a></li>
+  
+  </ul>
+
+
+<hr/>
+
+
+
+
+
+
+<p><b>Author: </b>Patrik Karlsson</p>
+
+
+
+<p><b>License: </b> VER007 整理 <a href="http://www.ver007.com">http://www.ver007.com</a></p>
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+</BODY>
+</HTML>
+
+

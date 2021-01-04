@@ -1,0 +1,197 @@
+﻿   <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+    <title>broadcast-wsdd-discover NSE Script -VER007</title>
+    
+
+</HEAD>
+
+
+
+
+
+
+<a href="../nmap-script-help.html">HOME>>>>>>>>></a>
+
+
+
+<h1>File <code>broadcast-wsdd-discover</code></h1>
+
+
+
+<p>
+
+
+<a href="http://nmap.org/book/nse-script-format.html#nse-format-rules">脚本使用类型</a>:
+prerule
+<br>
+
+  脚本所属分类:
+  <i><a href="http://nmap.org/nsedoc/categories/broadcast.html">broadcast</a></i>, <i><a href="http://nmap.org/nsedoc/categories/safe.html">safe</a></i>
+  <br>
+
+脚本下载地址: <a href="http://nmap.org/svn/scripts/broadcast-wsdd-discover.nse">http://nmap.org/svn/scripts/broadcast-wsdd-discover.nse</a>
+</p>
+
+
+
+<h2> User Summary </h2>
+
+<p>
+Uses a multicast query to discover devices supporting the Web Services
+Dynamic Discovery (WS-Discovery) protocol. It also attempts to locate
+any published Windows Communication Framework (WCF) web services (.NET
+4.0 or later).</p>
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+    
+      
+        
+      
+    
+      
+        
+      
+    
+  
+  
+    
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+
+
+  <h2> Script Arguments </h2>
+  <p>
+    
+
+    
+      <h4> max-newtargets, newtargets </h4>
+      See the documentation for the <a href="http://nmap.org/nsedoc/lib/target.html#script-args">target</a> library.
+    
+  </p>
+
+
+<h2> Example Usage </h2>
+<p>执行格式
+
+  <pre>sudo ./nmap --script broadcast-wsdd-discover 
+</pre>
+
+</p>
+
+
+  <h2> Script Output </h2>
+<pre>| broadcast-wsdd-discover: 
+|   Devices
+|     1.2.3.116
+|         Message id: 9ea97e41-e874-faa7-fe28-deadbeefceb3
+|         Address: http://1.2.3.116:50000
+|         Type: Device wprt:PrintDeviceType
+|     1.2.3.131
+|         Message id: 4d971368-291c-1218-30f1-deadbeefceb3
+|         Address: http://1.2.3.131:5357/deadbeef-ea5c-4b9a-a68d-deadbeefceb3/
+|         Type: Device pub:Computer
+|     1.2.3.110
+|         Message id: f5a25a38-d61c-49e5-96c4-deadbeefceb3
+|         Address: http://1.2.3.110:5357/deadbeef-469b-4da4-b413-deadbeefee90/
+|         Type: Device pub:Computer
+|   WCF Services
+|     1.2.3.131
+|         Message id: c1767df8-43e5-4440-9e26--deadbeefceb3
+|_        Address: http://win-7:8090/discovery/scenarios/service2/deadbeef-3382-4668-86e7-deadbeefb935/
+
+</pre>
+
+
+
+  <h2> Requires </h2>
+  <ul>
+  
+     <li><a href="">coroutine</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/nmap.html">nmap</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/stdnse.html">stdnse</a></li>
+  
+     <li><a href="">table</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/wsdd.html">wsdd</a></li>
+  
+  </ul>
+
+
+<hr/>
+
+
+
+
+
+
+<p><b>Author: </b>Patrik Karlsson</p>
+
+
+
+<p><b>License: </b> VER007 整理 <a href="http://www.ver007.com">http://www.ver007.com</a></p>
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+</BODY>
+</HTML>
+
+

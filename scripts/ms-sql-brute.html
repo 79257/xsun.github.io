@@ -1,0 +1,424 @@
+﻿   <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+    <title>ms-sql-brute NSE Script -VER007</title>
+    
+
+</HEAD>
+
+
+
+
+
+
+<a href="../nmap-script-help.html">HOME>>>>>>>>></a>
+
+
+
+<h1>File <code>ms-sql-brute</code></h1>
+
+
+
+<p>
+
+
+<a href="http://nmap.org/book/nse-script-format.html#nse-format-rules">脚本使用类型</a>:
+hostrule, portrule
+<br>
+
+  脚本所属分类:
+  <i><a href="http://nmap.org/nsedoc/categories/brute.html">brute</a></i>, <i><a href="http://nmap.org/nsedoc/categories/intrusive.html">intrusive</a></i>
+  <br>
+
+脚本下载地址: <a href="http://nmap.org/svn/scripts/ms-sql-brute.nse">http://nmap.org/svn/scripts/ms-sql-brute.nse</a>
+</p>
+
+
+
+<h2> User Summary </h2>
+
+<p>
+Performs password guessing against Microsoft SQL Server (ms-sql). Works best in
+conjunction with the <code>broadcast-ms-sql-discover</code> script.
+</p>
+<p>
+SQL Server credentials required: No  (will not benefit from <code>mssql.username</code> &amp; <code>mssql.password</code>).
+</p>
+<p>
+Run criteria:
+<ul>
+<li>Host script: Will run if the <code>mssql.instance-all</code>, <code>mssql.instance-name</code> or <code>mssql.instance-port</code> script arguments are used (see mssql.lua).
+</li>
+<li>Port script: Will run against any services identified as SQL Servers, but only if the <code>mssql.instance-all</code>, <code>mssql.instance-name</code> and <code>mssql.instance-port</code> script arguments are NOT used.
+</li>
+</ul>
+</p>
+<p>
+WARNING: SQL Server 2005 and later versions include support for account lockout
+policies (which are enforced on a per-user basis). If an account is locked out,
+the script will stop running for that instance, unless the
+<code>ms-sql-brute.ignore-lockout</code> argument is used.
+</p>
+<p>
+NOTE: Communication with instances via named pipes depends on the <code>smb</code>
+library. To communicate with (and possibly to discover) instances via named pipes,
+the host must have at least one SMB port (e.g. TCP 445) that was scanned and
+found to be open. Additionally, named pipe connections may require Windows
+authentication to connect to the Windows host (via SMB) in addition to the
+authentication required to connect to the SQL Server instances itself. See the
+documentation and arguments for the <code>smb</code> library for more information.
+</p>
+<p>
+NOTE: By default, the ms-sql-* scripts may attempt to connect to and communicate
+with ports that were not included in the port list for the Nmap scan. This can
+be disabled using the <code>mssql.scanned-ports-only</code> script argument.</p>
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+  
+  
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+  
+  
+    
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+  
+  
+    
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+  
+  
+    
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+  
+  
+    
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+
+
+  <h2> Script Arguments </h2>
+  <p>
+    
+      <h4> ms-sql-brute.ignore-lockout </h4>
+      <p>
+WARNING! Including this argument will cause
+			the script to continue attempting to brute-forcing passwords for users
+			even after a user has been locked out. This may result in many SQL
+			Server logins being locked out!</p>
+
+    
+      <h4> ms-sql-brute.brute-windows-accounts </h4>
+      <p>
+Enable targeting Windows accounts
+         as part of the brute force attack.  This should be used in conjunction
+         with the mssql library's mssql.domain argument.</p>
+
+    
+
+    
+      <h4> passdb, unpwdb.passlimit, unpwdb.timelimit, unpwdb.userlimit, userdb </h4>
+      See the documentation for the <a href="http://nmap.org/nsedoc/lib/unpwdb.html#script-args">unpwdb</a> library.
+    
+      <h4> mssql.domain, mssql.instance-all, mssql.instance-name, mssql.instance-port, mssql.password, mssql.protocol, mssql.scanned-ports-only, mssql.timeout, mssql.username </h4>
+      See the documentation for the <a href="http://nmap.org/nsedoc/lib/mssql.html#script-args">mssql</a> library.
+    
+      <h4> randomseed, smbbasic, smbport, smbsign </h4>
+      See the documentation for the <a href="http://nmap.org/nsedoc/lib/smb.html#script-args">smb</a> library.
+    
+      <h4> smbdomain, smbhash, smbnoguest, smbpassword, smbtype, smbusername </h4>
+      See the documentation for the <a href="http://nmap.org/nsedoc/lib/smbauth.html#script-args">smbauth</a> library.
+    
+  </p>
+
+
+<h2> Example Usage </h2>
+<p>执行格式
+
+  <pre>nmap -p 445 --script ms-sql-brute --script-args mssql.instance-all,userdb=customuser.txt,passdb=custompass.txt &lt;host&gt;
+nmap -p 1433 --script ms-sql-brute --script-args userdb=customuser.txt,passdb=custompass.txt &lt;host&gt;
+</pre>
+
+</p>
+
+
+  <h2> Script Output </h2>
+<pre>| ms-sql-brute:
+|   [192.168.100.128\TEST]
+|     No credentials found
+|     Warnings:
+|       sa: AccountLockedOut
+|   [192.168.100.128\PROD]
+|     Credentials found:
+|       webshop_reader:secret =&gt; Login Success
+|       testuser:secret1234 =&gt; PasswordMustChange
+|_      lordvader:secret1234 =&gt; Login Success
+
+</pre>
+
+
+
+  <h2> Requires </h2>
+  <ul>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/mssql.html">mssql</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/nmap.html">nmap</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/stdnse.html">stdnse</a></li>
+  
+     <li><a href="">string</a></li>
+  
+     <li><a href="">table</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/unpwdb.html">unpwdb</a></li>
+  
+  </ul>
+
+
+<hr/>
+
+
+
+
+
+
+<p><b>Author: </b>Patrik Karlsson</p>
+
+
+
+<p><b>License: </b> VER007 整理 <a href="http://www.ver007.com">http://www.ver007.com</a></p>
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+</BODY>
+</HTML>
+
+

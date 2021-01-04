@@ -1,0 +1,432 @@
+﻿   <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+    <title>ms-sql-info NSE Script -VER007</title>
+    
+
+</HEAD>
+
+
+
+
+
+
+<a href="../nmap-script-help.html">HOME>>>>>>>>></a>
+
+
+
+<h1>File <code>ms-sql-info</code></h1>
+
+
+
+<p>
+
+
+<a href="http://nmap.org/book/nse-script-format.html#nse-format-rules">脚本使用类型</a>:
+hostrule
+<br>
+
+  脚本所属分类:
+  <i><a href="http://nmap.org/nsedoc/categories/default.html">default</a></i>, <i><a href="http://nmap.org/nsedoc/categories/discovery.html">discovery</a></i>, <i><a href="http://nmap.org/nsedoc/categories/safe.html">safe</a></i>
+  <br>
+
+脚本下载地址: <a href="http://nmap.org/svn/scripts/ms-sql-info.nse">http://nmap.org/svn/scripts/ms-sql-info.nse</a>
+</p>
+
+
+
+<h2> User Summary </h2>
+
+<p>
+Attempts to determine configuration and version information for Microsoft SQL
+Server instances.
+</p>
+<p>
+SQL Server credentials required: No (will not benefit from 
+<code>mssql.username</code> &amp; <code>mssql.password</code>).
+Run criteria:
+<ul>
+<li>Host script: Will always run.
+</li>
+<li>Port script: N/A
+</li>
+</ul>
+</p>
+<p>
+NOTE: Unlike previous versions, this script will NOT attempt to log in to SQL
+Server instances. Blank passwords can be checked using the
+<code>ms-sql-empty-password</code> script. E.g.:
+<code>nmap -sn --script ms-sql-empty-password --script-args mssql.instance-all &lt;host&gt;</code>
+</p>
+<p>
+The script uses two means of getting version information for SQL Server instances:
+<ul>
+<li>Querying the SQL Server Browser service, which runs by default on UDP port
+</li>
+</ul>
+1434 on servers that have SQL Server 2000 or later installed. However, this
+service may be disabled without affecting the functionality of the instances.
+Additionally, it provides imprecise version information. 
+<ul>
+<li>Sending a probe to the instance, causing the instance to respond with
+</li>
+</ul>
+information including the exact version number. This is the same method that
+Nmap uses for service versioning; however, this script can also do the same for 
+instances accessiable via Windows named pipes, and can target all of the
+instances listed by the SQL Server Browser service.
+</p>
+<p>
+In the event that the script can connect to the SQL Server Browser service
+(UDP 1434) but is unable to connect directly to the instance to obtain more
+accurate version information (because ports are blocked or the <code>mssql.scanned-ports-only</code>
+argument has been used), the script will rely only upon the version number
+provided by the SQL Server Browser/Monitor, which has the following limitations:
+<ul>
+<li>For SQL Server 2000 and SQL Server 7.0 instances, the RTM version number is
+</li>
+</ul>
+always given, regardless of any service packs or patches installed.
+<ul>
+<li>For SQL Server 2005 and later, the version number will reflect the service
+</li>
+</ul>
+pack installed, but the script will not be able to tell whether patches have
+been installed.
+</p>
+<p>
+Where possible, the script will determine major version numbers, service pack
+levels and whether patches have been installed. However, in cases where
+particular determinations can not be made, the script will report only what can
+be confirmed.
+</p>
+<p>
+NOTE: Communication with instances via named pipes depends on the <code>smb</code>
+library. To communicate with (and possibly to discover) instances via named pipes,
+the host must have at least one SMB port (e.g. TCP 445) that was scanned and
+found to be open. Additionally, named pipe connections may require Windows
+authentication to connect to the Windows host (via SMB) in addition to the
+authentication required to connect to the SQL Server instances itself. See the
+documentation and arguments for the <code>smb</code> library for more information.
+</p>
+<p>
+NOTE: By default, the ms-sql-* scripts may attempt to connect to and communicate
+with ports that were not included in the port list for the Nmap scan. This can
+be disabled using the <code>mssql.scanned-ports-only</code> script argument.</p>
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+  
+  
+    
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+  
+  
+    
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+  
+  
+    
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+
+
+  <h2> Script Arguments </h2>
+  <p>
+    
+
+    
+      <h4> mssql.domain, mssql.instance-all, mssql.instance-name, mssql.instance-port, mssql.password, mssql.protocol, mssql.scanned-ports-only, mssql.timeout, mssql.username </h4>
+      See the documentation for the <a href="http://nmap.org/nsedoc/lib/mssql.html#script-args">mssql</a> library.
+    
+      <h4> randomseed, smbbasic, smbport, smbsign </h4>
+      See the documentation for the <a href="http://nmap.org/nsedoc/lib/smb.html#script-args">smb</a> library.
+    
+      <h4> smbdomain, smbhash, smbnoguest, smbpassword, smbtype, smbusername </h4>
+      See the documentation for the <a href="http://nmap.org/nsedoc/lib/smbauth.html#script-args">smbauth</a> library.
+    
+  </p>
+
+
+<h2> Example Usage </h2>
+<p>执行格式
+
+  <pre>nmap -p 445 --script ms-sql-info &lt;host&gt;
+nmap -p 1433 --script ms-sql-info --script-args mssql.instance-port=1433 &lt;host&gt;
+</pre>
+
+</p>
+
+
+  <h2> Script Output </h2>
+<pre>| ms-sql-info:
+|   Windows server name: WINXP
+|   [192.168.100.128\PROD]
+|     Instance name: PROD
+|     Version: Microsoft SQL Server 2000 SP3
+|       Version number: 8.00.760
+|       Product: Microsoft SQL Server 2005
+|       Service pack level: SP3
+|       Post-SP patches applied: No
+|     TCP port: 1278
+|     Named pipe: \\192.168.100.128\pipe\MSSQL$PROD\sql\query
+|     Clustered: No
+|   [192.168.100.128\SQLFIREWALLED]
+|     Instance name: SQLFIREWALLED
+|     Version: Microsoft SQL Server 2008 RTM
+|       Product: Microsoft SQL Server 2008
+|       Service pack level: RTM
+|     TCP port: 4343
+|     Clustered: No
+|   [\\192.168.100.128\pipe\sql\query]
+|     Version: Microsoft SQL Server 2005 SP3+
+|       Version number: 9.00.4053
+|       Product: Microsoft SQL Server 2005
+|       Service pack level: SP3
+|       Post-SP patches applied: Yes
+|_    Named pipe: \\192.168.100.128\pipe\sql\query
+</pre>
+
+
+
+  <h2> Requires </h2>
+  <ul>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/mssql.html">mssql</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/nmap.html">nmap</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/smb.html">smb</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/stdnse.html">stdnse</a></li>
+  
+     <li><a href="">string</a></li>
+  
+     <li><a href="">table</a></li>
+  
+  </ul>
+
+
+<hr/>
+
+
+
+
+
+
+<p><b>Author: </b>Chris Woodbury, Thomas Buchanan</p>
+
+
+
+<p><b>License: </b> VER007 整理 <a href="http://www.ver007.com">http://www.ver007.com</a></p>
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+</BODY>
+</HTML>
+
+

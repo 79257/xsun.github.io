@@ -1,0 +1,216 @@
+﻿   <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+    <title>afp-ls NSE Script -VER007</title>
+    
+
+</HEAD>
+
+
+
+
+
+
+<a href="../nmap-script-help.html">HOME>>>>>>>>></a>
+
+
+
+<h1>File <code>afp-ls</code></h1>
+
+
+
+<p>
+
+
+<a href="http://nmap.org/book/nse-script-format.html#nse-format-rules">脚本使用类型</a>:
+portrule
+<br>
+
+  脚本所属分类:
+  <i><a href="http://nmap.org/nsedoc/categories/discovery.html">discovery</a></i>, <i><a href="http://nmap.org/nsedoc/categories/safe.html">safe</a></i>
+  <br>
+
+脚本下载地址: <a href="http://nmap.org/svn/scripts/afp-ls.nse">http://nmap.org/svn/scripts/afp-ls.nse</a>
+</p>
+
+
+
+<h2> User Summary </h2>
+
+<p>
+Attempts to get useful information about files from AFP volumes.
+The output is intended to resemble the output of <code>ls</code>.</p>
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+
+
+  <h2> Script Arguments </h2>
+  <p>
+    
+      <h4> afp-ls.maxfiles </h4>
+      <p>
+If set, limits the amount of files returned by the script (default 10).</p>
+
+    
+
+    
+  </p>
+
+
+<h2> Example Usage </h2>
+<p>执行格式
+
+  <pre>nmap -sV --script=afp-ls &lt;target&gt;</pre>
+
+</p>
+
+
+  <h2> Script Output </h2>
+<pre>PORT    STATE SERVICE
+548/tcp open  afp     syn-ack
+| afp-ls: 
+|   Macintosh HD
+|     PERMISSION  UID  GID  SIZE    TIME              FILENAME
+|     -rw-r--r--  501  80   15364   2010-06-13 17:52  .DS_Store
+|     ----------  0    80   0       2009-10-05 07:42  .file
+|     drwx------  501  20   0       2009-11-04 17:28  .fseventsd
+|     -rw-------  0    0    393216  2010-06-14 01:49  .hotfiles.btree
+|     drwx------  0    80   0       2009-11-04 18:19  .Spotlight-V100
+|     d-wx-wx-wx  0    80   0       2009-11-04 18:25  .Trashes
+|     drwxr-xr-x  0    0    0       2009-05-18 21:29  .vol
+|     drwxrwxr-x  0    80   0       2009-04-28 00:06  Applications
+|     drwxr-xr-x  0    0    0       2009-05-18 21:43  bin
+|     drwxr-xr-x  501  80   0       2010-08-10 22:55  bundles
+|   Patrik Karlsson's Public Folder
+|     PERMISSION  UID  GID  SIZE  TIME              FILENAME
+|     -rw-------  501  20   6148  2010-12-27 23:45  .DS_Store
+|     -rw-r--r--  501  20   0     2007-07-24 21:17  .localized
+|     drwx-wx-wx  501  20   0     2009-06-19 04:01  Drop Box
+|   patrik
+|     PERMISSION  UID  GID  SIZE   TIME              FILENAME
+|     -rw-------  501  20   11281  2010-06-14 22:51  .bash_history
+|     -rw-r--r--  501  20   33     2011-01-19 20:11  .bashrc
+|     -rw-------  501  20   3      2007-07-24 21:17  .CFUserTextEncoding
+|     drwx------  501  20   0      2010-09-12 14:52  .config
+|     drwx------  501  20   0      2010-09-12 12:29  .cups
+|     -rw-r--r--  501  20   15364  2010-06-13 18:34  .DS_Store
+|     drwxr-xr-x  501  20   0      2010-09-12 14:13  .fontconfig
+|     -rw-------  501  20   102    2010-06-14 01:46  .lesshst
+|     -rw-r--r--  501  20   241    2010-06-14 01:45  .profile
+|     -rw-------  501  20   218    2010-09-12 16:35  .recently-used.xbel
+|   
+|   Information retrieved as: patrik
+|_  Output restricted to 10 entries per volume. (See afp-ls.maxfiles)
+</pre>
+
+
+
+  <h2> Requires </h2>
+  <ul>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/afp.html">afp</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/nmap.html">nmap</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/shortport.html">shortport</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/stdnse.html">stdnse</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/tab.html">tab</a></li>
+  
+     <li><a href="">table</a></li>
+  
+  </ul>
+
+
+<hr/>
+
+
+
+
+
+
+<p><b>Author: </b>Patrik Karlsson</p>
+
+
+
+<p><b>License: </b> VER007 整理 <a href="http://www.ver007.com">http://www.ver007.com</a></p>
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+</BODY>
+</HTML>
+
+

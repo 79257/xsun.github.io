@@ -1,0 +1,179 @@
+﻿   <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+    <title>path-mtu NSE Script -VER007</title>
+    
+
+</HEAD>
+
+
+
+
+
+
+<a href="../nmap-script-help.html">HOME>>>>>>>>></a>
+
+
+
+<h1>File <code>path-mtu</code></h1>
+
+
+
+<p>
+
+
+<a href="http://nmap.org/book/nse-script-format.html#nse-format-rules">脚本使用类型</a>:
+hostrule
+<br>
+
+  脚本所属分类:
+  <i><a href="http://nmap.org/nsedoc/categories/safe.html">safe</a></i>, <i><a href="http://nmap.org/nsedoc/categories/discovery.html">discovery</a></i>
+  <br>
+
+脚本下载地址: <a href="http://nmap.org/svn/scripts/path-mtu.nse">http://nmap.org/svn/scripts/path-mtu.nse</a>
+</p>
+
+
+
+<h2> User Summary </h2>
+
+<p>
+Performs simple Path MTU Discovery to target hosts.
+</p>
+<p>
+TCP or UDP packets are sent to the host with the DF (don't fragment) bit
+set and with varying amounts of data.  If an ICMP Fragmentation Needed
+is received, or no reply is received after retransmissions, the amount
+of data is lowered and another packet is sent.  This continues until
+(assuming no errors occur) a reply from the final host is received,
+indicating the packet reached the host without being fragmented.
+</p>
+<p>
+Not all MTUs are attempted so as to not expend too much time or network
+resources.  Currently the relatively short list of MTUs to try contains
+the plateau values from Table 7-1 in RFC 1191, "Path MTU Discovery".
+Using these values significantly cuts down the MTU search space.  On top
+of that, this list is rarely traversed in whole because:
+    * the MTU of the outgoing interface is used as a starting point, and
+    * we can jump down the list when an intermediate router sending a
+      "can't fragment" message includes its next hop MTU (as described
+      in RFC 1191 and required by RFC 1812)</p>
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+
+
+
+<h2> Example Usage </h2>
+<p>执行格式
+
+  <pre>nmap --script path-mtu target
+</pre>
+
+</p>
+
+
+  <h2> Script Output </h2>
+<pre>Host script results:
+|_path-mtu: 1492 &lt;= PMTU &lt; 1500
+
+Host script results:
+|_path-mtu: PMTU == 1006</pre>
+
+
+
+  <h2> Requires </h2>
+  <ul>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/bin.html">bin</a></li>
+  
+     <li><a href="">math</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/nmap.html">nmap</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/packet.html">packet</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/stdnse.html">stdnse</a></li>
+  
+     <li><a href="">string</a></li>
+  
+     <li><a href="">table</a></li>
+  
+  </ul>
+
+
+<hr/>
+
+
+
+
+
+
+<p><b>Author: </b>Kris Katterjohn</p>
+
+
+
+<p><b>License: </b> VER007 整理 <a href="http://www.ver007.com">http://www.ver007.com</a></p>
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+</BODY>
+</HTML>
+
+

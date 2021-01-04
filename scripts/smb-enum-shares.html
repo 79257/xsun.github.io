@@ -1,0 +1,316 @@
+﻿   <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+    <title>smb-enum-shares NSE Script -VER007</title>
+    
+
+</HEAD>
+
+
+
+
+
+
+<a href="../nmap-script-help.html">HOME>>>>>>>>></a>
+
+
+
+<h1>File <code>smb-enum-shares</code></h1>
+
+
+
+<p>
+
+
+<a href="http://nmap.org/book/nse-script-format.html#nse-format-rules">脚本使用类型</a>:
+hostrule
+<br>
+
+  脚本所属分类:
+  <i><a href="http://nmap.org/nsedoc/categories/discovery.html">discovery</a></i>, <i><a href="http://nmap.org/nsedoc/categories/intrusive.html">intrusive</a></i>
+  <br>
+
+脚本下载地址: <a href="http://nmap.org/svn/scripts/smb-enum-shares.nse">http://nmap.org/svn/scripts/smb-enum-shares.nse</a>
+</p>
+
+
+
+<h2> User Summary </h2>
+
+<p>
+Attempts to list shares using the <code>srvsvc.NetShareEnumAll</code> MSRPC function and
+retrieve more information about them using <code>srvsvc.NetShareGetInfo</code>. If access
+to those functions is denied, a list of common share names are checked. 
+</p>
+<p>
+Finding open shares is useful to a penetration tester because there may be private files
+shared, or, if it's writable, it could be a good place to drop a Trojan or to infect a file
+that's already there. Knowing where the share is could make those kinds of tests more useful, 
+except that determiing where the share is requires administrative privileges already. 
+</p>
+<p>
+Running <code>NetShareEnumAll</code> will work anonymously against Windows 2000, and 
+requires a user-level account on any other Windows version. Calling <code>NetShareGetInfo</code> 
+requires an administrator account on all versions of Windows up to 2003, as well as Windows Vista
+and Windows 7, if UAC is turned down. 
+</p>
+<p>
+Even if <code>NetShareEnumAll</code> is restricted, attempting to connect to a share will always
+reveal its existence. So, if <code>NetShareEnumAll</code> fails, a pre-generated list of shares,
+based on a large test network, are used. If any of those succeed, they are recorded. 
+</p>
+<p>
+After a list of shares is found, the script attempts to connect to each of them anonymously, 
+which divides them into "anonymous", for shares that the NULL user can connect to, or "restricted",
+for shares that require a user account.</p>
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+  
+  
+    
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+  
+  
+    
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+
+
+  <h2> Script Arguments </h2>
+  <p>
+    
+
+    
+      <h4> randomseed, smbbasic, smbport, smbsign </h4>
+      See the documentation for the <a href="http://nmap.org/nsedoc/lib/smb.html#script-args">smb</a> library.
+    
+      <h4> smbdomain, smbhash, smbnoguest, smbpassword, smbtype, smbusername </h4>
+      See the documentation for the <a href="http://nmap.org/nsedoc/lib/smbauth.html#script-args">smbauth</a> library.
+    
+  </p>
+
+
+<h2> Example Usage </h2>
+<p>执行格式
+
+  <pre>nmap --script smb-enum-shares.nse -p445 &lt;host&gt;
+sudo nmap -sU -sS --script smb-enum-shares.nse -p U:137,T:139 &lt;host&gt;
+</pre>
+
+</p>
+
+
+  <h2> Script Output </h2>
+<pre>Host script results:
+|  smb-enum-shares:
+|  |  ADMIN$
+|  |  |  Type: STYPE_DISKTREE_HIDDEN
+|  |  |  Comment: Remote Admin
+|  |  |  Users: 0, Max: &lt;unlimited&gt;
+|  |  |  Path: C:\WINNT
+|  |  |  Anonymous access: &lt;none&gt;
+|  |  |_ Current user ('administrator') access: READ/WRITE
+|  |  C$
+|  |  |  Type: STYPE_DISKTREE_HIDDEN
+|  |  |  Comment: Default share
+|  |  |  Users: 0, Max: &lt;unlimited&gt;
+|  |  |  Path: C:\
+|  |  |  Anonymous access: &lt;none&gt;
+|  |  |_ Current user ('administrator') access: READ
+|  |  IPC$
+|  |  |  Type: STYPE_IPC_HIDDEN
+|  |  |  Comment: Remote IPC
+|  |  |  Users: 1, Max: &lt;unlimited&gt;
+|  |  |  Path:
+|  |  |  Anonymous access: READ &lt;not a file share&gt;
+|_ |_ |_ Current user ('administrator') access: READ &lt;not a file share&gt;
+</pre>
+
+
+
+  <h2> Requires </h2>
+  <ul>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/smb.html">smb</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/stdnse.html">stdnse</a></li>
+  
+     <li><a href="">string</a></li>
+  
+     <li><a href="">table</a></li>
+  
+  </ul>
+
+
+<hr/>
+
+
+
+
+
+
+<p><b>Author: </b>Ron Bowes</p>
+
+
+
+<p><b>License: </b> VER007 整理 <a href="http://www.ver007.com">http://www.ver007.com</a></p>
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+</BODY>
+</HTML>
+
+

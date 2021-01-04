@@ -1,0 +1,203 @@
+﻿   <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+    <title>mysql-query NSE Script -VER007</title>
+    
+
+</HEAD>
+
+
+
+
+
+
+<a href="../nmap-script-help.html">HOME>>>>>>>>></a>
+
+
+
+<h1>File <code>mysql-query</code></h1>
+
+
+
+<p>
+
+
+<a href="http://nmap.org/book/nse-script-format.html#nse-format-rules">脚本使用类型</a>:
+portrule
+<br>
+
+  脚本所属分类:
+  <i><a href="http://nmap.org/nsedoc/categories/auth.html">auth</a></i>, <i><a href="http://nmap.org/nsedoc/categories/discovery.html">discovery</a></i>, <i><a href="http://nmap.org/nsedoc/categories/safe.html">safe</a></i>
+  <br>
+
+脚本下载地址: <a href="http://nmap.org/svn/scripts/mysql-query.nse">http://nmap.org/svn/scripts/mysql-query.nse</a>
+</p>
+
+
+
+<h2> User Summary </h2>
+
+<p>
+Runs a query against a MySQL database and returns the results as a table.</p>
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+
+
+  <h2> Script Arguments </h2>
+  <p>
+    
+      <h4> mysql-query.noheaders </h4>
+      <p>
+do not display column headers (default: false)</p>
+
+    
+      <h4> mysql-query.query </h4>
+      <p>
+the query for which to return the results</p>
+
+    
+      <h4> mysql-query.username </h4>
+      <p>
+(optional) the username used to authenticate to the database server</p>
+
+    
+      <h4> mysql-query.password </h4>
+      <p>
+(optional) the password used to authenticate to the database server</p>
+
+    
+
+    
+  </p>
+
+
+<h2> Example Usage </h2>
+<p>执行格式
+
+  <pre>nmap -p 3306 &lt;ip&gt; --script mysql-query --script-args='query="&lt;query&gt;"[,username=&lt;username&gt;,password=&lt;password&gt;]'
+</pre>
+
+</p>
+
+
+  <h2> Script Output </h2>
+<pre>PORT     STATE SERVICE
+3306/tcp open  mysql
+| mysql-query: 
+|   host       user
+|   127.0.0.1  root
+|   localhost  debian-sys-maint
+|   localhost  root
+|   ubu1110    root
+|   
+|   Query: SELECT host, user FROM mysql.user
+|_  User: root
+</pre>
+
+
+
+  <h2> Requires </h2>
+  <ul>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/mysql.html">mysql</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/nmap.html">nmap</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/shortport.html">shortport</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/stdnse.html">stdnse</a></li>
+  
+  </ul>
+
+
+<hr/>
+
+
+
+
+
+
+<p><b>Author: </b>Patrik Karlsson</p>
+
+
+
+<p><b>License: </b> VER007 整理 <a href="http://www.ver007.com">http://www.ver007.com</a></p>
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+</BODY>
+</HTML>
+
+

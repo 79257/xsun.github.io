@@ -1,0 +1,290 @@
+﻿   <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+    <title>hbase-region-info NSE Script -VER007</title>
+    
+
+</HEAD>
+
+
+
+
+
+
+<a href="../nmap-script-help.html">HOME>>>>>>>>></a>
+
+
+
+<h1>File <code>hbase-region-info</code></h1>
+
+
+
+<p>
+
+
+<a href="http://nmap.org/book/nse-script-format.html#nse-format-rules">脚本使用类型</a>:
+portrule
+<br>
+
+  脚本所属分类:
+  <i><a href="http://nmap.org/nsedoc/categories/default.html">default</a></i>, <i><a href="http://nmap.org/nsedoc/categories/discovery.html">discovery</a></i>, <i><a href="http://nmap.org/nsedoc/categories/safe.html">safe</a></i>
+  <br>
+
+脚本下载地址: <a href="http://nmap.org/svn/scripts/hbase-region-info.nse">http://nmap.org/svn/scripts/hbase-region-info.nse</a>
+</p>
+
+
+
+<h2> User Summary </h2>
+
+<p>
+Retrieves information from an Apache HBase (Hadoop database) region server HTTP status page.
+</p>
+<p>
+Information gathered:
+ * HBase version
+ * HBase compile date
+ * A bunch of metrics about the state of the region server
+ * Zookeeper quorum server
+</p>
+<p>
+For more information about Hbase, see:
+ * <a href="http://hbase.apache.org/">http://hbase.apache.org/</a>
+ * <a href="http://wiki.apache.org/hadoop/Hbase">http://wiki.apache.org/hadoop/Hbase</a></p>
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+  
+  
+    
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+  
+  
+    
+    
+  
+
+  
+  
+  
+    
+      
+        
+      
+    
+      
+        
+      
+    
+  
+  
+    
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+
+
+  <h2> Script Arguments </h2>
+  <p>
+    
+
+    
+      <h4> max-newtargets, newtargets </h4>
+      See the documentation for the <a href="http://nmap.org/nsedoc/lib/target.html#script-args">target</a> library.
+    
+      <h4> smbdomain, smbhash, smbnoguest, smbpassword, smbtype, smbusername </h4>
+      See the documentation for the <a href="http://nmap.org/nsedoc/lib/smbauth.html#script-args">smbauth</a> library.
+    
+      <h4> http.max-cache-size, http.max-pipeline, http.pipeline, http.useragent </h4>
+      See the documentation for the <a href="http://nmap.org/nsedoc/lib/http.html#script-args">http</a> library.
+    
+  </p>
+
+
+<h2> Example Usage </h2>
+<p>执行格式
+
+  <pre>nmap --script hbase-region-info -p 60030 host
+</pre>
+
+</p>
+
+
+  <h2> Script Output </h2>
+<pre>PORT      STATE SERVICE      REASON
+60030/tcp open  hbase-region syn-ack
+| hbase-region-info:
+|   Hbase Version: 0.90.1
+|   Hbase Compiled: Wed May 11 22:33:44 PDT 2011, bob
+|   Metrics requests=0, regions=0, stores=0, storefiles=0, storefileIndexSize=0, memstoreSize=0,
+|   compactionQueueSize=0, flushQueueSize=0, usedHeap=0, maxHeap=0, blockCacheSize=0,
+|   blockCacheFree=0, blockCacheCount=0, blockCacheHitCount=0, blockCacheMissCount=0,
+|   blockCacheEvictedCount=0, blockCacheHitRatio=0, blockCacheHitCachingRatio=0
+|_  Zookeeper Quorum: zookeeper.example.com:2181
+</pre>
+
+
+
+  <h2> Requires </h2>
+  <ul>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/http.html">http</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/nmap.html">nmap</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/shortport.html">shortport</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/stdnse.html">stdnse</a></li>
+  
+     <li><a href="">table</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/target.html">target</a></li>
+  
+  </ul>
+
+
+<hr/>
+
+
+
+
+
+
+<p><b>Author: </b>John R. Bond</p>
+
+
+
+<p><b>License: </b> Simplified (2-clause) BSD license--See <a href="http://nmap.org/svn/docs/licenses/BSD-simplified">http://nmap.org/svn/docs/licenses/BSD-simplified</a></p>
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+</BODY>
+</HTML>
+
+

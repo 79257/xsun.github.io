@@ -1,0 +1,342 @@
+﻿   <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+    <title>smb-enum-processes NSE Script -VER007</title>
+    
+
+</HEAD>
+
+
+
+
+
+
+<a href="../nmap-script-help.html">HOME>>>>>>>>></a>
+
+
+
+<h1>File <code>smb-enum-processes</code></h1>
+
+
+
+<p>
+
+
+<a href="http://nmap.org/book/nse-script-format.html#nse-format-rules">脚本使用类型</a>:
+hostrule
+<br>
+
+  脚本所属分类:
+  <i><a href="http://nmap.org/nsedoc/categories/discovery.html">discovery</a></i>, <i><a href="http://nmap.org/nsedoc/categories/intrusive.html">intrusive</a></i>
+  <br>
+
+脚本下载地址: <a href="http://nmap.org/svn/scripts/smb-enum-processes.nse">http://nmap.org/svn/scripts/smb-enum-processes.nse</a>
+</p>
+
+
+
+<h2> User Summary </h2>
+
+<p>
+Pulls a list of processes from the remote server over SMB. This will determine
+all running processes, their process IDs, and their parent processes. It is done
+by querying the remote registry service, which is disabled by default on Vista;
+on all other Windows versions, it requires Administrator privileges.
+</p>
+<p>
+Since this requires administrator privileges, it isn't especially useful for a
+penetration tester, since they can effectively do the same thing with metasploit
+or other tools. It does, however, provide for a quick way to get process lists
+for a bunch of systems at the same time.
+</p>
+<p>
+WARNING: I have experienced crashes in <code>regsvc.exe</code> while making registry calls
+against a fully patched Windows 2000 system; I've fixed the issue that caused
+it, but there's no guarantee that it (or a similar vulnerability in the same code) won't
+show up again. Since the process automatically restarts, it doesn't negatively
+impact the system, besides showing a message box to the user.</p>
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+  
+  
+    
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+  
+  
+    
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+
+
+  <h2> Script Arguments </h2>
+  <p>
+    
+
+    
+      <h4> randomseed, smbbasic, smbport, smbsign </h4>
+      See the documentation for the <a href="http://nmap.org/nsedoc/lib/smb.html#script-args">smb</a> library.
+    
+      <h4> smbdomain, smbhash, smbnoguest, smbpassword, smbtype, smbusername </h4>
+      See the documentation for the <a href="http://nmap.org/nsedoc/lib/smbauth.html#script-args">smbauth</a> library.
+    
+  </p>
+
+
+<h2> Example Usage </h2>
+<p>执行格式
+
+  <pre>nmap --script smb-enum-processes.nse -p445 &lt;host&gt;
+sudo nmap -sU -sS --script smb-enum-processes.nse -p U:137,T:139 &lt;host&gt;
+
+</pre>
+
+</p>
+
+
+  <h2> Script Output </h2>
+<pre>Host script results:
+|  smb-enum-processes:
+|_ |_ Idle, System, smss, csrss, winlogon, services, logon.scr, lsass, spoolsv, msdtc, VMwareService, svchost, alg, explorer, VMwareTray, VMwareUser, wmiprvse
+
+--
+Host script results:
+|  smb-enum-processes:
+|  `+-Idle
+|   | `-System
+|   |   `-smss
+|   |     `+-csrss
+|   |      `-winlogon
+|   |        `+-services
+|   |         | `+-spoolsv
+|   |         |  +-msdtc
+|   |         |  +-VMwareService
+|   |         |  +-svchost
+|   |         |  `-alg
+|   |         +-logon.scr
+|   |         `-lsass
+|   +-explorer
+|   | `+-VMwareTray
+|   |  `-VMwareUser
+|_  `-wmiprvse
+
+--
+Host script results:
+|  smb-enum-processes:
+|   PID  PPID  Priority Threads Handles
+|  ----- ----- -------- ------- -------
+|      0     0        0       1       0 `+-Idle
+|      4     0        8      49     395  | `-System
+|    252     4       11       3      19  |   `-smss
+|    300   252       13      10     338  |     `+-csrss
+|    324   252       13      18     513  |      `-winlogon
+|    372   324        9      16     272  |        `+-services
+|    872   372        8      12     121  |         | `+-spoolsv
+|    896   372        8      13     151  |         |  +-msdtc
+|   1172   372       13       3      53  |         |  +-VMwareService
+|   1336   372        8      20     158  |         |  +-svchost
+|   1476   372        8       6      90  |         |  `-alg
+|    376   324        4       1      22  |         +-logon.scr
+|    384   324        9      23     394  |         `-lsass
+|   1720  1684        8       9     259  +-explorer
+|   1796  1720        8       1      42  | `+-VMwareTray
+|   1808  1720        8       1      44  |  `-VMwareUser
+|_  1992   580        8       7     179  `-wmiprvse
+</pre>
+
+
+
+  <h2> Requires </h2>
+  <ul>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/msrpcperformance.html">msrpcperformance</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/nmap.html">nmap</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/smb.html">smb</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/stdnse.html">stdnse</a></li>
+  
+     <li><a href="">string</a></li>
+  
+     <li><a href="">table</a></li>
+  
+  </ul>
+
+
+<hr/>
+
+
+
+
+
+
+<p><b>Author: </b>Ron Bowes</p>
+
+
+
+<p><b>License: </b> VER007 整理 <a href="http://www.ver007.com">http://www.ver007.com</a></p>
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+</BODY>
+</HTML>
+
+

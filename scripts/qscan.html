@@ -1,0 +1,226 @@
+﻿   <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+    <title>qscan NSE Script -VER007</title>
+    
+
+</HEAD>
+
+
+
+
+
+
+<a href="../nmap-script-help.html">HOME>>>>>>>>></a>
+
+
+
+<h1>File <code>qscan</code></h1>
+
+
+
+<p>
+
+
+<a href="http://nmap.org/book/nse-script-format.html#nse-format-rules">脚本使用类型</a>:
+hostrule
+<br>
+
+  脚本所属分类:
+  <i><a href="http://nmap.org/nsedoc/categories/safe.html">safe</a></i>, <i><a href="http://nmap.org/nsedoc/categories/discovery.html">discovery</a></i>
+  <br>
+
+脚本下载地址: <a href="http://nmap.org/svn/scripts/qscan.nse">http://nmap.org/svn/scripts/qscan.nse</a>
+</p>
+
+
+
+<h2> User Summary </h2>
+
+<p>
+Repeatedly probe open and/or closed ports on a host to obtain a series
+	of round-trip time values for each port.  These values are used to
+	group collections of ports which are statistically different from other
+	groups.  Ports being in different groups (or "families") may be due to
+	network mechanisms such as port forwarding to machines behind a NAT.
+</p>
+<p>
+	In order to group these ports into different families, some statistical
+	values must be computed.  Among these values are the mean and standard
+	deviation of the round-trip times for each port.  Once all of the times
+	have been recorded and these values have been computed, the Student's
+	t-test is used to test the statistical significance of the differences
+	between each port's data.  Ports which have round-trip times that are
+	statistically the same are grouped together in the same family.
+</p>
+<p>
+	This script is based on Doug Hoyte's Qscan documentation and patches
+	for Nmap.</p>
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+
+
+  <h2> Script Arguments </h2>
+  <p>
+    
+      <h4> numclosed </h4>
+      <p>
+Maximum number of closed ports to probe (default 1). A negative number disables the limit.</p>
+
+    
+      <h4> numopen </h4>
+      <p>
+Maximum number of open ports to probe (default 8). A negative number disables the limit.</p>
+
+    
+      <h4> confidence </h4>
+      <p>
+Confidence level: <code>0.75</code>, <code>0.9</code>, <code>0.95</code>, <code>0.975</code>, <code>0.99</code>, <code>0.995</code>, or <code>0.9995</code>.</p>
+
+    
+      <h4> numtrips </h4>
+      <p>
+Number of round-trip times to try to get.</p>
+
+    
+      <h4> delay </h4>
+      <p>
+Average delay between packet sends. This is a number followed by <code>ms</code> for milliseconds or <code>s</code> for seconds. (<code>m</code> and <code>h</code> are also supported but are too long for timeouts.) The actual delay will randomly vary between 50% and 150% of the time specified. Default: <code>200ms</code>.</p>
+
+    
+
+    
+  </p>
+
+
+<h2> Example Usage </h2>
+<p>执行格式
+
+  <pre>nmap --script qscan --script-args qscan.confidence=0.95,qscan.delay=200ms,qscan.numtrips=10 target
+</pre>
+
+</p>
+
+
+  <h2> Script Output </h2>
+<pre>| qscan:
+| PORT  FAMILY  MEAN (us)  STDDEV  LOSS (%)
+| 21    0       2082.70    460.72  0.0%
+| 22    0       2211.70    886.69  0.0%
+| 23    1       4631.90    606.67  0.0%
+| 24    0       1922.40    336.90  0.0%
+| 25    0       2017.30    404.31  0.0%
+| 80    1       4180.80    856.98  0.0%
+|_443   0       2013.30    368.91  0.0%
+</pre>
+
+
+
+  <h2> Requires </h2>
+  <ul>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/bin.html">bin</a></li>
+  
+     <li><a href="">math</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/nmap.html">nmap</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/packet.html">packet</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/stdnse.html">stdnse</a></li>
+  
+     <li><a href="">string</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/tab.html">tab</a></li>
+  
+     <li><a href="">table</a></li>
+  
+  </ul>
+
+
+<hr/>
+
+
+
+
+
+
+<p><b>Author: </b>Kris Katterjohn</p>
+
+
+
+<p><b>License: </b> VER007 整理 <a href="http://www.ver007.com">http://www.ver007.com</a></p>
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+</BODY>
+</HTML>
+
+

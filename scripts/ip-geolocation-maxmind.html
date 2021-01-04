@@ -1,0 +1,174 @@
+﻿   <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+    <title>ip-geolocation-maxmind NSE Script -VER007</title>
+    
+
+</HEAD>
+
+
+
+
+
+
+<a href="../nmap-script-help.html">HOME>>>>>>>>></a>
+
+
+
+<h1>File <code>ip-geolocation-maxmind</code></h1>
+
+
+
+<p>
+
+
+<a href="http://nmap.org/book/nse-script-format.html#nse-format-rules">脚本使用类型</a>:
+hostrule
+<br>
+
+  脚本所属分类:
+  <i><a href="http://nmap.org/nsedoc/categories/discovery.html">discovery</a></i>, <i><a href="http://nmap.org/nsedoc/categories/external.html">external</a></i>, <i><a href="http://nmap.org/nsedoc/categories/safe.html">safe</a></i>
+  <br>
+
+脚本下载地址: <a href="http://nmap.org/svn/scripts/ip-geolocation-maxmind.nse">http://nmap.org/svn/scripts/ip-geolocation-maxmind.nse</a>
+</p>
+
+
+
+<h2> User Summary </h2>
+
+<p>
+Tries to identify the physical location of an IP address using a
+Geolocation Maxmind database file (available from
+<a href="http://www.maxmind.com/app/ip-location">http://www.maxmind.com/app/ip-location</a>). This script supports queries
+using all Maxmind databases that are supported by their API including
+the commercial ones.</p>
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+
+
+  <h2> Script Arguments </h2>
+  <p>
+    
+      <h4> maxmind_db </h4>
+      <p>
+string indicates which file to use as a Maxmind database</p>
+
+    
+
+    
+  </p>
+
+
+<h2> Example Usage </h2>
+<p>执行格式
+
+  <pre>nmap --script ip-geolocation-maxmind &lt;target&gt; [--script-args ip-geolocation.maxmind_db=&lt;filename&gt;]
+</pre>
+
+</p>
+
+
+  <h2> Script Output </h2>
+<pre>| ip-geolocation-maxmind:
+| 74.207.244.221 (scanme.nmap.org)
+|   coordinates (lat,lon): 39.4899,-74.4773
+|_  city: Absecon, Philadelphia, PA, United States
+</pre>
+
+
+
+  <h2> Requires </h2>
+  <ul>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/bit.html">bit</a></li>
+  
+     <li><a href="">io</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/ipOps.html">ipOps</a></li>
+  
+     <li><a href="">math</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/stdnse.html">stdnse</a></li>
+  
+     <li><a href="">table</a></li>
+  
+  </ul>
+
+
+<hr/>
+
+
+
+
+
+
+<p><b>Author: </b>Gorjan Petrovski</p>
+
+
+
+<p><b>License: </b> VER007 整理 <a href="http://www.ver007.com">http://www.ver007.com</a></p>
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+</BODY>
+</HTML>
+
+

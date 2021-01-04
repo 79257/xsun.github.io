@@ -1,0 +1,249 @@
+﻿   <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+    <title>broadcast-ping NSE Script -VER007</title>
+    
+
+</HEAD>
+
+
+
+
+
+
+<a href="../nmap-script-help.html">HOME>>>>>>>>></a>
+
+
+
+<h1>File <code>broadcast-ping</code></h1>
+
+
+
+<p>
+
+
+<a href="http://nmap.org/book/nse-script-format.html#nse-format-rules">脚本使用类型</a>:
+prerule
+<br>
+
+  脚本所属分类:
+  <i><a href="http://nmap.org/nsedoc/categories/discovery.html">discovery</a></i>, <i><a href="http://nmap.org/nsedoc/categories/safe.html">safe</a></i>, <i><a href="http://nmap.org/nsedoc/categories/broadcast.html">broadcast</a></i>
+  <br>
+
+脚本下载地址: <a href="http://nmap.org/svn/scripts/broadcast-ping.nse">http://nmap.org/svn/scripts/broadcast-ping.nse</a>
+</p>
+
+
+
+<h2> User Summary </h2>
+
+<p>
+Sends broadcast pings on a selected interface using raw ethernet packets and 
+outputs the responding hosts' IP and MAC addresses or (if requested) adds them as targets.  Root privileges on UNIX are required to run this script since it uses raw sockets.  Most operating systems don't respond to broadcast-ping probes, 
+but they can be configured to do so.
+</p>
+<p>
+The interface on which is broadcasted can be specified using the -e Nmap option
+or the <code>broadcast-ping.interface</code> script-arg. If no interface is 
+specified this script broadcasts on all ethernet interfaces which have an IPv4
+address defined.
+</p>
+<p>
+The <code>newtarget</code> script-arg can be used so the script adds the 
+discovered IPs as targets.
+</p>
+<p>
+The timeout of the ICMP probes can be specified using the <code>timeout</code>
+script-arg. The default timeout is 3000 ms. A higher number might be necesary 
+when scanning across larger networks.
+</p>
+<p>
+The number of sent probes can be specified using the <code>num-probes</code>
+script-arg. The default number is 1. A higher value might get more results on 
+larger networks.
+</p>
+<p>
+The ICMP probes sent comply with the --ttl and --data-length Nmap options, so 
+you can use those to control the TTL(time to live) and ICMP payload length 
+respectively. The default value for TTL is 64, and the length of the payload 
+is 0. The payload is consisted of random bytes.</p>
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+    
+      
+        
+      
+    
+      
+        
+      
+    
+  
+  
+    
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+
+
+  <h2> Script Arguments </h2>
+  <p>
+    
+      <h4> broadcast-ping.timeout </h4>
+      <p>
+timespec specifying how long to wait for response (default 3s)</p>
+
+    
+      <h4> broadcast-ping.num_probes </h4>
+      <p>
+number specifying how many ICMP probes should be sent (default 1)</p>
+
+    
+      <h4> broadcast-ping.interface </h4>
+      <p>
+string specifying which interface to use for this script (default all interfaces)</p>
+
+    
+
+    
+      <h4> max-newtargets, newtargets </h4>
+      See the documentation for the <a href="http://nmap.org/nsedoc/lib/target.html#script-args">target</a> library.
+    
+  </p>
+
+
+<h2> Example Usage </h2>
+<p>执行格式
+
+  <pre>nmap -e &lt;interface&gt; [--ttl &lt;ttl&gt;] [--data-length &lt;payload_length&gt;]
+--script broadcast-ping [--script-args [broadcast-ping.timeout=&lt;ms&gt;],[num-probes=&lt;n&gt;]]
+</pre>
+
+</p>
+
+
+  <h2> Script Output </h2>
+<pre>| broadcast-ping: 
+|   IP: 192.168.1.1    MAC: 00:23:69:2a:b1:25 
+|   IP: 192.168.1.106  MAC: 1c:65:9d:88:d8:36
+|_  Use --script-args=newtargets to add the results as targets
+
+</pre>
+
+
+
+  <h2> Requires </h2>
+  <ul>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/bin.html">bin</a></li>
+  
+     <li><a href="">coroutine</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/nmap.html">nmap</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/packet.html">packet</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/stdnse.html">stdnse</a></li>
+  
+     <li><a href="">string</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/tab.html">tab</a></li>
+  
+     <li><a href="">table</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/target.html">target</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/openssl.html">openssl</a></li>
+  
+  </ul>
+
+
+<hr/>
+
+
+
+
+
+
+<p><b>Author: </b>Gorjan Petrovski</p>
+
+
+
+<p><b>License: </b> VER007 整理 <a href="http://www.ver007.com">http://www.ver007.com</a></p>
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+</BODY>
+</HTML>
+
+

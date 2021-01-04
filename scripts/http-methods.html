@@ -1,0 +1,286 @@
+﻿   <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+    <title>http-methods NSE Script -VER007</title>
+    
+
+</HEAD>
+
+
+
+
+
+
+<a href="../nmap-script-help.html">HOME>>>>>>>>></a>
+
+
+
+<h1>File <code>http-methods</code></h1>
+
+
+
+<p>
+
+
+<a href="http://nmap.org/book/nse-script-format.html#nse-format-rules">脚本使用类型</a>:
+portrule
+<br>
+
+  脚本所属分类:
+  <i><a href="http://nmap.org/nsedoc/categories/default.html">default</a></i>, <i><a href="http://nmap.org/nsedoc/categories/safe.html">safe</a></i>
+  <br>
+
+脚本下载地址: <a href="http://nmap.org/svn/scripts/http-methods.nse">http://nmap.org/svn/scripts/http-methods.nse</a>
+</p>
+
+
+
+<h2> User Summary </h2>
+
+<p>
+Finds out what options are supported by an HTTP server by sending an
+OPTIONS request. Lists potentially risky methods. Optionally tests each
+method individually to see if they are subject to e.g. IP address
+restrictions.
+</p>
+<p>
+In this script, "potentially risky" methods are anything except GET,
+HEAD, POST, and OPTIONS. If the script reports potentially risky
+methods, they may not all be security risks, but you should check to
+make sure. This page lists the dangers of some common methods:
+</p>
+<p>
+<a href="http://www.owasp.org/index.php/Testing_for_HTTP_Methods_and_XST_%28OWASP-CM-008%29">http://www.owasp.org/index.php/Testing_for_HTTP_Methods_and_XST_%28OWASP-CM-008%29</a>
+</p>
+<p>
+The list of supported methods comes from the contents of the Allow and
+Public header fields. In verbose mode, a list of all methods is printed,
+followed by the list of potentially risky methods. Without verbose mode,
+only the potentially risky methods are shown.</p>
+
+
+
+
+
+
+
+  
+  
+  
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+  
+  
+    
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+  
+  
+    
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+
+
+  <h2> Script Arguments </h2>
+  <p>
+    
+      <h4> http-methods.retest </h4>
+      <p>
+If defined, do a request using each method
+individually and show the response code. Use of this argument can
+make this script unsafe; for example <code>DELETE /</code> is
+possible.</p>
+
+    
+      <h4> http-methods.url-path </h4>
+      <p>
+The path to request. Defaults to
+<code>/</code>.</p>
+
+    
+
+    
+      <h4> smbdomain, smbhash, smbnoguest, smbpassword, smbtype, smbusername </h4>
+      See the documentation for the <a href="http://nmap.org/nsedoc/lib/smbauth.html#script-args">smbauth</a> library.
+    
+      <h4> http.max-cache-size, http.max-pipeline, http.pipeline, http.useragent </h4>
+      See the documentation for the <a href="http://nmap.org/nsedoc/lib/http.html#script-args">http</a> library.
+    
+  </p>
+
+
+<h2> Example Usage </h2>
+<p>执行格式
+
+  <pre>nmap --script=http-methods.nse --script-args http-methods.retest=1 &lt;target&gt;
+nmap --script=http-methods.nse --script-args http-methods.url-path=/website &lt;target&gt;</pre>
+
+</p>
+
+
+  <h2> Script Output </h2>
+<pre>80/tcp open  http
+| http-methods: GET HEAD POST OPTIONS TRACE
+| Potentially risky methods: TRACE
+| See http://nmap.org/nsedoc/scripts/http-methods.html
+| GET / -&gt; HTTP/1.1 200 OK
+| HEAD / -&gt; HTTP/1.1 200 OK
+| POST / -&gt; HTTP/1.1 200 OK
+| OPTIONS / -&gt; HTTP/1.1 200 OK
+|_TRACE / -&gt; HTTP/1.1 200 OK
+</pre>
+
+
+
+  <h2> Requires </h2>
+  <ul>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/http.html">http</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/nmap.html">nmap</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/shortport.html">shortport</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/stdnse.html">stdnse</a></li>
+  
+     <li><a href="">string</a></li>
+  
+  </ul>
+
+
+<hr/>
+
+
+
+
+
+
+<p><b>Author: </b>Bernd Stroessenreuther &lt;berny1@users.sourceforge.net&gt;</p>
+
+
+
+<p><b>License: </b> VER007 整理 <a href="http://www.ver007.com">http://www.ver007.com</a></p>
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+</BODY>
+</HTML>
+
+

@@ -1,0 +1,182 @@
+﻿   <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+    <title>dns-nsid NSE Script -VER007</title>
+    
+
+</HEAD>
+
+
+
+
+
+
+<a href="../nmap-script-help.html">HOME>>>>>>>>></a>
+
+
+
+<h1>File <code>dns-nsid</code></h1>
+
+
+
+<p>
+
+
+<a href="http://nmap.org/book/nse-script-format.html#nse-format-rules">脚本使用类型</a>:
+portrule
+<br>
+
+  脚本所属分类:
+  <i><a href="http://nmap.org/nsedoc/categories/discovery.html">discovery</a></i>, <i><a href="http://nmap.org/nsedoc/categories/default.html">default</a></i>
+  <br>
+
+脚本下载地址: <a href="http://nmap.org/svn/scripts/dns-nsid.nse">http://nmap.org/svn/scripts/dns-nsid.nse</a>
+</p>
+
+
+
+<h2> User Summary </h2>
+
+<p>
+Retrieves information from a DNS nameserver by requesting
+its nameserver ID (nsid) and asking for its id.server and
+version.bind values. This script performs the same queries as the following
+two dig commands:
+  - dig CH TXT bind.version @target
+  - dig +nsid CH TXT id.server @target
+</p>
+<p>
+References:
+[1]<a href="http://www.ietf.org/rfc/rfc5001.txt">http://www.ietf.org/rfc/rfc5001.txt</a>
+[2]<a href="http://www.ietf.org/rfc/rfc4892.txt">http://www.ietf.org/rfc/rfc4892.txt</a></p>
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+
+
+
+<h2> Example Usage </h2>
+<p>执行格式
+
+  <pre>nmap -sSU -p 53 --script dns-nsid &lt;target&gt;
+</pre>
+
+</p>
+
+
+  <h2> Script Output </h2>
+<pre>53/udp open  domain  udp-response
+| dns-nsid: 
+|   NSID dns.example.com (646E732E6578616D706C652E636F6D)
+|   id.server: dns.example.com
+|_  bind.version: 9.7.3-P3
+</pre>
+
+
+
+  <h2> Requires </h2>
+  <ul>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/bin.html">bin</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/dns.html">dns</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/shortport.html">shortport</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/stdnse.html">stdnse</a></li>
+  
+     <li><a href="">table</a></li>
+  
+  </ul>
+
+
+<hr/>
+
+
+
+
+
+
+<p><b>Author: </b>John Bond</p>
+
+
+
+<p><b>License: </b> Simplified (2-clause) BSD license--See <a href="http://nmap.org/svn/docs/licenses/BSD-simplified">http://nmap.org/svn/docs/licenses/BSD-simplified</a></p>
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+</BODY>
+</HTML>
+
+

@@ -1,0 +1,307 @@
+﻿   <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+    <title>http-traceroute NSE Script -VER007</title>
+    
+
+</HEAD>
+
+
+
+
+
+
+<a href="../nmap-script-help.html">HOME>>>>>>>>></a>
+
+
+
+<h1>File <code>http-traceroute</code></h1>
+
+
+
+<p>
+
+
+<a href="http://nmap.org/book/nse-script-format.html#nse-format-rules">脚本使用类型</a>:
+portrule
+<br>
+
+  脚本所属分类:
+  <i><a href="http://nmap.org/nsedoc/categories/discovery.html">discovery</a></i>, <i><a href="http://nmap.org/nsedoc/categories/safe.html">safe</a></i>
+  <br>
+
+脚本下载地址: <a href="http://nmap.org/svn/scripts/http-traceroute.nse">http://nmap.org/svn/scripts/http-traceroute.nse</a>
+</p>
+
+
+
+<h2> User Summary </h2>
+
+<p>
+Exploits the Max-Forwards HTTP header to detect the presence of reverse proxies.
+</p>
+<p>
+The script works by sending HTTP requests with values of the Max-Forwards HTTP header varying
+from 0 to 2 and checking for any anomalies in certain response values such as the status code,
+Server, Content-Type and Content-Length HTTP headers and body values such as the html title.
+</p>
+<p>
+Based on the work of:
+<ul>
+<li>Nicolas Gregoire (nicolas.gregoire@agarri.fr)
+</li>
+<li>Julien Cayssol (tools@aqwz.com)
+</li>
+</ul>
+</p>
+<p>
+For more information, see:
+    * <a href="http://www.agarri.fr/kom/archives/2011/11/12/traceroute-like_http_scanner/index.html">http://www.agarri.fr/kom/archives/2011/11/12/traceroute-like_http_scanner/index.html</a></p>
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+  
+  
+    
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+  
+  
+    
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+
+
+  <h2> Script Arguments </h2>
+  <p>
+    
+      <h4> http-traceroute.path </h4>
+      <p>
+The path to send requests to. Defaults to <code>/</code>.</p>
+
+    
+      <h4> http-traceroute.method </h4>
+      <p>
+HTTP request method to use. Defaults to <code>GET</code>.
+among other values, TRACE is probably the most interesting.</p>
+
+    
+
+    
+      <h4> smbdomain, smbhash, smbnoguest, smbpassword, smbtype, smbusername </h4>
+      See the documentation for the <a href="http://nmap.org/nsedoc/lib/smbauth.html#script-args">smbauth</a> library.
+    
+      <h4> http.max-cache-size, http.max-pipeline, http.pipeline, http.useragent </h4>
+      See the documentation for the <a href="http://nmap.org/nsedoc/lib/http.html#script-args">http</a> library.
+    
+  </p>
+
+
+<h2> Example Usage </h2>
+<p>执行格式
+
+  <pre>nmap --script=http-traceroute &lt;targets&gt;
+</pre>
+
+</p>
+
+
+  <h2> Script Output </h2>
+<pre>PORT   STATE SERVICE REASON
+80/tcp open  http    syn-ack
+| http-traceroute: 
+|   HTML title
+|     Hop #1: Twitter / Over capacity
+|     Hop #2: t.co / Twitter
+|     Hop #3: t.co / Twitter
+|   Status Code
+|     Hop #1: 502
+|     Hop #2: 200
+|     Hop #3: 200
+|   server
+|     Hop #1: Apache
+|     Hop #2: hi
+|     Hop #3: hi
+|   content-type
+|     Hop #1: text/html; charset=UTF-8
+|     Hop #2: text/html; charset=utf-8
+|     Hop #3: text/html; charset=utf-8
+|   content-length
+|     Hop #1: 4833
+|     Hop #2: 3280
+|     Hop #3: 3280
+|   last-modified
+|     Hop #1: Thu, 05 Apr 2012 00:19:40 GMT
+|     Hop #2
+|_    Hop #3</pre>
+
+
+
+  <h2> Requires </h2>
+  <ul>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/http.html">http</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/nmap.html">nmap</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/pcre.html">pcre</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/shortport.html">shortport</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/stdnse.html">stdnse</a></li>
+  
+     <li><a href="">table</a></li>
+  
+  </ul>
+
+
+<hr/>
+
+
+
+
+
+
+<p><b>Author: </b>Hani Benhabiles</p>
+
+
+
+<p><b>License: </b> VER007 整理 <a href="http://www.ver007.com">http://www.ver007.com</a></p>
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+</BODY>
+</HTML>
+
+

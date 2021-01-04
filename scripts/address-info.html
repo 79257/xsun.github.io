@@ -1,0 +1,203 @@
+﻿   <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+    <title>address-info NSE Script -VER007</title>
+    
+
+</HEAD>
+
+
+
+
+
+
+<a href="../nmap-script-help.html">HOME>>>>>>>>></a>
+
+
+
+<h1>File <code>address-info</code></h1>
+
+
+
+<p>
+
+
+<a href="http://nmap.org/book/nse-script-format.html#nse-format-rules">脚本使用类型</a>:
+hostrule
+<br>
+
+  脚本所属分类:
+  <i><a href="http://nmap.org/nsedoc/categories/default.html">default</a></i>, <i><a href="http://nmap.org/nsedoc/categories/safe.html">safe</a></i>
+  <br>
+
+脚本下载地址: <a href="http://nmap.org/svn/scripts/address-info.nse">http://nmap.org/svn/scripts/address-info.nse</a>
+</p>
+
+
+
+<h2> User Summary </h2>
+
+<p>
+Shows extra information about IPv6 addresses, such as embedded MAC or IPv4 addresses when available.
+</p>
+<p>
+Some IP address formats encode extra information; for example some IPv6
+addresses encode an IPv4 address or MAC address. This script can decode
+these address formats:
+<ul>
+<li>IPv4-compatible IPv6 addresses,
+</li>
+<li>IPv4-mapped IPv6 addresses,
+</li>
+<li>Teredo IPv6 addresses,
+</li>
+<li>6to4 IPv6 addresses,
+</li>
+<li>IPv6 addresses using an EUI-64 interface ID,
+</li>
+<li>IPv4-embedded IPv6 addresses,
+</li>
+<li>IPv4-translated IPv6 addresses and
+</li>
+<li>ISATAP Modified EUI-64 IPv6 addresses.
+</li>
+</ul>
+</p>
+<p>
+See RFC 4291 for general IPv6 addressing architecture and the
+definitions of some terms.</p>
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+
+
+
+<h2> Example Usage </h2>
+<p>执行格式
+
+  <pre>nmap -sV -sC &lt;target&gt;</pre>
+
+</p>
+
+
+  <h2> Script Output </h2>
+<pre>Nmap scan report for ::1.2.3.4
+Host script results:
+|_address-info: IPv4-compatible; IPv4 address: 1.2.3.4
+
+Nmap scan report for ::ffff:1.2.3.4
+Host script results:
+|_address-info: IPv4-mapped; IPv4 address: 1.2.3.4
+
+Nmap scan report for 2001:0:506:708:282a:3d75:fefd:fcfb
+Host script results:
+| address-info: Teredo;
+|   Server IPv4 address: 5.6.7.8
+|   Client IPv4 address: 1.2.3.4
+|_  UDP port: 49802
+
+Nmap scan report for 2002:102:304::1
+Host script results:
+|_address-info: 6to4; IPv4 address: 1.2.3.4
+
+Nmap scan report for fe80::a8bb:ccff:fedd:eeff
+Host script results:
+|_address-info: IPv6 EUI-64; MAC address: aa:bb:cc:dd:ee:ff (Unknown)
+
+Nmap scan report for 64:ff9b::c000:221
+Host script results:
+|_address-info: IPv4-embedded IPv6 address; IPv4 address: 192.0.2.33
+
+Nmap scan report for ::ffff:0:c0a8:101
+Host script results:
+|_address-info: IPv4-translated IPv6 address; IPv4 address: 192.168.1.1
+</pre>
+
+
+
+  <h2> Requires </h2>
+  <ul>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/bit.html">bit</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/datafiles.html">datafiles</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/nmap.html">nmap</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/stdnse.html">stdnse</a></li>
+  
+     <li><a href="">string</a></li>
+  
+  </ul>
+
+
+<hr/>
+
+
+
+
+
+
+<p><b>Author: </b>David Fifield</p>
+
+
+
+<p><b>License: </b> VER007 整理 <a href="http://www.ver007.com">http://www.ver007.com</a></p>
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+</BODY>
+</HTML>
+
+

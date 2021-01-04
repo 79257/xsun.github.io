@@ -1,0 +1,154 @@
+﻿   <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+    <title>reverse-index NSE Script -VER007</title>
+    
+
+</HEAD>
+
+
+
+
+
+
+<a href="../nmap-script-help.html">HOME>>>>>>>>></a>
+
+
+
+<h1>File <code>reverse-index</code></h1>
+
+
+
+<p>
+
+
+<a href="http://nmap.org/book/nse-script-format.html#nse-format-rules">脚本使用类型</a>:
+
+<br>
+
+  脚本所属分类:
+  <i><a href="http://nmap.org/nsedoc/categories/safe.html">safe</a></i>
+  <br>
+
+脚本下载地址: <a href="http://nmap.org/svn/scripts/reverse-index.nse">http://nmap.org/svn/scripts/reverse-index.nse</a>
+</p>
+
+
+
+<h2> User Summary </h2>
+
+<p>
+Creates a reverse index at the end of scan output showing which hosts run a particular service.  This is in addition to Nmap's normal output listing the services on each host.</p>
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+
+
+  <h2> Script Arguments </h2>
+  <p>
+    
+      <h4> reverse-index.mode </h4>
+      <p>
+the output display mode, can be either horizontal
+      or vertical (default: horizontal)</p>
+
+    
+
+    
+  </p>
+
+
+<h2> Example Usage </h2>
+<p>执行格式
+
+  <pre>nmap --script reverse-index &lt;hosts/networks&gt;
+</pre>
+
+</p>
+
+
+  <h2> Script Output </h2>
+<pre>Post-scan script results:
+| reverse-index: 
+|   22/tcp: 192.168.0.60
+|   23/tcp: 192.168.0.100
+|   80/tcp: 192.168.0.70
+|   445/tcp: 192.168.0.1
+|   53/udp: 192.168.0.105, 192.168.0.70, 192.168.0.60, 192.168.0.1
+|_  5353/udp: 192.168.0.105, 192.168.0.70, 192.168.0.60, 192.168.0.1
+</pre>
+
+
+
+  <h2> Requires </h2>
+  <ul>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/nmap.html">nmap</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/stdnse.html">stdnse</a></li>
+  
+     <li><a href="">table</a></li>
+  
+  </ul>
+
+
+<hr/>
+
+
+
+
+
+
+<p><b>Author: </b>Patrik Karlsson</p>
+
+
+
+<p><b>License: </b> VER007 整理 <a href="http://www.ver007.com">http://www.ver007.com</a></p>
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+</BODY>
+</HTML>
+
+

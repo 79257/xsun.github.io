@@ -1,0 +1,266 @@
+﻿   <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+    <title>snmp-brute NSE Script -VER007</title>
+    
+
+</HEAD>
+
+
+
+
+
+
+<a href="../nmap-script-help.html">HOME>>>>>>>>></a>
+
+
+
+<h1>File <code>snmp-brute</code></h1>
+
+
+
+<p>
+
+
+<a href="http://nmap.org/book/nse-script-format.html#nse-format-rules">脚本使用类型</a>:
+portrule
+<br>
+
+  脚本所属分类:
+  <i><a href="http://nmap.org/nsedoc/categories/intrusive.html">intrusive</a></i>, <i><a href="http://nmap.org/nsedoc/categories/brute.html">brute</a></i>
+  <br>
+
+脚本下载地址: <a href="http://nmap.org/svn/scripts/snmp-brute.nse">http://nmap.org/svn/scripts/snmp-brute.nse</a>
+</p>
+
+
+
+<h2> User Summary </h2>
+
+<p>
+Attempts to find an SNMP community string by brute force guessing.
+</p>
+<p>
+This script opens a sending socket and a sniffing pcap socket in parallel 
+threads. The sending socket sends the SNMP probes with the community strings,
+while the pcap socket sniffs the network for an answer to the probes. If 
+valid community strings are found, they are added to the creds database and
+reported in the output.
+</p>
+<p>
+The script takes the <code>snmp-brute.communitiesdb</code> argument that
+allows the user to define the file that contains the community strings to
+be used. If not defined, the default wordlist used to bruteforce the SNMP
+community strings is <code>nselib/data/snmpcommunities.lst</code>. In case
+this wordlist does not exist, the script falls back to
+<code>nselib/data/passwords.lst</code>
+</p>
+<p>
+No output is reported if no valid account is found.</p>
+
+
+
+
+
+
+
+  
+  
+  
+    
+      
+        
+      
+    
+  
+  
+    
+    
+  
+
+  
+  
+  
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+  
+  
+    
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+
+
+  <h2> Script Arguments </h2>
+  <p>
+    
+      <h4> snmp-brute.communitiesdb </h4>
+      <p>
+The filename of a list of community strings to try.</p>
+
+    
+
+    
+      <h4> passdb, unpwdb.passlimit, unpwdb.timelimit, unpwdb.userlimit, userdb </h4>
+      See the documentation for the <a href="http://nmap.org/nsedoc/lib/unpwdb.html#script-args">unpwdb</a> library.
+    
+      <h4> snmpcommunity </h4>
+      See the documentation for the <a href="http://nmap.org/nsedoc/lib/snmp.html#script-args">snmp</a> library.
+    
+  </p>
+
+
+<h2> Example Usage </h2>
+<p>执行格式
+
+  <pre>nmap -sU --script snmp-brute &lt;target&gt; [--script-args snmp-brute.communitiesdb=&lt;wordlist&gt; ]
+</pre>
+
+</p>
+
+
+  <h2> Script Output </h2>
+<pre>PORT    STATE SERVICE
+161/udp open  snmp
+| snmp-brute: 
+|   dragon - Valid credentials
+|_  jordan - Valid credentials</pre>
+
+
+
+  <h2> Requires </h2>
+  <ul>
+  
+     <li><a href="">coroutine</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/creds.html">creds</a></li>
+  
+     <li><a href="">io</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/nmap.html">nmap</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/packet.html">packet</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/shortport.html">shortport</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/snmp.html">snmp</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/stdnse.html">stdnse</a></li>
+  
+     <li><a href="">string</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/unpwdb.html">unpwdb</a></li>
+  
+  </ul>
+
+
+<hr/>
+
+
+
+
+
+
+<p><b>Author: </b>Philip Pickering, Gorjan Petrovski, Patrik Karlsson</p>
+
+
+
+<p><b>License: </b> VER007 整理 <a href="http://www.ver007.com">http://www.ver007.com</a></p>
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+</BODY>
+</HTML>
+
+

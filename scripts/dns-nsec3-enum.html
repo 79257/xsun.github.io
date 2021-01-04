@@ -1,0 +1,349 @@
+﻿   <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+    <title>dns-nsec3-enum NSE Script -VER007</title>
+    
+
+</HEAD>
+
+
+
+
+
+
+<a href="../nmap-script-help.html">HOME>>>>>>>>></a>
+
+
+
+<h1>File <code>dns-nsec3-enum</code></h1>
+
+
+
+<p>
+
+
+<a href="http://nmap.org/book/nse-script-format.html#nse-format-rules">脚本使用类型</a>:
+portrule
+<br>
+
+  脚本所属分类:
+  <i><a href="http://nmap.org/nsedoc/categories/discovery.html">discovery</a></i>, <i><a href="http://nmap.org/nsedoc/categories/intrusive.html">intrusive</a></i>
+  <br>
+
+脚本下载地址: <a href="http://nmap.org/svn/scripts/dns-nsec3-enum.nse">http://nmap.org/svn/scripts/dns-nsec3-enum.nse</a>
+</p>
+
+
+
+<h2> User Summary </h2>
+
+<p>
+Tries to enumerate domain names from the DNS server that supports DNSSEC
+NSEC3 records.
+</p>
+<p>
+The script queries for nonexistant domains until it exhausts all domain
+ranges keeping track of hashes. At the end, all hashes are printed along
+with salt and number of iterations used. This technique is known as
+"NSEC3 walking".
+</p>
+<p>
+That info should then be fed into an offline cracker, like
+<code>unhash</code> from <a href="http://dnscurve.org/nsec3walker.html">http://dnscurve.org/nsec3walker.html</a>, to
+bruteforce the actual names from the hashes. Assuming that the script
+output was written into a text file <code>hashes.txt</code> like:
+<pre>domain example.com
+salt 123456
+iterations 10
+nexthash d1427bj0ahqnpi4t0t0aaun18oqpgcda vhnelm23s1m3japt7gohc82hgr9un2at
+nexthash k7i4ekvi22ebrim5b6celtaniknd6ilj prv54a3cr1tbcvqslrb7bftf5ji5l0p8
+nexthash 9ool6bk7r2diaiu81ctiemmb6n961mph nm7v0ig7h9c0agaedc901kojfj9bgabj
+nexthash 430456af8svfvl98l66shhrgucoip7mi mges520acstgaviekurg3oksh9u31bmb</pre>
+</p>
+<p>
+Run this command to recover the domain names:
+<pre># ./unhash &lt; hashes.txt &gt; domains.txt
+names: 8
+d1427bj0ahqnpi4t0t0aaun18oqpgcda ns.example.com.
+found 1 private NSEC3 names (12%) using 235451 hash computations
+k7i4ekvi22ebrim5b6celtaniknd6ilj vulpix.example.com.
+found 2 private NSEC3 names (25%) using 35017190 hash computations</pre>
+</p>
+<p>
+Use the <code>dns-nsec-enum</code> script to handle servers that use NSEC
+rather than NSEC3.
+</p>
+<p>
+References:
+<ul>
+<li><a href="http://dnscurve.org/nsec3walker.html">http://dnscurve.org/nsec3walker.html</a></li>
+</ul>
+</p>
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+  
+  
+    
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+  
+  
+    
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+
+
+  <h2> Script Arguments </h2>
+  <p>
+    
+      <h4> dns-nsec3-enum.domains </h4>
+      <p>
+The domain or list of domains to
+enumerate. If not provided, the script will make a guess based on the
+name of the target.</p>
+
+    
+      <h4> dns-nsec3-enum.timelimit </h4>
+      <p>
+Sets a script run time limit. Default 30 minutes.</p>
+
+    
+
+    
+      <h4> randomseed, smbbasic, smbport, smbsign </h4>
+      See the documentation for the <a href="http://nmap.org/nsedoc/lib/smb.html#script-args">smb</a> library.
+    
+      <h4> smbdomain, smbhash, smbnoguest, smbpassword, smbtype, smbusername </h4>
+      See the documentation for the <a href="http://nmap.org/nsedoc/lib/smbauth.html#script-args">smbauth</a> library.
+    
+  </p>
+
+
+<h2> Example Usage </h2>
+<p>执行格式
+
+  <pre>nmap  -sU -p 53 &lt;target&gt; --script=dns-nsec3-enum --script-args dns-nsec3-enum.domains=example.com 
+</pre>
+
+</p>
+
+
+  <h2> Script Output </h2>
+<pre>PORT   STATE SERVICE
+53/udp open  domain
+| dns-nsec3-enum:
+|   domain example.com
+|   salt 123456
+|   iterations 10
+|   nexthash d1427bj0ahqnpi4t0t0aaun18oqpgcda vhnelm23s1m3japt7gohc82hgr9un2at
+|   nexthash k7i4ekvi22ebrim5b6celtaniknd6ilj prv54a3cr1tbcvqslrb7bftf5ji5l0p8
+|   nexthash 9ool6bk7r2diaiu81ctiemmb6n961mph nm7v0ig7h9c0agaedc901kojfj9bgabj
+|   nexthash 430456af8svfvl98l66shhrgucoip7mi mges520acstgaviekurg3oksh9u31bmb
+|_  Total hashes found: 8</pre>
+
+
+
+  <h2> Requires </h2>
+  <ul>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/stdnse.html">stdnse</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/shortport.html">shortport</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/dns.html">dns</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/base32.html">base32</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/msrpc.html">msrpc</a></li>
+  
+     <li><a href="">math</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/bin.html">bin</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/nmap.html">nmap</a></li>
+  
+     <li><a href="">string</a></li>
+  
+     <li><a href="">table</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/openssl.html">openssl</a></li>
+  
+  </ul>
+
+
+<hr/>
+
+
+
+
+
+
+<p><b>Author: </b>Aleksandar Nikolic, John Bond</p>
+
+
+
+<p><b>License: </b> Simplified (2-clause) BSD license--See <a href="http://nmap.org/svn/docs/licenses/BSD-simplified">http://nmap.org/svn/docs/licenses/BSD-simplified</a></p>
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+</BODY>
+</HTML>
+
+

@@ -1,0 +1,236 @@
+﻿   <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+    <title>broadcast-avahi-dos NSE Script -VER007</title>
+    
+
+</HEAD>
+
+
+
+
+
+
+<a href="../nmap-script-help.html">HOME>>>>>>>>></a>
+
+
+
+<h1>File <code>broadcast-avahi-dos</code></h1>
+
+
+
+<p>
+
+
+<a href="http://nmap.org/book/nse-script-format.html#nse-format-rules">脚本使用类型</a>:
+prerule
+<br>
+
+  脚本所属分类:
+  <i><a href="http://nmap.org/nsedoc/categories/broadcast.html">broadcast</a></i>, <i><a href="http://nmap.org/nsedoc/categories/dos.html">dos</a></i>, <i><a href="http://nmap.org/nsedoc/categories/intrusive.html">intrusive</a></i>, <i><a href="http://nmap.org/nsedoc/categories/vuln.html">vuln</a></i>
+  <br>
+
+脚本下载地址: <a href="http://nmap.org/svn/scripts/broadcast-avahi-dos.nse">http://nmap.org/svn/scripts/broadcast-avahi-dos.nse</a>
+</p>
+
+
+
+<h2> User Summary </h2>
+
+<p>
+Attempts to discover hosts in the local network using the DNS Service
+Discovery protocol and sends a NULL UDP packet to each host to test
+if it is vulnerable to the Avahi NULL UDP packet denial of service
+(CVE-2011-1002).
+</p>
+<p>
+The <code>broadcast-avahi-dos.wait</code> script argument specifies how
+many number of seconds to wait before a new attempt of host discovery.
+Each host who does not respond to this second attempt will be considered
+vulnerable.
+</p>
+<p>
+Reference:
+<ul>
+<li><a href="http://avahi.org/ticket/325">http://avahi.org/ticket/325</a>
+</li>
+<li><a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2011-1002">http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2011-1002</a></li>
+</ul>
+</p>
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+    
+      
+        
+      
+    
+      
+        
+      
+    
+  
+  
+    
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+    
+      
+        
+      
+    
+  
+  
+    
+    
+  
+
+  
+  
+  
+  
+
+
+
+  <h2> Script Arguments </h2>
+  <p>
+    
+      <h4> broadcast-avahi-dos.wait </h4>
+      <p>
+Wait time in seconds before executing
+      the check, the default value is 20 seconds.</p>
+
+    
+
+    
+      <h4> max-newtargets, newtargets </h4>
+      See the documentation for the <a href="http://nmap.org/nsedoc/lib/target.html#script-args">target</a> library.
+    
+      <h4> dnssd.services </h4>
+      See the documentation for the <a href="http://nmap.org/nsedoc/lib/dnssd.html#script-args">dnssd</a> library.
+    
+  </p>
+
+
+<h2> Example Usage </h2>
+<p>执行格式
+
+  <pre>nmap --script=broadcast-avahi-dos
+</pre>
+
+</p>
+
+
+  <h2> Script Output </h2>
+<pre>| broadcast-avahi-dos: 
+|   Discovered hosts:
+|     10.0.1.150
+|     10.0.1.151
+|   After NULL UDP avahi packet DoS (CVE-2011-1002).
+|   Hosts that seem down (vulnerable):
+|_    10.0.1.151
+</pre>
+
+
+
+  <h2> Requires </h2>
+  <ul>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/dnssd.html">dnssd</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/nmap.html">nmap</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/stdnse.html">stdnse</a></li>
+  
+     <li><a href="">table</a></li>
+  
+  </ul>
+
+
+<hr/>
+
+
+
+
+
+
+<p><b>Author: </b>Djalal Harouni</p>
+
+
+
+<p><b>License: </b> VER007 整理 <a href="http://www.ver007.com">http://www.ver007.com</a></p>
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+</BODY>
+</HTML>
+
+

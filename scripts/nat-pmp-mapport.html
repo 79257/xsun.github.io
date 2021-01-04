@@ -1,0 +1,211 @@
+﻿   <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+    <title>nat-pmp-mapport NSE Script -VER007</title>
+    
+
+</HEAD>
+
+
+
+
+
+
+<a href="../nmap-script-help.html">HOME>>>>>>>>></a>
+
+
+
+<h1>File <code>nat-pmp-mapport</code></h1>
+
+
+
+<p>
+
+
+<a href="http://nmap.org/book/nse-script-format.html#nse-format-rules">脚本使用类型</a>:
+portrule
+<br>
+
+  脚本所属分类:
+  <i><a href="http://nmap.org/nsedoc/categories/discovery.html">discovery</a></i>, <i><a href="http://nmap.org/nsedoc/categories/safe.html">safe</a></i>
+  <br>
+
+脚本下载地址: <a href="http://nmap.org/svn/scripts/nat-pmp-mapport.nse">http://nmap.org/svn/scripts/nat-pmp-mapport.nse</a>
+</p>
+
+
+
+<h2> User Summary </h2>
+
+<p>
+Maps a WAN port on the router to a local port on the client using the NAT Port Mapping Protocol (NAT-PMP).  It supports the following operations:
+o map - maps a new external port on the router to an internal port of the requesting IP
+o unmap - unmaps a previously mapped port for the requesting IP
+o unmapall - unmaps all previously mapped ports for the requesting IP</p>
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+
+
+  <h2> Script Arguments </h2>
+  <p>
+    
+      <h4> nat-pmp-mapport.op </h4>
+      <p>
+operation, can be either map, unmap or unmap all
+      o map allows you to map an external port to an internal port of the calling IP
+      o unmap removes the external port mapping for the specified ports and protocol
+      o unmapall removes all mappings for the specified protocol and calling IP</p>
+
+    
+      <h4> nat-pmp-mapport.protocol </h4>
+      <p>
+the protocol to map, can be either tcp or udp.</p>
+
+    
+      <h4> nat-pmp-mapport.privport </h4>
+      <p>
+the internal port of the calling IP to map requests
+      to. This port will recieve all requests coming in to the external port on the
+      router.</p>
+
+    
+      <h4> nat-pmp-mapport.pubport </h4>
+      <p>
+the external port to map on the router. The
+      specified port is treated as the requested port. If the port is available
+      it will be allocated to the caller, otherwise the router will simply
+      choose another port, create the mapping and return the resulting port.</p>
+
+    
+      <h4> nat-pmp-mapport.lifetime </h4>
+      <p>
+the lifetime of the mapping in seconds (default: 3600)</p>
+
+    
+
+    
+  </p>
+
+
+<h2> Example Usage </h2>
+<p>执行格式
+
+  <pre>nmap -sU -p 5351 &lt;ip&gt; --script nat-pmp-mapport --script-args='op=map,pubport=8080,privport=8080,protocol=tcp'
+nmap -sU -p 5351 &lt;ip&gt; --script nat-pmp-mapport --script-args='op=unmap,pubport=8080,privport=8080,protocol=tcp'
+nmap -sU -p 5351 &lt;ip&gt; --script nat-pmp-mapport --script-args='op=unmapall,protocol=tcp'
+</pre>
+
+</p>
+
+
+  <h2> Script Output </h2>
+<pre>PORT     STATE SERVICE
+5351/udp open  nat-pmp
+| nat-pmp-mapport: 
+|_  Successfully mapped tcp 1.2.3.4:8080 -&gt; 192.168.0.100:80
+</pre>
+
+
+
+  <h2> Requires </h2>
+  <ul>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/natpmp.html">natpmp</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/nmap.html">nmap</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/shortport.html">shortport</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/stdnse.html">stdnse</a></li>
+  
+     <li><a href="">table</a></li>
+  
+  </ul>
+
+
+<hr/>
+
+
+
+
+
+
+<p><b>Author: </b>Patrik Karlsson</p>
+
+
+
+<p><b>License: </b> VER007 整理 <a href="http://www.ver007.com">http://www.ver007.com</a></p>
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+</BODY>
+</HTML>
+
+

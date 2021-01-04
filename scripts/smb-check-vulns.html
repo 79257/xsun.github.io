@@ -1,0 +1,386 @@
+﻿   <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+    <title>smb-check-vulns NSE Script -VER007</title>
+    
+
+</HEAD>
+
+
+
+
+
+
+<a href="../nmap-script-help.html">HOME>>>>>>>>></a>
+
+
+
+<h1>File <code>smb-check-vulns</code></h1>
+
+
+
+<p>
+
+
+<a href="http://nmap.org/book/nse-script-format.html#nse-format-rules">脚本使用类型</a>:
+hostrule
+<br>
+
+  脚本所属分类:
+  <i><a href="http://nmap.org/nsedoc/categories/intrusive.html">intrusive</a></i>, <i><a href="http://nmap.org/nsedoc/categories/exploit.html">exploit</a></i>, <i><a href="http://nmap.org/nsedoc/categories/dos.html">dos</a></i>, <i><a href="http://nmap.org/nsedoc/categories/vuln.html">vuln</a></i>
+  <br>
+
+脚本下载地址: <a href="http://nmap.org/svn/scripts/smb-check-vulns.nse">http://nmap.org/svn/scripts/smb-check-vulns.nse</a>
+</p>
+
+
+
+<h2> User Summary </h2>
+
+<p>
+Checks for vulnerabilities:
+<ul>
+<li>MS08-067, a Windows RPC vulnerability
+</li>
+<li>Conficker, an infection by the Conficker worm
+</li>
+<li>Unnamed regsvc DoS, a denial-of-service vulnerability I accidentally found in Windows 2000
+</li>
+<li>SMBv2 exploit (CVE-2009-3103, Microsoft Security Advisory 975497)
+</li>
+<li>MS06-025, a Windows Ras RPC service vulnerability
+</li>
+<li>MS07-029, a Windows Dns Server RPC service vulnerability
+</li>
+</ul>
+</p>
+<p>
+WARNING: These checks are dangerous, and are very likely to bring down a server. 
+These should not be run in a production environment unless you (and, more importantly,
+the business) understand the risks! 
+</p>
+<p>
+As a system administrator, performing these kinds of checks is crucial, because 
+a lot more damage can be done by a worm or a hacker using this vulnerability than
+by a scanner. Penetration testers, on the other hand, might not want to use this
+script -- crashing services is not generally a good way of sneaking through a 
+network. 
+</p>
+<p>
+If you set the script parameter <code>unsafe</code>, then scripts will run that are almost 
+(or totally) guaranteed to crash a vulnerable system; do NOT specify <code>unsafe</code>
+in a production environment! And that isn't to say that non-unsafe scripts will 
+not crash a system, they're just less likely to. 
+</p>
+<p>
+If you set the script parameter <code>safe</code>, then script will run that rarely or never
+crash a vulnerable system. No promises, though. 
+</p>
+<p>
+MS08-067. Checks if a host is vulnerable to MS08-067, a Windows RPC vulnerability that
+can allow remote code execution.  Checking for MS08-067 is very dangerous, as the check 
+is likely to crash systems. On a fairly wide scan conducted by Brandon Enright, we determined
+that on average, a vulnerable system is more likely to crash than to survive
+the check. Out of 82 vulnerable systems, 52 crashed. 
+At the same time, MS08-067 is extremely critical to fix. Metasploit has a working and
+stable exploit for it, and any system vulnerable can very easily be compromised. 
+Conficker. Checks if a host is infected with a known Conficker strain. This check
+is based on the simple conficker scanner found on this page:
+<a href="http://iv.cs.uni-bonn.de/wg/cs/applications/containing-conficker">http://iv.cs.uni-bonn.de/wg/cs/applications/containing-conficker</a>.
+Thanks to the folks who wrote that scanner!
+</p>
+<p>
+regsvc DoS. Checks if a host is vulnerable to a crash in regsvc, caused 
+by a null pointer dereference. I inadvertently discovered this crash while working
+on <code>smb-enum-sessions</code>, and discovered that it was repeatable. It's been 
+reported to Microsoft (case #MSRC8742). 
+</p>
+<p>
+This check WILL crash the service, if it's vulnerable, and requires a guest account
+or higher to work. It is considered <code>unsafe</code>. 
+</p>
+<p>
+SMBv2 DoS. Performs a denial-of-service against the vulnerability disclosed in
+CVE-2009-3103. Checks if the server went offline. This works agianst Windows Vista
+and some versions of Windows 7, and causes a bluescreen if successful. The
+proof-of-concept code at <a href="http://seclists.org/fulldisclosure/2009/Sep/39">http://seclists.org/fulldisclosure/2009/Sep/39</a> was used, 
+with one small change. 
+</p>
+<p>
+MS06-025. Vulnerability targets the <code>RasRpcSumbitRequest()</code> RPC method which is
+a part of RASRPC interface that serves as a RPC service for configuring and 
+getting information from the Remote Access and Routing service. RASRPC can be
+accessed using either "\ROUTER" SMB pipe or the "\SRVSVC" SMB pipe (usually on Windows XP machines).
+This is in RPC world known as "ncan_np" RPC transport. <code>RasRpcSumbitRequest()</code>
+method is a generic method which provides different functionalities according
+to the <code>RequestBuffer</code> structure and particulary the <code>RegType</code> field within that 
+structure. <code>RegType</code> field is of <code>enum ReqTypes</code> type. This enum type lists all
+the different available operation that can be performed using the <code>RasRpcSubmitRequest()</code>
+RPC method. The one particular operation that this vuln targets is the <code>REQTYPE_GETDEVCONFIG</code> 
+request to get device information on the RRAS.
+</p>
+<p>
+MS07-029. Vulnerability targets the <code>R_DnssrvQuery()</code> and <code>R_DnssrvQuery2()</code> RPC method which is
+a part of DNS Server RPC interface that serves as a RPC service for configuring and 
+getting information from the DNS Server service. DNS Server RPC service can be
+accessed using "\dnsserver" SMB named pipe. The vulnerability is triggered when
+a long string is send as the "zone" parameter which causes the buffer overflow which
+crashes the service.
+</p>
+<p>
+(Note: if you have other SMB/MSRPC vulnerability checks you'd like to see added, and
+you can show me a tool with a license that is compatible with Nmap's, post a request 
+on the nmap-dev mailing list and I'll add it to my list [Ron Bowes].)</p>
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+  
+  
+    
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+  
+  
+    
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+
+
+  <h2> Script Arguments </h2>
+  <p>
+    
+      <h4> safe </h4>
+      <p>
+If set, this script will only run checks that are known (or at
+      least suspected) to be safe.</p>
+
+    
+      <h4> unsafe </h4>
+      <p>
+If set, this script will run checks that, if the system isn't
+      patched, are basically guaranteed to crash something. Remember that
+      non-unsafe checks aren't necessarily safe either)</p>
+
+    
+
+    
+      <h4> randomseed, smbbasic, smbport, smbsign </h4>
+      See the documentation for the <a href="http://nmap.org/nsedoc/lib/smb.html#script-args">smb</a> library.
+    
+      <h4> smbdomain, smbhash, smbnoguest, smbpassword, smbtype, smbusername </h4>
+      See the documentation for the <a href="http://nmap.org/nsedoc/lib/smbauth.html#script-args">smbauth</a> library.
+    
+  </p>
+
+
+<h2> Example Usage </h2>
+<p>执行格式
+
+  <pre>nmap --script smb-check-vulns.nse -p445 &lt;host&gt;
+sudo nmap -sU -sS --script smb-check-vulns.nse -p U:137,T:139 &lt;host&gt;
+</pre>
+
+</p>
+
+
+  <h2> Script Output </h2>
+<pre>Host script results:
+| smb-check-vulns:  
+|   MS08-067: NOT VULNERABLE
+|   Conficker: Likely CLEAN
+|   regsvc DoS: regsvc DoS: NOT VULNERABLE
+|   SMBv2 DoS (CVE-2009-3103): NOT VULNERABLE
+|   MS06-025: NO SERVICE (the Ras RPC service is inactive)
+|_  MS07-029: NO SERVICE (the Dns Server RPC service is inactive)
+</pre>
+
+
+
+  <h2> Requires </h2>
+  <ul>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/msrpc.html">msrpc</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/nmap.html">nmap</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/smb.html">smb</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/stdnse.html">stdnse</a></li>
+  
+     <li><a href="">string</a></li>
+  
+     <li><a href="">table</a></li>
+  
+  </ul>
+
+
+<hr/>
+
+
+
+
+
+
+<p><b>Author: </b>Ron Bowes</p>
+
+
+
+<p><b>License: </b> VER007 整理 <a href="http://www.ver007.com">http://www.ver007.com</a></p>
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+</BODY>
+</HTML>
+
+

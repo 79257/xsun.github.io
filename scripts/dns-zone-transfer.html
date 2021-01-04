@@ -1,0 +1,323 @@
+﻿   <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+    <title>dns-zone-transfer NSE Script -VER007</title>
+    
+
+</HEAD>
+
+
+
+
+
+
+<a href="../nmap-script-help.html">HOME>>>>>>>>></a>
+
+
+
+<h1>File <code>dns-zone-transfer</code></h1>
+
+
+
+<p>
+
+
+<a href="http://nmap.org/book/nse-script-format.html#nse-format-rules">脚本使用类型</a>:
+prerule, portrule
+<br>
+
+  脚本所属分类:
+  <i><a href="http://nmap.org/nsedoc/categories/intrusive.html">intrusive</a></i>, <i><a href="http://nmap.org/nsedoc/categories/discovery.html">discovery</a></i>
+  <br>
+
+脚本下载地址: <a href="http://nmap.org/svn/scripts/dns-zone-transfer.nse">http://nmap.org/svn/scripts/dns-zone-transfer.nse</a>
+</p>
+
+
+
+<h2> User Summary </h2>
+
+<p>
+Requests a zone transfer (AXFR) from a DNS server.
+</p>
+<p>
+The script sends an AXFR query to a DNS server. The domain to query is
+determined by examining the name given on the command line, the DNS
+server's hostname, or it can be specified with the
+<code>dns-zone-transfer.domain</code> script argument. If the query is
+successful all domains and domain types are returned along with common
+type specific data (SOA/MX/NS/PTR/A).
+</p>
+<p>
+This script can run at different phases of an Nmap scan:
+<ul>
+<li>Script Pre-scanning: in this phase the script will run before any
+</li>
+</ul>
+Nmap scan and use the defined DNS server in the arguments. The script
+arguments in this phase are: <code>dns-zone-transfer.server</code> the
+DNS server to use, can be a hostname or an IP address and must be
+specified. The <code>dns-zone-transfer.port</code> argument is optional
+and can be used to specify the DNS server port.
+<ul>
+<li>Script scanning: in this phase the script will run after the other
+</li>
+</ul>
+Nmap phases and against an Nmap discovered DNS server. If we don't
+have the "true" hostname for the DNS server we cannot determine a
+likely zone to perform the transfer on.
+</p>
+<p>
+Useful resources
+<ul>
+<li>DNS for rocket scientists: <a href="http://www.zytrax.com/books/dns/">http://www.zytrax.com/books/dns/</a>
+</li>
+<li>How the AXFR protocol works: <a href="http://cr.yp.to/djbdns/axfr-notes.html">http://cr.yp.to/djbdns/axfr-notes.html</a></li>
+</ul>
+</p>
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+    
+      
+    
+      
+        
+      
+    
+  
+  
+    
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+
+
+  <h2> Script Arguments </h2>
+  <p>
+    
+      <h4> dns-zone-transfer.port </h4>
+      <p>
+DNS server port, this argument concerns
+      the "Script Pre-scanning phase" and it's optional, the default
+      value is <code>53</code>.</p>
+
+    
+      <h4> dns-zone-transfer.server </h4>
+      <p>
+DNS server. If set, this argument will
+      enable the script for the "Script Pre-scanning phase".</p>
+
+    
+      <h4> newtargets </h4>
+      <p>
+If specified, adds returned DNS records onto Nmap
+      scanning queue.</p>
+
+    
+      <h4> dns-zone-transfer.domain </h4>
+      <p>
+Domain to transfer.</p>
+
+    
+      <h4> dns-zone-transfer.addall </h4>
+      <p>
+If specified, adds all IP addresses
+      including private ones onto Nmap scanning queue when the
+      script argument <code>newtargets</code> is given. The default
+      behavior is to skip private IPs (non-routable).</p>
+
+    
+
+    
+      <h4> max-newtargets </h4>
+      See the documentation for the <a href="http://nmap.org/nsedoc/lib/target.html#script-args">target</a> library.
+    
+  </p>
+
+
+<h2> Example Usage </h2>
+<p>执行格式
+
+  <pre>nmap --script dns-zone-transfer.nse \
+     --script-args dns-zone-transfer.domain=&lt;domain&gt;</pre>
+
+</p>
+
+
+  <h2> Script Output </h2>
+<pre>53/tcp   open     domain
+|  dns-zone-transfer:
+|  foo.com.            SOA     ns2.foo.com. piou.foo.com.
+|  foo.com.            TXT  
+|  foo.com.            NS      ns1.foo.com.               
+|  foo.com.            NS      ns2.foo.com.               
+|  foo.com.            NS      ns3.foo.com.               
+|  foo.com.            A       127.0.0.1                  
+|  foo.com.            MX      mail.foo.com.              
+|  anansie.foo.com.    A       127.0.0.2                  
+|  dhalgren.foo.com.   A       127.0.0.3                  
+|  drupal.foo.com.     CNAME
+|  goodman.foo.com.    A       127.0.0.4 i                
+|  goodman.foo.com.    MX      mail.foo.com.              
+|  isaac.foo.com.      A       127.0.0.5                  
+|  julie.foo.com.      A       127.0.0.6                  
+|  mail.foo.com.       A       127.0.0.7                  
+|  ns1.foo.com.        A       127.0.0.7                  
+|  ns2.foo.com.        A       127.0.0.8                  
+|  ns3.foo.com.        A       127.0.0.9                  
+|  stubing.foo.com.    A       127.0.0.10                 
+|  vicki.foo.com.      A       127.0.0.11                 
+|  votetrust.foo.com.  CNAME
+|  www.foo.com.        CNAME
+|_ foo.com.            SOA     ns2.foo.com. piou.foo.com.</pre>
+
+
+
+  <h2> Requires </h2>
+  <ul>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/bin.html">bin</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/bit.html">bit</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/dns.html">dns</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/ipOps.html">ipOps</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/listop.html">listop</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/nmap.html">nmap</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/shortport.html">shortport</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/stdnse.html">stdnse</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/strbuf.html">strbuf</a></li>
+  
+     <li><a href="">string</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/tab.html">tab</a></li>
+  
+     <li><a href="">table</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/target.html">target</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/packet.html">packet</a></li>
+  
+  </ul>
+
+
+<hr/>
+
+
+
+
+
+
+<p><b>Author: </b>Eddie Bell</p>
+
+
+
+<p><b>License: </b> VER007 整理 <a href="http://www.ver007.com">http://www.ver007.com</a></p>
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+</BODY>
+</HTML>
+
+

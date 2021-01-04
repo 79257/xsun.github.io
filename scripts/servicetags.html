@@ -1,0 +1,280 @@
+﻿   <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+    <title>servicetags NSE Script -VER007</title>
+    
+
+</HEAD>
+
+
+
+
+
+
+<a href="../nmap-script-help.html">HOME>>>>>>>>></a>
+
+
+
+<h1>File <code>servicetags</code></h1>
+
+
+
+<p>
+
+
+<a href="http://nmap.org/book/nse-script-format.html#nse-format-rules">脚本使用类型</a>:
+portrule
+<br>
+
+  脚本所属分类:
+  <i><a href="http://nmap.org/nsedoc/categories/default.html">default</a></i>, <i><a href="http://nmap.org/nsedoc/categories/discovery.html">discovery</a></i>, <i><a href="http://nmap.org/nsedoc/categories/safe.html">safe</a></i>
+  <br>
+
+脚本下载地址: <a href="http://nmap.org/svn/scripts/servicetags.nse">http://nmap.org/svn/scripts/servicetags.nse</a>
+</p>
+
+
+
+<h2> User Summary </h2>
+
+<p>
+Attempts to extract system information (OS, hardware, etc.) from the Sun Service Tags service agent (UDP port 6481).
+</p>
+<p>
+Based on protocol specs from
+<a href="http://arc.opensolaris.org/caselog/PSARC/2006/638/stdiscover_protocolv2.pdf">http://arc.opensolaris.org/caselog/PSARC/2006/638/stdiscover_protocolv2.pdf</a>
+<a href="http://arc.opensolaris.org/caselog/PSARC/2006/638/stlisten_protocolv2.pdf">http://arc.opensolaris.org/caselog/PSARC/2006/638/stlisten_protocolv2.pdf</a>
+<a href="http://arc.opensolaris.org/caselog/PSARC/2006/638/ServiceTag_API_CLI_v07.pdf">http://arc.opensolaris.org/caselog/PSARC/2006/638/ServiceTag_API_CLI_v07.pdf</a></p>
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+
+
+
+<h2> Example Usage </h2>
+<p>执行格式
+
+  <pre>nmap -sV -sC &lt;target&gt;</pre>
+
+</p>
+
+
+  <h2> Script Output </h2>
+<pre>| servicetags:
+|   URN: urn:st:3bf76681-5e68-415b-f980-abcdef123456
+|   System: SunOS
+|   Release: 5.10
+|   Hostname: myhost
+|   Architecture: sparc
+|   Platform: SUNW,SPARC-Enterprise-T5120::Generic_142900-13
+|   Manufacturer: Sun Microsystems, Inc.
+|   CPU Manufacturer: Sun Microsystems, Inc.
+|   Serial Number: ABC123456
+|   HostID: 12345678
+|   RAM: 16256
+|   CPUs: 1
+|   Cores: 4
+|   Virtual CPUs: 32
+|   CPU Name: UltraSPARC-T2
+|   CPU Clock Rate: 1165
+|   Service Tags
+|     Solaris 10 Operating System
+|       Product Name: Solaris 10 Operating System
+|       Instance URN: urn:st:90592a79-974d-ebcc-c17a-b87b8eee5f1f
+|       Product Version: 10
+|       Product URN: urn:uuid:5005588c-36f3-11d6-9cec-fc96f718e113
+|       Product Parent URN: urn:uuid:596ffcfa-63d5-11d7-9886-ac816a682f92
+|       Product Parent: Solaris Operating System
+|       Product Defined Instance ID:
+|       Timestamp: 2010-08-10 07:35:40 GMT
+|       Container: global
+|       Source: SUNWstosreg
+|     SUNW,SPARC-Enterprise-T5120 SPARC System
+|       Product Name: SUNW,SPARC-Enterprise-T5120 SPARC System
+|       Instance URN: urn:st:51c61acd-9f37-65af-a667-c9925a5b0ee9
+|       Product Version:
+|       Product URN: urn:st:hwreg:SUNW,SPARC-Enterprise-T5120:Sun Microsystems:sparc
+|       Product Parent URN: urn:st:hwreg:System:Sun Microsystems
+|       Product Parent: System
+|       Product Defined Instance ID:
+|       Timestamp: 2010-08-10 07:35:41 GMT
+|       Container: global
+|       Source: SUNWsthwreg
+|     Explorer
+|       Product Name: Explorer
+|       Instance URN: urn:st:2dc5ab61-9bb5-409b-e910-fa39840d0d85
+|       Product Version: 6.4
+|       Product URN: urn:uuid:9cb70a38-7d15-11de-9d26-080020a9ed93
+|       Product Parent URN:
+|       Product Parent:
+|       Product Defined Instance ID:
+|       Timestamp: 2010-08-10 07:35:42 GMT
+|       Container: global
+|_      Source: Explorer</pre>
+
+
+
+  <h2> Requires </h2>
+  <ul>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/nmap.html">nmap</a></li>
+  
+     <li><a href="">os</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/shortport.html">shortport</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/stdnse.html">stdnse</a></li>
+  
+     <li><a href="">string</a></li>
+  
+     <li><a href="">table</a></li>
+  
+  </ul>
+
+
+<hr/>
+
+
+
+
+
+
+<p><b>Author: </b>Matthew Flanagan</p>
+
+
+
+<p><b>License: </b> VER007 整理 <a href="http://www.ver007.com">http://www.ver007.com</a></p>
+
+
+
+
+
+
+
+
+<h2> <font color="#ff0000">action</font> </h2>
+<dl class="function">
+  
+
+<dt><a name="action"></a><strong>action</strong>&nbsp;(host, port)</dt>
+<dd>
+
+<p>
+Sends Service Tags discovery packet to host, 
+and extracts service information from results</p>
+
+
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  host:
+          
+	</li>
+	
+	<li>
+	  port:
+          
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+</dl>
+
+
+
+
+  
+
+  
+
+  
+    <h2> <font color="#0000ff">portrule</font> </h2>
+    <dl class="function">
+      
+
+<dt><a name="portrule"></a><strong>portrule</strong>&nbsp;(host, port)</dt>
+<dd>
+
+<p>
+Runs on UDP port 6481</p>
+
+
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  host:
+          
+	</li>
+	
+	<li>
+	  port:
+          
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+    </dl>
+  
+
+  
+
+
+
+
+</BODY>
+</HTML>
+
+

@@ -1,0 +1,237 @@
+﻿   <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+    <title>targets-ipv6-multicast-slaac NSE Script -VER007</title>
+    
+
+</HEAD>
+
+
+
+
+
+
+<a href="../nmap-script-help.html">HOME>>>>>>>>></a>
+
+
+
+<h1>File <code>targets-ipv6-multicast-slaac</code></h1>
+
+
+
+<p>
+
+
+<a href="http://nmap.org/book/nse-script-format.html#nse-format-rules">脚本使用类型</a>:
+prerule
+<br>
+
+  脚本所属分类:
+  <i><a href="http://nmap.org/nsedoc/categories/discovery.html">discovery</a></i>, <i><a href="http://nmap.org/nsedoc/categories/broadcast.html">broadcast</a></i>
+  <br>
+
+脚本下载地址: <a href="http://nmap.org/svn/scripts/targets-ipv6-multicast-slaac.nse">http://nmap.org/svn/scripts/targets-ipv6-multicast-slaac.nse</a>
+</p>
+
+
+
+<h2> User Summary </h2>
+
+<p>
+Performs IPv6 host discovery by triggering stateless address auto-configuration
+(SLAAC).
+</p>
+<p>
+This script works by sending an ICMPv6 Router Advertisement with a random
+address prefix, which causes hosts to begin SLAAC and send a solicitation for
+their newly configured address, as part of duplicate address detection. The
+script then guesses the remote addresses by combining the link-local prefix of
+the interface with the interface identifier in each of the received
+solicitations. This should be followed up with ordinary ND host discovery to
+verify that the guessed addresses are correct.
+</p>
+<p>
+The router advertisement has a router lifetime of zero and a short prefix
+lifetime (a few seconds)
+</p>
+<p>
+See also:
+<ul>
+<li>RFC 4862, IPv6 Stateless Address Autoconfiguration, especially section 5.5.3.
+</li>
+<li><a href="http://dev.metasploit.com/redmine/projects/framework/repository/changes/modules/auxiliary/scanner/discovery/ipv6_neighbor_router_advertisement.rb">http://dev.metasploit.com/redmine/projects/framework/repository/changes/modules/auxiliary/scanner/discovery/ipv6_neighbor_router_advertisement.rb</a></li>
+</ul>
+</p>
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+    
+      
+        
+      
+    
+      
+        
+      
+    
+  
+  
+    
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+
+
+  <h2> Script Arguments </h2>
+  <p>
+    
+      <h4> targets-ipv6-multicast-slaac.interface </h4>
+      <p>
+The interface to use for host discovery.</p>
+
+    
+
+    
+      <h4> max-newtargets, newtargets </h4>
+      See the documentation for the <a href="http://nmap.org/nsedoc/lib/target.html#script-args">target</a> library.
+    
+  </p>
+
+
+<h2> Example Usage </h2>
+<p>执行格式
+
+  <pre>./nmap -6 --script=slaac_host_discovery.nse --script-args 'newtargets,interface=eth0' -sP</pre>
+
+</p>
+
+
+  <h2> Script Output </h2>
+<pre>Pre-scan script results:
+| targets-ipv6-multicast-slaac:
+|   IP: fe80:0000:0000:0000:1322:33ff:fe44:5566  MAC: 11:22:33:44:55:66  IFACE: eth0
+|_  Use --script-args=newtargets to add the results as targets</pre>
+
+
+
+  <h2> Requires </h2>
+  <ul>
+  
+     <li><a href="">coroutine</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/ipOps.html">ipOps</a></li>
+  
+     <li><a href="">math</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/nmap.html">nmap</a></li>
+  
+     <li><a href="">os</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/packet.html">packet</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/stdnse.html">stdnse</a></li>
+  
+     <li><a href="">string</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/tab.html">tab</a></li>
+  
+     <li><a href="">table</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/target.html">target</a></li>
+  
+  </ul>
+
+
+<hr/>
+
+
+
+
+
+
+<p><b>Author: </b>David Fifield, Xu Weilin</p>
+
+
+
+<p><b>License: </b> VER007 整理 <a href="http://www.ver007.com">http://www.ver007.com</a></p>
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+</BODY>
+</HTML>
+
+

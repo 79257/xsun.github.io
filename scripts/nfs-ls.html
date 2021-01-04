@@ -1,0 +1,288 @@
+﻿   <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+    <title>nfs-ls NSE Script -VER007</title>
+    
+
+</HEAD>
+
+
+
+
+
+
+<a href="../nmap-script-help.html">HOME>>>>>>>>></a>
+
+
+
+<h1>File <code>nfs-ls</code></h1>
+
+
+
+<p>
+
+
+<a href="http://nmap.org/book/nse-script-format.html#nse-format-rules">脚本使用类型</a>:
+
+<br>
+
+  脚本所属分类:
+  <i><a href="http://nmap.org/nsedoc/categories/discovery.html">discovery</a></i>, <i><a href="http://nmap.org/nsedoc/categories/safe.html">safe</a></i>
+  <br>
+
+脚本下载地址: <a href="http://nmap.org/svn/scripts/nfs-ls.nse">http://nmap.org/svn/scripts/nfs-ls.nse</a>
+</p>
+
+
+
+<h2> User Summary </h2>
+
+<p>
+Attempts to get useful information about files from NFS exports.
+The output is intended to resemble the output of <code>ls</code>.
+</p>
+<p>
+The script starts by enumerating and mounting the remote NFS exports. After 
+that it performs an NFS GETATTR procedure call for each mounted point
+in order to get its ACLs.
+For each mounted directory the script will try to list its file entries
+with their attributes.
+</p>
+<p>
+Since the file attributes shown in the results are the result of
+GETATTR, READDIRPLUS, and similar procedures, the attributes
+are the attributes of the local filesystem.
+</p>
+<p>
+These access permissions are shown only with NFSv3:
+<ul>
+<li>Read:     Read data from file or read a directory.
+</li>
+<li>Lookup:   Look up a name in a directory
+</li>
+</ul>
+            (no meaning for non-directory objects).
+<ul>
+<li>Modify:   Rewrite existing file data or modify existing
+</li>
+</ul>
+            directory entries.
+<ul>
+<li>Extend:   Write new data or add directory entries.
+</li>
+<li>Delete:   Delete an existing directory entry.
+</li>
+<li>Execute:  Execute file (no meaning for a directory).</li>
+</ul>
+</p>
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+  
+  
+    
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+
+
+  <h2> Script Arguments </h2>
+  <p>
+    
+      <h4> nfs-ls.maxfiles </h4>
+      <p>
+If set, limits the amount of files returned by
+      the script. If set to 0
+      or less, all files are shown. The default value is 10.</p>
+
+    
+      <h4> nfs-ls.time </h4>
+      <p>
+Specifies which one of the last mac times to use in
+      the files attributes output. Possible values are:
+<ul>
+<li><code>m</code>: last modification time (mtime)
+</li>
+<li><code>a</code>: last access time (atime)
+</li>
+<li><code>c</code>: last change time (ctime)
+</li>
+</ul>
+The default value is <code>m</code> (mtime).</p>
+
+    
+      <h4> nfs-ls.human </h4>
+      <p>
+If set to <code>1</code> or <code>true</code>,
+      shows file sizes in a human readable format with suffixes like
+      <code>KB</code> and <code>MB</code>.</p>
+
+    
+
+    
+      <h4> mount.version, nfs.version, rpc.protocol </h4>
+      See the documentation for the <a href="http://nmap.org/nsedoc/lib/rpc.html#script-args">rpc</a> library.
+    
+  </p>
+
+
+<h2> Example Usage </h2>
+<p>执行格式
+
+  <pre>nmap -sV --script=nfs-ls &lt;target&gt;</pre>
+
+</p>
+
+
+  <h2> Script Output </h2>
+<pre>PORT    STATE SERVICE
+111/tcp open  rpcbind
+| nfs-ls:
+|   Arguments:
+|     maxfiles: 10 (file listing output limited)
+|
+|   NFS Export: /mnt/nfs/files
+|   NFS Access: Read Lookup NoModify NoExtend NoDelete NoExecute
+|     PERMISSION  UID   GID   SIZE     MODIFICATION TIME  FILENAME
+|     drwxr-xr-x  1000  100   4096     2010-06-17 12:28   /mnt/nfs/files
+|     drwxr--r--  1000  1002  4096     2010-05-14 12:58   sources
+|     -rw-------  1000  1002  23606    2010-06-17 12:28   notes
+|
+|   NFS Export: /home/storage/backup
+|   NFS Access: Read Lookup Modify Extend Delete NoExecute
+|     PERMISSION  UID   GID   SIZE     MODIFICATION TIME  FILENAME
+|     drwxr-xr-x  1000  100   4096     2010-06-11 22:31   /home/storage/backup
+|     -rw-r--r--  1000  1002  0        2010-06-10 08:34   filetest
+|     drwx------  1000  100   16384    2010-02-05 17:05   lost+found
+|     -rw-r--r--  0     0     5        2010-06-10 11:32   rootfile
+|_    lrwxrwxrwx  1000  1002  8        2010-06-10 08:34   symlink
+</pre>
+
+
+
+  <h2> Requires </h2>
+  <ul>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/rpc.html">rpc</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/shortport.html">shortport</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/stdnse.html">stdnse</a></li>
+  
+     <li><a href="">string</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/tab.html">tab</a></li>
+  
+     <li><a href="">table</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/nmap.html">nmap</a></li>
+  
+  </ul>
+
+
+<hr/>
+
+
+
+
+
+
+<p><b>Author: </b>Patrik Karlsson, Djalal Harouni</p>
+
+
+
+<p><b>License: </b> VER007 整理 <a href="http://www.ver007.com">http://www.ver007.com</a></p>
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+</BODY>
+</HTML>
+
+

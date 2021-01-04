@@ -1,0 +1,193 @@
+﻿   <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+    <title>ipv6-ra-flood NSE Script -VER007</title>
+    
+
+</HEAD>
+
+
+
+
+
+
+<a href="../nmap-script-help.html">HOME>>>>>>>>></a>
+
+
+
+<h1>File <code>ipv6-ra-flood</code></h1>
+
+
+
+<p>
+
+
+<a href="http://nmap.org/book/nse-script-format.html#nse-format-rules">脚本使用类型</a>:
+prerule
+<br>
+
+  脚本所属分类:
+  <i><a href="http://nmap.org/nsedoc/categories/dos.html">dos</a></i>, <i><a href="http://nmap.org/nsedoc/categories/intrusive.html">intrusive</a></i>
+  <br>
+
+脚本下载地址: <a href="http://nmap.org/svn/scripts/ipv6-ra-flood.nse">http://nmap.org/svn/scripts/ipv6-ra-flood.nse</a>
+</p>
+
+
+
+<h2> User Summary </h2>
+
+<p>
+Generates a flood of Router Advertisements (RA) with random source MAC addresses and IPv6 prefixes. Computers, which have stateless autoconfiguration enabled by default (every major OS), 
+will start to compute IPv6 suffix and update their routing table to reflect the accepted announcement. This will cause 100% CPU usage on Windows and platforms, preventing to process other application requests.
+</p>
+<p>
+Vulnerable platforms:
+<ul>
+<li>All Cisco IOS ASA with firmware &lt; November 2010
+</li>
+<li>All Netscreen versions supporting IPv6
+</li>
+<li>Windows 2000/XP/2003/Vista/7/2008/8/2012 
+</li>
+<li>All FreeBSD versions
+</li>
+<li>All NetBSD versions
+</li>
+<li>All Solaris/Illumos versions 
+</li>
+</ul>
+</p>
+<p>
+Security advisory: <a href="http://www.mh-sec.de/downloads/mh-RA_flooding_CVE-2010-multiple.txt">http://www.mh-sec.de/downloads/mh-RA_flooding_CVE-2010-multiple.txt</a>
+</p>
+<p>
+WARNING: This script is dangerous and is very likely to bring down a server or network appliance. 
+It should not be run in a production environment unless you (and, more importantly,
+the business) understand the risks! 
+</p>
+<p>
+Additional documents: <a href="https://tools.ietf.org/rfc/rfc6104.txt">https://tools.ietf.org/rfc/rfc6104.txt</a></p>
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+
+
+  <h2> Script Arguments </h2>
+  <p>
+    
+      <h4> ipv6-ra-flood.interface </h4>
+      <p>
+defines interface we should broadcast on</p>
+
+    
+      <h4> ipv6-ra-flood.timeout </h4>
+      <p>
+runs the script until the timeout is reached (default: 30s). If timeout is zero, the script will run forever.</p>
+
+    
+
+    
+  </p>
+
+
+<h2> Example Usage </h2>
+<p>执行格式
+
+  <pre>nmap -6 --script ipv6-ra-flood.nse
+nmap -6 --script ipv6-ra-flood.nse --script-args 'interface=&lt;interface&gt;'
+nmap -6 --script ipv6-ra-flood.nse --script-args 'interface=&lt;interface&gt;,timeout=10s'</pre>
+
+</p>
+
+
+
+
+  <h2> Requires </h2>
+  <ul>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/nmap.html">nmap</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/packet.html">packet</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/stdnse.html">stdnse</a></li>
+  
+     <li><a href="">math</a></li>
+  
+     <li><a href="">string</a></li>
+  
+     <li><a href="">os</a></li>
+  
+  </ul>
+
+
+<hr/>
+
+
+
+
+
+
+<p><b>Author: </b>Adam Števko</p>
+
+
+
+<p><b>License: </b> VER007 整理 <a href="http://www.ver007.com">http://www.ver007.com</a></p>
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+</BODY>
+</HTML>
+
+

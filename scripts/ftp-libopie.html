@@ -1,0 +1,199 @@
+﻿   <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+    <title>ftp-libopie NSE Script -VER007</title>
+    
+
+</HEAD>
+
+
+
+
+
+
+<a href="../nmap-script-help.html">HOME>>>>>>>>></a>
+
+
+
+<h1>File <code>ftp-libopie</code></h1>
+
+
+
+<p>
+
+
+<a href="http://nmap.org/book/nse-script-format.html#nse-format-rules">脚本使用类型</a>:
+portrule
+<br>
+
+  脚本所属分类:
+  <i><a href="http://nmap.org/nsedoc/categories/vuln.html">vuln</a></i>, <i><a href="http://nmap.org/nsedoc/categories/intrusive.html">intrusive</a></i>
+  <br>
+
+脚本下载地址: <a href="http://nmap.org/svn/scripts/ftp-libopie.nse">http://nmap.org/svn/scripts/ftp-libopie.nse</a>
+</p>
+
+
+
+<h2> User Summary </h2>
+
+<p>
+Checks if an FTPd is prone to CVE-2010-1938 (OPIE off-by-one stack overflow),
+a vulnerability discovered by Maksymilian Arciemowicz and Adam "pi3" Zabrocki.
+See the advisory at <a href="http://nmap.org/r/fbsd-sa-opie">http://nmap.org/r/fbsd-sa-opie</a>.
+Be advised that, if launched against a vulnerable host, this script will crash the FTPd.</p>
+
+
+
+
+
+
+
+  
+  
+  
+    
+      
+        
+      
+    
+  
+  
+    
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+
+
+  <h2> Script Arguments </h2>
+  <p>
+    
+
+    
+      <h4> vulns.showall </h4>
+      See the documentation for the <a href="http://nmap.org/nsedoc/lib/vulns.html#script-args">vulns</a> library.
+    
+  </p>
+
+
+<h2> Example Usage </h2>
+<p>执行格式
+
+  <pre>nmap -sV --script=ftp-libopie &lt;target&gt;</pre>
+
+</p>
+
+
+  <h2> Script Output </h2>
+<pre>PORT   STATE SERVICE
+21/tcp open  ftp
+| ftp-libopie: 
+|   VULNERABLE:
+|   OPIE off-by-one stack overflow
+|     State: LIKELY VULNERABLE
+|     IDs:  CVE:CVE-2010-1938  OSVDB:64949
+|     Risk factor: High  CVSSv2: 9.3 (HIGH) (AV:N/AC:M/Au:N/C:C/I:C/A:C)
+|     Description:
+|       An off-by-one error in OPIE library 2.4.1-test1 and earlier, allows remote
+|       attackers to cause a denial of service or possibly execute arbitrary code
+|       via a long username.
+|     Disclosure date: 2010-05-27
+|     References:
+|       http://osvdb.org/64949
+|       http://site.pi3.com.pl/adv/libopie-adv.txt
+|       http://security.freebsd.org/advisories/FreeBSD-SA-10:05.opie.asc
+|_      http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-1938
+</pre>
+
+
+
+  <h2> Requires </h2>
+  <ul>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/nmap.html">nmap</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/shortport.html">shortport</a></li>
+  
+     <li><a href="">string</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/vulns.html">vulns</a></li>
+  
+  </ul>
+
+
+<hr/>
+
+
+
+
+
+
+<p><b>Author: </b>Ange Gutek</p>
+
+
+
+<p><b>License: </b> VER007 整理 <a href="http://www.ver007.com">http://www.ver007.com</a></p>
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+</BODY>
+</HTML>
+
+

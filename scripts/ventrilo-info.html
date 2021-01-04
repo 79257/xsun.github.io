@@ -1,0 +1,227 @@
+﻿   <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+    <title>ventrilo-info NSE Script -VER007</title>
+    
+
+</HEAD>
+
+
+
+
+
+
+<a href="../nmap-script-help.html">HOME>>>>>>>>></a>
+
+
+
+<h1>File <code>ventrilo-info</code></h1>
+
+
+
+<p>
+
+
+<a href="http://nmap.org/book/nse-script-format.html#nse-format-rules">脚本使用类型</a>:
+portrule
+<br>
+
+  脚本所属分类:
+  <i><a href="http://nmap.org/nsedoc/categories/default.html">default</a></i>, <i><a href="http://nmap.org/nsedoc/categories/discovery.html">discovery</a></i>, <i><a href="http://nmap.org/nsedoc/categories/safe.html">safe</a></i>, <i><a href="http://nmap.org/nsedoc/categories/version.html">version</a></i>
+  <br>
+
+脚本下载地址: <a href="http://nmap.org/svn/scripts/ventrilo-info.nse">http://nmap.org/svn/scripts/ventrilo-info.nse</a>
+</p>
+
+
+
+<h2> User Summary </h2>
+
+<p>
+Detects the Ventrilo voice communication server service versions 2.1.2
+and above. Some of the older versions (pre 3.0.0) may not have the UDP
+service this probe relies on enabled by default.
+</p>
+<p>
+The Ventrilo server listens on a TCP (voice/control) and an UDP (ping/status)
+port with the same port number (fixed to 3784 in the free version, otherwise
+configurable). This script activates on both a TCP and UDP port version scan.
+In both cases probe data is sent only to the UDP port because it allows for a
+simple and informative status command as implemented by the
+<code>ventrilo_status.exe</code> executable which has shipped alongside the Windows server
+package since version 2.1.2 when the UDP status service was implemented.
+</p>
+<p>
+When run as a version detection script (<code>-sV</code>), the script will report on the
+server version, name, uptime, authentication scheme, and OS.  When run
+explicitly (<code>--script ventrilo-info</code>), the script will additionally report on the
+server name phonetic pronounciation string, the server comment, maximum number
+of clients, voice codec, voice format, channel and client counts, and details
+about channels and currently connected clients.
+</p>
+<p>
+Original reversing of the protocol was done by Luigi Auriemma
+(<a href="http://aluigi.altervista.org/papers.htm#ventrilo">http://aluigi.altervista.org/papers.htm#ventrilo</a>).</p>
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+
+
+
+<h2> Example Usage </h2>
+<p>执行格式
+
+  <ul>
+  
+    <li><pre>nmap -sV &lt;target&gt;</pre></li>
+  
+    <li><pre>nmap -Pn -sU -sV --script ventrilo-info -p &lt;port&gt; &lt;target&gt;
+</pre></li>
+  
+  </ul>
+
+</p>
+
+
+  <h2> Script Output </h2>
+<pre>PORT     STATE SERVICE  VERSION
+9408/tcp open  ventrilo Ventrilo 3.0.3.C (voice port; name: TypeFrag.com; uptime: 152h:56m; auth: pw)
+| ventrilo-info: 
+| name: TypeFrag.com
+| phonetic: Type Frag Dot Com
+| comment: http://www.typefrag.com/
+| auth: pw
+| max. clients: 100
+| voice codec: 3,Speex
+| voice format: 32,32 KHz%2C 16 bit%2C 10 Qlty
+| uptime: 152h:56m
+| platform: WIN32
+| version: 3.0.3.C
+| channel count: 14
+| channel fields: CID, PID, PROT, NAME, COMM
+| client count: 6
+| client fields: ADMIN, CID, PHAN, PING, SEC, NAME, COMM
+| channels:
+| &lt;top level lobby&gt; (CID: 0, PID: n/a, PROT: n/a, COMM: n/a): &lt;empty&gt;
+| Group 1 (CID: 719, PID: 0, PROT: 0, COMM: ): 
+|   stabya (ADMIN: 0, PHAN: 0, PING: 47, SEC: 206304, COMM: 
+| Group 2 (CID: 720, PID: 0, PROT: 0, COMM: ): &lt;empty&gt;
+| Group 3 (CID: 721, PID: 0, PROT: 0, COMM: ): &lt;empty&gt;
+| Group 4 (CID: 722, PID: 0, PROT: 0, COMM: ): &lt;empty&gt;
+| Group 5 (CID: 723, PID: 0, PROT: 0, COMM: ): 
+|   Sir Master Win (ADMIN: 0, PHAN: 0, PING: 32, SEC: 186890, COMM: 
+|   waterbukk (ADMIN: 0, PHAN: 0, PING: 31, SEC: 111387, COMM: 
+|   likez (ADMIN: 0, PHAN: 0, PING: 140, SEC: 22457, COMM: 
+|   Tweet (ADMIN: 0, PHAN: 0, PING: 140, SEC: 21009, COMM: 
+| Group 6 (CID: 724, PID: 0, PROT: 0, COMM: ): &lt;empty&gt;
+| Raid (CID: 725, PID: 0, PROT: 0, COMM: ): &lt;empty&gt;
+| Officers (CID: 726, PID: 0, PROT: 1, COMM: ): &lt;empty&gt;
+| PG 13 (CID: 727, PID: 0, PROT: 0, COMM: ): &lt;empty&gt;
+| Rated R (CID: 728, PID: 0, PROT: 0, COMM: ): &lt;empty&gt;
+| Group 7 (CID: 729, PID: 0, PROT: 0, COMM: ): &lt;empty&gt;
+| Group 8 (CID: 730, PID: 0, PROT: 0, COMM: ): &lt;empty&gt;
+| Group 9 (CID: 731, PID: 0, PROT: 0, COMM: ): &lt;empty&gt;
+| AFK - switch to this when AFK (CID: 732, PID: 0, PROT: 0, COMM: ): 
+|_  Eisennacher (ADMIN: 0, PHAN: 0, PING: 79, SEC: 181948, COMM: 
+Service Info: OS: WIN32
+</pre>
+
+
+
+  <h2> Requires </h2>
+  <ul>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/bit.html">bit</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/stdnse.html">stdnse</a></li>
+  
+     <li><a href="">math</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/nmap.html">nmap</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/strbuf.html">strbuf</a></li>
+  
+     <li><a href="">string</a></li>
+  
+     <li><a href="">table</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/shortport.html">shortport</a></li>
+  
+  </ul>
+
+
+<hr/>
+
+
+
+
+
+
+<p><b>Author: </b>Marin Marzic</p>
+
+
+
+<p><b>License: </b> VER007 整理 <a href="http://www.ver007.com">http://www.ver007.com</a></p>
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+</BODY>
+</HTML>
+
+

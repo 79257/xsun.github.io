@@ -1,0 +1,229 @@
+﻿   <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+    <title>ganglia-info NSE Script -VER007</title>
+    
+
+</HEAD>
+
+
+
+
+
+
+<a href="../nmap-script-help.html">HOME>>>>>>>>></a>
+
+
+
+<h1>File <code>ganglia-info</code></h1>
+
+
+
+<p>
+
+
+<a href="http://nmap.org/book/nse-script-format.html#nse-format-rules">脚本使用类型</a>:
+portrule
+<br>
+
+  脚本所属分类:
+  <i><a href="http://nmap.org/nsedoc/categories/default.html">default</a></i>, <i><a href="http://nmap.org/nsedoc/categories/discovery.html">discovery</a></i>, <i><a href="http://nmap.org/nsedoc/categories/safe.html">safe</a></i>
+  <br>
+
+脚本下载地址: <a href="http://nmap.org/svn/scripts/ganglia-info.nse">http://nmap.org/svn/scripts/ganglia-info.nse</a>
+</p>
+
+
+
+<h2> User Summary </h2>
+
+<p>
+Retrieves system information (OS version, available memory, etc.) from
+a listening Ganglia Monitoring Daemon or Ganglia Meta Daemon.
+</p>
+<p>
+Ganglia is a scalable distributed monitoring system for high-performance
+computing systems such as clusters and Grids. The information retrieved
+includes HDD size, available memory, OS version, architecture (and more) from
+each of the systems in each of the clusters in the grid.
+</p>
+<p>
+For more information about Ganglia, see:
+<ul>
+<li><a href="http://ganglia.sourceforge.net/">http://ganglia.sourceforge.net/</a>
+</li>
+<li><a href="http://en.wikipedia.org/wiki/Ganglia_(software)#Ganglia_Monitoring_Daemon_.28gmond.29">http://en.wikipedia.org/wiki/Ganglia_(software)#Ganglia_Monitoring_Daemon_.28gmond.29</a>
+</li>
+<li><a href="http://en.wikipedia.org/wiki/Ganglia_(software)#Ganglia_Meta_Daemon_.28gmetad.29">http://en.wikipedia.org/wiki/Ganglia_(software)#Ganglia_Meta_Daemon_.28gmetad.29</a></li>
+</ul>
+</p>
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+
+
+  <h2> Script Arguments </h2>
+  <p>
+    
+      <h4> ganglia-info.bytes </h4>
+      <p>
+Set the number of bytes to retrieve. The default value is 1000000.
+		   This should be enough for a grid of more than 100 hosts.
+		   About 5KB-10KB of data is returned for each host in the cluster.</p>
+
+    
+      <h4> ganglia-info.timeout </h4>
+      <p>
+Set the timeout in seconds. The default value is 60.
+		   This should be enough for a grid of more than 100 hosts at 200Kb/s.
+		   About 5KB-10KB of data is returned for each host in the cluster.</p>
+
+    
+
+    
+  </p>
+
+
+<h2> Example Usage </h2>
+<p>执行格式
+
+  <pre>nmap --script ganglia-info --script-args ganglia-info.timeout=60,ganglia-info.bytes=1000000 -p &lt;port&gt; &lt;target&gt;
+</pre>
+
+</p>
+
+
+  <h2> Script Output </h2>
+<pre>PORT     STATE SERVICE VERSION
+8649/tcp open  ganglia Ganglia XML Grid monitor 2.5.7 (Cluster name: unspecified; Owner: unspecified; Source: gmond)
+| ganglia-info:
+|   Service: Ganglia Monitoring Daemon
+|   Version: 2.5.7
+|   Cluster Name: unspecified
+|       Owner: unspecified
+|       Hostname: localhost
+|               IP: 127.0.0.1
+|               cpu nice: 0.0%
+|               cpu user: 2.0%
+|               proc total: 182
+|               proc run: 0
+|               load fifteen: 0.13
+|               pkts in: 0.12packets/sec
+|               swap total: 9928700KB
+|               load five: 0.15
+|               machine type: x86_64
+|               disk total: 236.111GB
+|               mem buffers: 33148KB
+|               mem total: 3845028KB
+|               bytes in: 6.57bytes/sec
+|               load one: 0.22
+|               sys clock: 1317692483s
+|               mem free: 3280956KB
+|               mtu: 1280B
+|               mem shared: 0KB
+|               cpu aidle: 97.0%
+|               cpu idle: 99.1%
+|               cpu speed: 2266MHz
+|               mem cached: 271924KB
+|               cpu num: 4
+|               part max used: 55.9%
+|               bytes out: 5.48bytes/sec
+|               os release: 2.6.34
+|               gexec: OFF
+|               disk free: 104.075GB
+|               cpu system: 0.1%
+|               boottime: 1317692167s
+|               swap free: 9928700KB
+|               os name: Linux
+|_              pkts out: 0.06packets/sec</pre>
+
+
+
+  <h2> Requires </h2>
+  <ul>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/comm.html">comm</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/nmap.html">nmap</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/shortport.html">shortport</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/stdnse.html">stdnse</a></li>
+  
+     <li><a href="">string</a></li>
+  
+     <li><a href="">table</a></li>
+  
+  </ul>
+
+
+<hr/>
+
+
+
+
+
+
+<p><b>Author: </b>Brendan Coles</p>
+
+
+
+<p><b>License: </b> VER007 整理 <a href="http://www.ver007.com">http://www.ver007.com</a></p>
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+</BODY>
+</HTML>
+
+

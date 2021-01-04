@@ -1,0 +1,211 @@
+﻿   <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+    <title>lltd-discovery NSE Script -VER007</title>
+    
+
+</HEAD>
+
+
+
+
+
+
+<a href="../nmap-script-help.html">HOME>>>>>>>>></a>
+
+
+
+<h1>File <code>lltd-discovery</code></h1>
+
+
+
+<p>
+
+
+<a href="http://nmap.org/book/nse-script-format.html#nse-format-rules">脚本使用类型</a>:
+prerule
+<br>
+
+  脚本所属分类:
+  <i><a href="http://nmap.org/nsedoc/categories/broadcast.html">broadcast</a></i>, <i><a href="http://nmap.org/nsedoc/categories/discovery.html">discovery</a></i>, <i><a href="http://nmap.org/nsedoc/categories/safe.html">safe</a></i>
+  <br>
+
+脚本下载地址: <a href="http://nmap.org/svn/scripts/lltd-discovery.nse">http://nmap.org/svn/scripts/lltd-discovery.nse</a>
+</p>
+
+
+
+<h2> User Summary </h2>
+
+<p>
+Uses the Microsoft LLTD protocol to discover hosts on a local network.
+</p>
+<p>
+For more information on the LLTD protocol please refer to
+<a href="http://www.microsoft.com/whdc/connect/Rally/LLTD-spec.mspx">http://www.microsoft.com/whdc/connect/Rally/LLTD-spec.mspx</a></p>
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+    
+      
+        
+      
+    
+      
+        
+      
+    
+  
+  
+    
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+
+
+  <h2> Script Arguments </h2>
+  <p>
+    
+      <h4> lltd-discovery.interface </h4>
+      <p>
+string specifying which interface to do lltd discovery on.  If not specified, all ethernet interfaces are tried.</p>
+
+    
+      <h4> lltd-discover.timeout </h4>
+      <p>
+timespec specifying how long to listen for replies (default 30s)</p>
+
+    
+
+    
+      <h4> max-newtargets, newtargets </h4>
+      See the documentation for the <a href="http://nmap.org/nsedoc/lib/target.html#script-args">target</a> library.
+    
+  </p>
+
+
+<h2> Example Usage </h2>
+<p>执行格式
+
+  <pre>nmap -e &lt;interface&gt; --script lltd-discovery 
+</pre>
+
+</p>
+
+
+  <h2> Script Output </h2>
+<pre>| lltd-discovery: 
+|   192.168.1.64
+|     Hostname: acer-PC
+|     Mac: 18:f4:6a:4f:de:a2 (Hon Hai Precision Ind. Co.)
+|     IPv6: fe80:0000:0000:0000:0000:0000:c0a8:0134
+|   192.168.1.33
+|     Hostname: winxp-2b2955502
+|     Mac: 08:00:27:79:fd:d2 (Cadmus Computer Systems)
+|   192.168.1.22
+|     Hostname: core
+|     Mac: 08:00:27:57:30:7f (Cadmus Computer Systems)
+|_  Use the newtargets script-arg to add the results as targets
+</pre>
+
+
+
+  <h2> Requires </h2>
+  <ul>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/datafiles.html">datafiles</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/bin.html">bin</a></li>
+  
+     <li><a href="">coroutine</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/nmap.html">nmap</a></li>
+  
+     <li><a href="">os</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/stdnse.html">stdnse</a></li>
+  
+     <li><a href="">string</a></li>
+  
+     <li><a href="">table</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/target.html">target</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/openssl.html">openssl</a></li>
+  
+  </ul>
+
+
+<hr/>
+
+
+
+
+
+
+<p><b>Author: </b>Gorjan Petrovski, Hani Benhabiles</p>
+
+
+
+<p><b>License: </b> VER007 整理 <a href="http://www.ver007.com">http://www.ver007.com</a></p>
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+</BODY>
+</HTML>
+
+

@@ -1,0 +1,181 @@
+﻿   <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+    <title>murmur-version NSE Script -VER007</title>
+    
+
+</HEAD>
+
+
+
+
+
+
+<a href="../nmap-script-help.html">HOME>>>>>>>>></a>
+
+
+
+<h1>File <code>murmur-version</code></h1>
+
+
+
+<p>
+
+
+<a href="http://nmap.org/book/nse-script-format.html#nse-format-rules">脚本使用类型</a>:
+portrule
+<br>
+
+  脚本所属分类:
+  <i><a href="http://nmap.org/nsedoc/categories/version.html">version</a></i>
+  <br>
+
+脚本下载地址: <a href="http://nmap.org/svn/scripts/murmur-version.nse">http://nmap.org/svn/scripts/murmur-version.nse</a>
+</p>
+
+
+
+<h2> User Summary </h2>
+
+<p>
+Detects the Murmur service (server for the Mumble voice communication
+client) version 1.2.0 and above.
+</p>
+<p>
+The Murmur server listens on a TCP (control) and an UDP (voice) port
+with the same port number. This script activates on both a TCP and UDP
+port version scan. In both cases probe data is sent only to the UDP
+port because it allows for a simple and informative ping command.
+</p>
+<p>
+The single probe will report on the server version, current user
+count, maximum users allowed on the server, and bandwidth used for
+voice communication. It is used by the Mumble client to ping known
+Murmur servers.
+</p>
+<p>
+The IP address from which service detection is being ran will most
+likely be temporarily banned by the target Murmur server due to
+multiple incorrect handshakes (Nmap service probes). This ban makes
+identifying the service via TCP impossible in practice, but does not
+affect the UDP probe used by this script.
+</p>
+<p>
+It is possible to get a corrupt user count (usually +1) when doing a
+TCP service scan due to previous service probe connections affecting
+the server.
+</p>
+<p>
+See <a href="http://mumble.sourceforge.net/Protocol">http://mumble.sourceforge.net/Protocol</a>.</p>
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+
+
+
+<h2> Example Usage </h2>
+<p>执行格式
+
+  <pre>nmap -sV &lt;target&gt;</pre>
+
+</p>
+
+
+  <h2> Script Output </h2>
+<pre>PORT      STATE SERVICE VERSION
+64740/tcp open  murmur  Murmur 1.2.4 (control port; users: 35; max. users: 100; bandwidth: 72000 b/s)
+64740/udp open  murmur  Murmur 1.2.4 (voice port; users: 35; max. users: 100; bandwidth: 72000 b/s)</pre>
+
+
+
+  <h2> Requires </h2>
+  <ul>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/bin.html">bin</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/comm.html">comm</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/nmap.html">nmap</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/shortport.html">shortport</a></li>
+  
+     <li><a href="">string</a></li>
+  
+  </ul>
+
+
+<hr/>
+
+
+
+
+
+
+<p><b>Author: </b>Marin Maržić</p>
+
+
+
+<p><b>License: </b> VER007 整理 <a href="http://www.ver007.com">http://www.ver007.com</a></p>
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+</BODY>
+</HTML>
+
+

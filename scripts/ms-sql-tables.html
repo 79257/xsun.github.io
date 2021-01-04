@@ -1,0 +1,413 @@
+﻿   <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+    <title>ms-sql-tables NSE Script -VER007</title>
+    
+
+</HEAD>
+
+
+
+
+
+
+<a href="../nmap-script-help.html">HOME>>>>>>>>></a>
+
+
+
+<h1>File <code>ms-sql-tables</code></h1>
+
+
+
+<p>
+
+
+<a href="http://nmap.org/book/nse-script-format.html#nse-format-rules">脚本使用类型</a>:
+hostrule, portrule
+<br>
+
+  脚本所属分类:
+  <i><a href="http://nmap.org/nsedoc/categories/discovery.html">discovery</a></i>, <i><a href="http://nmap.org/nsedoc/categories/safe.html">safe</a></i>
+  <br>
+
+脚本下载地址: <a href="http://nmap.org/svn/scripts/ms-sql-tables.nse">http://nmap.org/svn/scripts/ms-sql-tables.nse</a>
+</p>
+
+
+
+<h2> User Summary </h2>
+
+<p>
+Queries Microsoft SQL Server (ms-sql) for a list of tables per database.
+</p>
+<p>
+SQL Server credentials required: Yes (use <code>ms-sql-brute</code>, <code>ms-sql-empty-password</code>
+and/or <code>mssql.username</code> &amp; <code>mssql.password</code>)
+Run criteria:
+<ul>
+<li>Host script: Will run if the <code>mssql.instance-all</code>, <code>mssql.instance-name</code>
+</li>
+</ul>
+or <code>mssql.instance-port</code> script arguments are used (see mssql.lua).
+<ul>
+<li>Port script: Will run against any services identified as SQL Servers, but only
+</li>
+</ul>
+if the <code>mssql.instance-all</code>, <code>mssql.instance-name</code>
+and <code>mssql.instance-port</code> script arguments are NOT used.
+</p>
+<p>
+The sysdatabase table should be accessible by more or less everyone.
+</p>
+<p>
+Once we have a list of databases we iterate over it and attempt to extract
+table names. In order for this to succeed we need to have either
+sysadmin privileges or an account with access to the db. So, each
+database we successfully enumerate tables from we mark as finished, then
+iterate over known user accounts until either we have exhausted the users
+or found all tables in all the databases.
+</p>
+<p>
+System databases are excluded.
+</p>
+<p>
+NOTE: Communication with instances via named pipes depends on the <code>smb</code>
+library. To communicate with (and possibly to discover) instances via named pipes,
+the host must have at least one SMB port (e.g. TCP 445) that was scanned and
+found to be open. Additionally, named pipe connections may require Windows
+authentication to connect to the Windows host (via SMB) in addition to the
+authentication required to connect to the SQL Server instances itself. See the
+documentation and arguments for the <code>smb</code> library for more information.
+</p>
+<p>
+NOTE: By default, the ms-sql-* scripts may attempt to connect to and communicate
+with ports that were not included in the port list for the Nmap scan. This can
+be disabled using the <code>mssql.scanned-ports-only</code> script argument.</p>
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+  
+  
+    
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+  
+  
+    
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+  
+  
+    
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+
+
+  <h2> Script Arguments </h2>
+  <p>
+    
+      <h4> ms-sql-tables.keywords </h4>
+      <p>
+If set shows only tables or columns matching
+		 the keywords</p>
+
+    
+      <h4> ms-sql-tables.maxdb </h4>
+      <p>
+Limits the amount of databases that are
+      processed and returned (default 5). If set to zero or less 
+      all databases are processed.</p>
+
+    
+      <h4> ms-sql-tables.maxtables </h4>
+      <p>
+Limits the amount of tables returned
+      (default 5). If set to zero or less all tables are returned.</p>
+
+    
+
+    
+      <h4> mssql.domain, mssql.instance-all, mssql.instance-name, mssql.instance-port, mssql.password, mssql.protocol, mssql.scanned-ports-only, mssql.timeout, mssql.username </h4>
+      See the documentation for the <a href="http://nmap.org/nsedoc/lib/mssql.html#script-args">mssql</a> library.
+    
+      <h4> randomseed, smbbasic, smbport, smbsign </h4>
+      See the documentation for the <a href="http://nmap.org/nsedoc/lib/smb.html#script-args">smb</a> library.
+    
+      <h4> smbdomain, smbhash, smbnoguest, smbpassword, smbtype, smbusername </h4>
+      See the documentation for the <a href="http://nmap.org/nsedoc/lib/smbauth.html#script-args">smbauth</a> library.
+    
+  </p>
+
+
+<h2> Example Usage </h2>
+<p>执行格式
+
+  <pre>nmap -p 1433 --script ms-sql-tables --script-args mssql.username=sa,mssql.password=sa &lt;host&gt;
+</pre>
+
+</p>
+
+
+  <h2> Script Output </h2>
+<pre>| ms-sql-tables:  
+|   [192.168.100.25\MSSQLSERVER]
+|   webshop
+|     table	column	type	length
+|     payments	user_id	int	4
+|     payments	purchase_id	int	4
+|     payments	cardholder	varchar	50
+|     payments	cardtype	varchar	50
+|     payments	cardno	varchar	50
+|     payments	expiry	varchar	50
+|     payments	cvv	varchar	4
+|     products	id	int	4
+|     products	manu	varchar	50
+|     products	model	varchar	50
+|     products	productname	varchar	100
+|     products	price	float	8
+|     products	imagefile	varchar	255
+|     products	quantity	int	4
+|     products	keywords	varchar	100
+|     products	description	text	16
+|     users	id	int	4
+|     users	username	varchar	50
+|     users	password	varchar	50
+|_    users	fullname	varchar	100</pre>
+
+
+
+  <h2> Requires </h2>
+  <ul>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/mssql.html">mssql</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/stdnse.html">stdnse</a></li>
+  
+     <li><a href="">string</a></li>
+  
+     <li><a href="">table</a></li>
+  
+  </ul>
+
+
+<hr/>
+
+
+
+
+
+
+<p><b>Author: </b>Patrik Karlsson</p>
+
+
+
+<p><b>License: </b> VER007 整理 <a href="http://www.ver007.com">http://www.ver007.com</a></p>
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+</BODY>
+</HTML>
+
+

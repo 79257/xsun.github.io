@@ -1,0 +1,382 @@
+﻿   <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+    <title>http-method-tamper NSE Script -VER007</title>
+    
+
+</HEAD>
+
+
+
+
+
+
+<a href="../nmap-script-help.html">HOME>>>>>>>>></a>
+
+
+
+<h1>File <code>http-method-tamper</code></h1>
+
+
+
+<p>
+
+
+<a href="http://nmap.org/book/nse-script-format.html#nse-format-rules">脚本使用类型</a>:
+portrule
+<br>
+
+  脚本所属分类:
+  <i><a href="http://nmap.org/nsedoc/categories/auth.html">auth</a></i>, <i><a href="http://nmap.org/nsedoc/categories/vuln.html">vuln</a></i>
+  <br>
+
+脚本下载地址: <a href="http://nmap.org/svn/scripts/http-method-tamper.nse">http://nmap.org/svn/scripts/http-method-tamper.nse</a>
+</p>
+
+
+
+<h2> User Summary </h2>
+
+<p>
+Attempts to bypass password protected resources (HTTP 401 status) by performing HTTP verb tampering. 
+If an array of paths to check is not set, it will crawl the web server and perform the check against any 
+password protected resource that it finds.
+</p>
+<p>
+The script determines if the protected URI is vulnerable by performing HTTP verb tampering and monitoring
+ the status codes. First, it uses a HEAD request, then a POST request and finally a random generated string 
+( This last one is useful when web servers treat unknown request methods as a GET request. This is the case
+ for PHP servers ).
+</p>
+<p>
+If the table <code>paths</code> is set, it will attempt to access the given URIs. Otherwise, a web crawler 
+is initiated to try to find protected resources. Note that in a PHP environment with .htacess files you need to specify a 
+path to a file rather than a directory to find misconfigured .htaccess files.
+</p>
+<p>
+References:
+<ul>
+<li><a href="http://www.imperva.com/resources/glossary/http_verb_tampering.html">http://www.imperva.com/resources/glossary/http_verb_tampering.html</a>
+</li>
+<li><a href="https://www.owasp.org/index.php/Testing_for_HTTP_Methods_and_XST_%28OWASP-CM-008%29">https://www.owasp.org/index.php/Testing_for_HTTP_Methods_and_XST_%28OWASP-CM-008%29</a>
+</li>
+<li><a href="http://www.mkit.com.ar/labs/htexploit/">http://www.mkit.com.ar/labs/htexploit/</a>
+</li>
+<li><a href="http://capec.mitre.org/data/definitions/274.html">http://capec.mitre.org/data/definitions/274.html</a></li>
+</ul>
+</p>
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+  
+  
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+  
+  
+    
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+    
+      
+        
+      
+    
+  
+  
+    
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+  
+  
+    
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+  
+  
+    
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+
+
+  <h2> Script Arguments </h2>
+  <p>
+    
+      <h4> http-method-tamper.timeout </h4>
+      <p>
+Web crawler timeout. Default: 10s</p>
+
+    
+      <h4> http-method-tamper.uri </h4>
+      <p>
+Base URI to crawl. Not aplicable if <code>http-method-tamper.paths</code> is set.</p>
+
+    
+      <h4> http-method-tamper.paths </h4>
+      <p>
+Array of paths to check. If not set, the script will crawl the web server.</p>
+
+    
+
+    
+      <h4> smbdomain, smbhash, smbnoguest, smbpassword, smbtype, smbusername </h4>
+      See the documentation for the <a href="http://nmap.org/nsedoc/lib/smbauth.html#script-args">smbauth</a> library.
+    
+      <h4> httpspider.maxdepth, httpspider.maxpagecount, httpspider.noblacklist, httpspider.url, httpspider.useheadfornonwebfiles, httpspider.withindomain, httpspider.withinhost </h4>
+      See the documentation for the <a href="http://nmap.org/nsedoc/lib/httpspider.html#script-args">httpspider</a> library.
+    
+      <h4> http.max-cache-size, http.max-pipeline, http.pipeline, http.useragent </h4>
+      See the documentation for the <a href="http://nmap.org/nsedoc/lib/http.html#script-args">http</a> library.
+    
+      <h4> vulns.showall </h4>
+      See the documentation for the <a href="http://nmap.org/nsedoc/lib/vulns.html#script-args">vulns</a> library.
+    
+  </p>
+
+
+<h2> Example Usage </h2>
+<p>执行格式
+
+  <ul>
+  
+    <li><pre>nmap -sV --script http-method-tamper &lt;target&gt;</pre></li>
+  
+    <li><pre>nmap -p80 --script http-method-tamper --script-args 'http-method-tamper.paths={/protected/db.php,/protected/index.php}' &lt;target&gt;
+</pre></li>
+  
+  </ul>
+
+</p>
+
+
+  <h2> Script Output </h2>
+<pre>PORT   STATE SERVICE REASON
+80/tcp open  http    syn-ack
+| http-method-tamper: 
+|   VULNERABLE:
+|   Authentication bypass by HTTP verb tampering
+|     State: VULNERABLE (Exploitable)
+|     Description:
+|       This web server contains password protected resources vulnerable to authentication bypass 
+|       vulnerabilities via HTTP verb tampering. This is often found in web servers that only limit access to the
+|        common HTTP methods and in misconfigured .htaccess files.
+|              
+|     Extra information:
+|       
+|   URIs suspected to be vulnerable to HTTP verb tampering:
+|     /method-tamper/protected/pass.txt [POST]
+|   
+|     References:
+|       http://www.imperva.com/resources/glossary/http_verb_tampering.html
+|       http://www.mkit.com.ar/labs/htexploit/
+|       http://capec.mitre.org/data/definitions/274.html
+|_      https://www.owasp.org/index.php/Testing_for_HTTP_Methods_and_XST_%28OWASP-CM-008%29
+</pre>
+
+
+
+  <h2> Requires </h2>
+  <ul>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/http.html">http</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/shortport.html">shortport</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/stdnse.html">stdnse</a></li>
+  
+     <li><a href="">table</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/httpspider.html">httpspider</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/vulns.html">vulns</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/url.html">url</a></li>
+  
+     <li><a href="">string</a></li>
+  
+  </ul>
+
+
+<hr/>
+
+
+
+
+
+
+<p><b>Author: </b>Paulino Calderon &lt;calderon()websec.mx&gt;</p>
+
+
+
+<p><b>License: </b> VER007 整理 <a href="http://www.ver007.com">http://www.ver007.com</a></p>
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+</BODY>
+</HTML>
+
+

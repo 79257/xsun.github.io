@@ -1,0 +1,301 @@
+﻿   <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+    <title>hadoop-namenode-info NSE Script -VER007</title>
+    
+
+</HEAD>
+
+
+
+
+
+
+<a href="../nmap-script-help.html">HOME>>>>>>>>></a>
+
+
+
+<h1>File <code>hadoop-namenode-info</code></h1>
+
+
+
+<p>
+
+
+<a href="http://nmap.org/book/nse-script-format.html#nse-format-rules">脚本使用类型</a>:
+portrule
+<br>
+
+  脚本所属分类:
+  <i><a href="http://nmap.org/nsedoc/categories/default.html">default</a></i>, <i><a href="http://nmap.org/nsedoc/categories/discovery.html">discovery</a></i>, <i><a href="http://nmap.org/nsedoc/categories/safe.html">safe</a></i>
+  <br>
+
+脚本下载地址: <a href="http://nmap.org/svn/scripts/hadoop-namenode-info.nse">http://nmap.org/svn/scripts/hadoop-namenode-info.nse</a>
+</p>
+
+
+
+<h2> User Summary </h2>
+
+<p>
+Retrieves information from an Apache Hadoop NameNode HTTP status page.
+</p>
+<p>
+Information gathered:
+ * Date/time the service was started
+ * Hadoop version
+ * Hadoop compile date
+ * Upgrades status
+ * Filesystem directory (relative to <a href="http://host:port/">http://host:port/</a>)
+ * Log directory (relative to <a href="http://host:port/">http://host:port/</a>)
+ * Associated DataNodes.
+</p>
+<p>
+For more information about Hadoop, see:
+ * <a href="http://hadoop.apache.org/">http://hadoop.apache.org/</a>
+ * <a href="http://en.wikipedia.org/wiki/Apache_Hadoop">http://en.wikipedia.org/wiki/Apache_Hadoop</a>
+ * <a href="http://wiki.apache.org/hadoop/NameNode">http://wiki.apache.org/hadoop/NameNode</a></p>
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+  
+  
+    
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+  
+  
+    
+    
+  
+
+  
+  
+  
+    
+      
+        
+      
+    
+      
+        
+      
+    
+  
+  
+    
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+
+
+  <h2> Script Arguments </h2>
+  <p>
+    
+
+    
+      <h4> max-newtargets, newtargets </h4>
+      See the documentation for the <a href="http://nmap.org/nsedoc/lib/target.html#script-args">target</a> library.
+    
+      <h4> smbdomain, smbhash, smbnoguest, smbpassword, smbtype, smbusername </h4>
+      See the documentation for the <a href="http://nmap.org/nsedoc/lib/smbauth.html#script-args">smbauth</a> library.
+    
+      <h4> http.max-cache-size, http.max-pipeline, http.pipeline, http.useragent </h4>
+      See the documentation for the <a href="http://nmap.org/nsedoc/lib/http.html#script-args">http</a> library.
+    
+  </p>
+
+
+<h2> Example Usage </h2>
+<p>执行格式
+
+  <pre>nmap --script hadoop-namenode-info -p 50070 host
+</pre>
+
+</p>
+
+
+  <h2> Script Output </h2>
+<pre>PORT      STATE SERVICE         REASON
+50070/tcp open  hadoop-namenode syn-ack
+| hadoop-namenode-info:
+|   Started:  Wed May 11 22:33:44 PDT 2011
+|   Version:  0.20.2-cdh3u1, f415ef415ef415ef415ef415ef415ef415ef415e
+|   Compiled:  Wed May 11 22:33:44 PDT 2011 by bob from unknown
+|   Upgrades:  There are no upgrades in progress.
+|   Filesystem: /nn_browsedfscontent.jsp
+|   Logs: /logs/
+|   Storage:
+|   Total       Used (DFS)      Used (Non DFS)  Remaining
+|   100 TB      85 TB           500 GB          14.5 TB
+|   Datanodes (Live):
+|     Datanode: datanode1.example.com:50075
+|     Datanode: datanode2.example.com:50075
+</pre>
+
+
+
+  <h2> Requires </h2>
+  <ul>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/http.html">http</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/nmap.html">nmap</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/shortport.html">shortport</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/stdnse.html">stdnse</a></li>
+  
+     <li><a href="">string</a></li>
+  
+     <li><a href="">table</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/target.html">target</a></li>
+  
+  </ul>
+
+
+<hr/>
+
+
+
+
+
+
+<p><b>Author: </b>John R. Bond (john.r.bond@gmail.com)</p>
+
+
+
+<p><b>License: </b> Simplified (2-clause) BSD license--See <a href="http://nmap.org/svn/docs/licenses/BSD-simplified">http://nmap.org/svn/docs/licenses/BSD-simplified</a></p>
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+</BODY>
+</HTML>
+
+

@@ -1,0 +1,304 @@
+﻿   <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+    <title>smtp-vuln-cve2010-4344 NSE Script -VER007</title>
+    
+
+</HEAD>
+
+
+
+
+
+
+<a href="../nmap-script-help.html">HOME>>>>>>>>></a>
+
+
+
+<h1>File <code>smtp-vuln-cve2010-4344</code></h1>
+
+
+
+<p>
+
+
+<a href="http://nmap.org/book/nse-script-format.html#nse-format-rules">脚本使用类型</a>:
+portrule
+<br>
+
+  脚本所属分类:
+  <i><a href="http://nmap.org/nsedoc/categories/exploit.html">exploit</a></i>, <i><a href="http://nmap.org/nsedoc/categories/intrusive.html">intrusive</a></i>, <i><a href="http://nmap.org/nsedoc/categories/vuln.html">vuln</a></i>
+  <br>
+
+脚本下载地址: <a href="http://nmap.org/svn/scripts/smtp-vuln-cve2010-4344.nse">http://nmap.org/svn/scripts/smtp-vuln-cve2010-4344.nse</a>
+</p>
+
+
+
+<h2> User Summary </h2>
+
+<p>
+Checks for and/or exploits a heap overflow within versions of Exim
+prior to version 4.69 (CVE-2010-4344) and a privilege escalation
+vulnerability in Exim 4.72 and prior (CVE-2010-4345).
+</p>
+<p>
+The heap overflow vulnerability allows remote attackers to execute
+arbitrary code with the privileges of the Exim daemon
+(CVE-2010-4344). If the exploit fails then the Exim smtpd child will
+be killed (heap corruption).
+</p>
+<p>
+The script also checks for a privilege escalation vulnerability that
+affects Exim version 4.72 and prior. The vulnerability allows the exim
+user to gain root privileges by specifying an alternate configuration
+file using the -C option (CVE-2010-4345).
+</p>
+<p>
+The <code>smtp-vuln-cve2010-4344.exploit</code> script argument will make
+the script try to exploit the vulnerabilties, by sending more than 50MB of
+data, it depends on the message size limit configuration option of the
+Exim server. If the exploit succeed the <code>exploit.cmd</code> or
+<code>smtp-vuln-cve2010-4344.cmd</code> script arguments can be used to
+run an arbitrary command on the remote system, under the
+<code>Exim</code> user privileges. If this script argument is set then it
+will enable the <code>smtp-vuln-cve2010-4344.exploit</code> argument.
+</p>
+<p>
+To get the appropriate debug messages for this script, please use -d2. 
+</p>
+<p>
+Some of the logic of this script is based on the metasploit
+exim4_string_format exploit.
+<ul>
+<li><a href="http://www.metasploit.com/modules/exploit/unix/smtp/exim4_string_format">http://www.metasploit.com/modules/exploit/unix/smtp/exim4_string_format</a>
+</li>
+</ul>
+</p>
+<p>
+Reference:
+<ul>
+<li><a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=2010-4344">http://cve.mitre.org/cgi-bin/cvename.cgi?name=2010-4344</a>
+</li>
+<li><a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=2010-4345">http://cve.mitre.org/cgi-bin/cvename.cgi?name=2010-4345</a></li>
+</ul>
+</p>
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+  
+  
+    
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+
+
+  <h2> Script Arguments </h2>
+  <p>
+    
+      <h4> smtp.domain </h4>
+      <p>
+Define the domain to be used in the SMTP EHLO command.</p>
+
+    
+      <h4> exploit.cmd </h4>
+      <p>
+or smtp-vuln-cve2010-4344.cmd An arbitrary command to
+      run under the <code>Exim</code> user privileges on the remote
+      system. If this argument is set then, it will enable the
+      <code>smtp-vuln-cve2010-4344.exploit</code> argument.</p>
+
+    
+      <h4> smtp-vuln-cve2010-4344.mailto </h4>
+      <p>
+Define the destination email address
+      to be used.</p>
+
+    
+      <h4> smtp-vuln-cve2010-4344.exploit </h4>
+      <p>
+The script will force the checks,
+      and will try to exploit the Exim SMTP server.</p>
+
+    
+      <h4> smtp-vuln-cve2010-4344.mailfrom </h4>
+      <p>
+Define the source email address to
+      be used.</p>
+
+    
+
+    
+      <h4> smbdomain, smbhash, smbnoguest, smbpassword, smbtype, smbusername </h4>
+      See the documentation for the <a href="http://nmap.org/nsedoc/lib/smbauth.html#script-args">smbauth</a> library.
+    
+  </p>
+
+
+<h2> Example Usage </h2>
+<p>执行格式
+
+  <pre>nmap --script=smtp-vuln-cve2010-4344 --script-args="smtp-vuln-cve2010-4344.exploit" -pT:25,465,587 &lt;host&gt;
+nmap --script=smtp-vuln-cve2010-4344 --script-args="exploit.cmd='uname -a'" -pT:25,465,587 &lt;host&gt;
+</pre>
+
+</p>
+
+
+  <h2> Script Output </h2>
+<pre>PORT   STATE SERVICE
+25/tcp open  smtp
+| smtp-vuln-cve2010-4344:
+| Exim heap overflow vulnerability (CVE-2010-4344):
+|   Exim (CVE-2010-4344): VULNERABLE
+|     Shell command 'uname -a': Linux qemu-ubuntu-x32 2.6.38-8-generic #42-Ubuntu SMP Fri Jan 21 17:40:48 UTC 2011 i686 GNU/Linux
+| Exim privileges escalation vulnerability (CVE-2010-4345):
+|   Exim (CVE-2010-4345): VULNERABLE
+|     Before 'id': uid=121(Debian-exim) gid=128(Debian-exim) groups=128(Debian-exim),45(sasl)
+|_    After  'id': uid=0(root) gid=128(Debian-exim) groups=0(root)
+</pre>
+
+
+
+  <h2> Requires </h2>
+  <ul>
+  
+     <li><a href="">math</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/shortport.html">shortport</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/smtp.html">smtp</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/stdnse.html">stdnse</a></li>
+  
+     <li><a href="">string</a></li>
+  
+     <li><a href="">table</a></li>
+  
+  </ul>
+
+
+<hr/>
+
+
+
+
+
+
+<p><b>Author: </b>Djalal Harouni</p>
+
+
+
+<p><b>License: </b> VER007 整理 <a href="http://www.ver007.com">http://www.ver007.com</a></p>
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+</BODY>
+</HTML>
+
+

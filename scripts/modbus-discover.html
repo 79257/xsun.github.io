@@ -1,0 +1,191 @@
+﻿   <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+    <title>modbus-discover NSE Script -VER007</title>
+    
+
+</HEAD>
+
+
+
+
+
+
+<a href="../nmap-script-help.html">HOME>>>>>>>>></a>
+
+
+
+<h1>File <code>modbus-discover</code></h1>
+
+
+
+<p>
+
+
+<a href="http://nmap.org/book/nse-script-format.html#nse-format-rules">脚本使用类型</a>:
+portrule
+<br>
+
+  脚本所属分类:
+  <i><a href="http://nmap.org/nsedoc/categories/discovery.html">discovery</a></i>, <i><a href="http://nmap.org/nsedoc/categories/intrusive.html">intrusive</a></i>
+  <br>
+
+脚本下载地址: <a href="http://nmap.org/svn/scripts/modbus-discover.nse">http://nmap.org/svn/scripts/modbus-discover.nse</a>
+</p>
+
+
+
+<h2> User Summary </h2>
+
+<p>
+Enumerates SCADA Modbus slave ids (sids) and collects their device information.
+</p>
+<p>
+Modbus is one of the popular SCADA protocols. This script does Modbus device
+information disclosure. It tries to find legal sids (slave ids) of Modbus
+devices and to get additional information about the vendor and firmware. This
+script is improvement of modscan python utility written by Mark Bristow.
+</p>
+<p>
+Information about MODBUS protocol and security issues:
+<ul>
+<li>MODBUS application protocol specification:  <a href="http://www.modbus.org/docs/Modbus_Application_Protocol_V1_1b.pdf">http://www.modbus.org/docs/Modbus_Application_Protocol_V1_1b.pdf</a>
+</li>
+<li>Defcon 16 Modscan presentation: <a href="https://www.defcon.org/images/defcon-16/dc16-presentations/defcon-16-bristow.pdf">https://www.defcon.org/images/defcon-16/dc16-presentations/defcon-16-bristow.pdf</a>
+</li>
+<li>Modscan utility is hosted at google code: <a href="http://code.google.com/p/modscan/">http://code.google.com/p/modscan/</a></li>
+</ul>
+</p>
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+
+
+  <h2> Script Arguments </h2>
+  <p>
+    
+      <h4> aggressive </h4>
+      <p>
+- boolean value defines find all or just first sid</p>
+
+    
+
+    
+  </p>
+
+
+<h2> Example Usage </h2>
+<p>执行格式
+
+  <pre>nmap --script modbus-discover.nse --script-args='modbus-discover.aggressive=true' -p 502 &lt;host&gt;
+</pre>
+
+</p>
+
+
+  <h2> Script Output </h2>
+<pre>PORT    STATE SERVICE
+502/tcp open  modbus
+| modbus-discover:
+|   Positive response for sid = 0x64
+|     SLAVE ID DATA: \xFA\xFFPM710PowerMeter
+|     DEVICE IDENTIFICATION: Schneider Electric PM710 v03.110
+|_  Positive error response for sid = 0x96 (GATEWAY TARGET DEVICE FAILED TO RESPONSE)</pre>
+
+
+
+  <h2> Requires </h2>
+  <ul>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/bin.html">bin</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/comm.html">comm</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/nmap.html">nmap</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/shortport.html">shortport</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/stdnse.html">stdnse</a></li>
+  
+     <li><a href="">string</a></li>
+  
+     <li><a href="">table</a></li>
+  
+  </ul>
+
+
+<hr/>
+
+
+
+
+
+
+<p><b>Author: </b>Alexander Rudakov</p>
+
+
+
+<p><b>License: </b> VER007 整理 <a href="http://www.ver007.com">http://www.ver007.com</a></p>
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+</BODY>
+</HTML>
+
+

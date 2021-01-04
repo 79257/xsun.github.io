@@ -1,0 +1,207 @@
+﻿   <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+    <title>dns-nsec-enum NSE Script -VER007</title>
+    
+
+</HEAD>
+
+
+
+
+
+
+<a href="../nmap-script-help.html">HOME>>>>>>>>></a>
+
+
+
+<h1>File <code>dns-nsec-enum</code></h1>
+
+
+
+<p>
+
+
+<a href="http://nmap.org/book/nse-script-format.html#nse-format-rules">脚本使用类型</a>:
+portrule
+<br>
+
+  脚本所属分类:
+  <i><a href="http://nmap.org/nsedoc/categories/discovery.html">discovery</a></i>, <i><a href="http://nmap.org/nsedoc/categories/intrusive.html">intrusive</a></i>
+  <br>
+
+脚本下载地址: <a href="http://nmap.org/svn/scripts/dns-nsec-enum.nse">http://nmap.org/svn/scripts/dns-nsec-enum.nse</a>
+</p>
+
+
+
+<h2> User Summary </h2>
+
+<p>
+Enumerates DNS names using the DNSSEC NSEC-walking technique.
+</p>
+<p>
+Output is arranged by domain. Within a domain, subzones are shown with
+increased indentation.
+</p>
+<p>
+The NSEC response record in DNSSEC is used to give negative answers to
+queries, but it has the side effect of allowing enumeration of all
+names, much like a zone transfer. This script doesn't work against
+servers that use NSEC3 rather than NSEC; for that, see
+<code>dns-nsec3-enum</code>.</p>
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+
+
+  <h2> Script Arguments </h2>
+  <p>
+    
+      <h4> dns-nsec-enum.domains </h4>
+      <p>
+The domain or list of domains to
+enumerate. If not provided, the script will make a guess based on the
+name of the target.</p>
+
+    
+
+    
+  </p>
+
+
+<h2> Example Usage </h2>
+<p>执行格式
+
+  <pre>nmap -sSU -p 53 --script dns-nsec-enum --script-args dns-nsec-enum.domains=example.com &lt;target&gt;
+</pre>
+
+</p>
+
+
+  <h2> Script Output </h2>
+<pre>53/udp open  domain  udp-response
+| dns-nsec-enum:
+|   example.com
+|     bulbasaur.example.com
+|     charmander.example.com
+|     dugtrio.example.com
+|     www.dugtrio.example.com
+|     gyarados.example.com
+|       johto.example.com
+|       blue.johto.example.com
+|       green.johto.example.com
+|       ns.johto.example.com
+|       red.johto.example.com
+|     ns.example.com
+|     snorlax.example.com
+|_    vulpix.example.com</pre>
+
+
+
+  <h2> Requires </h2>
+  <ul>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/dns.html">dns</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/shortport.html">shortport</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/stdnse.html">stdnse</a></li>
+  
+     <li><a href="">string</a></li>
+  
+     <li><a href="">table</a></li>
+  
+  </ul>
+
+
+<hr/>
+
+
+
+
+
+
+<p><b>Author: </b>John Bond</p>
+
+
+
+<p><b>License: </b> Simplified (2-clause) BSD license--See <a href="http://nmap.org/svn/docs/licenses/BSD-simplified">http://nmap.org/svn/docs/licenses/BSD-simplified</a></p>
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+</BODY>
+</HTML>
+
+

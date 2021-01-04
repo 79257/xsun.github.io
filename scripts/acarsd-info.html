@@ -1,0 +1,188 @@
+﻿   <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+    <title>acarsd-info NSE Script -VER007</title>
+    
+
+</HEAD>
+
+
+
+
+
+
+<h2><a href="../nmap-script-help.html">HOME>>>>>>>>></a>
+  
+  
+  
+</h2>
+<h1>File <code>acarsd-info</code></h1>
+
+
+
+<p>
+
+
+<a href="http://nmap.org/book/nse-script-format.html#nse-format-rules">脚本使用类型</a>:
+portrule
+<br>
+
+  脚本所属分类:
+  <i><a href="http://nmap.org/nsedoc/categories/safe.html">safe</a></i>, <i><a href="http://nmap.org/nsedoc/categories/discovery.html">discovery</a></i>
+  <br>
+
+脚本下载地址: <a href="http://nmap.org/svn/scripts/acarsd-info.nse">http://nmap.org/svn/scripts/acarsd-info.nse</a>
+</p>
+
+
+
+<h2> User Summary </h2>
+
+<p>
+Retrieves information from a listening acarsd daemon. Acarsd decodes
+ACARS (Aircraft Communication Addressing and Reporting System) data in
+real time.  The information retrieved by this script includes the
+daemon version, API version, administrator e-mail address and
+listening frequency.
+</p>
+<p>
+For more information about acarsd, see:
+<ul>
+<li><a href="http://www.acarsd.org/">http://www.acarsd.org/</a></li>
+</ul>
+</p>
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+
+
+  <h2> Script Arguments </h2>
+  <p>
+    
+<h4> acarsd-info.timeout </h4>
+      <p>
+Set the timeout in seconds. The default value is 10.</p>
+
+    
+      <h4> acarsd-info.bytes </h4>
+      <p>
+Set the number of bytes to retrieve. The default value is 512.</p>
+
+    
+
+    
+  </p>
+
+
+<h2> Example Usage </h2>
+<p>执行格式
+
+<pre>nmap --script acarsd-info --script-args "acarsd-info.timeout=10,acarsd-info.bytes=512" -p &lt;port&gt; &lt;host&gt;
+</pre>
+
+</p>
+
+
+  <h2> Script Output </h2>
+<pre>PORT    STATE SERVICE
+2202/tcp open  unknown
+| acarsd-info: 
+|   Version: 1.65
+|   API Version: API-2005-Oct-18
+|   Authorization Required: 0
+|   Admin E-mail: admin@acarsd
+|   Clients Connected: 1
+|_  Frequency: 131.7250 &amp; 131.45
+</pre>
+
+
+
+  <h2> Requires </h2>
+  <ul>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/comm.html">comm</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/nmap.html">nmap</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/shortport.html">shortport</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/stdnse.html">stdnse</a></li>
+  
+     <li><a href="">string</a></li>
+  
+     <li><a href="">table</a></li>
+  
+  </ul>
+
+
+<hr/>
+
+
+
+
+
+
+<p><b>Author: </b>Brendan Coles</p>
+
+
+
+
+<p><b>License: </b> VER007 整理 <a href="http://www.ver007.com">http://www.ver007.com</a></p>
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+</BODY>
+</HTML>
+
+

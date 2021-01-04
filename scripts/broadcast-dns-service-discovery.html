@@ -1,0 +1,224 @@
+﻿   <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+    <title>broadcast-dns-service-discovery NSE Script -VER007</title>
+    
+
+</HEAD>
+
+
+
+
+
+
+<a href="../nmap-script-help.html">HOME>>>>>>>>></a>
+
+
+
+<h1>File <code>broadcast-dns-service-discovery</code></h1>
+
+
+
+<p>
+
+
+<a href="http://nmap.org/book/nse-script-format.html#nse-format-rules">脚本使用类型</a>:
+prerule
+<br>
+
+  脚本所属分类:
+  <i><a href="http://nmap.org/nsedoc/categories/broadcast.html">broadcast</a></i>, <i><a href="http://nmap.org/nsedoc/categories/safe.html">safe</a></i>
+  <br>
+
+脚本下载地址: <a href="http://nmap.org/svn/scripts/broadcast-dns-service-discovery.nse">http://nmap.org/svn/scripts/broadcast-dns-service-discovery.nse</a>
+</p>
+
+
+
+<h2> User Summary </h2>
+
+<p>
+Attempts to discover hosts' services using the DNS Service Discovery protocol.  It sends a multicast DNS-SD query and collects all the responses.
+</p>
+<p>
+The script first sends a query for _services._dns-sd._udp.local to get a
+list of services. It then sends a followup query for each one to try to
+get more information.</p>
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+    
+      
+        
+      
+    
+      
+        
+      
+    
+  
+  
+    
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+    
+      
+        
+      
+    
+  
+  
+    
+    
+  
+
+  
+  
+  
+  
+
+
+
+  <h2> Script Arguments </h2>
+  <p>
+    
+
+    
+      <h4> max-newtargets, newtargets </h4>
+      See the documentation for the <a href="http://nmap.org/nsedoc/lib/target.html#script-args">target</a> library.
+    
+      <h4> dnssd.services </h4>
+      See the documentation for the <a href="http://nmap.org/nsedoc/lib/dnssd.html#script-args">dnssd</a> library.
+    
+  </p>
+
+
+<h2> Example Usage </h2>
+<p>执行格式
+
+  <pre>nmap --script=broadcast-dns-service-discovery
+</pre>
+
+</p>
+
+
+  <h2> Script Output </h2>
+<pre>| broadcast-dns-service-discovery: 
+|   1.2.3.1
+|     _ssh._tcp.local
+|     _http._tcp.local
+|   1.2.3.50
+|     22/tcp ssh
+|       org.freedesktop.Avahi.cookie=2292090182
+|       Address=1.2.3.50
+|     80/tcp http
+|       path=/admin
+|       org.freedesktop.Avahi.cookie=2292090182
+|       path=/
+|       org.freedesktop.Avahi.cookie=2292090182
+|       path=/pim
+|       org.freedesktop.Avahi.cookie=2292090182
+|       Address=1.2.3.50
+|   1.2.3.116
+|     80/tcp http
+|_      Address=1.2.3.116</pre>
+
+
+
+  <h2> Requires </h2>
+  <ul>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/dnssd.html">dnssd</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/stdnse.html">stdnse</a></li>
+  
+  </ul>
+
+
+<hr/>
+
+
+
+
+
+
+<p><b>Author: </b>Patrik Karlsson</p>
+
+
+
+<p><b>License: </b> VER007 整理 <a href="http://www.ver007.com">http://www.ver007.com</a></p>
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+</BODY>
+</HTML>
+
+

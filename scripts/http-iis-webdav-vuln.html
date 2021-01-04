@@ -1,0 +1,285 @@
+﻿   <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+    <title>http-iis-webdav-vuln NSE Script -VER007</title>
+    
+
+</HEAD>
+
+
+
+
+
+
+<a href="../nmap-script-help.html">HOME>>>>>>>>></a>
+
+
+
+<h1>File <code>http-iis-webdav-vuln</code></h1>
+
+
+
+<p>
+
+
+<a href="http://nmap.org/book/nse-script-format.html#nse-format-rules">脚本使用类型</a>:
+portrule
+<br>
+
+  脚本所属分类:
+  <i><a href="http://nmap.org/nsedoc/categories/vuln.html">vuln</a></i>, <i><a href="http://nmap.org/nsedoc/categories/intrusive.html">intrusive</a></i>
+  <br>
+
+脚本下载地址: <a href="http://nmap.org/svn/scripts/http-iis-webdav-vuln.nse">http://nmap.org/svn/scripts/http-iis-webdav-vuln.nse</a>
+</p>
+
+
+
+<h2> User Summary </h2>
+
+<p>
+Checks for a vulnerability in IIS 5.1/6.0 that allows arbitrary users to access secured WebDAV folders by searching for a password-protected folder and attempting to access it. This vulnerability was patched in Microsoft Security Bulletin MS09-020, <a href="http://nmap.org/r/ms09-020">http://nmap.org/r/ms09-020</a>.
+</p>
+<p>
+A list of well known folders (almost 900) is used by default. Each one is checked, and if returns an authentication request (401), another attempt is tried with the malicious encoding. If that attempt returns a successful result (207), then the folder is marked as vulnerable.
+</p>
+<p>
+This script is based on the Metasploit modules/auxiliary/scanner/http/wmap_dir_webdav_unicode_bypass.rb auxiliary module.
+</p>
+<p>
+For more information on this vulnerability and script, see:
+<ul>
+<li><a href="http://blog.zoller.lu/2009/05/iis-6-webdac-auth-bypass-and-data.html">http://blog.zoller.lu/2009/05/iis-6-webdac-auth-bypass-and-data.html</a>
+</li>
+<li><a href="http://seclists.org/fulldisclosure/2009/May/att-134/IIS_Advisory_pdf.bin">http://seclists.org/fulldisclosure/2009/May/att-134/IIS_Advisory_pdf.bin</a>
+</li>
+<li><a href="http://www.skullsecurity.org/blog/?p=271">http://www.skullsecurity.org/blog/?p=271</a>
+</li>
+<li><a href="http://www.kb.cert.org/vuls/id/787932">http://www.kb.cert.org/vuls/id/787932</a>
+</li>
+<li><a href="http://www.microsoft.com/technet/security/advisory/971492.mspx">http://www.microsoft.com/technet/security/advisory/971492.mspx</a></li>
+</ul>
+</p>
+
+
+
+
+
+
+
+  
+  
+  
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+  
+  
+    
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+  
+  
+    
+    
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+
+
+  <h2> Script Arguments </h2>
+  <p>
+    
+      <h4> basefolder </h4>
+      <p>
+The folder to start in; eg, <code>"/web"</code> will try <code>"/web/xxx"</code>.</p>
+
+    
+      <h4> folderdb </h4>
+      <p>
+The filename of an alternate list of folders.</p>
+
+    
+      <h4> webdavfolder </h4>
+      <p>
+Selects a single folder to use, instead of using a built-in list.</p>
+
+    
+
+    
+      <h4> smbdomain, smbhash, smbnoguest, smbpassword, smbtype, smbusername </h4>
+      See the documentation for the <a href="http://nmap.org/nsedoc/lib/smbauth.html#script-args">smbauth</a> library.
+    
+      <h4> http.max-cache-size, http.max-pipeline, http.pipeline, http.useragent </h4>
+      See the documentation for the <a href="http://nmap.org/nsedoc/lib/http.html#script-args">http</a> library.
+    
+  </p>
+
+
+<h2> Example Usage </h2>
+<p>执行格式
+
+  <pre>nmap --script http-iis-webdav-vuln -p80,8080 &lt;host&gt;
+</pre>
+
+</p>
+
+
+  <h2> Script Output </h2>
+<pre>80/tcp open  http    syn-ack
+|_ http-iis-webdav-vuln: WebDAV is ENABLED. Vulnerable folders discovered: /secret, /webdav
+</pre>
+
+
+
+  <h2> Requires </h2>
+  <ul>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/http.html">http</a></li>
+  
+     <li><a href="">io</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/nmap.html">nmap</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/shortport.html">shortport</a></li>
+  
+     <li><a href="http://nmap.org/nsedoc/lib/stdnse.html">stdnse</a></li>
+  
+     <li><a href="">string</a></li>
+  
+  </ul>
+
+
+<hr/>
+
+
+
+
+
+
+<p><b>Author: </b>Ron Bowes and Andrew Orr</p>
+
+
+
+<p><b>License: </b> VER007 整理 <a href="http://www.ver007.com">http://www.ver007.com</a></p>
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+</BODY>
+</HTML>
+
+
